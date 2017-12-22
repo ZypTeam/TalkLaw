@@ -48,6 +48,7 @@ public class HomeActivity extends BaseTalkLawActivity {
         opinionText = findViewById(R.id.text_opinion);
         statementText = findViewById(R.id.text_statement);
         myText = findViewById(R.id.text_my);
+
     }
 
     @Override
@@ -76,6 +77,7 @@ public class HomeActivity extends BaseTalkLawActivity {
                 viewPager.setCurrentItem(2, false);
             }
         });
+
     }
 
 

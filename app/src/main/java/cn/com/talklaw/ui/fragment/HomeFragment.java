@@ -1,10 +1,17 @@
 package cn.com.talklaw.ui.fragment;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
+import cn.com.talklaw.ui.util.GlideImageLoader;
 
 /**
  * @author zhaoyapeng
@@ -14,9 +21,10 @@ import cn.com.talklaw.base.BaseTalkLawFragment;
  */
 public class HomeFragment extends BaseTalkLawFragment {
 
-    private RecyclerView recyclerView;
 
-    public static HomeFragment getInstance(){
+    protected Banner banner;
+
+    public static HomeFragment getInstance() {
         HomeFragment fragment = new HomeFragment();
         return fragment;
     }
@@ -32,12 +40,39 @@ public class HomeFragment extends BaseTalkLawFragment {
     }
 
     @Override
-    public void initView(View view) {
-        recyclerView = view.findViewById(R.id.recycler_view);
+    public void initView(View rootView) {
+        banner = (Banner) rootView.findViewById(R.id.banner);
+
     }
+
 
     @Override
     public void initAction() {
+        //设置banner样式
+        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        //设置图片加载器
+        banner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
 
+        List<String>list = new ArrayList<>();
+        list.add("1");
+        list.add("1");
+        list.add("1");
+        list.add("1");
+        list.add("1");
+
+        banner.setImages(list);
+        //设置banner动画效果
+        banner.setBannerAnimation(Transformer.Default);
+        //设置标题集合（当banner样式有显示title时）
+//        banner.setBannerTitles(titles);
+        //设置自动轮播，默认为true
+        banner.isAutoPlay(true);
+        //设置轮播时间
+        banner.setDelayTime(3000);
+        //设置指示器位置（当banner模式中有指示器时）
+        banner.setIndicatorGravity(BannerConfig.CENTER);
+        //banner设置方法全部调用完毕时最后调用
+        banner.start();
     }
 }

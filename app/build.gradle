@@ -50,4 +50,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':baselibrary')
     compile project(':dblibrary')
+
+    compile 'com.youth.banner:banner:1.4.10'
 }

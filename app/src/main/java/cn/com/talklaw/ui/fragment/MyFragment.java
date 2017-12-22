@@ -1,5 +1,7 @@
 package cn.com.talklaw.ui.fragment;
 
+import android.view.View;
+
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
 
@@ -28,9 +30,10 @@ public class MyFragment extends BaseTalkLawFragment {
     }
 
     @Override
-    public void initView() {
+    public void initView(View rootView) {
 
     }
+
 
     @Override
     public void initAction() {

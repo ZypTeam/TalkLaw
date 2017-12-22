@@ -87,7 +87,7 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract int getLayoutResId();
     public abstract void initDatas();
-    public abstract void initView(View view);
+    public abstract void initView(View rootView);
     public abstract void initAction();
 
 
