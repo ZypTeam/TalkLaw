@@ -40,7 +40,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView=inflater.inflate(getLayoutResId(),container,false);
-        initView();
+        initView(rootView);
         initAction();
         return rootView;
     }
@@ -87,7 +87,7 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract int getLayoutResId();
     public abstract void initDatas();
-    public abstract void initView();
+    public abstract void initView(View view);
     public abstract void initAction();
 
 

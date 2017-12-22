@@ -1,5 +1,8 @@
 package cn.com.talklaw.ui.fragment;
 
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
 
@@ -11,6 +14,7 @@ import cn.com.talklaw.base.BaseTalkLawFragment;
  */
 public class HomeFragment extends BaseTalkLawFragment {
 
+    private RecyclerView recyclerView;
 
     public static HomeFragment getInstance(){
         HomeFragment fragment = new HomeFragment();
@@ -28,8 +32,8 @@ public class HomeFragment extends BaseTalkLawFragment {
     }
 
     @Override
-    public void initView() {
-
+    public void initView(View view) {
+        recyclerView = view.findViewById(R.id.recycler_view);
     }
 
     @Override
