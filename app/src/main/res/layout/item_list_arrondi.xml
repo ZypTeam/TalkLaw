@@ -4,7 +4,7 @@
     android:background="#fff"
     android:layout_marginBottom="4dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/image"
@@ -62,6 +62,7 @@
         android:textColor="#7f8389"
         android:textSize="13sp"
         android:drawablePadding="5dp"
+        app:layout_constraintHorizontal_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="36dp" />
 
@@ -76,6 +77,7 @@
         android:id="@+id/comment"
         android:textColor="#7f8389"
         android:textSize="13sp"
+        app:layout_constraintHorizontal_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="36dp" />
 

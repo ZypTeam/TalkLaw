@@ -2,7 +2,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <com.jusfoun.baselibrary.widget.TitleStatusBarView
         android:id="@+id/title_bar"
         android:background="#00000000"
@@ -14,6 +13,7 @@
             android:layout_height="40dp">
             <ImageView
                 android:id="@+id/back"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
                 android:layout_marginLeft="15dp"
                 android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
@@ -23,7 +23,6 @@
                 android:gravity="center"
                 android:textSize="19sp"
                 android:textColor="#333"
-                android:textStyle="bold"
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

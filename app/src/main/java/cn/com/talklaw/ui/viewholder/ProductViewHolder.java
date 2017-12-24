@@ -27,6 +27,8 @@ public class ProductViewHolder extends BaseViewHolder<ProductModel> {
 
     @Override
     public void update(ProductModel model) {
-        Glide.with(context);
+        Glide.with(context)
+        .load(R.mipmap.logo)
+        .into(image);
     }
 }

@@ -37,6 +37,7 @@ public class ArrondiProductAdapter extends PagerAdapter {
         list.setLayoutManager(new GridLayoutManager(context,4));
         ArrondiProductListAdapter adapter=new ArrondiProductListAdapter(context);
         list.setAdapter(adapter);
+        adapter.refreshList(lists.get(position));
         container.addView(view);
         return view;
     }

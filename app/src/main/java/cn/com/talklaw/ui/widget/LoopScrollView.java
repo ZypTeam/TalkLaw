@@ -89,6 +89,7 @@ public class LoopScrollView extends FrameLayout {
     }
 
     private void initView(Context context) {
+        this.context=context;
         LayoutInflater.from(context).inflate(R.layout.layout_loop_scroll, this);
         viewPager =findViewById(R.id.viewpager);
         bottomLayout = (LinearLayout) findViewById(R.id.bottom_layout);

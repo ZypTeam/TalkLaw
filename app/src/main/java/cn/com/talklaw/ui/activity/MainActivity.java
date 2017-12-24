@@ -17,7 +17,8 @@ import rx.functions.Action1;
 
 public class MainActivity extends BaseTalkLawActivity {
 
-    protected Button login,audio,list;
+    protected Button login, audio, list;
+    protected Button home;
     private TextView txt;
 
     @Override
@@ -34,8 +35,9 @@ public class MainActivity extends BaseTalkLawActivity {
     public void initView() {
         txt = findViewById(R.id.txt);
         login = (Button) findViewById(R.id.login);
-        audio= (Button) findViewById(R.id.audio);
-        list= (Button) findViewById(R.id.list);
+        audio = (Button) findViewById(R.id.audio);
+        list = (Button) findViewById(R.id.list);
+        home = (Button) findViewById(R.id.home);
     }
 
     @Override
@@ -57,21 +59,28 @@ public class MainActivity extends BaseTalkLawActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goActivity(null,LoginActivity.class);
+                goActivity(null, LoginActivity.class);
             }
         });
 
         audio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goActivity(null,AudioDetailsActivity.class);
+                goActivity(null, AudioDetailsActivity.class);
             }
         });
 
         list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goActivity(null,ArrondiActivity.class);
+                goActivity(null, ArrondiActivity.class);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goActivity(null,HomeActivity.class);
             }
         });
     }

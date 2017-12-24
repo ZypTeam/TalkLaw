@@ -45,6 +45,7 @@ public class ArrondiTopAdapter extends PagerAdapter {
         ImageView imageView=view.findViewById(R.id.image);
         Glide.with(context)
                 .load(list.get(position))
+                .centerCrop()
                 .into(imageView);
         container.addView(view);
         return view;
