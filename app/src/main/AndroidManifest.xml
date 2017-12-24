@@ -24,6 +24,8 @@
 
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.AudioDetailsActivity" />
+        <activity android:name=".ui.activity.ArrondiActivity" />
+        <activity android:name=".ui.activity.ProductiListActivity" />
     </application>
 
 </manifest>

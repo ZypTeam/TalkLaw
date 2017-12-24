@@ -58,10 +58,11 @@ public abstract class BaseFragment extends Fragment {
         Toast.makeText(mContext,getString(stringId), Toast.LENGTH_SHORT).show();
     }
 
-    public void findViewById(int resId){
+    public <T extends View> T findViewById(int resId){
         if (rootView!=null){
-            rootView.findViewById(resId);
+            return (T) rootView.findViewById(resId);
         }
+        return null;
     }
 
 
