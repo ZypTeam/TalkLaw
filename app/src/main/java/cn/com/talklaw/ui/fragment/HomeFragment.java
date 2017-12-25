@@ -13,6 +13,7 @@ import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
 import cn.com.talklaw.ui.util.GlideImageLoader;
 import cn.com.talklaw.ui.view.HomeListProductView;
+import cn.com.talklaw.ui.view.HomeNeedView;
 
 /**
  * @author zhaoyapeng
@@ -26,6 +27,7 @@ public class HomeFragment extends BaseTalkLawFragment {
     protected Banner banner;
     protected HomeListProductView viewHotProduct;
     protected HomeListProductView viewFreeProduct;
+    protected HomeNeedView viewNeed;
 
     public static HomeFragment getInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -47,6 +49,7 @@ public class HomeFragment extends BaseTalkLawFragment {
         banner = (Banner) rootView.findViewById(R.id.banner);
         viewHotProduct = (HomeListProductView) rootView.findViewById(R.id.view_hot_product);
         viewFreeProduct = (HomeListProductView) rootView.findViewById(R.id.view_free_product);
+        viewNeed = (HomeNeedView) rootView.findViewById(R.id.view_need);
 
     }
 
@@ -81,8 +84,12 @@ public class HomeFragment extends BaseTalkLawFragment {
         banner.start();
 
 
+        banner.setFocusable(true);
+        banner.setFocusableInTouchMode(true);
+        banner.requestFocus();
 
         viewFreeProduct.setData();
         viewHotProduct.setData();
+        viewNeed.setData();
     }
 }
