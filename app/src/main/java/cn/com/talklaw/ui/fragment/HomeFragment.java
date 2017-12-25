@@ -12,6 +12,7 @@ import java.util.List;
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
 import cn.com.talklaw.ui.util.GlideImageLoader;
+import cn.com.talklaw.ui.view.HomeListProductView;
 
 /**
  * @author zhaoyapeng
@@ -23,6 +24,8 @@ public class HomeFragment extends BaseTalkLawFragment {
 
 
     protected Banner banner;
+    protected HomeListProductView viewHotProduct;
+    protected HomeListProductView viewFreeProduct;
 
     public static HomeFragment getInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -42,6 +45,8 @@ public class HomeFragment extends BaseTalkLawFragment {
     @Override
     public void initView(View rootView) {
         banner = (Banner) rootView.findViewById(R.id.banner);
+        viewHotProduct = (HomeListProductView) rootView.findViewById(R.id.view_hot_product);
+        viewFreeProduct = (HomeListProductView) rootView.findViewById(R.id.view_free_product);
 
     }
 
@@ -54,7 +59,7 @@ public class HomeFragment extends BaseTalkLawFragment {
         banner.setImageLoader(new GlideImageLoader());
         //设置图片集合
 
-        List<String>list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         list.add("1");
         list.add("1");
         list.add("1");
@@ -74,5 +79,10 @@ public class HomeFragment extends BaseTalkLawFragment {
         banner.setIndicatorGravity(BannerConfig.CENTER);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
+
+
+
+        viewFreeProduct.setData();
+        viewHotProduct.setData();
     }
 }

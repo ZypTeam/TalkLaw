@@ -47,12 +47,16 @@ public class OpinionAdapter extends RecyclerView.Adapter implements OpinionItemC
 
     @Override
     public int getItemCount() {
-        return 10;
+        return 5;
     }
 
     @Override
     public int getItemViewType(int position) {
 //        return (int) mDataList.get(position).getNewsType();
-        return 0;
+        return TYPE_CAROUSEL;
+    }
+
+    public void refresh(){
+
     }
 }

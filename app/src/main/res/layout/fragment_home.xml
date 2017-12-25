@@ -17,6 +17,16 @@
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
+
+            <cn.com.talklaw.ui.view.HomeListProductView
+                android:id="@+id/view_hot_product"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <cn.com.talklaw.ui.view.HomeListProductView
+                android:id="@+id/view_free_product"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </ScrollView>
 
