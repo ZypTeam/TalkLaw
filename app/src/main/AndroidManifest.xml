@@ -22,11 +22,20 @@
             </intent-filter>
         </activity>
 
+        <!--登录-->
         <activity android:name=".ui.activity.LoginActivity" />
+        <!--首页-->
         <activity android:name=".ui.activity.HomeActivity" />
+        <!--音频详情-->
         <activity android:name=".ui.activity.AudioDetailsActivity" />
+        <!--免费专区-->
         <activity android:name=".ui.activity.ArrondiActivity" />
+        <!--注释-->
         <activity android:name=".ui.activity.ProductiListActivity" />
+
+        <!-- 积分首页 -->
+        <activity android:name=".ui.activity.IntegralActivity" />
+
     </application>
 
 </manifest>

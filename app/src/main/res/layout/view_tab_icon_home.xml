@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/write"
     android:orientation="horizontal"
     android:paddingLeft="8dp"
     android:paddingRight="8dp">
@@ -9,6 +10,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
         android:layout_weight="1">
 
         <ImageView
@@ -29,6 +32,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
         android:layout_weight="1">
 
         <ImageView
@@ -49,6 +54,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
         android:layout_weight="1">
 
         <ImageView
@@ -61,14 +68,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_marginBottom="15dp"
             android:text="公司顾问"
             android:textColor="@color/write"
             android:textSize="16sp" />
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/layout_integral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
         android:layout_weight="1">
 
         <ImageView
