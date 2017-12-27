@@ -7,4 +7,6 @@
     <color name="text_home_btn_select">#cb1e28</color>
     <color name="text_home_btn_no">#8d8e93</color>
     <color name="write">#ffffff</color>
+
+    <color name="color_main_bg">#f8f8f8</color>
 </resources>

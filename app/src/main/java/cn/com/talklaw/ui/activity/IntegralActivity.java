@@ -10,7 +10,7 @@ import java.util.List;
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawActivity;
 import cn.com.talklaw.ui.util.GlideImageLoader;
-import cn.com.talklaw.ui.view.HomeListProductView;
+import cn.com.talklaw.ui.view.IntegralListProductView;
 
 /**
  * @author zhaoyapeng
@@ -20,7 +20,7 @@ import cn.com.talklaw.ui.view.HomeListProductView;
  */
 public class IntegralActivity extends BaseTalkLawActivity {
     protected Banner banner;
-    protected HomeListProductView viewHotProduct;
+    protected IntegralListProductView viewIntegral;
 
     @Override
     public int getLayoutResId() {
@@ -35,7 +35,7 @@ public class IntegralActivity extends BaseTalkLawActivity {
     @Override
     public void initView() {
         banner = (Banner) findViewById(R.id.banner);
-        viewHotProduct = (HomeListProductView) findViewById(R.id.view_hot_product);
+        viewIntegral = (IntegralListProductView) findViewById(R.id.view_integeral_product);
 
     }
 
@@ -73,6 +73,6 @@ public class IntegralActivity extends BaseTalkLawActivity {
         banner.setFocusableInTouchMode(true);
         banner.requestFocus();
 
-        viewHotProduct.setData();
+        viewIntegral.setData();
     }
 }
