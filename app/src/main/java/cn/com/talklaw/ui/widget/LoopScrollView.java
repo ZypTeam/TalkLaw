@@ -124,9 +124,9 @@ public class LoopScrollView extends FrameLayout {
                     for (int i = 0; i < bottomLayout.getChildCount(); i++) {
                         View child=bottomLayout.getChildAt(i);
                         if (i == index) {
-                            child.setBackgroundResource(R.mipmap.icon_dot_drag);
-                        } else {
                             child.setBackgroundResource(R.mipmap.icon_dot_light);
+                        } else {
+                            child.setBackgroundResource(R.mipmap.icon_dot_drag);
                         }
                     }
                 }
@@ -219,9 +219,9 @@ public class LoopScrollView extends FrameLayout {
         for (int i = 0; i < size; i++) {
             View view=new View(context);
             if (i==0){
-                view.setBackgroundResource(R.mipmap.icon_dot_drag);
-            }else {
                 view.setBackgroundResource(R.mipmap.icon_dot_light);
+            }else {
+                view.setBackgroundResource(R.mipmap.icon_dot_drag);
             }
 
             LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(PhoneUtil.dip2px(context,9),PhoneUtil.dip2px(context,9));

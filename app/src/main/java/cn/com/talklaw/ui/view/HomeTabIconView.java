@@ -2,6 +2,7 @@ package cn.com.talklaw.ui.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,9 @@ public class HomeTabIconView extends BaseView {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ArrondiActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putInt(ArrondiActivity.TYPE,0);
+                intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
         });
@@ -69,6 +73,9 @@ public class HomeTabIconView extends BaseView {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ArrondiActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putInt(ArrondiActivity.TYPE,1);
+                intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
         });
@@ -76,6 +83,9 @@ public class HomeTabIconView extends BaseView {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ArrondiActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putInt(ArrondiActivity.TYPE,2);
+                intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
         });

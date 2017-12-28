@@ -12,6 +12,7 @@ public class ArrondiProductModel extends BaseModel {
     private int imageResId;
     private String imgeUrl;
     private String name;
+    private String title;
 
     public int getImageResId() {
         return imageResId;
@@ -35,5 +36,13 @@ public class ArrondiProductModel extends BaseModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

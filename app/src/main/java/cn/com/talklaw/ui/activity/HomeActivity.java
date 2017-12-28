@@ -100,4 +100,9 @@ public class HomeActivity extends BaseTalkLawActivity {
             myText.setTextColor(getResources().getColor(R.color.text_home_btn_select));
         }
     }
+
+    @Override
+    public boolean isNeedSwipe() {
+        return false;
+    }
 }

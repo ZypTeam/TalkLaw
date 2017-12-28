@@ -8,6 +8,7 @@ import java.util.List;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawActivity;
+import cn.com.talklaw.model.ArrondiProductModel;
 import cn.com.talklaw.model.ProductModel;
 import cn.com.talklaw.ui.adapter.ProductListAdapter;
 import cn.com.talklaw.ui.widget.BackTitleView;
@@ -20,9 +21,11 @@ import cn.com.talklaw.ui.widget.BackTitleView;
 
 public class ProductiListActivity extends BaseTalkLawActivity {
 
+    public static final String PRODUCT_MODEL="productmodel";
     protected BackTitleView titleView;
     protected RecyclerView list;
     private ProductListAdapter adapter;
+    private ArrondiProductModel model;
 
     @Override
     public int getLayoutResId() {
@@ -32,6 +35,7 @@ public class ProductiListActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
         adapter = new ProductListAdapter(mContext);
+        model= (ArrondiProductModel) getIntent().getExtras().getSerializable(PRODUCT_MODEL);
     }
 
     @Override
@@ -44,7 +48,9 @@ public class ProductiListActivity extends BaseTalkLawActivity {
     @Override
     public void initAction() {
 
-        titleView.setTitle("婚姻案例");
+        if (model!=null){
+            titleView.setTitle(model.getName()+"案例");
+        }
         list.setLayoutManager(new LinearLayoutManager(mContext));
         list.setAdapter(adapter);
 

@@ -79,7 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @return
      */
     public boolean isNeedSwipe(){
-        return false;
+        return true;
     };
 
     private void initBase() {

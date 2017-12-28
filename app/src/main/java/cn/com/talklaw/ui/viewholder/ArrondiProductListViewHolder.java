@@ -2,6 +2,7 @@ package cn.com.talklaw.ui.viewholder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ public class ArrondiProductListViewHolder extends BaseViewHolder<ArrondiProductM
     }
 
     @Override
-    public void update(ArrondiProductModel model) {
+    public void update(final ArrondiProductModel model) {
         Glide.with(context)
                 .load(model.getImageResId())
                 .into(icon);
@@ -44,6 +45,9 @@ public class ArrondiProductListViewHolder extends BaseViewHolder<ArrondiProductM
             public void onClick(View v) {
                 Intent intent=new Intent();
                 intent.setClass(context, ProductiListActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable(ProductiListActivity.PRODUCT_MODEL,model);
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });
