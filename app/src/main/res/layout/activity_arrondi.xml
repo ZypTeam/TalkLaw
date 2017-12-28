@@ -5,6 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#e8e8e8">
 
+    <cn.com.talklaw.ui.widget.xRecyclerView.XRecyclerView
+        android:id="@+id/list"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buy"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
     <cn.com.talklaw.ui.widget.BackTitleView
         android:id="@+id/titleView"
         android:background="#fff"
@@ -13,23 +22,6 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"/>
-
-    <cn.com.talklaw.ui.widget.LoopScrollView
-        android:id="@+id/top"
-        app:layout_constraintTop_toBottomOf="@+id/titleView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="165dp"/>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/arrondi"
-        android:background="#fff"
-        app:layout_constraintTop_toBottomOf="@+id/top"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="140dp"/>
 
     <Button
         android:id="@+id/buy"
@@ -43,15 +35,5 @@
         android:text="购买"
         android:layout_width="0dp"
         android:layout_height="49dp" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/arrondi"
-        app:layout_constraintBottom_toTopOf="@+id/buy"
-        android:layout_marginTop="10dp"
-        android:layout_width="0dp"
-        android:layout_height="0dp"/>
 
 </android.support.constraint.ConstraintLayout>
