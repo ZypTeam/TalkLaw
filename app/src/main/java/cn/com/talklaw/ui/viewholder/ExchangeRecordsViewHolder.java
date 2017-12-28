@@ -1,6 +1,7 @@
 package cn.com.talklaw.ui.viewholder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -12,6 +13,7 @@ import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseViewHolder;
 import cn.com.talklaw.model.ExchangeRecordsItemModel;
 import cn.com.talklaw.model.ProductModel;
+import cn.com.talklaw.ui.activity.RedeemDetailsActivity;
 
 /**
  * @author wangcc
@@ -46,6 +48,14 @@ public class ExchangeRecordsViewHolder extends BaseViewHolder<ExchangeRecordsIte
         textCount.setText("共6件商品");
         textIntegral.setText("299积分");
         desText.setText("律师书籍");
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, RedeemDetailsActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 

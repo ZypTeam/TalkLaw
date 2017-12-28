@@ -1,10 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="兑换详情"/>
+    android:layout_height="match_parent"
+    android:background="@color/color_main_bg"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <cn.com.talklaw.ui.widget.BackTitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff" />
+
+    <LinearLayout
+        android:id="@+id/layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/titleView"
+        android:layout_marginTop="10dp">
+
+
+        <RelativeLayout
+            android:id="@+id/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@color/write"
+            android:paddingLeft="21dp"
+            android:paddingRight="16dp">
+
+            <TextView
+                android:id="@+id/text_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="#7f8389"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/text_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="#7f8389"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/layout_title"
+            android:background="#e8e8e8" />
+    </LinearLayout>
+
+    <cn.com.talklaw.ui.widget.xRecyclerView.XRecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_top"
+        android:background="@color/write" />
+
+
+    <Button
+        android:id="@+id/buy"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_alignParentBottom="true"
+        android:background="#e6e60012"
+        android:gravity="center"
+        android:text="实际支付：1000积分"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+
+</RelativeLayout>
