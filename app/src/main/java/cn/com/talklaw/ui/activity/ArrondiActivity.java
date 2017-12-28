@@ -3,7 +3,12 @@ package cn.com.talklaw.ui.activity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
+
+import com.jusfoun.baselibrary.Util.PhoneUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +22,7 @@ import cn.com.talklaw.ui.adapter.ArrondiTopAdapter;
 import cn.com.talklaw.ui.adapter.ProductListAdapter;
 import cn.com.talklaw.ui.widget.BackTitleView;
 import cn.com.talklaw.ui.widget.LoopScrollView;
+import cn.com.talklaw.ui.widget.xRecyclerView.XRecyclerView;
 
 /**
  * @author wangcc
@@ -29,11 +35,13 @@ public class ArrondiActivity extends BaseTalkLawActivity {
     protected LoopScrollView top;
     protected ViewPager arrondi;
     protected Button buy;
-    protected RecyclerView list;
+    protected XRecyclerView list;
 
     private ArrondiTopAdapter topAdapter;
     private ProductListAdapter listAdapter;
     private ArrondiProductAdapter productAdapter;
+    private int listDy=0;
+    private int disY;
 
     @Override
     public int getLayoutResId() {
@@ -45,20 +53,25 @@ public class ArrondiActivity extends BaseTalkLawActivity {
         topAdapter=new ArrondiTopAdapter(mContext);
         listAdapter=new ProductListAdapter(mContext);
         productAdapter=new ArrondiProductAdapter(mContext);
+        disY=PhoneUtil.dip2px(mContext,200);
     }
 
     @Override
     public void initView() {
-        titleView = (BackTitleView) findViewById(R.id.titleView);
-        top = (LoopScrollView) findViewById(R.id.top);
-        arrondi = (ViewPager) findViewById(R.id.arrondi);
-        buy = (Button) findViewById(R.id.buy);
-        list = (RecyclerView) findViewById(R.id.list);
+        View headerView= LayoutInflater.from(mContext).inflate(R.layout.layout_arrondi_header,null);
 
+        titleView = (BackTitleView) findViewById(R.id.titleView);
+        top = (LoopScrollView) headerView.findViewById(R.id.top);
+        arrondi = (ViewPager) headerView.findViewById(R.id.arrondi);
+        buy = (Button) findViewById(R.id.buy);
+        list = (XRecyclerView) findViewById(R.id.list);
+        list.addHeaderView(headerView);
     }
 
     @Override
     public void initAction() {
+
+        list.setPullRefreshEnabled(false);
 
         titleView.setTitle("免费专区");
         top.setAdapter(topAdapter)
@@ -74,6 +87,18 @@ public class ArrondiActivity extends BaseTalkLawActivity {
 
         list.setLayoutManager(new LinearLayoutManager(mContext));
         list.setAdapter(listAdapter);
+
+        list.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                listDy+=dy;
+                if (listDy<0){
+                    listDy=0;
+                }
+                float alpha=listDy/(float)disY;
+                titleView.setAlpha(alpha);
+            }
+        });
 
         List<ProductModel> list=new ArrayList<>();
         for (int i = 0; i < 10; i++) {
