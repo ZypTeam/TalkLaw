@@ -21,7 +21,7 @@ public class HomeFragmentUtil {
         if (index == TYPE_OPINION) {
             fragment = HomeFragment.getInstance();
         } else if (index == TYPE_STATEMENT) {
-            fragment = StatementFragment.getInstance();
+            fragment = HomeFragment.getInstance();
 
         } else if (index == TYPE_PERSONAL) {
             fragment = MyFragment.getInstance();
