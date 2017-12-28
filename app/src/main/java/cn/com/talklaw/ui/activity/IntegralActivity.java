@@ -1,5 +1,8 @@
 package cn.com.talklaw.ui.activity;
 
+import android.view.View;
+import android.widget.RelativeLayout;
+
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -11,6 +14,7 @@ import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawActivity;
 import cn.com.talklaw.ui.util.GlideImageLoader;
 import cn.com.talklaw.ui.view.IntegralListProductView;
+import cn.com.talklaw.ui.widget.BackTitleView;
 
 /**
  * @author zhaoyapeng
@@ -21,6 +25,8 @@ import cn.com.talklaw.ui.view.IntegralListProductView;
 public class IntegralActivity extends BaseTalkLawActivity {
     protected Banner banner;
     protected IntegralListProductView viewIntegral;
+    protected BackTitleView titleView;
+    protected RelativeLayout layoutRecords;
 
     @Override
     public int getLayoutResId() {
@@ -36,11 +42,14 @@ public class IntegralActivity extends BaseTalkLawActivity {
     public void initView() {
         banner = (Banner) findViewById(R.id.banner);
         viewIntegral = (IntegralListProductView) findViewById(R.id.view_integeral_product);
+        titleView = (BackTitleView) findViewById(R.id.titleView);
+        layoutRecords = (RelativeLayout) findViewById(R.id.layout_records);
 
     }
 
     @Override
     public void initAction() {
+        titleView.setTitle("积分商城");
         //设置banner样式
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置图片加载器
@@ -74,5 +83,12 @@ public class IntegralActivity extends BaseTalkLawActivity {
         banner.requestFocus();
 
         viewIntegral.setData();
+
+        layoutRecords.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goActivity(null,ExchangeRecordsActivity.class);
+            }
+        });
     }
 }

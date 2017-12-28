@@ -3,6 +3,7 @@ package com.jusfoun.baselibrary.widget;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -47,6 +48,7 @@ public class TitleStatusBarView extends FrameLayout {
 
         int height=0;
         if (heightMode==MeasureSpec.EXACTLY){
+            Log.e("tag","MeasureSpec1");
             if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
                 setPadding(0,statusBarHeight,0,0);
                 height=heightSize+statusBarHeight;
@@ -54,20 +56,24 @@ public class TitleStatusBarView extends FrameLayout {
                 height=heightSize;
             }
         }else if (heightMode==MeasureSpec.AT_MOST){
+            Log.e("tag","MeasureSpec2");
             int count=getChildCount();
             if (count!=1){
                 throw new IllegalArgumentException("titlebar child view count most is 1");
             }
-
+            Log.e("tag","MeasureSpec3");
             View child=getChildAt(0);
             if (child.getVisibility()!=GONE){
+                Log.e("tag","MeasureSpec4");
                 measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, 0);
                 LayoutParams layoutParams= (LayoutParams) child.getLayoutParams();
                 if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT) {
+                    Log.e("tag","MeasureSpec5");
                     height = child.getMeasuredHeight() + layoutParams.topMargin
                             + layoutParams.bottomMargin+ statusBarHeight;
                     setPadding(0,statusBarHeight,0,0);
                 }else {
+                    Log.e("tag","MeasureSpec6");
                     height = child.getMeasuredHeight() + layoutParams.topMargin
                             + layoutParams.bottomMargin;
                 }

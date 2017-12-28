@@ -36,6 +36,12 @@
         <!-- 积分首页 -->
         <activity android:name=".ui.activity.IntegralActivity" />
 
+        <!-- 兑换记录 -->
+        <activity android:name=".ui.activity.ExchangeRecordsActivity" />
+
+        <!-- 兑换详情 -->
+        <activity android:name=".ui.activity.RedeemDetailsActivity" />
+
     </application>
 
 </manifest>
