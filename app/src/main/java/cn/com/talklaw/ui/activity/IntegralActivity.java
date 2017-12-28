@@ -1,6 +1,4 @@
-package cn.com.talklaw.ui.fragment;
-
-import android.view.View;
+package cn.com.talklaw.ui.activity;
 
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -10,33 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.com.talklaw.R;
-import cn.com.talklaw.base.BaseTalkLawFragment;
+import cn.com.talklaw.base.BaseTalkLawActivity;
 import cn.com.talklaw.ui.util.GlideImageLoader;
-import cn.com.talklaw.ui.view.HomeListProductView;
-import cn.com.talklaw.ui.view.HomeNeedView;
+import cn.com.talklaw.ui.view.IntegralListProductView;
 
 /**
  * @author zhaoyapeng
- * @version create time:17/12/2115:49
+ * @version create time:17/12/2515:31
  * @Email zyp@jusfoun.com
- * @Description ${首页fragment}
+ * @Description ${积分首页}
  */
-public class HomeFragment extends BaseTalkLawFragment {
-
-
+public class IntegralActivity extends BaseTalkLawActivity {
     protected Banner banner;
-    protected HomeListProductView viewHotProduct;
-    protected HomeListProductView viewFreeProduct;
-    protected HomeNeedView viewNeed;
-
-    public static HomeFragment getInstance() {
-        HomeFragment fragment = new HomeFragment();
-        return fragment;
-    }
+    protected IntegralListProductView viewIntegral;
 
     @Override
     public int getLayoutResId() {
-        return R.layout.fragment_home;
+        return R.layout.activity_homt_integral;
     }
 
     @Override
@@ -45,14 +33,11 @@ public class HomeFragment extends BaseTalkLawFragment {
     }
 
     @Override
-    public void initView(View rootView) {
-        banner = (Banner) rootView.findViewById(R.id.banner);
-        viewHotProduct = (HomeListProductView) rootView.findViewById(R.id.view_hot_product);
-        viewFreeProduct = (HomeListProductView) rootView.findViewById(R.id.view_free_product);
-        viewNeed = (HomeNeedView) rootView.findViewById(R.id.view_need);
+    public void initView() {
+        banner = (Banner) findViewById(R.id.banner);
+        viewIntegral = (IntegralListProductView) findViewById(R.id.view_integeral_product);
 
     }
-
 
     @Override
     public void initAction() {
@@ -88,8 +73,6 @@ public class HomeFragment extends BaseTalkLawFragment {
         banner.setFocusableInTouchMode(true);
         banner.requestFocus();
 
-        viewFreeProduct.setData();
-        viewHotProduct.setData();
-        viewNeed.setData();
+        viewIntegral.setData();
     }
 }

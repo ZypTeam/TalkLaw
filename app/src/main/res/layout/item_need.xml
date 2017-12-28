@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="141dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="22dp"
+        android:background="@drawable/bg_item__home_need"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="17dp"
+        android:paddingBottom="14sp">
+
+
+        <ImageView
+            android:id="@+id/img_avatar"
+            android:layout_width="82dp"
+            android:layout_height="82dp"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_need_defalt" />
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_avatar"
+            android:layout_marginTop="16dp"
+            android:maxLines="2"
+            android:minLines="2"
+            android:textColor="#333333"
+            android:ellipsize="end"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_title"
+            android:layout_marginTop="12dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/img_jiaoyi" />
+
+            <TextView
+                android:id="@+id/text_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:textColor="#bbbbbb"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

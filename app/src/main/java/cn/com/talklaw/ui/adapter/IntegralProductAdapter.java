@@ -2,14 +2,13 @@ package cn.com.talklaw.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.constant.OpinionItemConstant;
 import cn.com.talklaw.ui.viewholder.CarouselViewHolder;
+import cn.com.talklaw.ui.viewholder.IntegralProductViewHolder;
 
 /**
  * @author zhaoyapeng
@@ -17,11 +16,11 @@ import cn.com.talklaw.ui.viewholder.CarouselViewHolder;
  * @Email zyp@jusfoun.com
  * @Description ${TODO}
  */
-public class OpinionAdapter extends RecyclerView.Adapter implements OpinionItemConstant{
+public class IntegralProductAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private LayoutInflater mInflater;
 
-    public OpinionAdapter(Context context) {
+    public IntegralProductAdapter(Context context) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
 
@@ -29,32 +28,21 @@ public class OpinionAdapter extends RecyclerView.Adapter implements OpinionItemC
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case TYPE_CAROUSEL:
-                return new CarouselViewHolder(
-                        mInflater.inflate(R.layout.item_opinion_carousel, parent, false),
+                return new IntegralProductViewHolder(
+                        mInflater.inflate(R.layout.item_prodycu_integral, parent, false),
                         mContext);
-        }
-        return null;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (getItemViewType(position) == TYPE_CAROUSEL) {
-            ((CarouselViewHolder) holder).update(null);
-        }
+            ((IntegralProductViewHolder) holder).update(null);
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 6;
     }
 
-    @Override
-    public int getItemViewType(int position) {
-//        return (int) mDataList.get(position).getNewsType();
-        return TYPE_CAROUSEL;
-    }
 
     public void refresh(){
 
