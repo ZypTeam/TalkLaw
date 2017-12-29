@@ -84,4 +84,9 @@ public class MainActivity extends BaseTalkLawActivity {
             }
         });
     }
+
+    @Override
+    public boolean isNeedSwipe() {
+        return false;
+    }
 }

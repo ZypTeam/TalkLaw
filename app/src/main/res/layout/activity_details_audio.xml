@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="@+id/lawyer_name"
         app:layout_constraintBottom_toBottomOf="@+id/lawyer_name"
         app:layout_constraintRight_toRightOf="parent"
-        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:src="@mipmap/icon_audio_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

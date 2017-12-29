@@ -1,6 +1,7 @@
 package cn.com.talklaw.ui.viewholder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -9,6 +10,7 @@ import com.bumptech.glide.Glide;
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseViewHolder;
 import cn.com.talklaw.model.ProductModel;
+import cn.com.talklaw.ui.activity.AudioDetailsActivity;
 
 /**
  * @author wangcc
@@ -30,5 +32,14 @@ public class ProductViewHolder extends BaseViewHolder<ProductModel> {
         Glide.with(context)
         .load(R.mipmap.logo)
         .into(image);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(mContext, AudioDetailsActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
     }
 }

@@ -3,6 +3,7 @@ package cn.com.talklaw.ui.activity;
 import com.jusfoun.baselibrary.base.BaseActivity;
 
 import cn.com.talklaw.R;
+import cn.com.talklaw.base.BaseTalkLawActivity;
 
 /**
  * @author wangcc
@@ -10,7 +11,7 @@ import cn.com.talklaw.R;
  * @describe
  */
 
-public class AudioDetailsActivity extends BaseActivity {
+public class AudioDetailsActivity extends BaseTalkLawActivity {
     @Override
     public int getLayoutResId() {
         return R.layout.activity_details_audio;
@@ -18,7 +19,7 @@ public class AudioDetailsActivity extends BaseActivity {
 
     @Override
     public void initDatas() {
-
+        setStatusBarLight(false);
     }
 
     @Override
