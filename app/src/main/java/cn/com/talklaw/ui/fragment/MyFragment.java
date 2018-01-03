@@ -1,9 +1,14 @@
 package cn.com.talklaw.ui.fragment;
 
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
+import cn.com.talklaw.ui.activity.MyInfoActivity;
+import cn.com.talklaw.ui.activity.MyMsgListActivity;
 
 /**
  * @author zhaoyapeng
@@ -11,10 +16,31 @@ import cn.com.talklaw.base.BaseTalkLawFragment;
  * @Email zyp@jusfoun.com
  * @Description ${首页fragment}
  */
-public class MyFragment extends BaseTalkLawFragment {
+public class MyFragment extends BaseTalkLawFragment implements View.OnClickListener {
 
 
-    public static MyFragment getInstance(){
+    protected ImageView iconHead;
+    protected TextView name;
+    protected TextView yxlCount;
+    protected TextView buyCount;
+    protected TextView followCount;
+    protected TextView txtZhanghuInfo;
+    protected TextView zhuanghu;
+    protected TextView jifen;
+    protected TextView zhuanghuCount;
+    protected TextView jifenCount;
+    protected Button btnTixian;
+    protected Button btnJifen;
+    protected TextView myZixun;
+    protected TextView myZixunAll;
+    protected TextView zixunContent;
+    protected TextView zixunA;
+    protected TextView myAddress;
+    protected TextView editAddress;
+    protected ImageView imgAddress;
+    protected TextView myAddressContent;
+
+    public static MyFragment getInstance() {
         MyFragment fragment = new MyFragment();
         return fragment;
     }
@@ -31,6 +57,26 @@ public class MyFragment extends BaseTalkLawFragment {
 
     @Override
     public void initView(View rootView) {
+        iconHead = (ImageView) rootView.findViewById(R.id.icon_head);
+        name = (TextView) rootView.findViewById(R.id.name);
+        yxlCount = (TextView) rootView.findViewById(R.id.yxl_count);
+        buyCount = (TextView) rootView.findViewById(R.id.buy_count);
+        followCount = (TextView) rootView.findViewById(R.id.follow_count);
+        txtZhanghuInfo = (TextView) rootView.findViewById(R.id.txt_zhanghu_info);
+        zhuanghu = (TextView) rootView.findViewById(R.id.zhuanghu);
+        jifen = (TextView) rootView.findViewById(R.id.jifen);
+        zhuanghuCount = (TextView) rootView.findViewById(R.id.zhuanghu_count);
+        jifenCount = (TextView) rootView.findViewById(R.id.jifen_count);
+        btnTixian = (Button) rootView.findViewById(R.id.btn_tixian);
+        btnJifen = (Button) rootView.findViewById(R.id.btn_jifen);
+        myZixun = (TextView) rootView.findViewById(R.id.my_zixun);
+        myZixunAll = (TextView) rootView.findViewById(R.id.my_zixun_all);
+        zixunContent = (TextView) rootView.findViewById(R.id.zixun_content);
+        zixunA = (TextView) rootView.findViewById(R.id.zixun_a);
+        myAddress = (TextView) rootView.findViewById(R.id.my_address);
+        editAddress = (TextView) rootView.findViewById(R.id.edit_address);
+        imgAddress = (ImageView) rootView.findViewById(R.id.img_address);
+        myAddressContent = (TextView) rootView.findViewById(R.id.my_address_content);
 
     }
 
@@ -38,5 +84,19 @@ public class MyFragment extends BaseTalkLawFragment {
     @Override
     public void initAction() {
 
+        iconHead.setOnClickListener(this);
+        myZixunAll.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.icon_head:
+                goActivity(null, MyInfoActivity.class);
+                break;
+            case R.id.my_zixun_all:
+                goActivity(null, MyMsgListActivity.class);
+                break;
+        }
     }
 }

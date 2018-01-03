@@ -40,6 +40,12 @@
         <!-- 兑换详情 -->
         <activity android:name=".ui.activity.RedeemDetailsActivity" />
 
+        <!--个人信息-->
+        <activity android:name=".ui.activity.MyInfoActivity" />
+
+        <!--消息列表-->
+        <activity android:name=".ui.activity.MyMsgListActivity" />
+
     </application>
 
 </manifest>
