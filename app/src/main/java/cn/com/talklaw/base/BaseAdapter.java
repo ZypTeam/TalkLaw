@@ -114,9 +114,28 @@ public abstract class BaseAdapter<T extends Serializable> extends RecyclerView.A
 
     /**
      * 删除一项
-     * @param item
+     * @param position
      * @return
      */
+    public boolean remove(int position){
+        boolean result=false;
+        Iterator<T> iterator=list.iterator();
+        int index=0;
+        while (iterator.hasNext()){
+            T temp= iterator.next();
+            if (position==index){
+                iterator.remove();
+                result=true;
+                break;
+            }
+            index++;
+        }
+        if (result){
+            notifyItemRemoved(index);
+        }
+        return result;
+    }
+
     public boolean remove(T item){
         boolean result=false;
         Iterator<T> iterator=list.iterator();

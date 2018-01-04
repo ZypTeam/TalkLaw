@@ -33,7 +33,7 @@ public class MainActivity extends BaseTalkLawActivity {
 
     @Override
     public void initView() {
-        txt = findViewById(R.id.txt);
+        txt = (TextView) findViewById(R.id.txt);
         login = (Button) findViewById(R.id.login);
         audio = (Button) findViewById(R.id.audio);
         list = (Button) findViewById(R.id.list);

@@ -38,16 +38,16 @@ public class HomeActivity extends BaseTalkLawActivity {
     @Override
     public void initView() {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        opinionLayout = findViewById(R.id.layout_opinion);
-        statementLayout = findViewById(R.id.layout_statement);
-        myLayout = findViewById(R.id.layout_my);
-        opinionImg = findViewById(R.id.img_opinion);
-        statementImg = findViewById(R.id.img_stetement);
-        myImg = findViewById(R.id.img_my);
+        opinionLayout = (LinearLayout) findViewById(R.id.layout_opinion);
+        statementLayout = (LinearLayout) findViewById(R.id.layout_statement);
+        myLayout = (LinearLayout) findViewById(R.id.layout_my);
+        opinionImg = (ImageView) findViewById(R.id.img_opinion);
+        statementImg = (ImageView) findViewById(R.id.img_stetement);
+        myImg = (ImageView) findViewById(R.id.img_my);
 
-        opinionText = findViewById(R.id.text_opinion);
-        statementText = findViewById(R.id.text_statement);
-        myText = findViewById(R.id.text_my);
+        opinionText = (TextView) findViewById(R.id.text_opinion);
+        statementText = (TextView) findViewById(R.id.text_statement);
+        myText = (TextView) findViewById(R.id.text_my);
 
     }
 

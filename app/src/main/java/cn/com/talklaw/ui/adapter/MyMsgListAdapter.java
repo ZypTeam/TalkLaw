@@ -6,6 +6,7 @@ import android.view.View;
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseAdapter;
 import cn.com.talklaw.base.BaseViewHolder;
+import cn.com.talklaw.comment.OnMsgDelCallback;
 import cn.com.talklaw.model.MyMsgModel;
 import cn.com.talklaw.ui.viewholder.MyMsgListViewHolder;
 
@@ -27,6 +28,14 @@ public class MyMsgListAdapter extends BaseAdapter<MyMsgModel> {
 
     @Override
     protected <E extends BaseViewHolder> E getViewHolder(int viewType, View view) {
-        return (E) new MyMsgListViewHolder(view,context);
+        MyMsgListViewHolder viewHolder=new MyMsgListViewHolder(view,context);
+        viewHolder.setDelCallback(callback);
+        return (E)viewHolder;
+    }
+
+    private OnMsgDelCallback callback;
+
+    public void setCallback(OnMsgDelCallback callback) {
+        this.callback = callback;
     }
 }

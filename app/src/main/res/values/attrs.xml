@@ -30,4 +30,10 @@
         <flag name="BallGridBeat" value="26"/>
         <flag name="SemiCircleSpin" value="27"/>
     </attr><attr format="color" name="indicator_color"/></declare-styleable>
+
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="swipeEnable" format="boolean" />
+        <attr name="ios" format="boolean" />
+        <attr name="leftSwipe" format="boolean" />
+    </declare-styleable>
 </resources>

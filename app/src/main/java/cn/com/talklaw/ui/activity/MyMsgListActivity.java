@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawActivity;
+import cn.com.talklaw.comment.OnMsgDelCallback;
 import cn.com.talklaw.model.MyMsgModel;
 import cn.com.talklaw.ui.adapter.MyMsgListAdapter;
 import cn.com.talklaw.ui.widget.xRecyclerView.XRecyclerView;
@@ -59,5 +60,12 @@ public class MyMsgListActivity extends BaseTalkLawActivity {
             list.add(new MyMsgModel());
         }
         adapter.refreshList(list);
+
+        adapter.setCallback(new OnMsgDelCallback() {
+            @Override
+            public void del(MyMsgModel model, int position) {
+                adapter.remove(position);
+            }
+        });
     }
 }
