@@ -30,6 +30,7 @@
                     android:layout_weight="1">
 
                     <LinearLayout
+                        android:id="@+id/layout_integral"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true">
@@ -45,7 +46,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="17dp"
-                            android:text="积分"
+                            android:text="1000"
                             android:textColor="#fda623"
                             android:textSize="16sp" />
 

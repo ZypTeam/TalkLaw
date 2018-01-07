@@ -46,6 +46,10 @@
         <!--消息列表-->
         <activity android:name=".ui.activity.MyMsgListActivity" />
 
+        <!--积分详情-->
+        <activity android:name=".ui.activity.IntegralDetailActivity" />
+
+
     </application>
 
 </manifest>

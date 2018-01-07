@@ -1,6 +1,7 @@
 package cn.com.talklaw.ui.activity;
 
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.youth.banner.Banner;
@@ -27,6 +28,8 @@ public class IntegralActivity extends BaseTalkLawActivity {
     protected IntegralListProductView viewIntegral;
     protected BackTitleView titleView;
     protected RelativeLayout layoutRecords;
+    protected LinearLayout integralLayout;
+
 
     @Override
     public int getLayoutResId() {
@@ -44,6 +47,7 @@ public class IntegralActivity extends BaseTalkLawActivity {
         viewIntegral = (IntegralListProductView) findViewById(R.id.view_integeral_product);
         titleView = (BackTitleView) findViewById(R.id.titleView);
         layoutRecords = (RelativeLayout) findViewById(R.id.layout_records);
+        integralLayout = (LinearLayout) findViewById(R.id.layout_integral);
 
     }
 
@@ -88,6 +92,12 @@ public class IntegralActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View view) {
                 goActivity(null,ExchangeRecordsActivity.class);
+            }
+        });
+        integralLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goActivity(null,IntegralDetailActivity.class);
             }
         });
     }
