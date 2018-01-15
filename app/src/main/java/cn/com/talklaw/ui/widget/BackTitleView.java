@@ -22,7 +22,7 @@ import cn.com.talklaw.R;
  */
 
 public class BackTitleView extends FrameLayout {
-    protected ImageView back;
+    protected ImageView back,right;
     protected TextView title;
     protected TitleStatusBarView titleBar;
     private Context context;
@@ -45,8 +45,10 @@ public class BackTitleView extends FrameLayout {
         this.context = context;
         LayoutInflater.from(context).inflate(R.layout.view_back_title, this, true);
         back = (ImageView) findViewById(R.id.back);
+        right = (ImageView) findViewById(R.id.right);
         title = (TextView) findViewById(R.id.title);
         titleBar = (TitleStatusBarView) findViewById(R.id.title_bar);
+        right.setVisibility(GONE);
     }
 
     private void initAction(){
@@ -60,8 +62,17 @@ public class BackTitleView extends FrameLayout {
         });
     }
 
+    public void setRightIcon(int resId){
+        right.setVisibility(VISIBLE);
+        right.setImageResource(resId);
+    }
+
     public void setTitle(String title){
         this.title.setText(title);
+    }
+
+    public void setTitleColor(int color){
+        title.setTextColor(color);
     }
 
     public void setTitle(int resId){

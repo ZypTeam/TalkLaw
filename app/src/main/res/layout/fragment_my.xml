@@ -15,6 +15,7 @@
             android:layout_height="130dp">
 
             <ImageView
+                android:id="@+id/setting"
                 android:src="@mipmap/icon_my_setting"
                 android:layout_marginLeft="16dp"
                 android:layout_gravity="left"
@@ -23,6 +24,7 @@
                 android:layout_height="wrap_content" />
 
             <ImageView
+                android:id="@+id/msg"
                 android:src="@mipmap/icon_my_msg"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="5dp"
@@ -77,6 +79,7 @@
                 android:layout_height="0dp" />
 
             <TextView
+                android:id="@+id/recommend"
                 android:textSize="12sp"
                 android:textColor="#fff"
                 android:text="邀请好友获取积分"
