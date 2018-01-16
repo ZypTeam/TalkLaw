@@ -7,8 +7,14 @@ import android.widget.TextView;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
+import cn.com.talklaw.model.MyAttentionModel;
+import cn.com.talklaw.ui.activity.AlreadyPurchaseActivity;
+import cn.com.talklaw.ui.activity.MyAttentionActivity;
+import cn.com.talklaw.ui.activity.MyConsultActivity;
 import cn.com.talklaw.ui.activity.MyInfoActivity;
 import cn.com.talklaw.ui.activity.MyMsgListActivity;
+import cn.com.talklaw.ui.activity.RecommendCourtesyActivity;
+import cn.com.talklaw.ui.activity.SettingActivity;
 
 /**
  * @author zhaoyapeng
@@ -39,6 +45,9 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
     protected TextView editAddress;
     protected ImageView imgAddress;
     protected TextView myAddressContent;
+    private ImageView setting;
+    private TextView recommend;
+    private ImageView msg;
 
     public static MyFragment getInstance() {
         MyFragment fragment = new MyFragment();
@@ -77,7 +86,10 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         editAddress = (TextView) rootView.findViewById(R.id.edit_address);
         imgAddress = (ImageView) rootView.findViewById(R.id.img_address);
         myAddressContent = (TextView) rootView.findViewById(R.id.my_address_content);
+        recommend = (TextView) rootView.findViewById(R.id.recommend);
+        msg = (ImageView) rootView.findViewById(R.id.msg);
 
+        setting = rootView.findViewById(R.id.setting);
     }
 
 
@@ -86,16 +98,38 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
 
         iconHead.setOnClickListener(this);
         myZixunAll.setOnClickListener(this);
+        setting.setOnClickListener(this);
+        followCount.setOnClickListener(this);
+        buyCount.setOnClickListener(this);
+        recommend.setOnClickListener(this);
+        msg.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.icon_head:
                 goActivity(null, MyInfoActivity.class);
                 break;
             case R.id.my_zixun_all:
+                goActivity(null, MyConsultActivity.class);
+                break;
+            case R.id.msg:
                 goActivity(null, MyMsgListActivity.class);
+                break;
+            case R.id.setting:
+                goActivity(null, SettingActivity.class);
+                break;
+            case R.id.follow_count:
+                goActivity(null, MyAttentionActivity.class);
+                break;
+            case R.id.buy_count:
+                goActivity(null, AlreadyPurchaseActivity.class);
+                break;
+            case R.id.recommend:
+                goActivity(null, RecommendCourtesyActivity.class);
+                break;
+            default:
                 break;
         }
     }

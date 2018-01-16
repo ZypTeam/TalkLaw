@@ -49,6 +49,21 @@
         <!--积分详情-->
         <activity android:name=".ui.activity.IntegralDetailActivity" />
 
+        <!--已购产品-->
+        <activity android:name=".ui.activity.AlreadyPurchaseActivity" />
+
+        <!--我的关注-->
+        <activity android:name=".ui.activity.MyAttentionActivity" />
+
+        <!--设置-->
+        <activity android:name=".ui.activity.SettingActivity" />
+
+        <!--我的咨询-->
+        <activity android:name=".ui.activity.MyConsultActivity" />
+
+        <!--推荐有礼-->
+        <activity android:name=".ui.activity.RecommendCourtesyActivity" />
+
 
     </application>
 

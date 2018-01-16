@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2b2b2e"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <cn.com.talklaw.ui.widget.BackTitleView
+        android:id="@+id/titleView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:id="@+id/bg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="118dp"
+        android:background="@drawable/bg_recommend_courtesy"
+        android:layout_width="0dp"
+        android:layout_height="368dp"/>
+    
+    <ImageView
+        android:id="@+id/qrcode"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="@+id/bg"
+        app:layout_constraintRight_toRightOf="@id/bg"
+        app:layout_constraintTop_toTopOf="@+id/bg"
+        android:layout_marginTop="25dp"
+        android:layout_width="271dp"
+        android:layout_height="271dp" />
+
+    <TextView
+        android:text="长按图片保存到相册"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg"
+        app:layout_constraintLeft_toLeftOf="@+id/bg"
+        app:layout_constraintRight_toRightOf="@+id/bg"
+        android:layout_marginBottom="25dp"
+        android:textColor="#999"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="好友推荐规则"
+        android:layout_marginBottom="25dp"
+        android:textSize="15sp"
+        android:textColor="#999"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+</android.support.constraint.ConstraintLayout>
