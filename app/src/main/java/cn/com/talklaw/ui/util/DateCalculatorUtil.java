@@ -1,6 +1,8 @@
 package cn.com.talklaw.ui.util;
 
 import cn.com.talklaw.base.BaseTalkLawFragment;
+import cn.com.talklaw.ui.fragment.DateCalculatorFragment;
+import cn.com.talklaw.ui.fragment.DayCalculatorFragment;
 import cn.com.talklaw.ui.fragment.HomeFragment;
 import cn.com.talklaw.ui.fragment.MyFragment;
 import cn.com.talklaw.ui.fragment.StatementFragment;
@@ -11,22 +13,16 @@ import cn.com.talklaw.ui.fragment.StatementFragment;
  * @Email zyp@jusfoun.com
  * @Description $ fragemnt 工具类
  */
-public class HomeFragmentUtil {
-    private static int TYPE_OPINION = 0;
-    private static int TYPE_STATEMENT= 1;
-    private static int TYPE_PERSONAL = 2;
-
+public class DateCalculatorUtil {
+    private static int TYPE_DAY = 0;
+    private static int TYPE_DATE =1;
     public static BaseTalkLawFragment getInstance(int index) {
         BaseTalkLawFragment fragment = null;
-        if (index == TYPE_OPINION) {
-            fragment = HomeFragment.getInstance();
-        } else if (index == TYPE_STATEMENT) {
-            fragment = StatementFragment.getInstance();
-
-        } else if (index == TYPE_PERSONAL) {
-            fragment = MyFragment.getInstance();
+        if (index == TYPE_DAY) {
+            fragment = DayCalculatorFragment.getInstance();
+        } else if (index == TYPE_DATE) {
+            fragment = DateCalculatorFragment.getInstance();
         }
-
         return fragment;
     }
 }

@@ -64,6 +64,17 @@
         <!--推荐有礼-->
         <activity android:name=".ui.activity.RecommendCourtesyActivity" />
 
+        <!--日期计算器-->
+        <activity android:name=".ui.activity.DateCalculatorActivity" />
+
+        <!--诉讼计算器-->
+        <activity android:name=".ui.activity.LitigationCalculatorActivity" />
+
+        <!--律师计算器-->
+        <activity android:name=".ui.activity.LawyerCalculatorActivity" />
+
+        <!--个税计算器-->
+        <activity android:name=".ui.activity.AtaxCalculatorActivity" />
 
     </application>
 
