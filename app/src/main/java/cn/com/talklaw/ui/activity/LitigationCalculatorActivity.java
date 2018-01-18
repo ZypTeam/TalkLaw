@@ -8,14 +8,14 @@ import cn.com.talklaw.ui.widget.BackTitleView;
  * @author zhaoyapeng
  * @version create time:18/1/1718:20
  * @Email zyp@jusfoun.com
- * @Description ${日期计算器}
+ * @Description ${诉讼计算器}
  */
 public class LitigationCalculatorActivity extends BaseTalkLawActivity {
     protected BackTitleView titleBar;
 
     @Override
     public int getLayoutResId() {
-        return R.layout.activity_date_calculator;
+        return R.layout.activity_litigating_calculator;
     }
 
     @Override
