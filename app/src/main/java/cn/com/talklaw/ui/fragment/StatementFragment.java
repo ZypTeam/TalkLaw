@@ -1,8 +1,10 @@
 package cn.com.talklaw.ui.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.youth.banner.Banner;
@@ -19,6 +21,7 @@ import cn.com.talklaw.ui.activity.AtaxCalculatorActivity;
 import cn.com.talklaw.ui.activity.DateCalculatorActivity;
 import cn.com.talklaw.ui.activity.LawyerCalculatorActivity;
 import cn.com.talklaw.ui.activity.LitigationCalculatorActivity;
+import cn.com.talklaw.ui.activity.SearchActivity;
 import cn.com.talklaw.ui.adapter.ProductListAdapter;
 import cn.com.talklaw.ui.util.GlideImageLoader;
 
@@ -36,6 +39,8 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
     protected LinearLayout layoutLawyer;
     protected LinearLayout layoutAtax;
     protected LinearLayout layoutDate;
+    protected LinearLayout layoutSearchEdit;
+    protected ImageView imgAudio;
     private ProductListAdapter adapter;
 
     public static StatementFragment getInstance() {
@@ -65,6 +70,8 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         layoutAtax.setOnClickListener(StatementFragment.this);
         layoutDate = (LinearLayout) rootView.findViewById(R.id.layout_date);
         layoutDate.setOnClickListener(StatementFragment.this);
+        layoutSearchEdit = (LinearLayout) rootView.findViewById(R.id.layout_search_edit);
+        imgAudio = (ImageView) rootView.findViewById(R.id.img_audio);
     }
 
     @Override
@@ -111,21 +118,28 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
             list1.add(model);
         }
         adapter.refreshList(list1);
+
+        layoutSearchEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goActivity(null, SearchActivity.class);
+            }
+        });
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.layout_litigation) {
-            goActivity(null,LitigationCalculatorActivity.class);
+            goActivity(null, LitigationCalculatorActivity.class);
 
         } else if (view.getId() == R.id.layout_lawyer) {
-            goActivity(null,LawyerCalculatorActivity.class);
+            goActivity(null, LawyerCalculatorActivity.class);
 
         } else if (view.getId() == R.id.layout_atax) {
-            goActivity(null,AtaxCalculatorActivity.class);
+            goActivity(null, AtaxCalculatorActivity.class);
 
         } else if (view.getId() == R.id.layout_date) {
-            goActivity(null,DateCalculatorActivity.class);
+            goActivity(null, DateCalculatorActivity.class);
         }
     }
 }

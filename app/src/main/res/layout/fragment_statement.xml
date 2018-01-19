@@ -15,10 +15,68 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.youth.banner.Banner
-                android:id="@+id/banner"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="wrap_content">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:paddingLeft="16dp">
+
+                    <LinearLayout
+                        android:id="@+id/layout_search_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_statement_search_edit"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+                        <ImageView
+                            android:id="@+id/back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="16dp"
+                            android:src="@drawable/icon_search" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="限时免费"
+                            android:textColor="#cccccc"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="8dp"
+                            android:gravity="center_vertical"/>
+                    </LinearLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="55dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/img_audio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="16dp"
+                            android:src="@drawable/img_arrow_right"
+                            android:textSize="17sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/list"
@@ -45,9 +103,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="21dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/icon_susong"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:src="@mipmap/icon_susong" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,9 +129,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="21dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/icon_guansi"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:src="@mipmap/icon_guansi" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -97,9 +155,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="21dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/img_my"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:src="@mipmap/img_my" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -123,9 +181,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="21dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/img_my"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:src="@mipmap/img_my" />
 
             <TextView
                 android:layout_width="wrap_content"
