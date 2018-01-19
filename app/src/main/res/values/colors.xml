@@ -9,4 +9,7 @@
     <color name="write">#ffffff</color>
 
     <color name="color_main_bg">#f8f8f8</color>
+    <color name="huise">#f2f2f2</color>
+    <color name="purse_blue_new">#009b79</color>
+    <color name="my_textcolor">#333333</color>
 </resources>

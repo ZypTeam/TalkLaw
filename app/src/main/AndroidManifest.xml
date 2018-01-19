@@ -79,7 +79,15 @@
         <!--搜索页面-->
         <activity android:name=".ui.activity.SearchActivity" />
 
+        <!--添加地址-->
+        <activity android:name=".ui.activity.SelectAreaActivity" />
 
+
+        <!--添加地址-->
+        <activity android:name=".ui.activity.AreaListActivity" />
+
+        <!--添加地址-->
+        <activity android:name=".ui.activity.SelectCountryActivity" />
     </application>
 
 </manifest>

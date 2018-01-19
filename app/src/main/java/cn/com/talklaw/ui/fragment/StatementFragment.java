@@ -3,6 +3,7 @@ package cn.com.talklaw.ui.fragment;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +25,7 @@ import cn.com.talklaw.ui.activity.LitigationCalculatorActivity;
 import cn.com.talklaw.ui.activity.SearchActivity;
 import cn.com.talklaw.ui.adapter.ProductListAdapter;
 import cn.com.talklaw.ui.util.GlideImageLoader;
+import cn.com.talklaw.ui.widget.xRecyclerView.XRecyclerView;
 
 /**
  * @author zhaoyapeng
@@ -34,7 +36,7 @@ import cn.com.talklaw.ui.util.GlideImageLoader;
 public class StatementFragment extends BaseTalkLawFragment implements View.OnClickListener {
 
     protected Banner banner;
-    protected RecyclerView recyclerView;
+    protected XRecyclerView recyclerView;
     protected LinearLayout layoutLitigation;
     protected LinearLayout layoutLawyer;
     protected LinearLayout layoutAtax;
@@ -60,8 +62,8 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
 
     @Override
     public void initView(View rootView) {
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.list);
-        banner = (Banner) rootView.findViewById(R.id.banner);
+        recyclerView = (XRecyclerView) rootView.findViewById(R.id.list);
+
         layoutLitigation = (LinearLayout) rootView.findViewById(R.id.layout_litigation);
         layoutLitigation.setOnClickListener(StatementFragment.this);
         layoutLawyer = (LinearLayout) rootView.findViewById(R.id.layout_lawyer);
@@ -70,12 +72,21 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         layoutAtax.setOnClickListener(StatementFragment.this);
         layoutDate = (LinearLayout) rootView.findViewById(R.id.layout_date);
         layoutDate.setOnClickListener(StatementFragment.this);
-        layoutSearchEdit = (LinearLayout) rootView.findViewById(R.id.layout_search_edit);
-        imgAudio = (ImageView) rootView.findViewById(R.id.img_audio);
+
+
+        View headerView = LayoutInflater.from(mContext).inflate(R.layout.layout_statemen_header, null);
+        recyclerView.addHeaderView(headerView);
+
+        banner = (Banner) headerView.findViewById(R.id.banner);
+        layoutSearchEdit = (LinearLayout) headerView.findViewById(R.id.layout_search_edit);
+        imgAudio = (ImageView) headerView.findViewById(R.id.img_audio);
     }
 
     @Override
     public void initAction() {
+
+
+
         //设置banner样式
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置图片加载器
