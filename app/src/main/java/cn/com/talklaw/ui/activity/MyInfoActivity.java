@@ -71,6 +71,12 @@ public class MyInfoActivity extends BaseTalkLawActivity {
 
     @Override
     public void initAction() {
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goActivity(null,SelectAreaActivity.class);
+            }
+        });
 
         Glide.with(mContext)
                 .load("http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg")

@@ -9,7 +9,7 @@
     <application
         android:name=".TalkLawApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
@@ -64,10 +64,33 @@
         <!--推荐有礼-->
         <activity android:name=".ui.activity.RecommendCourtesyActivity" />
 
+        <!--日期计算器-->
+        <activity android:name=".ui.activity.DateCalculatorActivity" />
         <!--律师详情-->
         <activity android:name=".ui.activity.LawyerDefautActivity"/>
 
 
+        <!--诉讼计算器-->
+        <activity android:name=".ui.activity.LitigationCalculatorActivity" />
+
+        <!--律师计算器-->
+        <activity android:name=".ui.activity.LawyerCalculatorActivity" />
+
+        <!--个税计算器-->
+        <activity android:name=".ui.activity.AtaxCalculatorActivity" />
+
+        <!--搜索页面-->
+        <activity android:name=".ui.activity.SearchActivity" />
+
+        <!--添加地址-->
+        <activity android:name=".ui.activity.SelectAreaActivity" />
+
+
+        <!--添加地址-->
+        <activity android:name=".ui.activity.AreaListActivity" />
+
+        <!--添加地址-->
+        <activity android:name=".ui.activity.SelectCountryActivity" />
     </application>
 
 </manifest>

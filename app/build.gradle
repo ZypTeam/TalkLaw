@@ -15,10 +15,10 @@ android {
     signingConfigs
     {
         talklaw {
-            storeFile file("keystore/talklaw.keystore")
-            storePassword "talklaw"
-            keyAlias "talklaw"
-            keyPassword "talklaw"
+            storeFile file("keystore/law.jks")
+            storePassword "law123456"
+            keyAlias "law"
+            keyPassword "law123456"
         }
     }
 
