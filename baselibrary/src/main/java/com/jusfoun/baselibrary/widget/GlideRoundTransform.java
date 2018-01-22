@@ -26,7 +26,7 @@ public class GlideRoundTransform extends BitmapTransformation {
 
     @Override
     protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
-        return null;
+        return roundCrop(pool,toTransform);
     }
 
     @Override

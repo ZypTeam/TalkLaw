@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
+import com.jusfoun.baselibrary.widget.GlideRoundTransform;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawActivity;
@@ -80,9 +81,9 @@ public class MyInfoActivity extends BaseTalkLawActivity {
 
         Glide.with(mContext)
                 .load("http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg")
-                .placeholder(R.mipmap.logo)
-                .error(R.mipmap.logo)
-                .transform(new CenterCrop(mContext),new GlideCircleTransform(mContext))
+                .placeholder(R.mipmap.icon_head_def_round)
+                .error(R.mipmap.icon_head_def_round)
+                .transform(new CenterCrop(mContext),new GlideRoundTransform(mContext,10))
                 .crossFade()
                 .into(iconHead);
     }

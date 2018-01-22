@@ -306,11 +306,13 @@
 
     <TextView
         android:id="@+id/audio"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="音频"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:textSize="16sp"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -319,10 +321,12 @@
 
     <TextView
         android:id="@+id/image"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:gravity="center"
         android:text="图文"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:textSize="16sp"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@+id/audio"
@@ -331,11 +335,13 @@
 
     <TextView
         android:id="@+id/video"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:gravity="center"
         android:text="视频"
         android:textSize="16sp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@+id/image"
         app:layout_constraintRight_toRightOf="parent"

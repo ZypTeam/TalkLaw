@@ -129,18 +129,24 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
 
     private void selectPosition(int position) {
         audio.setTextColor(Color.parseColor("#999999"));
+        audio.setBackgroundResource(R.color.transparent);
         image.setTextColor(Color.parseColor("#999999"));
+        image.setBackgroundResource(R.color.transparent);
         video.setTextColor(Color.parseColor("#999999"));
+        video.setBackgroundResource(R.color.transparent);
         viewpager.setCurrentItem(position);
         switch (position) {
             case 0:
                 audio.setTextColor(Color.parseColor("#cb1f28"));
+                audio.setBackgroundResource(R.drawable.bg_red_line);
                 break;
             case 1:
                 image.setTextColor(Color.parseColor("#cb1f28"));
+                image.setBackgroundResource(R.drawable.bg_red_line);
                 break;
             case 2:
                 video.setTextColor(Color.parseColor("#cb1f28"));
+                video.setBackgroundResource(R.drawable.bg_red_line);
                 break;
             default:
                 break;

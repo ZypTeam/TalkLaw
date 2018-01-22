@@ -8,7 +8,12 @@ import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseViewHolder;
@@ -23,12 +28,14 @@ import cn.com.talklaw.ui.activity.LawyerDefautActivity;
 
 public class MyAttentionViewHolder extends BaseViewHolder<MyAttentionModel> {
     private TextView level,haoping,yiban,suc;
+    private ImageView icon_head;
     public MyAttentionViewHolder(View itemView, Context mContext) {
         super(itemView, mContext);
         level=itemView.findViewById(R.id.level);
         haoping=itemView.findViewById(R.id.haoping);
         yiban=itemView.findViewById(R.id.yiban);
         suc=itemView.findViewById(R.id.suc);
+        icon_head=itemView.findViewById(R.id.icon_head);
     }
 
     @Override
@@ -46,6 +53,14 @@ public class MyAttentionViewHolder extends BaseViewHolder<MyAttentionModel> {
                 mContext.startActivity(intent);
             }
         });
+
+        Glide.with(mContext)
+                .load("http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg")
+                .placeholder(R.mipmap.icon_head_def_cir)
+                .error(R.mipmap.icon_head_def_cir)
+                .transform(new CenterCrop(mContext),new GlideCircleTransform(mContext))
+                .crossFade()
+                .into(icon_head);
 
     }
 

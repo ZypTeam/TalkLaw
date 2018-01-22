@@ -1,4 +1,4 @@
-package cn.com.talklaw.ui.widget;
+package cn.com.talklaw.ui.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 
 import cn.com.talklaw.R;
+import cn.com.talklaw.ui.widget.MyProgressBar;
 
 /**
  * @author wangcc

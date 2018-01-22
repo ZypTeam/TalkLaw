@@ -85,7 +85,6 @@
         <!--添加地址-->
         <activity android:name=".ui.activity.SelectAreaActivity" />
 
-
         <!--添加地址-->
         <activity android:name=".ui.activity.AreaListActivity" />
 

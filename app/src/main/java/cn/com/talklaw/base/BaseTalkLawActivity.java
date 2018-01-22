@@ -1,19 +1,15 @@
 package cn.com.talklaw.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.jusfoun.baselibrary.base.BaseActivity;
-import com.jusfoun.baselibrary.base.BaseModel;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
 
 import cn.com.talklaw.R;
-import cn.com.talklaw.ui.widget.LoadingDialog;
-import rx.Observable;
-import rx.functions.Action1;
+import cn.com.talklaw.ui.dialog.LoadingDialog;
 
 /**
  * @author wangcc

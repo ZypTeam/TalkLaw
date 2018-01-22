@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#32000000">
+    
+    <TextView
+        android:id="@+id/content"
+        android:textColor="#666"
+        android:textSize="16sp"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="推荐规则推荐规则"
+        android:background="#f8f8f8"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="238dp" />
+
+    <View
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/content"
+        android:background="#ececec"
+        android:layout_marginLeft="16dp"
+        android:layout_width="0dp"
+        android:layout_height="1px"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:text="好友推荐规则"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:textSize="17dp"
+        android:textColor="#333"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/content"
+        android:background="#f8f8f8"
+        android:layout_width="0dp"
+        android:layout_height="45dp" />
+
+    <ImageView
+        android:id="@+id/close"
+        app:layout_constraintTop_toTopOf="@+id/title"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/title"
+        android:src="@mipmap/icon_close_black"
+        android:scaleType="center"
+        android:layout_marginRight="16dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp" />
+
+</android.support.constraint.ConstraintLayout>

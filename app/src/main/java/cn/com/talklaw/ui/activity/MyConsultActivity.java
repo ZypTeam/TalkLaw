@@ -90,10 +90,14 @@ public class MyConsultActivity extends BaseTalkLawActivity {
         switch (position) {
             case 0:
                 consulting.setTextColor(Color.parseColor("#cb1f28"));
+                consulting.setBackgroundResource(R.drawable.bg_red_line);
                 consulted.setTextColor(Color.parseColor("#999999"));
+                consulted.setBackgroundColor(Color.parseColor("#ffffff"));
                 break;
             case 1:
                 consulted.setTextColor(Color.parseColor("#cb1f28"));
+                consulted.setBackgroundResource(R.drawable.bg_red_line);
+                consulting.setBackgroundColor(Color.parseColor("#ffffff"));
                 consulting.setTextColor(Color.parseColor("#999999"));
                 break;
             default:

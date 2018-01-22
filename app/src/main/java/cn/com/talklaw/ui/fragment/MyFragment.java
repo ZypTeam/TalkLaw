@@ -110,8 +110,8 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
 
         Glide.with(mContext)
                 .load("http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg")
-                .placeholder(R.mipmap.logo)
-                .error(R.mipmap.logo)
+                .placeholder(R.mipmap.icon_head_def_cir)
+                .error(R.mipmap.icon_head_def_cir)
                 .transform(new CenterCrop(mContext),new GlideCircleTransform(mContext))
                 .crossFade()
                 .into(iconHead);
