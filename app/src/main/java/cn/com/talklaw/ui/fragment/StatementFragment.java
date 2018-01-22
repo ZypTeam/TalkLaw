@@ -39,4 +39,9 @@ public class StatementFragment extends BaseTalkLawFragment {
     public void initAction() {
 
     }
+
+    @Override
+    protected void refreshData() {
+
+    }
 }

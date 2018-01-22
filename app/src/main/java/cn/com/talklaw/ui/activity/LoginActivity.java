@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import cn.com.talklaw.R;
+import cn.com.talklaw.TalkLawApplication;
 import cn.com.talklaw.base.BaseTalkLawActivity;
 import cn.com.talklaw.comment.ApiService;
 import cn.com.talklaw.model.UserInfoModel;
@@ -103,6 +104,7 @@ public class LoginActivity extends BaseTalkLawActivity {
                     public void call(UserInfoModel userInfoModel) {
                         if (userInfoModel!=null&&userInfoModel.getCode()==10000){
                             Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
+                            TalkLawApplication.saveUserInfo(userInfoModel.getData());
                         }else {
                             Toast.makeText(mContext,userInfoModel.getMsg(),Toast.LENGTH_SHORT).show();
                         }

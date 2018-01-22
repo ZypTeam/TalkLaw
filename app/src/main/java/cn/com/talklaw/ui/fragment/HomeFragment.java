@@ -92,4 +92,9 @@ public class HomeFragment extends BaseTalkLawFragment {
         viewHotProduct.setData();
         viewNeed.setData();
     }
+
+    @Override
+    protected void refreshData() {
+
+    }
 }

@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.jusfoun.baselibrary.widget.GlideRoundTransform;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseViewHolder;
@@ -33,6 +35,7 @@ public class ExchangeDetailsViewHolder extends BaseViewHolder<ExchangeRecordsIte
     public void update(ExchangeRecordsItemModel model) {
         Glide.with(mContext)
                 .load(R.mipmap.logo)
+                .transform(new CenterCrop(mContext),new GlideRoundTransform(mContext,5))
                 .into(imgTitle);
 
         textTitle.setText("常律师书籍，详细讲解婚姻案例如何");

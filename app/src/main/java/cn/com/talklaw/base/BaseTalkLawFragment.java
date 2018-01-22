@@ -4,9 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.jusfoun.baselibrary.base.BaseFragment;
+import com.jusfoun.baselibrary.base.BaseViewPagerFragment;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
+
+import cn.com.talklaw.R;
+import cn.com.talklaw.ui.widget.LoadingDialog;
 
 /**
  * @author wangcc
@@ -14,11 +19,43 @@ import com.jusfoun.baselibrary.permissiongen.PermissionGen;
  * @describe
  */
 
-public abstract class BaseTalkLawFragment extends BaseFragment{
+public abstract class BaseTalkLawFragment extends BaseViewPagerFragment{
+
+    private LoadingDialog loadingDialog;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initDialog();
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         PermissionGen.onRequestPermissionsResult(this,requestCode,permissions,grantResults);
+    }
+
+    private void initDialog(){
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(mContext, R.style.my_dialog);
+            loadingDialog.setCancelable(true);
+            loadingDialog.setCanceledOnTouchOutside(false);
+        }
+    }
+
+    protected void showLoadDialog(){
+        if(mContext == null){
+            Log.e("TAG", "该Activity已经销毁，但仍欲显示dialog");
+            return;
+        }
+        if (loadingDialog != null && !loadingDialog.isShowing()) {
+            loadingDialog.show();
+        }
+    }
+
+    protected void hideLoadDialog(){
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.cancel();
+        }
     }
 
     /**

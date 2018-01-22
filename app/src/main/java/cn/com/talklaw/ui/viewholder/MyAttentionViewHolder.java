@@ -1,6 +1,7 @@
 package cn.com.talklaw.ui.viewholder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseViewHolder;
 import cn.com.talklaw.model.MyAttentionModel;
+import cn.com.talklaw.ui.activity.LawyerDefautActivity;
 
 /**
  * @author wangcc
@@ -35,6 +37,15 @@ public class MyAttentionViewHolder extends BaseViewHolder<MyAttentionModel> {
         haoping.setText(getText("专业级","等级"));
         yiban.setText(getText("100%","好评"));
         suc.setText(getText("100%","胜率"));
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(mContext, LawyerDefautActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 

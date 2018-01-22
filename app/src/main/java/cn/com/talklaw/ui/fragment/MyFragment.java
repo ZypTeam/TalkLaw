@@ -5,6 +5,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.jusfoun.baselibrary.widget.GlideCircleTransform;
+import com.jusfoun.baselibrary.widget.GlideRoundTransform;
+
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
 import cn.com.talklaw.model.MyAttentionModel;
@@ -23,7 +28,6 @@ import cn.com.talklaw.ui.activity.SettingActivity;
  * @Description ${首页fragment}
  */
 public class MyFragment extends BaseTalkLawFragment implements View.OnClickListener {
-
 
     protected ImageView iconHead;
     protected TextView name;
@@ -103,6 +107,14 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         buyCount.setOnClickListener(this);
         recommend.setOnClickListener(this);
         msg.setOnClickListener(this);
+
+        Glide.with(mContext)
+                .load("http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg")
+                .placeholder(R.mipmap.logo)
+                .error(R.mipmap.logo)
+                .transform(new CenterCrop(mContext),new GlideCircleTransform(mContext))
+                .crossFade()
+                .into(iconHead);
     }
 
     @Override
@@ -132,5 +144,10 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void refreshData() {
+
     }
 }

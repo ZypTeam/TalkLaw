@@ -64,6 +64,9 @@
         <!--推荐有礼-->
         <activity android:name=".ui.activity.RecommendCourtesyActivity" />
 
+        <!--律师详情-->
+        <activity android:name=".ui.activity.LawyerDefautActivity"/>
+
 
     </application>
 

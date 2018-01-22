@@ -40,6 +40,18 @@ public class RecommendCourtesyActivity extends BaseTalkLawActivity {
         bg = (View) findViewById(R.id.bg);
         qrcode = (ImageView) findViewById(R.id.qrcode);
 
+        qrcode.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                saveQrcode();
+                return false;
+            }
+        });
+
+    }
+
+    private void saveQrcode(){
+
     }
 
     @Override

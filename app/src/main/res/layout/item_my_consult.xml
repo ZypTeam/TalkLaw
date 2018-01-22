@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#fff"
+    android:layout_marginBottom="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <ImageView
+        android:id="@+id/icon_head"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:id="@+id/name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/icon_head"
+        app:layout_constraintRight_toLeftOf="@+id/time"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#000"
+        android:padding="0dp"
+        android:textSize="16dp"
+        android:text="王律师"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/time"
+        android:padding="0dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/name"
+        app:layout_constraintBottom_toBottomOf="@+id/name"
+        android:textSize="12sp"
+        android:textColor="#999"
+        android:text="2017/11/19"
+        android:gravity="center_vertical"
+        android:layout_marginRight="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="16dp"
+        android:text="你这个案件.."
+        android:textColorHighlight="#999"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="@+id/name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <View
+        android:background="#f0eff5"
+        android:id="@+id/line"
+        app:layout_constraintTop_toBottomOf="@+id/icon_head"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="1px"/>
+
+    <TextView
+        android:id="@+id/result"
+        app:layout_constraintTop_toBottomOf="@+id/line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="胜诉：已结束"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="#fea621"
+        android:layout_width="0dp"
+        android:layout_height="50dp" />
+
+</android.support.constraint.ConstraintLayout>
