@@ -11,6 +11,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jusfoun.baselibrary.Util.PhoneUtil;
+import com.jusfoun.baselibrary.Util.TouchUtil;
 import com.jusfoun.baselibrary.widget.TitleStatusBarView;
 
 import cn.com.talklaw.R;
@@ -52,6 +54,8 @@ public class BackTitleView extends FrameLayout {
     }
 
     private void initAction(){
+        TouchUtil.createTouchDelegate(right, PhoneUtil.dip2px(context,10));
+        TouchUtil.createTouchDelegate(back, PhoneUtil.dip2px(context,10));
         back.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
