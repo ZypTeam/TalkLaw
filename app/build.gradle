@@ -25,6 +25,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            buildConfigField "boolean", "LOG_MODE", "false"
             signingConfig signingConfigs.talklaw
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             resValue "string","url","http://api.law.wzgeek.com"
@@ -32,7 +33,7 @@ android {
 
         debug {
             minifyEnabled false
-            debuggable true
+            buildConfigField "boolean", "LOG_MODE", "true"
             signingConfig signingConfigs.talklaw
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             resValue "string","url","http://api.law.wzgeek.com"

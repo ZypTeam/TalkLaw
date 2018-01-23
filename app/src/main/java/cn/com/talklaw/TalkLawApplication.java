@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.jusfoun.baselibrary.BaseApplication;
+import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.SharePrefenceUtils;
 import com.jusfoun.baselibrary.net.Api;
 
@@ -27,6 +28,7 @@ public class TalkLawApplication extends BaseApplication{
         Api.getInstance().register(this,getString(R.string.url));
         DaoInstance.getInstance().regester(this);
         SharePrefenceUtils.getInstance().register(this,getPackageName());
+        LogUtil.setDebugable(BuildConfig.LOG_MODE);
     }
 
     public static void saveUserInfo(UserModel model){
