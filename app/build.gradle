@@ -53,4 +53,5 @@ dependencies {
     compile project(':dblibrary')
     compile 'com.youth.banner:banner:1.4.10'
     compile project(':zxing')
+    compile 'com.android.support:design:27.0.2'
 }
