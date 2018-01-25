@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.jusfoun.baselibrary.net.Api;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -13,9 +14,15 @@ import java.util.List;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawActivity;
+import cn.com.talklaw.comment.ApiService;
+import cn.com.talklaw.model.IntegralModel;
+import cn.com.talklaw.model.StatementListModel;
 import cn.com.talklaw.ui.util.GlideImageLoader;
 import cn.com.talklaw.ui.view.IntegralListProductView;
 import cn.com.talklaw.ui.widget.BackTitleView;
+import rx.functions.Action1;
+
+import static cn.com.talklaw.comment.CommentConstant.NET_SUC_CODE;
 
 /**
  * @author zhaoyapeng
@@ -86,7 +93,7 @@ public class IntegralActivity extends BaseTalkLawActivity {
         banner.setFocusableInTouchMode(true);
         banner.requestFocus();
 
-        viewIntegral.setData();
+
 
         layoutRecords.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,5 +107,34 @@ public class IntegralActivity extends BaseTalkLawActivity {
                 goActivity(null,IntegralDetailActivity.class);
             }
         });
+        delMsg();
+    }
+
+    private void delMsg() {
+        addNetwork(Api.getInstance().getService(ApiService.class).getIntergralHome()
+                , new Action1<IntegralModel>() {
+                    @Override
+                    public void call(IntegralModel model) {
+                        hideLoadDialog();
+                        if (model != null && model.getCode() == NET_SUC_CODE) {
+                            if (model.data != null) {
+                                if (model.data.goods != null) {
+                                    viewIntegral.setData(model.data.goods);
+                                }
+
+                                if (model.data.carouse != null) {
+                                    banner.setImages(model.data.carouse);
+                                    banner.start();
+                                }
+
+                            }
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
     }
 }

@@ -12,6 +12,8 @@ import java.io.Serializable;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseViewHolder;
+import cn.com.talklaw.model.IntegralModel;
+import cn.com.talklaw.ui.util.ImageLoderUtil;
 
 /**
  * @author zhaoyapeng
@@ -19,7 +21,7 @@ import cn.com.talklaw.base.BaseViewHolder;
  * @Email zyp@jusfoun.com
  * @Description ${轮播图viewpager}
  */
-public class IntegralProductViewHolder extends BaseViewHolder {
+public class IntegralProductViewHolder extends BaseViewHolder<IntegralModel.GoodsItemModel> {
 
 
     protected ImageView imgProduct;
@@ -33,10 +35,10 @@ public class IntegralProductViewHolder extends BaseViewHolder {
     }
 
     @Override
-    public void update(Serializable model) {
-        Glide.with(mContext).load("http://img5.imgtn.bdimg.com/it/u=2137958015,4291978384&fm=27&gp=0.jpg").into(imgProduct);
-        textTitle.setText("点在产品电子产品");
-        textCount.setText("100");
+    public void update(IntegralModel.GoodsItemModel model) {
+        ImageLoderUtil.loadRoundSmailImage(mContext,imgProduct,model.img);
+        textTitle.setText(model.title);
+        textCount.setText(model.point+"");
     }
 
     private void initView(View rootView) {

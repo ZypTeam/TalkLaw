@@ -121,10 +121,10 @@ public class HomeFragment extends BaseTalkLawFragment {
                         if (model != null && model.getCode() == NET_SUC_CODE) {
                             if (model.data != null) {
                                 if (model.data.hot != null) {
-                                    viewHotProduct.setData(model.data.hot, 1);
+                                    viewHotProduct.setData(model.data.hot, 1,model.data.freetime);
                                 }
                                 if (model.data.free != null) {
-                                    viewFreeProduct.setData(model.data.free, 2);
+                                    viewFreeProduct.setData(model.data.free, 2,model.data.freetime);
                                 }
 
                                 if (model.data.need != null) {

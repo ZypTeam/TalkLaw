@@ -6,6 +6,7 @@ import com.jusfoun.baselibrary.base.NoDataModel;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.com.talklaw.model.IntegralModel;
 import cn.com.talklaw.model.MoveModel;
 import cn.com.talklaw.model.MyMsgListModel;
 import cn.com.talklaw.model.MyMsgModel;
@@ -121,4 +122,14 @@ public interface ApiService {
      */
     @GET("/article/index")
     Observable<ProductListModel> getHomeKanfa();
+
+
+    /**
+     * 积分首页接口
+     * @param url
+     * @param params
+     * @return
+     */
+    @GET("/goods/index")
+    Observable<IntegralModel> getIntergralHome();
 }

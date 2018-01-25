@@ -18,8 +18,11 @@ import cn.com.talklaw.model.CarouseModel;
 public class GlideImageLoader extends ImageLoader{
     @Override
     public void displayImage(Context context, Object o, ImageView imageView) {
-        CarouseModel model = (CarouseModel)o;
-        Log.e("tag","displayImage="+model.img);
-        Glide.with(context).load(model.img).into(imageView);
+        CarouseModel model ;
+        if(o instanceof CarouseModel){
+            model=(CarouseModel)o;
+            Glide.with(context).load(model.img).into(imageView);
+        }
+
     }
 }
