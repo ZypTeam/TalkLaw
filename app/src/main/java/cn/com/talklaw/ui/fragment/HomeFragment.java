@@ -75,7 +75,7 @@ public class HomeFragment extends BaseTalkLawFragment {
         list.add("1");
         list.add("1");
 
-        banner.setImages(list);
+//        banner.setImages(list);
         //设置banner动画效果
         banner.setBannerAnimation(Transformer.Default);
         //设置标题集合（当banner样式有显示title时）

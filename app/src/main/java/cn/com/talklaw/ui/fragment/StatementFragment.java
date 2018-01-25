@@ -1,8 +1,6 @@
 package cn.com.talklaw.ui.fragment;
 
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,8 +17,8 @@ import java.util.List;
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
 import cn.com.talklaw.comment.ApiService;
+import cn.com.talklaw.model.ProductListModel;
 import cn.com.talklaw.model.ProductModel;
-import cn.com.talklaw.model.StatementListModel;
 import cn.com.talklaw.ui.activity.AtaxCalculatorActivity;
 import cn.com.talklaw.ui.activity.DateCalculatorActivity;
 import cn.com.talklaw.ui.activity.LawyerCalculatorActivity;
@@ -92,21 +90,12 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
     public void initAction() {
 
 
-
         //设置banner样式
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
         //设置图片集合
 
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
-
-        banner.setImages(list);
         //设置banner动画效果
         banner.setBannerAnimation(Transformer.Default);
         //设置标题集合（当banner样式有显示title时）
@@ -117,8 +106,7 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         banner.setDelayTime(3000);
         //设置指示器位置（当banner模式中有指示器时）
         banner.setIndicatorGravity(BannerConfig.CENTER);
-        //banner设置方法全部调用完毕时最后调用
-        banner.start();
+
 
 
         banner.setFocusable(true);
@@ -129,12 +117,11 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(adapter);
 
-        List<ProductModel> list1 = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ProductModel model = new ProductModel();
-            list1.add(model);
-        }
-        adapter.refreshList(list1);
+//        List<ProductModel> list1 = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            ProductModel model = new ProductModel();
+//            list1.add(model);
+//        }
 
         layoutSearchEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,21 +153,23 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
     }
 
     private void delMsg() {
+        showLoadDialog();
         addNetwork(Api.getInstance().getService(ApiService.class).getHomeKanfa()
-                , new Action1<StatementListModel>() {
+                , new Action1<ProductListModel>() {
                     @Override
-                    public void call(StatementListModel model) {
+                    public void call(ProductListModel model) {
                         hideLoadDialog();
                         if (model != null && model.getCode() == NET_SUC_CODE) {
                             if (model.data != null) {
-                                if (model.data.hot != null) {
+                                if (model.data.article != null) {
+                                    adapter.refreshList(model.data.article);
                                 }
-                                if (model.data.free != null) {
-                                }
+                                if (model.data.carouse != null) {
 
-                                if (model.data.need != null) {
+                                    banner.setImages(model.data.carouse);
+                                    //banner设置方法全部调用完毕时最后调用
+                                    banner.start();
                                 }
-
                             }
                         }
                     }

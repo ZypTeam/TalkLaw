@@ -9,6 +9,7 @@ import java.util.Map;
 import cn.com.talklaw.model.MoveModel;
 import cn.com.talklaw.model.MyMsgListModel;
 import cn.com.talklaw.model.MyMsgModel;
+import cn.com.talklaw.model.ProductListModel;
 import cn.com.talklaw.model.StatementListModel;
 import cn.com.talklaw.model.UserInfoModel;
 import retrofit2.http.FieldMap;
@@ -118,6 +119,6 @@ public interface ApiService {
      * @param params
      * @return
      */
-    @GET("/article/indexx")
-    Observable<StatementListModel> getHomeKanfa();
+    @GET("/article/index")
+    Observable<ProductListModel> getHomeKanfa();
 }

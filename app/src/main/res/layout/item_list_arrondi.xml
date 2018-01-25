@@ -25,13 +25,11 @@
         android:layout_marginLeft="12dp"
         android:layout_width="0dp"
         android:textSize="17sp"
-        android:text="房子质量...."
         android:textColor="#333"
         android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/date"
-        android:text="律师 2017年12月23日"
         app:layout_constraintLeft_toLeftOf="@+id/title"
         app:layout_constraintRight_toRightOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@+id/title"
