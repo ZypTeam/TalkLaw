@@ -1,24 +1,22 @@
 package cn.com.talklaw.ui.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.jusfoun.baselibrary.Util.PhoneUtil;
 import com.jusfoun.baselibrary.net.Api;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
 import cn.com.talklaw.comment.ApiService;
 import cn.com.talklaw.model.ProductListModel;
-import cn.com.talklaw.model.ProductModel;
 import cn.com.talklaw.ui.activity.AtaxCalculatorActivity;
 import cn.com.talklaw.ui.activity.DateCalculatorActivity;
 import cn.com.talklaw.ui.activity.LawyerCalculatorActivity;
@@ -26,6 +24,7 @@ import cn.com.talklaw.ui.activity.LitigationCalculatorActivity;
 import cn.com.talklaw.ui.activity.SearchActivity;
 import cn.com.talklaw.ui.adapter.ProductListAdapter;
 import cn.com.talklaw.ui.util.GlideImageLoader;
+import cn.com.talklaw.ui.widget.BackTitleView;
 import cn.com.talklaw.ui.widget.xRecyclerView.XRecyclerView;
 import rx.functions.Action1;
 
@@ -47,7 +46,11 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
     protected LinearLayout layoutDate;
     protected LinearLayout layoutSearchEdit;
     protected ImageView imgAudio;
+    protected BackTitleView backTitleView;
     private ProductListAdapter adapter;
+    private int listDy = 0;
+    private int disY;
+
 
     public static StatementFragment getInstance() {
         StatementFragment fragment = new StatementFragment();
@@ -62,6 +65,7 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
     @Override
     public void initDatas() {
         adapter = new ProductListAdapter(mContext);
+        disY = PhoneUtil.dip2px(mContext, 200);
     }
 
     @Override
@@ -84,6 +88,7 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         banner = (Banner) headerView.findViewById(R.id.banner);
         layoutSearchEdit = (LinearLayout) headerView.findViewById(R.id.layout_search_edit);
         imgAudio = (ImageView) headerView.findViewById(R.id.img_audio);
+        backTitleView = (BackTitleView) rootView.findViewById(R.id.back_title_view);
     }
 
     @Override
@@ -108,7 +113,6 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         banner.setIndicatorGravity(BannerConfig.CENTER);
 
 
-
         banner.setFocusable(true);
         banner.setFocusableInTouchMode(true);
         banner.requestFocus();
@@ -117,12 +121,18 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(adapter);
 
-//        List<ProductModel> list1 = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            ProductModel model = new ProductModel();
-//            list1.add(model);
-//        }
-
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                listDy += dy;
+                if (listDy < 0) {
+                    listDy = 0;
+                }
+                float alpha = listDy / (float) disY;
+                backTitleView.setAlpha(alpha);
+            }
+        });
+        backTitleView.setTitle("看法");
         layoutSearchEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,15 +175,16 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
                                     adapter.refreshList(model.data.article);
                                 }
                                 if (model.data.carouse != null) {
-                                    if(model.data.carouse.size()>0) {
-                                        banner.setVisibility(View.VISIBLE);
-                                        banner.setImages(model.data.carouse);
-                                        banner.start();
-                                    }else{
-                                        banner.setVisibility(View.GONE);
-                                    }
-                                }else{
-                                    banner.setVisibility(View.GONE);
+                                    banner.setImages(model.data.carouse);
+                                    banner.start();
+//                                    if(model.data.carouse.size()>0) {
+////                                        banner.setVisibility(View.VISIBLE);
+//
+//                                    }else{
+////                                        banner.setVisibility(View.GONE);
+//                                    }
+                                } else {
+//                                    banner.setVisibility(View.GONE);
                                 }
                             }
                         }
