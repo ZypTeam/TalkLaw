@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -171,16 +172,21 @@ public class IOUtil {
     //
     // }
     // 添加到系统相册
-    public static void saveImageToGallery(final Context context, Bitmap bmp) {
+    public static void saveImageToGallery(final Context context, Bitmap bmp,String fileName) {
         // 首先保存图片
-        File appDir = new File(IOUtil.getBaseLocalLocation(context), "Jusfoun");
+        File appDir = new File(IOUtil.getBaseLocalLocation(context), "talkLaw");
         if (!appDir.exists()) {
             appDir.mkdir();
         }
-        String fileName = System.currentTimeMillis() + ".jpg";
+        if (TextUtils.isEmpty(fileName)){
+            fileName = System.currentTimeMillis() + ".jpg";
+        }
         File file = new File(appDir, fileName);
         final String path = file.getAbsolutePath();
         try {
+            if (!file.exists()||!file.isFile()){
+                file.createNewFile();
+            }
             FileOutputStream fos = new FileOutputStream(file);
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
@@ -189,6 +195,8 @@ public class IOUtil {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+
         }
 
         // // 其次把文件插入到系统图库
@@ -208,7 +216,7 @@ public class IOUtil {
             };
         };
         handler.sendEmptyMessageDelayed(100, 1000);
-        Toast.makeText(context, "保存图片为：" + IOUtil.getBaseLocalLocation(context) + "/Jusfoun/", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "保存图片到：" + IOUtil.getBaseLocalLocation(context) + "/talklaw/", Toast.LENGTH_SHORT).show();
     }
 
     private static MediaScannerConnection msc = null;

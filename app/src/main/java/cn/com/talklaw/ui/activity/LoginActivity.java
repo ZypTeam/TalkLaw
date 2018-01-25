@@ -1,5 +1,6 @@
 package cn.com.talklaw.ui.activity;
 
+import android.content.Intent;
 import android.util.Log;
 import android.util.TimeUtils;
 import android.view.View;
@@ -13,8 +14,12 @@ import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.base.BaseActivity;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
@@ -50,6 +55,28 @@ public class LoginActivity extends BaseTalkLawActivity {
     protected ImageView weibo;
     protected ImageView wechat;
     private Subscription timer;
+    private UMShareAPI mShareAPI;
+
+    private UMAuthListener umAuthListener = new UMAuthListener() {
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+            //授权开始的回调
+        }
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+            LogUtil.e("auth","onComplete=="+data.toString());
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+            LogUtil.e("auth","onError=="+t.getMessage());
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform, int action) {
+            LogUtil.e("auth","onCancel=="+platform);
+        }
+    };
 
     @Override
     public int getLayoutResId() {
@@ -58,7 +85,7 @@ public class LoginActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-
+        mShareAPI=UMShareAPI.get(mContext);
     }
 
     @Override
@@ -92,6 +119,34 @@ public class LoginActivity extends BaseTalkLawActivity {
                 login();
             }
         });
+
+        wechat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener);
+            }
+        });
+
+        weibo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.SINA, umAuthListener);
+            }
+        });
+
+        qq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.QQ, umAuthListener);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+
     }
 
     private void login(){
@@ -105,6 +160,7 @@ public class LoginActivity extends BaseTalkLawActivity {
                         if (userInfoModel!=null&&userInfoModel.getCode()==10000){
                             Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
                             TalkLawApplication.saveUserInfo(userInfoModel.getData());
+                            goActivity(null,HomeActivity.class);
                         }else {
                             Toast.makeText(mContext,userInfoModel.getMsg(),Toast.LENGTH_SHORT).show();
                         }

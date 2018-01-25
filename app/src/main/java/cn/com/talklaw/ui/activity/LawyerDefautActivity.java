@@ -26,7 +26,6 @@ import cn.com.talklaw.ui.util.UIUtils;
 public class LawyerDefautActivity extends BaseTalkLawActivity {
     protected TextView title;
     protected TitleStatusBarView titleBar;
-    protected View viewBg;
     protected ImageView iconHead;
     protected TextView name;
     protected TextView content;
@@ -65,7 +64,6 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     public void initView() {
         title = (TextView) findViewById(R.id.title);
         titleBar = (TitleStatusBarView) findViewById(R.id.title_bar);
-        viewBg = (View) findViewById(R.id.view_bg);
         iconHead = (ImageView) findViewById(R.id.icon_head);
         name = (TextView) findViewById(R.id.name);
         content = (TextView) findViewById(R.id.content);
