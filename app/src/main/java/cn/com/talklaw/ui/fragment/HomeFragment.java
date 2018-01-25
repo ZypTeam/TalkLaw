@@ -2,6 +2,7 @@ package cn.com.talklaw.ui.fragment;
 
 import android.view.View;
 
+import com.jusfoun.baselibrary.net.Api;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -11,9 +12,14 @@ import java.util.List;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
+import cn.com.talklaw.comment.ApiService;
+import cn.com.talklaw.model.StatementListModel;
 import cn.com.talklaw.ui.util.GlideImageLoader;
 import cn.com.talklaw.ui.view.HomeListProductView;
 import cn.com.talklaw.ui.view.HomeNeedView;
+import rx.functions.Action1;
+
+import static cn.com.talklaw.comment.CommentConstant.NET_SUC_CODE;
 
 /**
  * @author zhaoyapeng
@@ -88,13 +94,42 @@ public class HomeFragment extends BaseTalkLawFragment {
         banner.setFocusableInTouchMode(true);
         banner.requestFocus();
 
-        viewFreeProduct.setData();
-        viewHotProduct.setData();
-        viewNeed.setData();
+
+        delMsg();
     }
 
     @Override
     protected void refreshData() {
 
+    }
+
+    private void delMsg() {
+        addNetwork(Api.getInstance().getService(ApiService.class).getHomeShuoFa()
+                , new Action1<StatementListModel>() {
+                    @Override
+                    public void call(StatementListModel model) {
+                        hideLoadDialog();
+                        if (model != null && model.getCode() == NET_SUC_CODE) {
+                            if (model.data != null) {
+                                if (model.data.hot != null) {
+                                    viewHotProduct.setData(model.data.hot);
+                                }
+                                if (model.data.free != null) {
+                                    viewFreeProduct.setData(model.data.free);
+                                }
+
+                                if (model.data.need != null) {
+                                    viewNeed.setData(model.data.need);
+                                }
+
+                            }
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
     }
 }

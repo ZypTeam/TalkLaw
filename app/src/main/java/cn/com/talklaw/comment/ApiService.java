@@ -9,6 +9,7 @@ import java.util.Map;
 import cn.com.talklaw.model.MoveModel;
 import cn.com.talklaw.model.MyMsgListModel;
 import cn.com.talklaw.model.MyMsgModel;
+import cn.com.talklaw.model.StatementListModel;
 import cn.com.talklaw.model.UserInfoModel;
 import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
@@ -102,4 +103,21 @@ public interface ApiService {
      */
     @POST
     Observable<NoDataModel> certifiedLawyer(@Url String url,@QueryMap Map<String,String> params);
+
+    /**
+     * 说法首页
+     * @param url
+     * @param params
+     * @return
+     */
+    @GET("/article/sindex")
+    Observable<StatementListModel> getHomeShuoFa();
+    /**
+     * 看法首页
+     * @param url
+     * @param params
+     * @return
+     */
+    @GET("/article/indexx")
+    Observable<StatementListModel> getHomeKanfa();
 }

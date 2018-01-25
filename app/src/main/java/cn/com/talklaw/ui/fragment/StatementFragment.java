@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.jusfoun.baselibrary.net.Api;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -17,7 +18,9 @@ import java.util.List;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
+import cn.com.talklaw.comment.ApiService;
 import cn.com.talklaw.model.ProductModel;
+import cn.com.talklaw.model.StatementListModel;
 import cn.com.talklaw.ui.activity.AtaxCalculatorActivity;
 import cn.com.talklaw.ui.activity.DateCalculatorActivity;
 import cn.com.talklaw.ui.activity.LawyerCalculatorActivity;
@@ -26,12 +29,15 @@ import cn.com.talklaw.ui.activity.SearchActivity;
 import cn.com.talklaw.ui.adapter.ProductListAdapter;
 import cn.com.talklaw.ui.util.GlideImageLoader;
 import cn.com.talklaw.ui.widget.xRecyclerView.XRecyclerView;
+import rx.functions.Action1;
+
+import static cn.com.talklaw.comment.CommentConstant.NET_SUC_CODE;
 
 /**
  * @author zhaoyapeng
  * @version create time:17/12/2115:49
  * @Email zyp@jusfoun.com
- * @Description ${说法fragment}
+ * @Description ${看法}
  */
 public class StatementFragment extends BaseTalkLawFragment implements View.OnClickListener {
 
@@ -156,6 +162,33 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
 
     @Override
     protected void refreshData() {
+        delMsg();
+    }
 
+    private void delMsg() {
+        addNetwork(Api.getInstance().getService(ApiService.class).getHomeKanfa()
+                , new Action1<StatementListModel>() {
+                    @Override
+                    public void call(StatementListModel model) {
+                        hideLoadDialog();
+                        if (model != null && model.getCode() == NET_SUC_CODE) {
+                            if (model.data != null) {
+                                if (model.data.hot != null) {
+                                }
+                                if (model.data.free != null) {
+                                }
+
+                                if (model.data.need != null) {
+                                }
+
+                            }
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
     }
 }

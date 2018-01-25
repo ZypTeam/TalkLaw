@@ -7,8 +7,12 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.com.talklaw.R;
 import cn.com.talklaw.constant.OpinionItemConstant;
+import cn.com.talklaw.model.ProductItemModel;
 import cn.com.talklaw.ui.viewholder.CarouselViewHolder;
 
 /**
@@ -20,10 +24,12 @@ import cn.com.talklaw.ui.viewholder.CarouselViewHolder;
 public class OpinionAdapter extends RecyclerView.Adapter implements OpinionItemConstant{
     private Context mContext;
     private LayoutInflater mInflater;
+    private List<ProductItemModel> list;
 
     public OpinionAdapter(Context context) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
+        list = new ArrayList<>();
 
     }
 
@@ -41,13 +47,13 @@ public class OpinionAdapter extends RecyclerView.Adapter implements OpinionItemC
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_CAROUSEL) {
-            ((CarouselViewHolder) holder).update(null);
+            ((CarouselViewHolder) holder).update(list.get(position));
         }
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return list.size();
     }
 
     @Override
@@ -56,7 +62,10 @@ public class OpinionAdapter extends RecyclerView.Adapter implements OpinionItemC
         return TYPE_CAROUSEL;
     }
 
-    public void refresh(){
+    public void refresh(List<ProductItemModel> list){
+        this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
 
     }
 }

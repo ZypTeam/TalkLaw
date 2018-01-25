@@ -7,8 +7,12 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseView;
+import cn.com.talklaw.model.ProductItemModel;
 import cn.com.talklaw.ui.adapter.OpinionAdapter;
 
 /**
@@ -59,11 +63,12 @@ public class HomeListProductView extends BaseView {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        adapter.refresh();
+
 
     }
 
-    public void setData(){
+    public void setData( List<ProductItemModel> list ){
+        adapter.refresh(list);
         textTitle.setText("热门产品");
     }
 }
