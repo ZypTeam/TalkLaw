@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/img_icon_free" />
+            android:src="@drawable/img_icon_consultant_private" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/img_icon_free" />
+            android:src="@drawable/img_icon_consultant_company" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/img_icon_free" />
+            android:src="@drawable/img_icon_consultant_shop" />
 
         <TextView
             android:layout_width="wrap_content"

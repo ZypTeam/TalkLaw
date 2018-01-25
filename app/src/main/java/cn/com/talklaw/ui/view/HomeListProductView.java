@@ -67,8 +67,13 @@ public class HomeListProductView extends BaseView {
 
     }
 
-    public void setData( List<ProductItemModel> list ){
-        adapter.refresh(list);
-        textTitle.setText("热门产品");
+    public void setData( List<ProductItemModel> list,int type ){
+        // type 1 热门产品  2 限时免费
+        adapter.refresh(list,type);
+        if(type==1) {
+            textTitle.setText("热门产品");
+        }else if(type==2){
+            textTitle.setText("限时免费");
+        }
     }
 }

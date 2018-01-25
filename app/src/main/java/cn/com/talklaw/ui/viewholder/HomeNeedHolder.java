@@ -1,16 +1,14 @@
 package cn.com.talklaw.ui.viewholder;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseViewHolder;
 import cn.com.talklaw.model.ProductItemModel;
+import cn.com.talklaw.ui.util.ImageLoderUtil;
 
 /**
  * @author wangcc
@@ -31,11 +29,7 @@ public class HomeNeedHolder extends BaseViewHolder<ProductItemModel> {
 
     @Override
     public void update(ProductItemModel model) {
-        if (model.img!=null) {
-            Glide.with(mContext)
-                    .load(model.img)
-                    .into(imgAvatar);
-        }
+        ImageLoderUtil.loadRoundImage(mContext, imgAvatar, model.img,100);
 
 
         textTitle.setText(model.title);

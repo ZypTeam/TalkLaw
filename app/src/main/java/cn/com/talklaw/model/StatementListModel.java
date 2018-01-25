@@ -18,7 +18,7 @@ public class StatementListModel extends BaseModel {
         public List<ProductItemModel> hot;
         public List<ProductItemModel> need;
         public List<ProductItemModel> free;
-        public List<ProductItemModel> carouse;
+        public List<CarouseModel> carouse;
         public long freetime;
     }
 }

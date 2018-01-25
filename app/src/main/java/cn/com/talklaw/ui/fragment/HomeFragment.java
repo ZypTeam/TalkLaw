@@ -7,9 +7,6 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
 import cn.com.talklaw.comment.ApiService;
@@ -68,14 +65,6 @@ public class HomeFragment extends BaseTalkLawFragment {
         banner.setImageLoader(new GlideImageLoader());
         //设置图片集合
 
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
-
-//        banner.setImages(list);
         //设置banner动画效果
         banner.setBannerAnimation(Transformer.Default);
         //设置标题集合（当banner样式有显示title时）
@@ -86,14 +75,10 @@ public class HomeFragment extends BaseTalkLawFragment {
         banner.setDelayTime(3000);
         //设置指示器位置（当banner模式中有指示器时）
         banner.setIndicatorGravity(BannerConfig.CENTER);
-        //banner设置方法全部调用完毕时最后调用
-        banner.start();
-
 
         banner.setFocusable(true);
         banner.setFocusableInTouchMode(true);
         banner.requestFocus();
-
 
         delMsg();
     }
@@ -112,14 +97,26 @@ public class HomeFragment extends BaseTalkLawFragment {
                         if (model != null && model.getCode() == NET_SUC_CODE) {
                             if (model.data != null) {
                                 if (model.data.hot != null) {
-                                    viewHotProduct.setData(model.data.hot);
+                                    viewHotProduct.setData(model.data.hot,1);
                                 }
                                 if (model.data.free != null) {
-                                    viewFreeProduct.setData(model.data.free);
+                                    viewFreeProduct.setData(model.data.free,2);
                                 }
 
                                 if (model.data.need != null) {
                                     viewNeed.setData(model.data.need);
+                                }
+
+                                if (model.data.carouse != null) {
+                                    if(model.data.carouse.size()>0) {
+                                        banner.setVisibility(View.VISIBLE);
+                                        banner.setImages(model.data.carouse);
+                                        banner.start();
+                                    }else{
+                                        banner.setVisibility(View.GONE);
+                                    }
+                                }else{
+                                    banner.setVisibility(View.GONE);
                                 }
 
                             }

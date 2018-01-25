@@ -165,10 +165,15 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
                                     adapter.refreshList(model.data.article);
                                 }
                                 if (model.data.carouse != null) {
-
-                                    banner.setImages(model.data.carouse);
-                                    //banner设置方法全部调用完毕时最后调用
-                                    banner.start();
+                                    if(model.data.carouse.size()>0) {
+                                        banner.setVisibility(View.VISIBLE);
+                                        banner.setImages(model.data.carouse);
+                                        banner.start();
+                                    }else{
+                                        banner.setVisibility(View.GONE);
+                                    }
+                                }else{
+                                    banner.setVisibility(View.GONE);
                                 }
                             }
                         }

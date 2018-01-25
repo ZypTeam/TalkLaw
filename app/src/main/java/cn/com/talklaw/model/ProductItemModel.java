@@ -26,6 +26,8 @@ public class ProductItemModel extends BaseModel implements Serializable{
     public String createtime;
     public String comment_num;
     public String like_num;
+    public String price;
+
 
 }
 

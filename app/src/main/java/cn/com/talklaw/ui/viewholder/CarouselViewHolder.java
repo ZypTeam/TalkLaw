@@ -12,6 +12,7 @@ import java.io.Serializable;
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseViewHolder;
 import cn.com.talklaw.model.ProductItemModel;
+import cn.com.talklaw.ui.util.ImageLoderUtil;
 
 /**
  * @author zhaoyapeng
@@ -36,12 +37,14 @@ public class CarouselViewHolder extends BaseViewHolder<ProductItemModel> {
         titleText = (TextView)itemView.findViewById(R.id.text_title);
     }
 
+
     @Override
     public void update(ProductItemModel model) {
-        Glide.with(mContext).load(model.img).into(imgAvatar);
-        textName.setText(model.title);
+        ImageLoderUtil.loadRoundImage(mContext,imgAvatar,model.img,10);
+        textName.setText(model.lawyer);
         textTime.setText(model.createtime);
         textCount.setText(model.comment_num);
         titleText.setText(model.title);
     }
+
 }
