@@ -5,10 +5,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.List;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseView;
+import cn.com.talklaw.model.ProductItemModel;
 import cn.com.talklaw.ui.adapter.OpinionAdapter;
 
 /**
@@ -20,7 +24,8 @@ import cn.com.talklaw.ui.adapter.OpinionAdapter;
 public class HomeListProductView extends BaseView {
     protected RecyclerView recyclerView;
     protected OpinionAdapter adapter;
-    protected TextView textTitle;
+    protected TextView textTitle,allText;
+    protected LimitedTimeView viewLimited;
     private LinearLayoutManager layoutManager;
 
     public HomeListProductView(Context context) {
@@ -45,11 +50,13 @@ public class HomeListProductView extends BaseView {
         LayoutInflater.from(mContext).inflate(R.layout.view_product_home_list, this, true);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         textTitle = (TextView) findViewById(R.id.text_title);
+        viewLimited = (LimitedTimeView)findViewById(R.id.view_limited);
+        allText = (TextView)findViewById(R.id.text_all);
     }
 
     @Override
     protected void initActions() {
-         layoutManager = new LinearLayoutManager(mContext) {
+        layoutManager = new LinearLayoutManager(mContext) {
             @Override
             public boolean canScrollVertically() {
                 // 直接禁止垂直滑动
@@ -59,11 +66,23 @@ public class HomeListProductView extends BaseView {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        adapter.refresh();
+
 
     }
 
-    public void setData(){
-        textTitle.setText("热门产品");
+    public void setData(List<ProductItemModel> list, int type,long time) {
+        // type 1 热门产品  2 限时免费
+        adapter.refresh(list, type);
+        if (type == 1) {
+            textTitle.setText("热门产品");
+            allText.setVisibility(VISIBLE);
+            viewLimited.setVisibility(GONE);
+        } else if (type == 2) {
+            textTitle.setText("限时免费");
+            viewLimited.setVisibility(VISIBLE);
+            allText.setVisibility(GONE);
+            viewLimited.setData(time);
+        }
     }
+
 }

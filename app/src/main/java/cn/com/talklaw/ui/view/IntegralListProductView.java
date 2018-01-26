@@ -8,8 +8,11 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
+import java.util.List;
+
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseView;
+import cn.com.talklaw.model.IntegralModel;
 import cn.com.talklaw.ui.adapter.IntegralProductAdapter;
 import cn.com.talklaw.ui.adapter.OpinionAdapter;
 
@@ -61,11 +64,12 @@ public class IntegralListProductView extends BaseView {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        adapter.refresh();
+
 
     }
 
-    public void setData(){
+    public void setData(List<IntegralModel.GoodsItemModel> goods ){
         textTitle.setText("精选推荐");
+        adapter.refresh(goods);
     }
 }

@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.util.Log;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -211,19 +213,41 @@ public class AppUtil {
     }
 
     public static boolean appIsRun(final Context mContext) {
-        ActivityManager activityManager = (ActivityManager)mContext.getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager activityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> list = activityManager.getRunningTasks(100);
         for (ActivityManager.RunningTaskInfo info : list) {
-            if(mContext.getPackageName().equals(info.topActivity.getPackageName())||mContext.getPackageName().equals(info.baseActivity.getPackageName()))
+            if (mContext.getPackageName().equals(info.topActivity.getPackageName()) || mContext.getPackageName().equals(info.baseActivity.getPackageName()))
                 return true;
         }
 
-        return  false;
+        return false;
     }
-
 
 
     public static boolean isAnimatorVision() {
         return android.os.Build.VERSION.SDK_INT >= 11;
     }
+
+    /**
+     * 获取 文件里面的json
+     *
+     * @param id
+     * @return
+     */
+    public static String getRowJson(Context mContext, int id) {
+        String json = null;
+        InputStream is = mContext.getResources().openRawResource(id);
+        byte[] buffer;
+        try {
+            buffer = new byte[is.available()];
+            is.read(buffer);
+            json = new String(buffer, "utf-8");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
 }
+

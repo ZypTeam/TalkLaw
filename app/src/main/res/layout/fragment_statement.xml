@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f8f8f8"
@@ -8,7 +8,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_above="@+id/layout_bottom">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,16 +18,16 @@
             <cn.com.talklaw.ui.widget.xRecyclerView.XRecyclerView
                 android:id="@+id/list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
-        android:layout_height="55dp">
-
-
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true">
         <LinearLayout
             android:id="@+id/layout_litigation"
             android:layout_width="match_parent"
@@ -94,7 +94,7 @@
                 android:layout_gravity="center_horizontal"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/img_my" />
+                android:src="@drawable/icon_geshui" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -120,7 +120,7 @@
                 android:layout_gravity="center_horizontal"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/img_my" />
+                android:src="@drawable/img_riqi" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -133,4 +133,11 @@
         </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+
+
+    <cn.com.talklaw.ui.widget.BackTitleView
+        android:id="@+id/back_title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff" />
+</RelativeLayout>

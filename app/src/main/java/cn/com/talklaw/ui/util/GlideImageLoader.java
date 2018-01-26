@@ -1,10 +1,13 @@
 package cn.com.talklaw.ui.util;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.youth.banner.loader.ImageLoader;
+
+import cn.com.talklaw.model.CarouseModel;
 
 /**
  * @author zhaoyapeng
@@ -15,6 +18,11 @@ import com.youth.banner.loader.ImageLoader;
 public class GlideImageLoader extends ImageLoader{
     @Override
     public void displayImage(Context context, Object o, ImageView imageView) {
-        Glide.with(context).load("http://img5.imgtn.bdimg.com/it/u=2137958015,4291978384&fm=27&gp=0.jpg").into(imageView);
+        CarouseModel model ;
+        if(o instanceof CarouseModel){
+            model=(CarouseModel)o;
+            Glide.with(context).load(model.img).into(imageView);
+        }
+
     }
 }

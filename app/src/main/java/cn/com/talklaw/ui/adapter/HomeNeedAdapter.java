@@ -6,6 +6,7 @@ import android.view.View;
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseAdapter;
 import cn.com.talklaw.base.BaseViewHolder;
+import cn.com.talklaw.model.ProductItemModel;
 import cn.com.talklaw.model.ProductModel;
 import cn.com.talklaw.ui.viewholder.HomeNeedHolder;
 import cn.com.talklaw.ui.viewholder.ProductViewHolder;
@@ -16,7 +17,7 @@ import cn.com.talklaw.ui.viewholder.ProductViewHolder;
  * @describe 专区 产品 list adapter
  */
 
-public class HomeNeedAdapter extends BaseAdapter<ProductModel> {
+public class HomeNeedAdapter extends BaseAdapter<ProductItemModel> {
     public HomeNeedAdapter(Context context) {
         super(context);
     }

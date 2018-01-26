@@ -8,4 +8,7 @@ package cn.com.talklaw.constant;
  */
 public interface OpinionItemConstant {
     public static int TYPE_CAROUSEL = 1001;
+    public static int TYPE_TIME_FREE = 1002; //限时免费
+
+
 }

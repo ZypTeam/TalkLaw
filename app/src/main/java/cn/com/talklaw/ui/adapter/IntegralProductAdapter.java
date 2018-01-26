@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.com.talklaw.R;
-import cn.com.talklaw.constant.OpinionItemConstant;
-import cn.com.talklaw.ui.viewholder.CarouselViewHolder;
+import cn.com.talklaw.model.IntegralModel;
 import cn.com.talklaw.ui.viewholder.IntegralProductViewHolder;
 
 /**
@@ -19,32 +21,36 @@ import cn.com.talklaw.ui.viewholder.IntegralProductViewHolder;
 public class IntegralProductAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private LayoutInflater mInflater;
+    private List<IntegralModel.GoodsItemModel> goods;
 
     public IntegralProductAdapter(Context context) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
+        goods= new ArrayList<>();
 
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                return new IntegralProductViewHolder(
-                        mInflater.inflate(R.layout.item_prodycu_integral, parent, false),
-                        mContext);
+        return new IntegralProductViewHolder(
+                mInflater.inflate(R.layout.item_prodycu_integral, parent, false),
+                mContext);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            ((IntegralProductViewHolder) holder).update(null);
+        ((IntegralProductViewHolder) holder).update(goods.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 6;
+        return goods.size();
     }
 
 
-    public void refresh(){
-
+    public void refresh(List<IntegralModel.GoodsItemModel> goods) {
+        this.goods.clear();
+        this.goods.addAll(goods);
+        notifyDataSetChanged();
     }
 }

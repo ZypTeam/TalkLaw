@@ -19,9 +19,10 @@ public class HomeFragmentUtil {
     public static BaseTalkLawFragment getInstance(int index) {
         BaseTalkLawFragment fragment = null;
         if (index == TYPE_OPINION) {
-            fragment = HomeFragment.getInstance();
-        } else if (index == TYPE_STATEMENT) {
             fragment = StatementFragment.getInstance();
+        } else if (index == TYPE_STATEMENT) {
+            fragment = HomeFragment.getInstance();
+
 
         } else if (index == TYPE_PERSONAL) {
             fragment = MyFragment.getInstance();

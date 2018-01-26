@@ -11,6 +11,8 @@ import java.io.Serializable;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseViewHolder;
+import cn.com.talklaw.model.ProductItemModel;
+import cn.com.talklaw.ui.util.ImageLoderUtil;
 
 /**
  * @author zhaoyapeng
@@ -18,7 +20,7 @@ import cn.com.talklaw.base.BaseViewHolder;
  * @Email zyp@jusfoun.com
  * @Description ${轮播图viewpager}
  */
-public class CarouselViewHolder extends BaseViewHolder {
+public class CarouselViewHolder extends BaseViewHolder<ProductItemModel> {
 
     protected ImageView imgAvatar;
     protected TextView textName;
@@ -35,16 +37,14 @@ public class CarouselViewHolder extends BaseViewHolder {
         titleText = (TextView)itemView.findViewById(R.id.text_title);
     }
 
+
     @Override
-    public void update(Serializable model) {
-        Glide.with(mContext).load("http://img5.imgtn.bdimg.com/it/u=2137958015,4291978384&fm=27&gp=0.jpg").into(imgAvatar);
-        textName.setText("赵律师");
-        textTime.setText("2017-11-12");
-        textCount.setText("1000");
-        titleText.setText("编译失败；看到编译器错误");
+    public void update(ProductItemModel model) {
+        ImageLoderUtil.loadRoundImage(mContext,imgAvatar,model.img,10);
+        textName.setText(model.lawyer);
+        textTime.setText(model.createtime);
+        textCount.setText(model.comment_num);
+        titleText.setText(model.title);
     }
 
-    private void initView(View rootView) {
-
-    }
 }

@@ -12,6 +12,7 @@ import java.util.List;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseView;
+import cn.com.talklaw.model.ProductItemModel;
 import cn.com.talklaw.model.ProductModel;
 import cn.com.talklaw.ui.adapter.HomeNeedAdapter;
 
@@ -58,16 +59,12 @@ public class HomeNeedView extends BaseView {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        List list = new ArrayList<ProductModel>();
-        list.add(new ProductModel());
-        list.add(new ProductModel());
-        list.add(new ProductModel());
-        list.add(new ProductModel());
-        adapter.refreshList(list);
+
 
     }
 
-    public void setData() {
+    public void setData( List<ProductItemModel> neeList ) {
         textTitle.setText("猜你需要");
+        adapter.refreshList(neeList);
     }
 }

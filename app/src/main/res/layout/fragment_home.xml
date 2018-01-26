@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#f8f8f8">
+    android:background="#f8f8f8"
+    android:orientation="vertical">
 
-    <ScrollView
+    <cn.com.talklaw.ui.view.HomeScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -17,18 +19,18 @@
             <com.youth.banner.Banner
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="200dp"
+                app:banner_default_image="@drawable/img_banner_datil" />
 
             <cn.com.talklaw.ui.view.HomeTabIconView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-               />
+                android:layout_height="wrap_content" />
 
             <cn.com.talklaw.ui.view.HomeListProductView
                 android:id="@+id/view_hot_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp" />
 
 
             <cn.com.talklaw.ui.view.HomeNeedView
@@ -40,8 +42,13 @@
                 android:id="@+id/view_free_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp" />
         </LinearLayout>
-    </ScrollView>
+    </cn.com.talklaw.ui.view.HomeScrollView>
 
-</LinearLayout>
+    <cn.com.talklaw.ui.widget.BackTitleView
+        android:id="@+id/back_title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff" />
+</RelativeLayout>

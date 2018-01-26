@@ -6,9 +6,12 @@ import com.jusfoun.baselibrary.base.NoDataModel;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.com.talklaw.model.IntegralModel;
 import cn.com.talklaw.model.MoveModel;
 import cn.com.talklaw.model.MyMsgListModel;
 import cn.com.talklaw.model.MyMsgModel;
+import cn.com.talklaw.model.ProductListModel;
+import cn.com.talklaw.model.StatementListModel;
 import cn.com.talklaw.model.UserInfoModel;
 import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
@@ -102,4 +105,31 @@ public interface ApiService {
      */
     @POST
     Observable<NoDataModel> certifiedLawyer(@Url String url,@QueryMap Map<String,String> params);
+
+    /**
+     * 说法首页
+     * @param url
+     * @param params
+     * @return
+     */
+    @GET("/article/sindex")
+    Observable<StatementListModel> getHomeShuoFa();
+    /**
+     * 看法首页
+     * @param url
+     * @param params
+     * @return
+     */
+    @GET("/article/index")
+    Observable<ProductListModel> getHomeKanfa();
+
+
+    /**
+     * 积分首页接口
+     * @param url
+     * @param params
+     * @return
+     */
+    @GET("/goods/index")
+    Observable<IntegralModel> getIntergralHome();
 }

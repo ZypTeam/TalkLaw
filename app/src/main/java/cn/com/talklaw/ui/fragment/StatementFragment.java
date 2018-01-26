@@ -1,6 +1,5 @@
 package cn.com.talklaw.ui.fragment;
 
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,16 +7,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.jusfoun.baselibrary.Util.PhoneUtil;
+import com.jusfoun.baselibrary.net.Api;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cn.com.talklaw.R;
 import cn.com.talklaw.base.BaseTalkLawFragment;
-import cn.com.talklaw.model.ProductModel;
+import cn.com.talklaw.comment.ApiService;
+import cn.com.talklaw.model.ProductListModel;
 import cn.com.talklaw.ui.activity.AtaxCalculatorActivity;
 import cn.com.talklaw.ui.activity.DateCalculatorActivity;
 import cn.com.talklaw.ui.activity.LawyerCalculatorActivity;
@@ -25,13 +24,17 @@ import cn.com.talklaw.ui.activity.LitigationCalculatorActivity;
 import cn.com.talklaw.ui.activity.SearchActivity;
 import cn.com.talklaw.ui.adapter.ProductListAdapter;
 import cn.com.talklaw.ui.util.GlideImageLoader;
+import cn.com.talklaw.ui.widget.BackTitleView;
 import cn.com.talklaw.ui.widget.xRecyclerView.XRecyclerView;
+import rx.functions.Action1;
+
+import static cn.com.talklaw.comment.CommentConstant.NET_SUC_CODE;
 
 /**
  * @author zhaoyapeng
  * @version create time:17/12/2115:49
  * @Email zyp@jusfoun.com
- * @Description ${说法fragment}
+ * @Description ${看法}
  */
 public class StatementFragment extends BaseTalkLawFragment implements View.OnClickListener {
 
@@ -43,7 +46,11 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
     protected LinearLayout layoutDate;
     protected LinearLayout layoutSearchEdit;
     protected ImageView imgAudio;
+    protected BackTitleView backTitleView;
     private ProductListAdapter adapter;
+    private int listDy = 0;
+    private int disY;
+
 
     public static StatementFragment getInstance() {
         StatementFragment fragment = new StatementFragment();
@@ -58,6 +65,7 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
     @Override
     public void initDatas() {
         adapter = new ProductListAdapter(mContext);
+        disY = PhoneUtil.dip2px(mContext, 200);
     }
 
     @Override
@@ -80,11 +88,11 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         banner = (Banner) headerView.findViewById(R.id.banner);
         layoutSearchEdit = (LinearLayout) headerView.findViewById(R.id.layout_search_edit);
         imgAudio = (ImageView) headerView.findViewById(R.id.img_audio);
+        backTitleView = (BackTitleView) rootView.findViewById(R.id.back_title_view);
     }
 
     @Override
     public void initAction() {
-
 
 
         //设置banner样式
@@ -93,14 +101,6 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         banner.setImageLoader(new GlideImageLoader());
         //设置图片集合
 
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
-
-        banner.setImages(list);
         //设置banner动画效果
         banner.setBannerAnimation(Transformer.Default);
         //设置标题集合（当banner样式有显示title时）
@@ -111,8 +111,6 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         banner.setDelayTime(3000);
         //设置指示器位置（当banner模式中有指示器时）
         banner.setIndicatorGravity(BannerConfig.CENTER);
-        //banner设置方法全部调用完毕时最后调用
-        banner.start();
 
 
         banner.setFocusable(true);
@@ -123,13 +121,18 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(adapter);
 
-        List<ProductModel> list1 = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ProductModel model = new ProductModel();
-            list1.add(model);
-        }
-        adapter.refreshList(list1);
-
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                listDy += dy;
+                if (listDy < 0) {
+                    listDy = 0;
+                }
+                float alpha = listDy / (float) disY;
+                backTitleView.setAlpha(alpha);
+            }
+        });
+        backTitleView.setTitle("看法");
         layoutSearchEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,6 +159,41 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
 
     @Override
     protected void refreshData() {
+        delMsg();
+    }
 
+    private void delMsg() {
+        showLoadDialog();
+        addNetwork(Api.getInstance().getService(ApiService.class).getHomeKanfa()
+                , new Action1<ProductListModel>() {
+                    @Override
+                    public void call(ProductListModel model) {
+                        hideLoadDialog();
+                        if (model != null && model.getCode() == NET_SUC_CODE) {
+                            if (model.data != null) {
+                                if (model.data.article != null) {
+                                    adapter.refreshList(model.data.article);
+                                }
+                                if (model.data.carouse != null) {
+                                    banner.setImages(model.data.carouse);
+                                    banner.start();
+//                                    if(model.data.carouse.size()>0) {
+////                                        banner.setVisibility(View.VISIBLE);
+//
+//                                    }else{
+////                                        banner.setVisibility(View.GONE);
+//                                    }
+                                } else {
+//                                    banner.setVisibility(View.GONE);
+                                }
+                            }
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
     }
 }
