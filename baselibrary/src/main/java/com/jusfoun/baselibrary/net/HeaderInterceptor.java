@@ -1,12 +1,7 @@
 package com.jusfoun.baselibrary.net;
 
 import android.content.Context;
-import android.util.Log;
-
-import com.jusfoun.baselibrary.Util.AppUtil;
 import com.jusfoun.baselibrary.Util.LogUtil;
-import com.jusfoun.baselibrary.Util.PhoneUtil;
-
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
@@ -20,6 +15,7 @@ import okhttp3.ResponseBody;
 import okhttp3.internal.http.HttpEngine;
 import okio.Buffer;
 import okio.BufferedSource;
+
 
 /**
  * Author  wangchenchen
@@ -40,6 +36,7 @@ public class HeaderInterceptor implements Interceptor {
     private String AccessToken = "AccessToken";
     private String APIVersion = "APIVersion";
     private String ContentType="";
+    private String SEAVER_TOKEN="Seaver-Token";
     public HeaderInterceptor(Context mContext) {
         this.mContext=mContext.getApplicationContext();
     }
@@ -54,6 +51,7 @@ public class HeaderInterceptor implements Interceptor {
 ////                .addHeader(Channel, AppUtil.getChannelName(mContext))
 //                .addHeader(Deviceid, PhoneUtil.getIMEI(mContext))
                 .addHeader(APIVersion, "1.0")
+                .addHeader(SEAVER_TOKEN, "c9f06dbe8619b276f9472b25ca44e2f8")
                 .build();
         String requestContent = bodyToString(request);
         LogUtil.e("request", "url==" + request.url().toString());

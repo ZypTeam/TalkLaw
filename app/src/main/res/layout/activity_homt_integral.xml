@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_main_bg"
     android:orientation="vertical">
+
     <cn.com.talklaw.ui.widget.BackTitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titleView">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="46dp">
+                android:layout_height="46dp"
+                android:background="@color/write">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -43,10 +45,10 @@
                             android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/text_count_integral"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="17dp"
-                            android:text="1000"
                             android:textColor="#fda623"
                             android:textSize="16sp" />
 
@@ -55,7 +57,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="20dp"
-                             />
+                            android:src="@drawable/img_arrow_right" />
 
                     </LinearLayout>
                 </RelativeLayout>
@@ -64,8 +66,7 @@
                     android:id="@+id/layout_records"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    >
+                    android:layout_weight="1">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -84,7 +85,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="30dp"
-                            />
+                            android:src="@drawable/img_arrow_right" />
 
                     </LinearLayout>
                 </RelativeLayout>
@@ -95,17 +96,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
 
-            <cn.com.talklaw.ui.view.HomeTabIconView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/view_goods_recycleview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:background="@color/write"/>
+
 
             <cn.com.talklaw.ui.view.IntegralListProductView
                 android:id="@+id/view_integeral_product"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#e0ff0000"
+        android:gravity="center"
+        android:text="获取积分"
+        android:textColor="@color/write"
+        android:textSize="16sp" />
+
+</RelativeLayout>

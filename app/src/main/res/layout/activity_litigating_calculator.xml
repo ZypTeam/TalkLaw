@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/write"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
 
     <cn.com.talklaw.ui.widget.BackTitleView
@@ -12,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
@@ -44,6 +44,7 @@
 
 
                 <TextView
+                    android:id="@+id/text_case_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -68,6 +69,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/layou_property_relationship"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:paddingRight="16dp">
@@ -88,11 +90,13 @@
 
 
                 <LinearLayout
+                    android:id="@+id/layou_property"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_no_yes">
 
                     <TextView
+                        android:id="@+id/text_no"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -102,6 +106,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/text_yes"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -115,6 +120,7 @@
         </RelativeLayout>
 
         <View
+            android:id="@+id/line_property_relationship"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="#e7e7e7" />
@@ -134,6 +140,7 @@
 
 
             <EditText
+                android:id="@+id/edit_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -141,9 +148,11 @@
                 android:background="@null"
                 android:gravity="right"
                 android:hint="请输入金额"
+                android:inputType="number"
                 android:textColor="#b2b2b2"
                 android:textSize="16sp" />
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
@@ -159,7 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="是否涉及财产关系"
+                android:text="计算方式"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
@@ -171,11 +180,13 @@
 
 
                 <LinearLayout
+                    android:id="@+id/layout_calculation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_no_yes">
 
                     <TextView
+                        android:id="@+id/text_quan"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -185,6 +196,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/text_ban"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -211,6 +223,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_reset_btn"
@@ -219,6 +232,7 @@
             android:textSize="18sp" />
 
         <Button
+            android:id="@+id/btn_afrim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
@@ -229,6 +243,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/text_result_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -236,7 +251,8 @@
         android:layout_marginTop="50dp"
         android:text="计算结果"
         android:textColor="#000000"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/text_result"
@@ -246,5 +262,6 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="20dp"
         android:textColor="#999999"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:visibility="gone" />
 </LinearLayout>
