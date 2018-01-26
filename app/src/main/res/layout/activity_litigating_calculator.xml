@@ -126,6 +126,7 @@
             android:background="#e7e7e7" />
 
         <RelativeLayout
+            android:id="@+id/layout_edit_money"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:paddingRight="16dp">

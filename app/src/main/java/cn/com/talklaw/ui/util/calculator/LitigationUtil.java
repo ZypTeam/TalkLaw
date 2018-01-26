@@ -10,33 +10,62 @@ public class LitigationUtil {
 
     private int UNIT = 10000;
 
-    public int getCost(int id, int price) {
+    public String getCost(int id, int price, boolean isHalved) {
         switch (id) {
             case 1:
-                return (int)getPropertyCase(price);
+                if (isHalved) {
+                    return (int) getPropertyCase(price) + "";
+                } else {
+                    return (int) getPropertyCase(price) / 2 + "";
+                }
+
+            case 2:
+                return getDivorceCases(price,isHalved);
         }
-        return 0;
+        return "";
     }
 
+
+    /**
+     * 财产案件
+     */
     private double getPropertyCase(int price) {
         if (price <= 10000) {
             return 50;
         } else if (price <= 10 * UNIT) {
-            return price * 0.025 - 200 ;
+            return price * 0.025 - 200;
         } else if (price <= 20 * UNIT) {
-            return price * 0.02 + 300 ;
+            return price * 0.02 + 300;
         } else if (price <= 50 * UNIT) {
-            return price * 0.015 + 1300 ;
+            return price * 0.015 + 1300;
         } else if (price <= 100 * UNIT) {
-            return price * 0.01 + 380 ;
+            return price * 0.01 + 380;
         } else if (price <= 200 * UNIT) {
-            return price * 0.009 + 4800 ;
+            return price * 0.009 + 4800;
         } else if (price <= 500 * UNIT) {
-            return price * 0.008 + 6800 ;
+            return price * 0.008 + 6800;
         } else if (price <= 1000 * UNIT) {
-            return price * 0.007 + 11800 ;
+            return price * 0.007 + 11800;
         } else {
-            return price * 0.006 + 21800 ;
+            return price * 0.006 + 21800;
         }
     }
+
+    private String getDivorceCases(int price,boolean isHalved) {
+        if (price <= 20 * UNIT) {
+            if(isHalved){
+                return "25~150";
+            }else{
+                return "50~300";
+            }
+        } else {
+            if(isHalved) {
+                return ((int) (price * 0.005 - 700))/2 + "";
+            }else {
+                return ((int) (price * 0.005 - 700)) + "";
+            }
+        }
+    }
+
+
 }

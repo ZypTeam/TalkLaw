@@ -43,6 +43,7 @@ public class LitigationCalculatorActivity extends BaseTalkLawActivity {
     protected TextView textResultTitle;
     protected RelativeLayout layouPropertyRelationship;
     protected View linePropertyRelationship;
+    protected RelativeLayout layoutEditMoney;
     private CaseTypeDialog caseTypeDialog;
     private CaseTypeModel.CaseTypeItemModel caseTypeItemModel;
 
@@ -86,6 +87,7 @@ public class LitigationCalculatorActivity extends BaseTalkLawActivity {
         textResultTitle = (TextView) findViewById(R.id.text_result_title);
         layouPropertyRelationship = (RelativeLayout) findViewById(R.id.layou_property_relationship);
         linePropertyRelationship = (View) findViewById(R.id.line_property_relationship);
+        layoutEditMoney = (RelativeLayout) findViewById(R.id.layout_edit_money);
 
     }
 
@@ -104,10 +106,10 @@ public class LitigationCalculatorActivity extends BaseTalkLawActivity {
                 caseTypeItemModel = model;
                 if (model.type != 0) {
                     caseTypeDialog.dismiss();
-                    if(model.id==1){
+                    if (model.id == 1) {
                         layouPropertyRelationship.setVisibility(View.GONE);
                         linePropertyRelationship.setVisibility(View.GONE);
-                    }else{
+                    } else {
                         layouPropertyRelationship.setVisibility(View.VISIBLE);
                         linePropertyRelationship.setVisibility(View.VISIBLE);
                     }
@@ -124,11 +126,17 @@ public class LitigationCalculatorActivity extends BaseTalkLawActivity {
                     layouProperty.setBackgroundResource(R.drawable.bg_yes_no);
                     textNo.setTextColor(mContext.getResources().getColor(R.color.write));
                     textYes.setTextColor(0xffcb1e28);
+
+                    layoutEditMoney.setVisibility(View.GONE);
+                    linePropertyRelationship.setVisibility(View.GONE);
                 } else {
                     propertyType = TYPE_YES;
                     layouProperty.setBackgroundResource(R.drawable.bg_no_yes);
                     textYes.setTextColor(mContext.getResources().getColor(R.color.write));
                     textNo.setTextColor(0xffcb1e28);
+
+                    layoutEditMoney.setVisibility(View.VISIBLE);
+                    linePropertyRelationship.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -185,22 +193,33 @@ public class LitigationCalculatorActivity extends BaseTalkLawActivity {
                     Toast.makeText(mContext, "请选择案件类型", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(editMoney.getText())) {
+                if (propertyType==TYPE_YES&&TextUtils.isEmpty(editMoney.getText())) {
                     Toast.makeText(mContext, "请输入金额", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (caseTypeItemModel != null) {
                     textResultTitle.setVisibility(View.VISIBLE);
                     textResult.setVisibility(View.VISIBLE);
-                    int count = litigationUtil.getCost(caseTypeItemModel.id, Integer.parseInt(editMoney.getText().toString()));
-                    if (calculationType == TYPE_HALVED) {
-                        count = count / 2;
+
+                    boolean isHalved ;
+                    if (calculationType == TYPE_ALL) {
+                        isHalved = false;
+                    } else {
+                        isHalved = true;
                     }
-                    textResult.setText(count + "");
+                    int price;
+                    if(propertyType==TYPE_NO){
+                        price = 0;
+                    }else{
+                        price =  Integer.parseInt(editMoney.getText().toString());
+                    }
+                    textResult.setText(litigationUtil.getCost(caseTypeItemModel.id, price, isHalved));
                     KeyBoardUtil.hideSoftKeyboard(LitigationCalculatorActivity.this);
                 }
 
             }
         });
     }
+
+
 }
