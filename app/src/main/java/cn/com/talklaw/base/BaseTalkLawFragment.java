@@ -10,7 +10,7 @@ import com.jusfoun.baselibrary.base.BaseViewPagerFragment;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
 
 import cn.com.talklaw.R;
-import cn.com.talklaw.ui.dialog.LoadingDialog;
+import com.jusfoun.baselibrary.dialog.LoadingDialog;
 
 /**
  * @author wangcc

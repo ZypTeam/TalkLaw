@@ -54,4 +54,10 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.10'
     compile project(':zxing')
     compile 'com.android.support:design:27.0.2'
+
+    compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
+
+    //Optional: see how to use the utility.
+    compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
+
 }

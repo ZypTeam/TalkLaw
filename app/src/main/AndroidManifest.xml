@@ -101,6 +101,11 @@
         <!--添加地址-->
         <activity android:name=".ui.activity.SelectCountryActivity" />
 
+        <!--积分商城 所有商品页面-->
+        <activity android:name=".ui.activity.AllGoodsActivity" />
+
+
+
         <!--新浪分享-->
         <activity
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"

@@ -20,4 +20,5 @@ public abstract class BaseViewHolder<T extends Serializable> extends RecyclerVie
     }
 
     public abstract void update(T model);
+
 }
