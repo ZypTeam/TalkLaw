@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jusfoun.baselibrary.Util.AppUtil;
 import com.jusfoun.baselibrary.Util.KeyBoardUtil;
 
 import cn.com.talklaw.R;
@@ -65,7 +66,8 @@ public class LitigationCalculatorActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-        caseTypeDialog = new CaseTypeDialog(mContext);
+        String typeJson = AppUtil.getRowJson(mContext, R.raw.casetype);
+        caseTypeDialog = new CaseTypeDialog(mContext,typeJson);
         litigationUtil = new LitigationUtil();
     }
 
@@ -102,7 +104,7 @@ public class LitigationCalculatorActivity extends BaseTalkLawActivity {
         });
         caseTypeDialog.setCallBack(new CaseTypeAdapter.CallBack() {
             @Override
-            public void getCaseTyoe(CaseTypeModel.CaseTypeItemModel model) {
+            public void getCaseType(CaseTypeModel.CaseTypeItemModel model) {
                 caseTypeItemModel = model;
                 if (model.type != 0) {
                     caseTypeDialog.dismiss();
