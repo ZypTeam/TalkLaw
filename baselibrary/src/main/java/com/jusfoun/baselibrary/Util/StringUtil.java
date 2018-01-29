@@ -1,5 +1,7 @@
 package com.jusfoun.baselibrary.Util;
 
+import android.text.TextUtils;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
@@ -75,5 +77,39 @@ public class StringUtil {
             }
         }
         return String.valueOf(c);
+    }
+
+    /*
+     * 字符串是否为空。
+     */
+    public static boolean isEmpty(String str) {
+        String string = str;
+        if (string == null) {
+            return true;
+        }
+        string = string.trim();
+        return TextUtils.isEmpty(string) || str.equalsIgnoreCase("null");
+    }
+
+//	/*
+//	 * 字符串是否为空。
+//	 */
+//	public static boolean isEmptyWithUnknown(String str) {
+//		String string = str;
+//		if (string == null) {
+//			return true;
+//		}
+//		string = string.trim();
+//		return TextUtils.isEmpty(string) || string.equalsIgnoreCase("null") || isUnknownString(string);
+//	}
+
+    /*
+     * 字符串是否相等。
+     */
+    public static boolean equals(String str1, String str2) {
+        if (str1 == null || str2 == null) {
+            return (str1 == str2);
+        }
+        return str2.equals(str1);
     }
 }

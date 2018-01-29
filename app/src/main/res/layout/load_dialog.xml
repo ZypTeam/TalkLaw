@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:padding="10dip" >
 
-    <cn.com.talklaw.ui.widget.MyProgressBar
+    <com.chuxin.law.ui.widget.MyProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="25dip"
         android:layout_height="25dip"

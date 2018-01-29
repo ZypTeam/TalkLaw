@@ -5,7 +5,7 @@
     android:background="@color/color_main_bg"
     android:orientation="vertical">
 
-    <cn.com.talklaw.ui.widget.BackTitleView
+    <com.chuxin.law.ui.widget.BackTitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             android:background="#e8e8e8" />
     </LinearLayout>
 
-    <cn.com.talklaw.ui.widget.xRecyclerView.XRecyclerView
+    <com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

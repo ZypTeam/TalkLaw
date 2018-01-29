@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:background="#fff">
 
-    <cn.com.talklaw.ui.widget.BackTitleView
-        android:id="@+id/title_bar"
+    <com.chuxin.law.ui.widget.BackTitleView
+        android:id="@+id/title_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -243,6 +243,5 @@
         android:layout_marginBottom="49dp"
         android:layout_width="0dp"
         android:layout_height="49dp" />
-
 
 </android.support.constraint.ConstraintLayout>

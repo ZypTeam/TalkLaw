@@ -5,7 +5,7 @@
     android:background="@color/write"
     android:orientation="vertical">
 
-    <cn.com.talklaw.ui.view.SearchTitleBar
+    <com.chuxin.law.ui.view.SearchTitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -14,7 +14,7 @@
         android:layout_height="1px"
         android:background="#e7e7e7" />
 
-    <cn.com.talklaw.ui.view.SearchGuideView
+    <com.chuxin.law.ui.view.SearchGuideView
         android:id="@+id/view_search_guide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

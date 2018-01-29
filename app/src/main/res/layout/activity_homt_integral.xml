@@ -5,7 +5,7 @@
     android:background="@color/color_main_bg"
     android:orientation="vertical">
 
-    <cn.com.talklaw.ui.widget.BackTitleView
+    <com.chuxin.law.ui.widget.BackTitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                 android:background="@color/write"/>
 
 
-            <cn.com.talklaw.ui.view.IntegralListProductView
+            <com.chuxin.law.ui.view.IntegralListProductView
                 android:id="@+id/view_integeral_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

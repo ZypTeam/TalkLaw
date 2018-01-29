@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px"/>
 
-    <cn.com.talklaw.ui.widget.xRecyclerView.XRecyclerView
+    <com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
