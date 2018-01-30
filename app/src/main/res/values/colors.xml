@@ -14,4 +14,13 @@
     <color name="my_textcolor">#333333</color>
 
     <color name="app_red_color">#e61419</color>
+
+
+    <!--wheel-->
+    <color name="orange_wheel">#FF8111</color>
+    <color name="wheel_unselect_text">#c2c1c1</color>
+    <color name="select_text">#333333</color>
+    <color name="wheel_bg">#f2f2f2</color>
+
+
 </resources>
