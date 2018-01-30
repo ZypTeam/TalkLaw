@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.viewholder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,6 +10,7 @@ import com.chuxin.law.model.ProductItemModel;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
+import com.chuxin.law.ui.activity.LawyerDefautActivity;
 import com.chuxin.law.ui.util.ImageLoderUtil;
 
 /**
@@ -42,6 +44,14 @@ public class CarouselViewHolder extends BaseViewHolder<ProductItemModel> {
         textTime.setText(model.createtime);
         textCount.setText(model.comment_num);
         titleText.setText(model.title);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, LawyerDefautActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
 }
