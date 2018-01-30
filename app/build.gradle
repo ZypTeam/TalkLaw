@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     signingConfigs
@@ -59,5 +60,10 @@ dependencies {
 
     //Optional: see how to use the utility.
     compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
-
+    compile project(':easeui')
+    compile project(':redpacketlibrary')
+    // Google firebase cloud messaging
+    compile 'com.google.firebase:firebase-messaging:11.4.0'
+    compile 'com.parse:parse-android:1.13.1'
+    compile 'com.android.support:multidex:1.0.1'
 }

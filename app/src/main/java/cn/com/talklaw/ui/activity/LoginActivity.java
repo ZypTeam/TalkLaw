@@ -2,7 +2,6 @@ package cn.com.talklaw.ui.activity;
 
 import android.content.Intent;
 import android.util.Log;
-import android.util.TimeUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.jusfoun.baselibrary.Util.LogUtil;
-import com.jusfoun.baselibrary.base.BaseActivity;
+import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 import com.umeng.socialize.UMAuthListener;
@@ -21,21 +22,19 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
 
 import cn.com.talklaw.R;
 import cn.com.talklaw.TalkLawApplication;
 import cn.com.talklaw.base.BaseTalkLawActivity;
 import cn.com.talklaw.comment.ApiService;
 import cn.com.talklaw.model.UserInfoModel;
+import cn.com.talklaw.xh.DemoHelper;
 import rx.Observable;
 import rx.Observer;
-import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
-import rx.observers.Subscribers;
 import rx.schedulers.Schedulers;
 
 /**
@@ -62,19 +61,20 @@ public class LoginActivity extends BaseTalkLawActivity {
         public void onStart(SHARE_MEDIA platform) {
             //授权开始的回调
         }
+
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-            LogUtil.e("auth","onComplete=="+data.toString());
+            LogUtil.e("auth", "onComplete==" + data.toString());
         }
 
         @Override
         public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-            LogUtil.e("auth","onError=="+t.getMessage());
+            LogUtil.e("auth", "onError==" + t.getMessage());
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
-            LogUtil.e("auth","onCancel=="+platform);
+            LogUtil.e("auth", "onCancel==" + platform);
         }
     };
 
@@ -85,7 +85,7 @@ public class LoginActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-        mShareAPI=UMShareAPI.get(mContext);
+        mShareAPI = UMShareAPI.get(mContext);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class LoginActivity extends BaseTalkLawActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
+                login1();
             }
         });
 
@@ -149,57 +149,57 @@ public class LoginActivity extends BaseTalkLawActivity {
 
     }
 
-    private void login(){
-        HashMap<String,String> params=new HashMap<>();
-        params.put("phone",number.getText().toString());
-        params.put("code",code.getText().toString());
+    private void login1() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("phone", number.getText().toString());
+        params.put("code", code.getText().toString());
         addNetwork(Api.getInstance().getService(ApiService.class).login(params)
                 , new Action1<UserInfoModel>() {
                     @Override
                     public void call(UserInfoModel userInfoModel) {
-                        if (userInfoModel!=null&&userInfoModel.getCode()==10000){
-                            Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
-                            TalkLawApplication.saveUserInfo(userInfoModel.getData());
-                            goActivity(null,HomeActivity.class);
-                        }else {
-                            Toast.makeText(mContext,userInfoModel.getMsg(),Toast.LENGTH_SHORT).show();
+                        Log.e("tag", "loginlogin1");
+                        if (userInfoModel != null && userInfoModel.getCode() == 10000) {
+                            loginHx(userInfoModel);
+                        } else {
+                            Toast.makeText(mContext, userInfoModel.getMsg(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        LogUtil.e("login",throwable.getMessage());
-                        Toast.makeText(mContext,"失败",Toast.LENGTH_SHORT).show();
+                        Log.e("tag", "loginlogin2");
+                        LogUtil.e("login", throwable.getMessage());
+                        Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    private void getCode(String number){
-        HashMap<String,String> params=new HashMap<>();
-        params.put("phone",number);
-        params.put("type","1");
+    private void getCode(String number) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("phone", number);
+        params.put("type", "1");
         addNetwork(Api.getInstance().getService(ApiService.class).getAuthCode(params)
                 , new Action1<NoDataModel>() {
                     @Override
                     public void call(NoDataModel noDataModel) {
-                        Log.e("noDataModel",noDataModel.getMsg());
+                        Log.e("noDataModel", noDataModel.getMsg());
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        Log.e("throwable",throwable.getMessage());
+                        Log.e("throwable", throwable.getMessage());
                     }
                 });
     }
 
-    private void startCode(){
+    private void startCode() {
         getCode.setEnabled(false);
-        timer= Observable.interval(1, TimeUnit.SECONDS)
+        timer = Observable.interval(1, TimeUnit.SECONDS)
                 .take(60)
                 .map(new Func1<Long, Long>() {
                     @Override
                     public Long call(Long aLong) {
-                        return 60-aLong;
+                        return 60 - aLong;
                     }
                 })
                 .subscribeOn(Schedulers.io())
@@ -219,15 +219,66 @@ public class LoginActivity extends BaseTalkLawActivity {
 
                     @Override
                     public void onNext(Long aLong) {
-                        getCode.setText(aLong+"");
+                        getCode.setText(aLong + "");
                     }
                 });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (timer.isUnsubscribed()){
+        if (timer!=null&&timer.isUnsubscribed()) {
             timer.unsubscribe();
         }
+    }
+
+
+    /**
+     * 登录环信
+     */
+    private void loginHx(final UserInfoModel userInfoModel) {
+        EMClient.getInstance().login(userInfoModel.getData().getHx_username(), StringUtil.getMD5Str(userInfoModel.getData().getHx_username()), new EMCallBack() {
+
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "login: onSuccess");
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
+                        TalkLawApplication.saveUserInfo(userInfoModel.getData());
+
+
+                        // ** manually load all local groups and conversation
+                        EMClient.getInstance().groupManager().loadAllGroups();
+                        EMClient.getInstance().chatManager().loadAllConversations();
+
+                        // update current user's display name for APNs
+                        boolean updatenick = EMClient.getInstance().pushManager().updatePushNickname(
+                                TalkLawApplication.currentUserNick.trim());
+                        if (!updatenick) {
+                            Log.e("LoginActivity", "update current user nick fail");
+                        }
+                        DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
+                        goActivity(null, HomeActivity.class);
+                        finish();
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+                Log.d(TAG, "login: onProgress");
+            }
+
+            @Override
+            public void onError(final int code, final String message) {
+                Log.d(TAG, "login: onError: " + code);
+            }
+        });
     }
 }
