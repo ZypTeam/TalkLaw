@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/wheel_bg"
+    >
+    <include layout="@layout/wheel_dialog_header"
+        />
+
+    <LinearLayout
+        android:id="@+id/wheel_week_select_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="250dp"
+        android:orientation="horizontal">
+
+        <cn.com.talklaw.ui.view.wheel.WheelView
+            android:id="@+id/wheel_week_wheel"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+    </LinearLayout>
+
+</LinearLayout>
