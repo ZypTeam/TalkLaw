@@ -93,7 +93,7 @@ public class IntegralActivity extends BaseTalkLawActivity {
         //设置轮播时间
         banner.setDelayTime(3000);
         //设置指示器位置（当banner模式中有指示器时）
-        banner.setIndicatorGravity(BannerConfig.CENTER);
+        banner.setIndicatorGravity(BannerConfig.LEFT);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
 
@@ -131,6 +131,7 @@ public class IntegralActivity extends BaseTalkLawActivity {
     }
 
     private void delMsg() {
+        showLoadDialog();
         addNetwork(Api.getInstance().getService(ApiService.class).getIntergralHome()
                 , new Action1<IntegralModel>() {
                     @Override

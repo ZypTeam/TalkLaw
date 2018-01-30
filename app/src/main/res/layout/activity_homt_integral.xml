@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/color_main_bg"
     android:orientation="vertical">
 
@@ -94,7 +95,11 @@
             <com.youth.banner.Banner
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="200dp"
+                app:indicator_width="6dp"
+                app:indicator_drawable_selected="@color/write"
+                app:indicator_height="6dp"
+                app:indicator_margin="9dp"/>
 
 
             <android.support.v7.widget.RecyclerView
@@ -102,7 +107,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
-                android:background="@color/write"/>
+                android:background="@color/write"
+                />
 
 
             <com.chuxin.law.ui.view.IntegralListProductView
@@ -118,7 +124,7 @@
         android:layout_alignParentBottom="true"
         android:background="#e0ff0000"
         android:gravity="center"
-        android:text="获取积分"
+        android:text="点击获取积分"
         android:textColor="@color/write"
         android:textSize="16sp" />
 
