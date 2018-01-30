@@ -1,5 +1,6 @@
 package cn.com.talklaw.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -42,7 +43,9 @@ public class IntegralActivity extends BaseTalkLawActivity {
     protected TextView textCountIntegral;
     protected RecyclerView viewGoodsRecycleview;
     private IntegralGoodsAdapter adapter;
-private LinearLayoutManager linearLayoutManager;
+    private LinearLayoutManager linearLayoutManager;
+
+    private IntegralModel integralModel;
 
     @Override
     public int getLayoutResId() {
@@ -52,7 +55,7 @@ private LinearLayoutManager linearLayoutManager;
     @Override
     public void initDatas() {
         adapter = new IntegralGoodsAdapter(mContext);
-        linearLayoutManager  = new LinearLayoutManager(mContext);
+        linearLayoutManager = new LinearLayoutManager(mContext);
     }
 
     @Override
@@ -119,6 +122,18 @@ private LinearLayoutManager linearLayoutManager;
                 goActivity(null, IntegralDetailActivity.class);
             }
         });
+
+        adapter.setCallBack(new IntegralGoodsAdapter.CallBack() {
+            @Override
+            public void click(int position) {
+                if (integralModel != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("integralModel", integralModel);
+                    goActivity(bundle, AllGoodsActivity.class);
+                }
+
+            }
+        });
         delMsg();
     }
 
@@ -127,6 +142,7 @@ private LinearLayoutManager linearLayoutManager;
                 , new Action1<IntegralModel>() {
                     @Override
                     public void call(IntegralModel model) {
+                        integralModel = model;
                         hideLoadDialog();
                         if (model != null && model.getCode() == NET_SUC_CODE) {
                             if (model.data != null) {
@@ -139,7 +155,7 @@ private LinearLayoutManager linearLayoutManager;
                                     banner.start();
                                 }
 
-                                if(model.data.cat!=null){
+                                if (model.data.cat != null) {
                                     adapter.refreshList(model.data.cat);
                                 }
 //                                textCountIntegral.setText();

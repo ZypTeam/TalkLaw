@@ -79,8 +79,8 @@ public class SearchGuideView extends LinearLayout {
         mHotLayout = (RelativeLayout) findViewById(R.id.search_hot_layout);
         hisTitleText = (TextView) findViewById(R.id.history_title);
         hotTitleText = (TextView) findViewById(R.id.hot_search_title);
-        imgDelete = (ImageView) rootView.findViewById(R.id.img_delete);
-        layoutHis = (RelativeLayout) rootView.findViewById(R.id.layout_his);
+        imgDelete = (ImageView) findViewById(R.id.img_delete);
+        layoutHis = (RelativeLayout) findViewById(R.id.layout_his);
     }
 
     private void initWidgetAction() {

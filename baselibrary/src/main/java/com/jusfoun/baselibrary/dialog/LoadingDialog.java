@@ -1,4 +1,4 @@
-package cn.com.talklaw.ui.dialog;
+package com.jusfoun.baselibrary.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.widget.TextView;
 
-import cn.com.talklaw.R;
-import cn.com.talklaw.ui.widget.MyProgressBar;
+import com.jusfoun.baselibrary.R;
+
 
 /**
  * @author wangcc
@@ -56,7 +56,6 @@ public class LoadingDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("tag", "LoadingDialog");
     }
 
     private void initViews() {
@@ -66,7 +65,6 @@ public class LoadingDialog extends Dialog {
     }
 
     public void setText(String text) {
-        Log.e("tag", "loading_text=" + loading_text);
         loading_text.setText(text);
     }
 
