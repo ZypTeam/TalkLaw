@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.chuxin.law.model.LawyerAudioModel;
+import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.ui.util.LawyerDefViewPagerUtils;
 
 /**
@@ -13,17 +15,20 @@ import com.chuxin.law.ui.util.LawyerDefViewPagerUtils;
  */
 
 public class LawyerDefPagerAdapter extends FragmentPagerAdapter {
-    public LawyerDefPagerAdapter(FragmentManager fm) {
+    private LawyerAudioModel model;
+    public LawyerDefPagerAdapter(FragmentManager fm, LawyerAudioModel model) {
         super(fm);
+        this.model=model;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return LawyerDefViewPagerUtils.getFragment(position);
+        return LawyerDefViewPagerUtils.getFragment(position,model);
     }
 
     @Override
     public int getCount() {
         return LawyerDefViewPagerUtils.COUNT;
     }
+
 }

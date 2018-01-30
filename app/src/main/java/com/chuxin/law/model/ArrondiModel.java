@@ -24,8 +24,8 @@ public class ArrondiModel extends BaseModel {
 
     public class DataBean implements Serializable{
         private List<ProductModel> article;
-        private List<ArrondiProductModel> carouse;
-        private List<ProductModel> catList;
+        private List<ProductModel> carouse;
+//        private List<ArrondiProductModel> catList;
 
         public List<ProductModel> getArticle() {
             return article;
@@ -35,20 +35,20 @@ public class ArrondiModel extends BaseModel {
             this.article = article;
         }
 
-        public List<ArrondiProductModel> getCarouse() {
+        public List<ProductModel> getCarouse() {
             return carouse;
         }
 
-        public void setCarouse(List<ArrondiProductModel> carouse) {
+        public void setCarouse(List<ProductModel> carouse) {
             this.carouse = carouse;
         }
 
-        public List<ProductModel> getCatList() {
+      /*  public List<ArrondiProductModel> getCatList() {
             return catList;
         }
 
-        public void setCatList(List<ProductModel> catList) {
+        public void setCatList(List<ArrondiProductModel> catList) {
             this.catList = catList;
-        }
+        }*/
     }
 }

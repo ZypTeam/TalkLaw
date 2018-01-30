@@ -13,6 +13,7 @@ import com.chuxin.law.ui.activity.AudioDetailsActivity;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
 import com.chuxin.law.ui.activity.LawyerIntroductionActivity;
+import com.chuxin.law.ui.util.UIUtils;
 
 /**
  * @author wangcc
@@ -36,7 +37,7 @@ public class ProductViewHolder extends BaseViewHolder<ProductModel> {
     }
 
     @Override
-    public void update(ProductModel model) {
+    public void update(final ProductModel model) {
         Glide.with(context)
                 .load(model.img)
                 .into(image);
@@ -50,9 +51,7 @@ public class ProductViewHolder extends BaseViewHolder<ProductModel> {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(mContext, LawyerIntroductionActivity.class);
-                mContext.startActivity(intent);
+                UIUtils.goLawyerDef(mContext,model.getId());
             }
         });
     }

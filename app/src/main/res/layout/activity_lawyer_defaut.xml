@@ -9,7 +9,7 @@
         android:id="@+id/title_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#f3f6f6"
+        android:background="@mipmap/bg_lawyer_title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,6 +27,7 @@
     </com.jusfoun.baselibrary.widget.TitleStatusBarView>
 
     <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/transparent"
@@ -298,6 +299,7 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <View
+        android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#f3f6f6"
@@ -313,7 +315,7 @@
         android:paddingLeft="13dp"
         android:paddingRight="13dp"
         android:scaleType="center"
-        android:src="@mipmap/icon_audio_back"
+        android:src="@mipmap/icon_lawyer_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom_line" />
@@ -325,7 +327,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:scaleType="center"
-        android:src="@mipmap/icon_audio_share"
+        android:src="@mipmap/icon_lawyer_share"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom_line" />
@@ -337,7 +339,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:scaleType="center"
-        android:src="@mipmap/icon_audio_like"
+        android:src="@mipmap/icon_lawyer_collection"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/share"
         app:layout_constraintTop_toBottomOf="@+id/bottom_line" />
@@ -349,7 +351,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:scaleType="center"
-        android:src="@mipmap/icon_thumbs_up"
+        android:src="@mipmap/icon_lawyer_like"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/collection"
         app:layout_constraintTop_toBottomOf="@+id/bottom_line" />
@@ -361,14 +363,17 @@
         android:paddingLeft="15dp"
         android:paddingRight="16dp"
         android:scaleType="center"
-        android:src="@mipmap/icon_comment"
+        android:src="@mipmap/icon_lawyer_comment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/thumbs_up"
         app:layout_constraintTop_toBottomOf="@+id/bottom_line" />
 
     <TextView
-        android:layout_width="20dp"
-        android:layout_height="11dp"
+        android:id="@+id/comment_count"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/bg_login_btn"
         android:gravity="center"
         android:text="50"
@@ -377,7 +382,7 @@
         app:layout_constraintRight_toRightOf="@+id/comment"
         app:layout_constraintTop_toTopOf="@+id/comment" />
 
-    <EditText
+    <TextView
         android:id="@+id/edit"
         android:layout_width="0dp"
         android:layout_height="34dp"
@@ -392,4 +397,5 @@
         app:layout_constraintLeft_toRightOf="@+id/back"
         app:layout_constraintRight_toLeftOf="@+id/comment"
         app:layout_constraintTop_toBottomOf="@+id/bottom_line" />
+
 </android.support.constraint.ConstraintLayout>

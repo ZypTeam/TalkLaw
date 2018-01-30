@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="#6b6767"
-        app:layout_constraintTop_toBottomOf="@+id/title_bar" />
+        app:layout_constraintTop_toBottomOf="@+id/title_view" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

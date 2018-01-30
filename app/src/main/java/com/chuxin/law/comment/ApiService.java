@@ -1,7 +1,9 @@
 package com.chuxin.law.comment;
 
 import com.chuxin.law.model.ArrondiModel;
+import com.chuxin.law.model.CommentListModel;
 import com.chuxin.law.model.IntegralModel;
+import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.model.MoveModel;
 import com.chuxin.law.model.MyAttentionListModel;
 import com.chuxin.law.model.MyMsgListModel;
@@ -177,5 +179,25 @@ public interface ApiService {
      */
     @GET("/article/free-index")
     Observable<ArrondiModel> getFreeList(@QueryMap Map<String,String> params);
+
+    /**
+     * 产品详情接口
+     * @param params
+     * @return
+     */
+    @GET("/article/view")
+    Observable<LawyerProductModel> getProductDetails(@QueryMap Map<String,String> params);
+
+    @GET("/article-like/set")
+    Observable<NoDataModel> setLike(@QueryMap Map<String,String> params);
+    @GET("/article-like/del")
+    Observable<NoDataModel> delLike(@QueryMap Map<String,String> params);
+    @GET("/article-collection/set")
+    Observable<NoDataModel> setCollection(@QueryMap Map<String,String> params);
+    @GET("/article-collection/del")
+    Observable<NoDataModel> delCollection(@QueryMap Map<String,String> params);
+
+    Observable<CommentListModel> getCommentList();
+
 
 }

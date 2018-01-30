@@ -2,6 +2,7 @@ package com.chuxin.law.ui.activity;
 
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,12 +10,23 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.base.BaseTalkLawActivity;
+import com.chuxin.law.comment.ApiService;
+import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.model.LawyerAudioModel;
+import com.chuxin.law.model.LawyerProductModel;
+import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.adapter.LawyerDefPagerAdapter;
 import com.chuxin.law.ui.util.UIUtils;
+import com.jusfoun.baselibrary.base.NoDataModel;
+import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 import com.jusfoun.baselibrary.widget.TitleStatusBarView;
 
 import com.chuxin.law.R;
+
+import java.util.HashMap;
+
+import rx.functions.Action1;
 
 /**
  * @author wangcc
@@ -23,6 +35,7 @@ import com.chuxin.law.R;
  */
 
 public class LawyerDefautActivity extends BaseTalkLawActivity {
+    public static final String ID="id";
     protected TextView title;
     protected TitleStatusBarView titleBar;
     protected ImageView iconHead;
@@ -42,11 +55,14 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     protected ImageView collection;
     protected ImageView thumbsUp;
     protected ImageView comment;
-    protected EditText edit;
+    protected TextView edit;
     protected TextView audio;
     protected TextView image;
-    protected TextView video;
+    protected TextView video,commentCount;
     protected ViewPager viewpager;
+
+    private String id;
+    private LawyerAudioModel audioModel;
 
     private LawyerDefPagerAdapter adapter;
     @Override
@@ -56,7 +72,8 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-        adapter=new LawyerDefPagerAdapter(getSupportFragmentManager());
+
+        id=getIntent().getStringExtra(ID);
     }
 
     @Override
@@ -80,10 +97,11 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         collection = (ImageView) findViewById(R.id.collection);
         thumbsUp = (ImageView) findViewById(R.id.thumbs_up);
         comment = (ImageView) findViewById(R.id.comment);
-        edit = (EditText) findViewById(R.id.edit);
+        edit = (TextView) findViewById(R.id.edit);
         audio = (TextView) findViewById(R.id.audio);
         image = (TextView) findViewById(R.id.image);
         video = (TextView) findViewById(R.id.video);
+        commentCount = (TextView) findViewById(R.id.comment_count);
         viewpager = (ViewPager) findViewById(R.id.viewpager);
 
     }
@@ -99,12 +117,6 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                 .crossFade()
                 .into(iconHead);
 
-        yiban.setText(UIUtils.getText("1254","已办"));
-        dengji.setText(UIUtils.getText("专业级","等级"));
-        haoping.setText(UIUtils.getText("100%","好评"));
-        shenglv.setText(UIUtils.getText("100%","胜率"));
-
-        viewpager.setAdapter(adapter);
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -121,7 +133,34 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
 
             }
         });
-        selectPosition(0);
+
+        collection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (audioModel!=null){
+                    if (audioModel.getIs_like()==1){
+                        unlike();
+                    }else {
+                        like();
+                    }
+                }
+            }
+        });
+
+        thumbsUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (audioModel!=null){
+                    if (audioModel.getIs_colle()==1){
+                        uncollection();
+                    }else {
+                        collection();
+                    }
+                }
+            }
+        });
+
+        getData();
     }
 
     private void selectPosition(int position) {
@@ -149,4 +188,150 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                 break;
         }
     }
+
+    private void getData(){
+        showLoadDialog();
+        HashMap<String,String> params=new HashMap<>();
+        params.put("id",id);
+        addNetwork(Api.getInstance().getService(ApiService.class).getProductDetails(params)
+                , new Action1<LawyerProductModel>() {
+                    @Override
+                    public void call(LawyerProductModel lawyerProductModel) {
+                        hideLoadDialog();
+                        if (lawyerProductModel.getCode()== CommentConstant.NET_SUC_CODE){
+                            updateView(lawyerProductModel.getData());
+                        }else {
+                            showToast(lawyerProductModel.getMsg());
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
+    }
+
+    private void updateView(LawyerProductModel.LawyerProductData data){
+        if (data==null){
+            return;
+        }
+        UserModel userModel=data.getLawyer();
+        name.setText(userModel.getName());
+        yiban.setText(UIUtils.getText(userModel.getDonenum(),"已办"));
+        dengji.setText(UIUtils.getText("专业级","等级"));
+        haoping.setText(UIUtils.getText(userModel.getPraise()+"%","好评"));
+        shenglv.setText(UIUtils.getText("100%","胜率"));
+
+        audioModel=data.getArticle();
+        price.setText(audioModel.getPrice());
+        if (audioModel.getIs_colle()==1){
+            collection.setImageResource(R.mipmap.icon_lawyer_collection);
+        }else {
+            collection.setImageResource(R.mipmap.icon_lawyer_collection_un);
+        }
+
+        if (audioModel.getIs_like()==1){
+            thumbsUp.setImageResource(R.mipmap.icon_lawyer_like);
+        }else {
+            thumbsUp.setImageResource(R.mipmap.icon_lawyer_like_un);
+        }
+        buyCount.setText("已购："+audioModel.getBuynum());
+        title.setText(audioModel.getTitle());
+        jifenCount.setText("积分："+audioModel.getPoint());
+        commentCount.setText(audioModel.getCommment_num());
+        adapter=new LawyerDefPagerAdapter(getSupportFragmentManager(),audioModel);
+        viewpager.setAdapter(adapter);
+        selectPosition(0);
+    }
+
+    private void like(){
+        showLoadDialog();
+        HashMap<String,String> params=new HashMap<>();
+        params.put("id",id);
+        addNetwork(Api.getInstance().getService(ApiService.class).setLike(params)
+                , new Action1<NoDataModel>() {
+                    @Override
+                    public void call(NoDataModel noDataModel) {
+                        hideLoadDialog();
+                        if (noDataModel.getCode()==CommentConstant.NET_SUC_CODE){
+                            audioModel.setIs_like(1);
+                            thumbsUp.setImageResource(R.mipmap.icon_lawyer_like);
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
+    }
+
+    private void uncollection(){
+        showLoadDialog();
+        HashMap<String,String> params=new HashMap<>();
+        params.put("id",id);
+        addNetwork(Api.getInstance().getService(ApiService.class).delCollection(params)
+                , new Action1<NoDataModel>() {
+                    @Override
+                    public void call(NoDataModel noDataModel) {
+                        hideLoadDialog();
+                        if (noDataModel.getCode()==CommentConstant.NET_SUC_CODE){
+                            audioModel.setIs_colle(0);
+                            collection.setImageResource(R.mipmap.icon_lawyer_collection_un);
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
+    }
+
+    private void unlike(){
+        showLoadDialog();
+        HashMap<String,String> params=new HashMap<>();
+        params.put("id",id);
+        addNetwork(Api.getInstance().getService(ApiService.class).delLike(params)
+                , new Action1<NoDataModel>() {
+                    @Override
+                    public void call(NoDataModel noDataModel) {
+                        hideLoadDialog();
+                        if (noDataModel.getCode()==CommentConstant.NET_SUC_CODE){
+                            audioModel.setIs_like(0);
+                            thumbsUp.setImageResource(R.mipmap.icon_lawyer_like_un);
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
+    }
+
+    private void collection(){
+        showLoadDialog();
+        HashMap<String,String> params=new HashMap<>();
+        params.put("id",id);
+        addNetwork(Api.getInstance().getService(ApiService.class).setCollection(params)
+                , new Action1<NoDataModel>() {
+                    @Override
+                    public void call(NoDataModel noDataModel) {
+                        hideLoadDialog();
+                        if (noDataModel.getCode()==CommentConstant.NET_SUC_CODE){
+                            audioModel.setIs_colle(1);
+                            collection.setImageResource(R.mipmap.icon_lawyer_collection);
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
+    }
+
+
 }
