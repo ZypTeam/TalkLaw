@@ -25,9 +25,9 @@ import com.hyphenate.chat.EMChatRoom;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.widget.EaseAlertDialog;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.Constant;
 
+import com.chuxin.law.R;
 public class NewChatRoomActivity extends BaseActivity {
 	private EditText chatRoomNameEditText;
 	private EditText introductionEditText;

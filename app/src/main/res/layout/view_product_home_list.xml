@@ -30,7 +30,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"/>
 
-        <cn.com.talklaw.ui.view.LimitedTimeView
+        <com.chuxin.law.ui.view.LimitedTimeView
             android:id="@+id/view_limited"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

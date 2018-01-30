@@ -20,8 +20,8 @@ import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.widget.EaseAlertDialog;
 import com.hyphenate.easeui.widget.EaseAlertDialog.AlertDialogUser;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class ForwardMessageActivity extends PickContactNoCheckboxActivity {
 	private EaseUser selectUser;
 	private String forward_msg_id;

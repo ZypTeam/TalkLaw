@@ -5,7 +5,7 @@
     android:background="#2b2b2e"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <cn.com.talklaw.ui.widget.BackTitleView
+    <com.chuxin.law.ui.widget.BackTitleView
         android:id="@+id/titleView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

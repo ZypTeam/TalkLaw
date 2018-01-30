@@ -25,10 +25,9 @@ import android.widget.Toast;
 
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.widget.EaseAlertDialog;
-
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.DemoHelper;
 
+import com.chuxin.law.R;
 public class AddContactActivity extends BaseActivity{
 	private EditText editText;
 	private RelativeLayout searchedUserLayout;

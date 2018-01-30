@@ -29,7 +29,7 @@ import android.widget.Toast;
 
 import com.hyphenate.chat.EMClient;
 
-import cn.com.talklaw.R;
+import com.chuxin.law.R;
 import cn.com.talklaw.xh.db.InviteMessgeDao;
 import cn.com.talklaw.xh.domain.InviteMessage;
 import cn.com.talklaw.xh.domain.InviteMessage.InviteMessageStatus;

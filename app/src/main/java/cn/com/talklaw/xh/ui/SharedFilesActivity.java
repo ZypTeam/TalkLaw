@@ -38,8 +38,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class SharedFilesActivity extends BaseActivity {
 
     private static final int REQUEST_CODE_SELECT_FILE = 1;

@@ -20,9 +20,9 @@ import android.view.View;
 import com.easemob.redpacketsdk.constant.RPConstant;
 import com.hyphenate.chat.EMMessage;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.Constant;
 
+import com.chuxin.law.R;
 public class ContextMenuActivity extends BaseActivity {
     public static final int RESULT_CODE_COPY = 1;
     public static final int RESULT_CODE_DELETE = 2;

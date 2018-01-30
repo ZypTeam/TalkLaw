@@ -23,7 +23,7 @@ import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.exceptions.EMServiceNotReadyException;
 import com.hyphenate.util.EMLog;
 
-import cn.com.talklaw.R;
+import com.chuxin.law.R;
 import cn.com.talklaw.xh.Constant;
 
 @SuppressLint("Registered")

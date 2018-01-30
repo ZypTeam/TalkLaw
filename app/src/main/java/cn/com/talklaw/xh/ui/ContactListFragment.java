@@ -29,7 +29,6 @@ import android.widget.Toast;
 
 import com.hyphenate.chat.EMClient;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.Constant;
 import cn.com.talklaw.xh.DemoHelper;
 import cn.com.talklaw.xh.conference.ConferenceActivity;
@@ -44,6 +43,7 @@ import com.hyphenate.util.NetUtils;
 import java.util.Hashtable;
 import java.util.Map;
 
+import com.chuxin.law.R;
 /**
  * contact list
  * 

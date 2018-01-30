@@ -15,9 +15,9 @@ import com.hyphenate.chat.EMCheckType;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.DemoHelper;
 
+import com.chuxin.law.R;
 /**
  * Created by zhangsong on 17-11-15.
  */

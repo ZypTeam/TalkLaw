@@ -29,8 +29,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import cn.com.talklaw.BuildConfig;
-import cn.com.talklaw.R;
+
+import com.chuxin.law.BuildConfig;
+import com.chuxin.law.R;
 import cn.com.talklaw.xh.domain.VideoEntity;
 import cn.com.talklaw.xh.util.ImageCache;
 import cn.com.talklaw.xh.util.ImageResizer;

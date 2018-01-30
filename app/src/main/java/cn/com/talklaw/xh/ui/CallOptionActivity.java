@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.hyphenate.chat.EMClient;
 
-import cn.com.talklaw.R;
+import com.chuxin.law.R;
 import cn.com.talklaw.xh.utils.PreferenceManager;
 import com.hyphenate.easeui.widget.EaseSwitchButton;
 

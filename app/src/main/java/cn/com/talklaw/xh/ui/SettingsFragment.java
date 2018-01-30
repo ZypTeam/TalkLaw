@@ -38,7 +38,6 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.Constant;
 import cn.com.talklaw.xh.DemoHelper;
 import cn.com.talklaw.xh.DemoModel;
@@ -49,6 +48,7 @@ import com.hyphenate.util.EMLog;
 import java.io.File;
 import java.util.ArrayList;
 
+import com.chuxin.law.R;
 /**
  * settings screen
  * 

@@ -7,9 +7,9 @@ import android.widget.EditText;
 
 import com.hyphenate.easeui.widget.EaseTitleBar;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.DemoModel;
 
+import com.chuxin.law.R;
 public class SetServersActivity extends BaseActivity {
 
     EditText restEdit;

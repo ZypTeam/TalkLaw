@@ -28,9 +28,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.DemoHelper;
 
+import com.chuxin.law.R;
 public class UserProfileActivity extends BaseActivity implements OnClickListener{
 	
 	private static final int REQUESTCODE_PICK = 1;

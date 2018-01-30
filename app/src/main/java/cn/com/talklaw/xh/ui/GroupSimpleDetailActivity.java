@@ -27,8 +27,8 @@ import com.hyphenate.chat.EMGroup;
 import com.hyphenate.chat.EMGroupInfo;
 import com.hyphenate.exceptions.HyphenateException;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class GroupSimpleDetailActivity extends BaseActivity {
 	private Button btn_add_group;
 	private TextView tv_admin;

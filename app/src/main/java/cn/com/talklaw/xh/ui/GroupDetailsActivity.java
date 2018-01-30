@@ -57,8 +57,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class GroupDetailsActivity extends BaseActivity implements OnClickListener {
 	private static final String TAG = "GroupDetailsActivity";
 	private static final int REQUEST_CODE_ADD_USER = 0;

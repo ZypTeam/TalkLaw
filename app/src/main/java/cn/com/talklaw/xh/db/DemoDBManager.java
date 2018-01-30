@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
+import com.chuxin.law.TalkLawApplication;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.HanziToPinyin;
@@ -15,7 +16,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import cn.com.talklaw.TalkLawApplication;
 import cn.com.talklaw.xh.Constant;
 import cn.com.talklaw.xh.domain.InviteMessage;
 import cn.com.talklaw.xh.domain.RobotUser;

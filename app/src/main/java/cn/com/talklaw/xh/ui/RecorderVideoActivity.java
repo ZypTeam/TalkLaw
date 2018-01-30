@@ -44,7 +44,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import cn.com.talklaw.R;
+import com.chuxin.law.R;
 import cn.com.talklaw.xh.util.Utils;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.EMLog;

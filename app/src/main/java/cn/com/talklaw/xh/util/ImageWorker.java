@@ -33,7 +33,7 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.widget.ImageView;
 
-import cn.com.talklaw.BuildConfig;
+import com.chuxin.law.BuildConfig;
 
 
 /**

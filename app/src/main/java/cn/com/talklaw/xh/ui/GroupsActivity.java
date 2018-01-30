@@ -35,12 +35,12 @@ import android.widget.Toast;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMGroup;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.Constant;
 import cn.com.talklaw.xh.adapter.GroupAdapter;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.exceptions.HyphenateException;
 
+import com.chuxin.law.R;
 import java.util.List;
 
 public class GroupsActivity extends BaseActivity {

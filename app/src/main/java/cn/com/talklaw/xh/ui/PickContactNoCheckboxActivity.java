@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import cn.com.talklaw.R;
+import com.chuxin.law.R;
 import cn.com.talklaw.xh.Constant;
 import cn.com.talklaw.xh.DemoHelper;
 

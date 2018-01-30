@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 
 public class ContactItemView extends LinearLayout{
 

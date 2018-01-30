@@ -14,7 +14,6 @@ import android.widget.ImageView;
 
 import com.jusfoun.baselibrary.R;
 
-
 /**
  * @author wangcc
  * @date 2018/1/17

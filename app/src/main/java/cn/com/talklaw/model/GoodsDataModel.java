@@ -1,5 +1,6 @@
 package cn.com.talklaw.model;
 
+import com.chuxin.law.model.IntegralModel;
 import com.jusfoun.baselibrary.base.BaseModel;
 
 import java.io.Serializable;

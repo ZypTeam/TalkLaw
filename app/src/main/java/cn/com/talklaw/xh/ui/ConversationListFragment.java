@@ -18,7 +18,6 @@ import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMConversation.EMConversationType;
 import com.hyphenate.chat.EMMessage;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.Constant;
 import cn.com.talklaw.xh.db.InviteMessgeDao;
 import com.hyphenate.easeui.model.EaseAtMessageHelper;
@@ -26,6 +25,7 @@ import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.hyphenate.easeui.widget.EaseConversationList.EaseConversationListHelper;
 import com.hyphenate.util.NetUtils;
 
+import com.chuxin.law.R;
 public class ConversationListFragment extends EaseConversationListFragment{
 
     private TextView errorText;

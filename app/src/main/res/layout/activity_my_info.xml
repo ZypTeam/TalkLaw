@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#eeedf3">
     
-    <cn.com.talklaw.ui.widget.BackTitleView
+    <com.chuxin.law.ui.widget.BackTitleView
         android:id="@+id/titleView"
         android:background="#fff"
         app:layout_constraintTop_toTopOf="parent"
@@ -54,12 +54,13 @@
         android:layout_width="match_parent"
         android:layout_height="45dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/user_name"
         app:layout_constraintTop_toTopOf="@+id/name"
         app:layout_constraintBottom_toBottomOf="@+id/name"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
+        android:background="@null"
         android:textSize="16sp"
         android:textColor="#999"
         android:text="姓名"
@@ -90,13 +91,14 @@
         android:layout_width="match_parent"
         android:layout_height="45dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/user_nickname"
         app:layout_constraintTop_toTopOf="@+id/nickname"
         app:layout_constraintBottom_toBottomOf="@+id/nickname"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
         android:textSize="16sp"
+        android:background="@null"
         android:textColor="#999"
         android:text="昵称"
         android:layout_width="wrap_content"
@@ -126,13 +128,14 @@
         android:layout_width="match_parent"
         android:layout_height="45dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/user_sex"
         app:layout_constraintTop_toTopOf="@+id/sex"
         app:layout_constraintBottom_toBottomOf="@+id/sex"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
         android:textSize="16sp"
+        android:background="@null"
         android:textColor="#999"
         android:text="男"
         android:layout_width="wrap_content"
@@ -188,7 +191,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/user_birthday"
         app:layout_constraintTop_toTopOf="@+id/birthday"
         app:layout_constraintBottom_toBottomOf="@+id/birthday"
@@ -196,6 +199,7 @@
         android:layout_marginRight="16dp"
         android:textSize="16sp"
         android:textColor="#999"
+        android:background="@null"
         android:text="2000-01-01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -216,13 +220,14 @@
         android:layout_width="match_parent"
         android:layout_height="45dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/user_number"
         app:layout_constraintTop_toTopOf="@+id/number"
         app:layout_constraintBottom_toBottomOf="@+id/number"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
         android:textSize="16sp"
+        android:background="@null"
         android:textColor="#999"
         android:text="123123123"
         android:layout_width="wrap_content"
@@ -252,8 +257,9 @@
         android:layout_width="match_parent"
         android:layout_height="45dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/user_mail"
+        android:background="@null"
         app:layout_constraintTop_toTopOf="@+id/mail"
         app:layout_constraintBottom_toBottomOf="@+id/mail"
         app:layout_constraintRight_toRightOf="parent"

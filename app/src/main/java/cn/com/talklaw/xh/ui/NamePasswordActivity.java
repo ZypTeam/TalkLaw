@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 
 public class NamePasswordActivity extends BaseActivity {
 

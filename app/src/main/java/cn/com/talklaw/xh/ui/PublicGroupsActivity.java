@@ -40,8 +40,8 @@ import com.hyphenate.exceptions.HyphenateException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class PublicGroupsActivity extends BaseActivity {
 	private ProgressBar pb;
 	private ListView listView;

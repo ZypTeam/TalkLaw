@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.chuxin.law.R;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.adapter.EaseContactAdapter;
 import com.hyphenate.easeui.domain.EaseUser;
@@ -19,7 +20,6 @@ import com.hyphenate.easeui.utils.EaseUserUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.Constant;
 import cn.com.talklaw.xh.DemoHelper;
 import cn.com.talklaw.xh.ui.BaseActivity;

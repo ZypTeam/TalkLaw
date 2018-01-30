@@ -24,8 +24,8 @@ import com.hyphenate.exceptions.HyphenateException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class MultiDeviceActivity extends BaseActivity {
 
     private static final int REQUEST_CODE_USERNAME_PASSWORD = 0;

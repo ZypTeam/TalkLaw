@@ -1,14 +1,14 @@
 package cn.com.talklaw.xh.domain;
 
+import com.chuxin.law.TalkLawApplication;
 import com.hyphenate.easeui.domain.EaseEmojicon;
 import com.hyphenate.easeui.domain.EaseEmojicon.Type;
 import com.hyphenate.easeui.domain.EaseEmojiconGroupEntity;
 
 import java.util.Arrays;
 
-import cn.com.talklaw.R;
-import cn.com.talklaw.TalkLawApplication;
 
+import com.chuxin.law.R;
 public class EmojiconExampleGroupData {
     
     private static int[] icons = new int[]{

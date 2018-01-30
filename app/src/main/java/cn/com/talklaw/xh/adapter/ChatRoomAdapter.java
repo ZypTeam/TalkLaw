@@ -26,11 +26,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chuxin.law.R;
 import com.hyphenate.chat.EMChatRoom;
 
 import java.util.List;
 
-import cn.com.talklaw.R;
 
 public class ChatRoomAdapter extends ArrayAdapter<EMChatRoom> {
 

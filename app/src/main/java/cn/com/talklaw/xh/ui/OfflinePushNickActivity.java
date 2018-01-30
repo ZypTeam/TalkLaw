@@ -14,9 +14,9 @@ import android.widget.Toast;
 
 import com.hyphenate.chat.EMClient;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.DemoHelper;
 
+import com.chuxin.law.R;
 public class OfflinePushNickActivity extends BaseActivity {
 
 	private EditText inputNickName;

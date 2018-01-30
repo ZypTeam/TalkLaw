@@ -22,7 +22,8 @@ import com.hyphenate.exceptions.HyphenateException;
 import java.util.Collections;
 import java.util.List;
 
-import cn.com.talklaw.R;
+
+import com.chuxin.law.R;
 
 /**
  * Blacklist screen

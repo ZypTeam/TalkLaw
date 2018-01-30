@@ -12,7 +12,7 @@ import android.os.Build;
 import android.provider.MediaStore.Video.Thumbnails;
 import android.util.Log;
 
-import cn.com.talklaw.BuildConfig;
+import com.chuxin.law.BuildConfig;
 
 
 public class ImageResizer extends ImageWorker {

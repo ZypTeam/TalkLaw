@@ -30,15 +30,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chuxin.law.TalkLawApplication;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
-import cn.com.talklaw.R;
-import cn.com.talklaw.TalkLawApplication;
 import cn.com.talklaw.xh.DemoHelper;
 import cn.com.talklaw.xh.db.DemoDBManager;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 
+import com.chuxin.law.R;
 /**
  * Login screen
  * 

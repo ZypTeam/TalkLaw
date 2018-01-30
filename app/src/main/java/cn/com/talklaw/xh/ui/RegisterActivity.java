@@ -24,9 +24,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.DemoHelper;
 
+import com.chuxin.law.R;
 /**
  * register screen
  * 

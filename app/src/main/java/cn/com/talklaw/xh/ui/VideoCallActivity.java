@@ -52,9 +52,9 @@ import java.io.File;
 import java.util.Date;
 import java.util.UUID;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.DemoHelper;
 
+import com.chuxin.law.R;
 
 public class VideoCallActivity extends CallActivity implements OnClickListener {
 

@@ -30,8 +30,8 @@ import com.hyphenate.chat.EMGroup;
 
 import java.util.List;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class GroupAdapter extends ArrayAdapter<EMGroup> {
 
 	private LayoutInflater inflater;

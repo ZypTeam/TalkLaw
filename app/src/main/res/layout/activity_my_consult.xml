@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <cn.com.talklaw.ui.widget.BackTitleView
+    <com.chuxin.law.ui.widget.BackTitleView
         android:id="@+id/titleView"
         android:background="#fff"
         app:layout_constraintTop_toTopOf="parent"

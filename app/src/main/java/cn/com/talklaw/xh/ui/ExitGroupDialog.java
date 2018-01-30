@@ -19,8 +19,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 
 public class ExitGroupDialog extends BaseActivity{
 

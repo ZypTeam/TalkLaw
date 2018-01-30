@@ -23,8 +23,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class PickAtUserActivity extends BaseActivity{
     ListView listView;
     View headerView;

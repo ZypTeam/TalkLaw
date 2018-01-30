@@ -31,6 +31,8 @@ import android.support.v4.util.LruCache;
 import android.util.Log;
 
 
+import com.chuxin.law.BuildConfig;
+
 import java.io.File;
 import java.lang.ref.SoftReference;
 import java.security.MessageDigest;
@@ -40,7 +42,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import cn.com.talklaw.BuildConfig;
 
 /**
  * This class memory caching of bitmaps in conjunction with the

@@ -13,8 +13,8 @@ import com.hyphenate.chat.EMPushConfigs;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 import com.hyphenate.exceptions.HyphenateException;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 /**
  * Created by wei on 2016/12/6.
  */

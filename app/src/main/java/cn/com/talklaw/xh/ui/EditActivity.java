@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 
 public class EditActivity extends BaseActivity{
 	private EditText editText;

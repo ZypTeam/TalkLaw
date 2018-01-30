@@ -9,9 +9,9 @@ import android.widget.TextView;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.util.EasyUtils;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.DemoHelper;
 
+import com.chuxin.law.R;
 /**
  * 开屏页
  *

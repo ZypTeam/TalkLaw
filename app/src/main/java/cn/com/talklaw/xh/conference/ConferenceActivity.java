@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chuxin.law.R;
 import com.hyphenate.EMConferenceListener;
 import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMClient;
@@ -27,7 +28,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.Constant;
 import cn.com.talklaw.xh.ui.BaseActivity;
 import cn.com.talklaw.xh.widget.EaseViewGroup;

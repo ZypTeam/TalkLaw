@@ -13,8 +13,8 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.util.EMLog;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 /**
  * Copyright (C) 2016 Hyphenate Inc. All rights reserved.
  * 

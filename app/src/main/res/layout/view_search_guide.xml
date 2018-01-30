@@ -37,7 +37,7 @@
         </RelativeLayout>
 
 
-        <cn.com.talklaw.ui.view.FlowLayout
+        <com.chuxin.law.ui.view.FlowLayout
             android:id="@+id/search_history_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:textColor="#999999"
             android:textSize="12sp" />
 
-        <cn.com.talklaw.ui.view.FlowLayout
+        <com.chuxin.law.ui.view.FlowLayout
             android:id="@+id/hot_search_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

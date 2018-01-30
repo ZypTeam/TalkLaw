@@ -20,8 +20,8 @@ import com.hyphenate.exceptions.HyphenateException;
 import java.util.Collections;
 import java.util.List;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class GroupBlacklistActivity extends BaseActivity {
 	private ListView listView;
 	private ProgressBar progressBar;

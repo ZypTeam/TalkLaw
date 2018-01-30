@@ -12,6 +12,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.chuxin.law.R;
 import com.easemob.redpacket.utils.RedPacketUtil;
 import com.easemob.redpacketsdk.constant.RPConstant;
 import com.hyphenate.EMCallBack;
@@ -60,7 +61,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.conference.ConferenceActivity;
 import cn.com.talklaw.xh.db.DemoDBManager;
 import cn.com.talklaw.xh.db.InviteMessgeDao;

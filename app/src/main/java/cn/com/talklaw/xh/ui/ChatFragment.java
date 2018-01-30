@@ -32,7 +32,7 @@ import com.hyphenate.chat.EMGroup;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
 
-import cn.com.talklaw.R;
+import com.chuxin.law.R;
 import cn.com.talklaw.xh.Constant;
 import cn.com.talklaw.xh.DemoHelper;
 import cn.com.talklaw.xh.domain.EmojiconExampleGroupData;

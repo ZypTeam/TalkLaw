@@ -15,8 +15,8 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMGroup;
 import com.hyphenate.exceptions.HyphenateException;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class PublicGroupsSeachActivity extends BaseActivity{
     private RelativeLayout containerLayout;
     private EditText idET;

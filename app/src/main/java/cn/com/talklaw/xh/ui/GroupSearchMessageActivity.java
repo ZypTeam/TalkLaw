@@ -30,8 +30,8 @@ import com.hyphenate.util.DateUtils;
 import java.util.Date;
 import java.util.List;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class GroupSearchMessageActivity extends BaseActivity implements OnClickListener{
     private ImageButton clearSearch;
     private EditText query;

@@ -36,7 +36,7 @@ import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMContact;
 
-import cn.com.talklaw.R;
+import com.chuxin.law.R;
 import cn.com.talklaw.xh.DemoHelper;
 import cn.com.talklaw.xh.db.UserDao;
 import cn.com.talklaw.xh.domain.RobotUser;

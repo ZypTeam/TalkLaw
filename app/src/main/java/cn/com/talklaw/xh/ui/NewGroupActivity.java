@@ -31,8 +31,8 @@ import com.hyphenate.chat.EMGroupOptions;
 import com.hyphenate.easeui.widget.EaseAlertDialog;
 import com.hyphenate.exceptions.HyphenateException;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class NewGroupActivity extends BaseActivity {
 	private EditText groupNameEditText;
 	private ProgressDialog progressDialog;

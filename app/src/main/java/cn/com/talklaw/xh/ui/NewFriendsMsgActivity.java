@@ -17,7 +17,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.adapter.NewFriendsMsgAdapter;
 import cn.com.talklaw.xh.db.InviteMessgeDao;
 import cn.com.talklaw.xh.domain.InviteMessage;
@@ -25,6 +24,7 @@ import cn.com.talklaw.xh.domain.InviteMessage;
 import java.util.Collections;
 import java.util.List;
 
+import com.chuxin.law.R;
 /**
  * Application and notification
  *

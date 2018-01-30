@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.chuxin.law.R;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.hyphenate.media.EMCallSurfaceView;
 import com.superrtc.sdk.VideoView;
 
-import cn.com.talklaw.R;
 
 /**
  * Created by lzan13 on 2017/8/21.

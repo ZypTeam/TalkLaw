@@ -45,7 +45,6 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCmdMessageBody;
 import com.hyphenate.chat.EMMessage;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.Constant;
 import cn.com.talklaw.xh.DemoHelper;
 import cn.com.talklaw.xh.db.InviteMessgeDao;
@@ -55,6 +54,7 @@ import cn.com.talklaw.xh.runtimepermissions.PermissionsResultAction;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.EMLog;
 
+import com.chuxin.law.R;
 import java.util.List;
 
 @SuppressLint("NewApi")

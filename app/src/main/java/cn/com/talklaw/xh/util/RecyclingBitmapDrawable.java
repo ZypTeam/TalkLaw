@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 
-import cn.com.talklaw.BuildConfig;
+import com.chuxin.law.BuildConfig;
 
 
 public class RecyclingBitmapDrawable extends BitmapDrawable {

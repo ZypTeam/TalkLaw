@@ -51,8 +51,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class ChatRoomDetailsActivity extends BaseActivity implements OnClickListener {
 	private static final String TAG = "ChatRoomDetailsActivity";
 	private static final int REQUEST_CODE_EXIT = 1;

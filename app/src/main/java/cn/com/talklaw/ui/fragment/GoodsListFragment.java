@@ -6,19 +6,19 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.chuxin.law.R;
+import com.chuxin.law.comment.ApiService;
+import com.chuxin.law.model.IntegralModel;
 import com.jusfoun.baselibrary.base.BaseViewPagerFragment;
 import com.jusfoun.baselibrary.net.Api;
 
 import java.util.HashMap;
 
-import cn.com.talklaw.R;
-import cn.com.talklaw.comment.ApiService;
 import cn.com.talklaw.model.GoodsDataModel;
-import cn.com.talklaw.model.IntegralModel;
 import cn.com.talklaw.ui.adapter.GoodsListAdapter;
 import rx.functions.Action1;
 
-import static cn.com.talklaw.comment.CommentConstant.NET_SUC_CODE;
+import static com.chuxin.law.comment.CommentConstant.NET_SUC_CODE;
 
 /**
  * @author zhaoyapeng

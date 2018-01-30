@@ -40,9 +40,9 @@ import com.hyphenate.util.EMLog;
 
 import java.util.UUID;
 
-import cn.com.talklaw.R;
 import cn.com.talklaw.xh.DemoHelper;
 
+import com.chuxin.law.R;
 /**
  * 语音通话页面
  * 

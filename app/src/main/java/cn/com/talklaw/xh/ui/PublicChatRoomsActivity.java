@@ -50,8 +50,8 @@ import com.hyphenate.util.EMLog;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.talklaw.R;
 
+import com.chuxin.law.R;
 public class PublicChatRoomsActivity extends BaseActivity {
 	private ProgressBar pb;
 	private ListView listView;
