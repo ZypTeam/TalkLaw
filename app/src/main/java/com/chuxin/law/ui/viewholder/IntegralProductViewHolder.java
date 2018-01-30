@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.viewholder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
 import com.chuxin.law.model.IntegralModel;
+import com.chuxin.law.ui.activity.IntegralWebViewActivity;
 import com.chuxin.law.ui.util.ImageLoderUtil;
 
 /**
@@ -31,10 +33,19 @@ public class IntegralProductViewHolder extends BaseViewHolder<IntegralModel.Good
     }
 
     @Override
-    public void update(IntegralModel.GoodsItemModel model) {
+    public void update(final IntegralModel.GoodsItemModel model) {
         ImageLoderUtil.loadRoundSmailImage(mContext,imgProduct,model.img);
         textTitle.setText(model.title);
         textCount.setText(model.point+"");
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, IntegralWebViewActivity.class);
+                intent.putExtra("id",model.id);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     private void initView(View rootView) {
@@ -42,6 +53,8 @@ public class IntegralProductViewHolder extends BaseViewHolder<IntegralModel.Good
         textTitle = (TextView) rootView.findViewById(R.id.text_title);
         textCount = (TextView) rootView.findViewById(R.id.text_count);
         btnExchange = (Button) rootView.findViewById(R.id.btn_exchange);
+
+
 
     }
 }

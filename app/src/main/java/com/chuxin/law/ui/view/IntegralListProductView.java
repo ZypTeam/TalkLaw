@@ -2,6 +2,7 @@ package com.chuxin.law.ui.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import java.util.List;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseView;
@@ -33,6 +32,7 @@ public class IntegralListProductView extends BaseView {
     protected TextView textAll;
     protected RelativeLayout layoutTitle;
     private LinearLayoutManager layoutManager;
+    private IntegralModel integralModel;
 
     public IntegralListProductView(Context context) {
         super(context);
@@ -56,7 +56,7 @@ public class IntegralListProductView extends BaseView {
         LayoutInflater.from(mContext).inflate(R.layout.view_product_integral_list, this, true);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         textTitle = (TextView) findViewById(R.id.text_title);
-        textAll = (TextView)findViewById(R.id.text_all);
+        textAll = (TextView) findViewById(R.id.text_all);
     }
 
     @Override
@@ -76,15 +76,22 @@ public class IntegralListProductView extends BaseView {
         textAll.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent  =new Intent(mContext, AllGoodsActivity.class);
-                mContext.startActivity(intent);
+                if (integralModel != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("integralModel", integralModel);
+                    Intent intent = new Intent(mContext, AllGoodsActivity.class);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
+                }
             }
         });
     }
 
-    public void setData(List<IntegralModel.GoodsItemModel> goods) {
+    public void setData(IntegralModel integralModel) {
         textTitle.setText("精选推荐");
-        adapter.refresh(goods);
+        this.integralModel = integralModel;
+        if (integralModel != null && integralModel.data != null && integralModel.data.goods != null)
+            adapter.refresh(integralModel.data.goods);
     }
 
 }
