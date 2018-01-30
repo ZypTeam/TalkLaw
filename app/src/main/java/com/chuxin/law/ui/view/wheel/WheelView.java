@@ -1,4 +1,4 @@
-package cn.com.talklaw.ui.view.wheel;
+package com.chuxin.law.ui.view.wheel;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -17,13 +17,13 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.chuxin.law.R;
+import com.chuxin.law.ui.view.wheel.utils.SizeConvertUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import cn.com.talklaw.R;
-import cn.com.talklaw.ui.view.wheel.utils.SizeConvertUtil;
 
 /**
  * 滚轮选择器
@@ -52,7 +52,7 @@ public class WheelView extends View {
     /**
      * item高度
      */
-    private int itemHeight = 50;
+    private int itemHeight = 40;
 
     /**
      * 选中的位置，这个位置是mDataList的中心位置，一直不变
@@ -191,12 +191,12 @@ public class WheelView extends View {
         mPaint.setStyle(Style.FILL);
         mPaint.setTextAlign(Align.CENTER);
         mPaint.setColor(getResources().getColor(R.color.wheel_unselect_text));
-        mPaint.setTextSize(SizeConvertUtil.spTopx(context, 18));
+        mPaint.setTextSize(SizeConvertUtil.spTopx(context, 16));
 
         selectPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         selectPaint.setStyle(Style.FILL);
         selectPaint.setTextAlign(Align.CENTER);
-        selectPaint.setColor(getResources().getColor(R.color.orange));
+        selectPaint.setColor(getResources().getColor(R.color.orange_wheel));
         selectPaint.setTextSize(SizeConvertUtil.spTopx(context, 22));
 
         centerLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);

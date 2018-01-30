@@ -1,4 +1,4 @@
-package cn.com.talklaw.ui.view.wheel.dialog;
+package com.chuxin.law.ui.view.wheel.dialog;
 
 import android.app.Dialog;
 import android.content.Context;

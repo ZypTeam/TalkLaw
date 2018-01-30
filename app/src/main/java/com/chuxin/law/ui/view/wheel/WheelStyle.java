@@ -1,11 +1,12 @@
-package cn.com.talklaw.ui.view.wheel;
+package com.chuxin.law.ui.view.wheel;
 
 import android.content.Context;
+
+import com.chuxin.law.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.talklaw.R;
 
 /**
  * 生成wheel的各种选项

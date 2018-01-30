@@ -1,4 +1,5 @@
-package cn.com.talklaw.ui.view.wheel.dialog;
+package com.chuxin.law.ui.view.wheel.dialog;
+
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,13 +10,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.chuxin.law.ui.view.wheel.WheelView;
 import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
-
+import com.chuxin.law.R;
 import java.util.List;
-
-import cn.com.talklaw.R;
-import cn.com.talklaw.ui.view.wheel.WheelView;
 
 /**
  * Created by lee on -2018/1/30.

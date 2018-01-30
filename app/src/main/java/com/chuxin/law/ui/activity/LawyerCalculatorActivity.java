@@ -1,8 +1,5 @@
 package com.chuxin.law.ui.activity;
 
-import com.chuxin.law.R;
-import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.ui.widget.BackTitleView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -10,14 +7,14 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.chuxin.law.R;
+import com.chuxin.law.base.BaseTalkLawActivity;
+import com.chuxin.law.ui.view.wheel.dialog.SelectorByArrayDialog;
+import com.chuxin.law.ui.widget.BackTitleView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import cn.com.talklaw.R;
-import cn.com.talklaw.base.BaseTalkLawActivity;
-import cn.com.talklaw.ui.view.wheel.dialog.SelectorByArrayDialog;
-import cn.com.talklaw.ui.widget.BackTitleView;
 
 /**
  * @author zhaoyapeng
