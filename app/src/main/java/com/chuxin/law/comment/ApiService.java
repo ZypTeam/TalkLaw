@@ -1,5 +1,6 @@
 package com.chuxin.law.comment;
 
+import com.chuxin.law.model.ArrondiModel;
 import com.chuxin.law.model.IntegralModel;
 import com.chuxin.law.model.MoveModel;
 import com.chuxin.law.model.MyAttentionListModel;
@@ -169,5 +170,12 @@ public interface ApiService {
      */
     @GET("/article/list")
     Observable<ProductsModel> getProductList(@QueryMap Map<String,String> params);
+
+    /**
+     * 免费专区接口
+     * @return
+     */
+    @GET("/article/free-index")
+    Observable<ArrondiModel> getFreeList(@QueryMap Map<String,String> params);
 
 }

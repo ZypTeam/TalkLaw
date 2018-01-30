@@ -12,6 +12,7 @@ import com.chuxin.law.ui.activity.AudioDetailsActivity;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
+import com.chuxin.law.ui.activity.LawyerIntroductionActivity;
 
 /**
  * @author wangcc
@@ -50,7 +51,7 @@ public class ProductViewHolder extends BaseViewHolder<ProductModel> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(mContext, AudioDetailsActivity.class);
+                intent.setClass(mContext, LawyerIntroductionActivity.class);
                 mContext.startActivity(intent);
             }
         });

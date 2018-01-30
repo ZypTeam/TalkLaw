@@ -42,7 +42,7 @@ public class MyMsgListActivity extends BaseTalkLawActivity {
 
     private MyMsgListAdapter adapter;
 
-    private int page=0;
+    private int page=1;
     private String size= CommentConstant.LIST_PAGE_SIZE;
 
     @Override

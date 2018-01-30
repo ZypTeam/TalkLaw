@@ -7,10 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
+import com.chuxin.law.comment.ApiService;
+import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.model.ArrondiModel;
 import com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.chuxin.law.R;
@@ -22,6 +26,9 @@ import com.chuxin.law.ui.adapter.ArrondiTopAdapter;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.chuxin.law.ui.widget.LoopScrollView;
+import com.jusfoun.baselibrary.net.Api;
+
+import rx.functions.Action1;
 
 /**
  * @author wangcc
@@ -42,7 +49,7 @@ public class ArrondiActivity extends BaseTalkLawActivity {
     private ArrondiProductAdapter productAdapter;
     private int listDy = 0;
     private int disY;
-
+    private int page=0;
     private int type;
 
     @Override
@@ -127,6 +134,31 @@ public class ArrondiActivity extends BaseTalkLawActivity {
         listAdapter.refreshList(list);
 
         initProduct();
+    }
+
+    private void getData(boolean isShow,boolean isRefresh){
+        if (isShow){
+            showLoadDialog();
+        }
+        HashMap<String,String> params=new HashMap<>();
+        params.put("size", CommentConstant.LIST_PAGE_SIZE);
+        params.put("page",(isRefresh?1:page+1)+"");
+        addNetwork(Api.getInstance().getService(ApiService.class).getFreeList(params)
+                , new Action1<ArrondiModel>() {
+                    @Override
+                    public void call(ArrondiModel arrondiModel) {
+                        hideLoadDialog();
+                        list.refreshComplete();
+                        list.loadMoreComplete();
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                        list.refreshComplete();
+                        list.loadMoreComplete();
+                    }
+                });
     }
 
     private void initProduct() {
