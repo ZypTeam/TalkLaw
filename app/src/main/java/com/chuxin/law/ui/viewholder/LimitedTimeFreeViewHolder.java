@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.viewholder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,6 +12,7 @@ import com.chuxin.law.model.ProductItemModel;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
+import com.chuxin.law.ui.activity.LawyerDefautActivity;
 import com.chuxin.law.ui.util.ImageLoderUtil;
 
 /**
@@ -56,5 +58,12 @@ public class LimitedTimeFreeViewHolder extends BaseViewHolder<ProductItemModel> 
         layoutTitle = (LinearLayout) rootView.findViewById(R.id.layout_title);
         imgIconCount = (ImageView) rootView.findViewById(R.id.img_icon_count);
         textCount = (TextView) rootView.findViewById(R.id.text_count);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, LawyerDefautActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
     }
 }
