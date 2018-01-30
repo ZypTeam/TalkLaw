@@ -1,5 +1,8 @@
 package com.chuxin.law;
 
+import android.content.Context;
+import android.support.multidex.MultiDex;
+
 import com.google.gson.Gson;
 import com.jusfoun.baselibrary.BaseApplication;
 import com.jusfoun.baselibrary.Util.LogUtil;
@@ -9,6 +12,7 @@ import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
+import cn.com.talklaw.xh.DemoHelper;
 
 import com.chuxin.law.comment.DaoInstance;
 import com.chuxin.law.comment.SharePrefenceConstant;
@@ -28,16 +32,30 @@ public class TalkLawApplication extends BaseApplication{
         PlatformConfig.setSinaWeibo("1701976759", "c9f6b6d5015055964780e0c56c3e59a5","http:www.sharesdk.cn");
         PlatformConfig.setQQZone("1106542171", "iLjGMwSEXLgyWWKG");
     }
-
+    private static TalkLawApplication instance;
+    /**
+     * nickname for current user, the nickname instead of ID be shown when user receive notification from APNs
+     */
+    public static String currentUserNick = "";
     @Override
     public void onCreate() {
+        MultiDex.install(this);
         super.onCreate();
+        instance = this;
+
         Api.getInstance().register(this,getString(R.string.url));
         DaoInstance.getInstance().regester(this);
         SharePrefenceUtils.getInstance().register(this,getPackageName());
         LogUtil.setDebugable(BuildConfig.LOG_MODE);
         UMShareAPI.get(this);
+
+        DemoHelper.getInstance().init(this);
         Config.DEBUG=true;
+    }
+
+    public static TalkLawApplication getInstance() {
+        return instance;
+
     }
 
     public static void exitUser(){
@@ -66,5 +84,10 @@ public class TalkLawApplication extends BaseApplication{
             userId=model.getId();
         }
         return userId;
+    }
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 }
