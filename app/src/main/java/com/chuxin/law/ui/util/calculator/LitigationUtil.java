@@ -1,5 +1,7 @@
 package com.chuxin.law.ui.util.calculator;
 
+import android.util.Log;
+
 /**
  * @author zhaoyapeng
  * @version create time:18/1/2616:46
@@ -18,9 +20,10 @@ public class LitigationUtil {
                 } else {
                     return (int) getPropertyCase(price) / 2 + "";
                 }
-
             case 2:
                 return getDivorceCases(price,isHalved);
+            case 3:
+                return getPersonality(price,isHalved);
         }
         return "";
     }
@@ -51,6 +54,9 @@ public class LitigationUtil {
         }
     }
 
+    /**
+     *  离婚
+     * */
     private String getDivorceCases(int price,boolean isHalved) {
         if (price <= 20 * UNIT) {
             if(isHalved){
@@ -63,6 +69,35 @@ public class LitigationUtil {
                 return ((int) (price * 0.005 - 700))/2 + "";
             }else {
                 return ((int) (price * 0.005 - 700)) + "";
+            }
+        }
+    }
+
+    /**
+     *  人格权
+     * */
+    private String  getPersonality(int price,boolean isHalved){
+        double p ;
+        if(price<=5*UNIT){
+            if(isHalved){
+                return "50~250";
+            }else{
+                return "100~500";
+            }
+        }else if(price<=10*UNIT){
+           p= (price-5*UNIT)*0.01;
+           if(isHalved){
+               return (p+ 500)/2+"";
+           }else{
+               return (p+ 500)+"";
+           }
+        }else {
+            p= (price-10*UNIT)*0.005;
+
+            if(isHalved){
+                return (p+ 500)/2+"";
+            }else{
+                return (p+ 500)+"";
             }
         }
     }

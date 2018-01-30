@@ -59,6 +59,17 @@ public class MyAttentionActivity extends BaseTalkLawActivity {
         titleView.setTitle("我的关注");
 
         attentionList.setAdapter(adapter);
+        attentionList.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                getFollowList(false,true);
+            }
+
+            @Override
+            public void onLoadMore() {
+                getFollowList(false,false);
+            }
+        });
 
         getFollowList(true,true);
         adapter.setCallback(new AdapterDelCallback() {

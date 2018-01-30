@@ -1,16 +1,18 @@
 package com.chuxin.law.comment;
 
+import com.chuxin.law.model.IntegralModel;
 import com.chuxin.law.model.MoveModel;
 import com.chuxin.law.model.MyAttentionListModel;
+import com.chuxin.law.model.MyMsgListModel;
+import com.chuxin.law.model.ProductListModel;
+import com.chuxin.law.model.ProductsModel;
+import com.chuxin.law.model.StatementListModel;
+import com.chuxin.law.model.UserInfoModel;
 import com.jusfoun.baselibrary.base.NoDataModel;
 
 import java.util.Map;
 
-import com.chuxin.law.model.IntegralModel;
-import com.chuxin.law.model.MyMsgListModel;
-import com.chuxin.law.model.ProductListModel;
-import com.chuxin.law.model.StatementListModel;
-import com.chuxin.law.model.UserInfoModel;
+import cn.com.talklaw.model.GoodsDataModel;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -140,8 +142,6 @@ public interface ApiService {
     Observable<StatementListModel> getHomeShuoFa();
     /**
      * 看法首页
-     * @param url
-     * @param params
      * @return
      */
     @GET("/article/index")
@@ -150,10 +150,24 @@ public interface ApiService {
 
     /**
      * 积分首页接口
-     * @param url
-     * @param params
      * @return
      */
     @GET("/goods/index")
     Observable<IntegralModel> getIntergralHome();
+
+    /**
+     * 积分首页接口
+     * @return
+     */
+    @GET("/goods/list")
+    Observable<GoodsDataModel> getAllGoods(@QueryMap Map<String,String> params);
+
+    /**
+     * 产品列表接口
+     * @param params
+     * @return
+     */
+    @GET("/article/list")
+    Observable<ProductsModel> getProductList(@QueryMap Map<String,String> params);
+
 }

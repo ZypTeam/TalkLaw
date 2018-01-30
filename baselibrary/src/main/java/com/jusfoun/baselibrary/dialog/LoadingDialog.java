@@ -1,4 +1,4 @@
-package com.chuxin.law.ui.dialog;
+package com.jusfoun.baselibrary.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -10,8 +10,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.widget.TextView;
 
-import com.chuxin.law.R;
-import com.jusfoun.baselibrary.dialog.MyProgressBar;
+import com.jusfoun.baselibrary.R;
 
 /**
  * @author wangcc

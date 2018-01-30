@@ -1,16 +1,16 @@
 package com.jusfoun.baselibrary.base;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.jusfoun.baselibrary.R;
+import com.jusfoun.baselibrary.dialog.LoadingDialog;
 
 import rx.functions.Action1;
 
@@ -23,6 +23,7 @@ public abstract class BaseFragment extends Fragment {
     protected Context mContext;
     protected RxManage rxManage;
     private View rootView;
+    private LoadingDialog loadingDialog;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView=inflater.inflate(getLayoutResId(),container,false);
+        initDialog();
         initView(rootView);
         initAction();
         return rootView;
@@ -90,6 +92,26 @@ public abstract class BaseFragment extends Fragment {
     public abstract void initDatas();
     public abstract void initView(View rootView);
     public abstract void initAction();
+    protected void showLoadDialog(){
+        if(mContext == null){
+            return;
+        }
+        if (loadingDialog != null && !loadingDialog.isShowing()) {
+            loadingDialog.show();
+        }
+    }
 
+    protected void hideLoadDialog(){
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.cancel();
+        }
+    }
 
+    private void initDialog(){
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(mContext, R.style.my_dialog);
+            loadingDialog.setCancelable(true);
+            loadingDialog.setCanceledOnTouchOutside(false);
+        }
+    }
 }

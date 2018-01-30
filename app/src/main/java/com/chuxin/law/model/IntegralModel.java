@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class IntegralModel extends BaseModel implements Serializable {
     public IntegralData data;
-    public class IntegralData {
+    public class IntegralData extends BaseModel implements Serializable{
         public List<GoodsItemModel> goods;
         public List<CarouseModel> carouse;
         public List<CatItemModel> cat;

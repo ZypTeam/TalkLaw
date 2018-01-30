@@ -38,8 +38,6 @@ public class IntegralGoodsAdapter extends BaseAdapter<IntegralModel.CatItemModel
     }
 
 
-
-
     public class IntegralGoodsViewHolder extends BaseViewHolder<IntegralModel.CatItemModel> {
         private Context context;
 
@@ -51,13 +49,33 @@ public class IntegralGoodsAdapter extends BaseAdapter<IntegralModel.CatItemModel
 
         @Override
         public void update(IntegralModel.CatItemModel model) {
-            ImageLoderUtil.loadRoundSmailImage(mContext,imgItemGoods,model.img);
+            ImageLoderUtil.loadRoundSmailImage(mContext, imgItemGoods, model.img);
             textTitle.setText(model.name);
+
+            imgItemGoods.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(callBack!=null){
+                        callBack.click(0);
+                    }
+                }
+            });
         }
 
         private void initView(View rootView) {
             imgItemGoods = (ImageView) rootView.findViewById(R.id.img_item_goods);
             textTitle = (TextView) rootView.findViewById(R.id.text_title);
+
         }
+    }
+
+    public interface CallBack {
+        void click(int position);
+    }
+
+    public CallBack callBack;
+
+    public void setCallBack(CallBack callBack) {
+        this.callBack = callBack;
     }
 }

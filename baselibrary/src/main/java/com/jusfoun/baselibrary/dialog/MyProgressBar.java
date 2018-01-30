@@ -1,4 +1,4 @@
-package com.chuxin.law.ui.widget;
+package com.jusfoun.baselibrary.dialog;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -12,7 +12,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
-import com.chuxin.law.R;
+import com.jusfoun.baselibrary.R;
 
 /**
  * @author wangcc
