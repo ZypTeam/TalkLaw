@@ -1,5 +1,6 @@
 package com.chuxin.law.comment;
 
+import com.chuxin.law.model.ArrondiModel;
 import com.chuxin.law.model.IntegralModel;
 import com.chuxin.law.model.IntegralProductDetailModel;
 import com.chuxin.law.model.MoveModel;
@@ -178,5 +179,13 @@ public interface ApiService {
      */
     @GET("/goods/view")
     Observable<IntegralProductDetailModel> getInteralProductDetail(@QueryMap Map<String,String> params);
+
+
+    /**
+     * 免费专区接口
+     * @return
+     */
+    @GET("/article/free-index")
+    Observable<ArrondiModel> getFreeList(@QueryMap Map<String,String> params);
 
 }

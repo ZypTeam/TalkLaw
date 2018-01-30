@@ -5,6 +5,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 import com.jusfoun.baselibrary.widget.GlideRoundTransform;
 
 /**
@@ -33,6 +34,16 @@ public class ImageLoderUtil {
         Glide.with(mContext)
                 .load(url)
                 .transform(new CenterCrop(mContext),new GlideRoundTransform(mContext,10))
+                .crossFade()
+                .into(imageView);
+    }
+
+    public static void loadCircleImage(Context mContext,ImageView imageView,String url,int errorResId){
+        Glide.with(mContext)
+                .load(url)
+                .transform(new CenterCrop(mContext),new GlideCircleTransform(mContext))
+                .placeholder(errorResId)
+                .error(errorResId)
                 .crossFade()
                 .into(imageView);
     }

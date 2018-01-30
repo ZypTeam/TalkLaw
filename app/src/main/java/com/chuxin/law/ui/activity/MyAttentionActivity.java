@@ -85,7 +85,7 @@ public class MyAttentionActivity extends BaseTalkLawActivity {
         showLoadDialog();
         HashMap<String,String> params=new HashMap<>();
         params.put("touserid",model.getId());
-        addNetwork(Api.getInstance().getService(ApiService.class).addFollow(params)
+        addNetwork(Api.getInstance().getService(ApiService.class).delFollow(params)
                 , new Action1<NoDataModel>() {
                     @Override
                     public void call(NoDataModel noDataModel) {
