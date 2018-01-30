@@ -146,6 +146,9 @@
         <!--聊天页面-->
         <activity android:name="cn.com.talklaw.xh.ui.ChatActivity" />
 
+        <!--积分产品详情-->
+        <activity android:name=".ui.activity.IntegralWebViewActivity" />
+
 
         <!--新浪分享-->
         <activity

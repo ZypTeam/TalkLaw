@@ -4,6 +4,7 @@ import com.chuxin.law.model.ArrondiModel;
 import com.chuxin.law.model.CommentListModel;
 import com.chuxin.law.model.IntegralModel;
 import com.chuxin.law.model.LawyerProductModel;
+import com.chuxin.law.model.IntegralProductDetailModel;
 import com.chuxin.law.model.MoveModel;
 import com.chuxin.law.model.MyAttentionListModel;
 import com.chuxin.law.model.MyMsgListModel;
@@ -172,6 +173,15 @@ public interface ApiService {
      */
     @GET("/article/list")
     Observable<ProductsModel> getProductList(@QueryMap Map<String,String> params);
+
+    /**
+     * 积分产品详情
+     * @param params
+     * @return
+     */
+    @GET("/goods/view")
+    Observable<IntegralProductDetailModel> getInteralProductDetail(@QueryMap Map<String,String> params);
+
 
     /**
      * 免费专区接口

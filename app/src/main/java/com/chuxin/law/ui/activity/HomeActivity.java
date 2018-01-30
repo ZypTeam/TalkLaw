@@ -83,6 +83,9 @@ public class HomeActivity extends BaseTalkLawActivity {
             }
         });
 
+
+        viewPager.setOffscreenPageLimit(3);
+
     }
 
 

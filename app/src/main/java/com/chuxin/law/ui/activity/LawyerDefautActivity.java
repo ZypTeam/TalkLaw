@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -131,6 +132,14 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+        iconHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent();
+                intent.setClass(mContext, LawyerIntroductionActivity.class);
+                mContext.startActivity(intent);
             }
         });
 

@@ -84,15 +84,6 @@ public class IntegralActivity extends BaseTalkLawActivity {
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
         //设置图片集合
-
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
-
-        banner.setImages(list);
         //设置banner动画效果
         banner.setBannerAnimation(Transformer.Default);
         //设置标题集合（当banner样式有显示title时）
@@ -102,7 +93,7 @@ public class IntegralActivity extends BaseTalkLawActivity {
         //设置轮播时间
         banner.setDelayTime(3000);
         //设置指示器位置（当banner模式中有指示器时）
-        banner.setIndicatorGravity(BannerConfig.CENTER);
+        banner.setIndicatorGravity(BannerConfig.LEFT);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
 
@@ -140,6 +131,7 @@ public class IntegralActivity extends BaseTalkLawActivity {
     }
 
     private void delMsg() {
+        showLoadDialog();
         addNetwork(Api.getInstance().getService(ApiService.class).getIntergralHome()
                 , new Action1<IntegralModel>() {
                     @Override
@@ -149,7 +141,7 @@ public class IntegralActivity extends BaseTalkLawActivity {
                         if (model != null && model.getCode() == NET_SUC_CODE) {
                             if (model.data != null) {
                                 if (model.data.goods != null) {
-                                    viewIntegral.setData(model.data.goods);
+                                    viewIntegral.setData(model);
                                 }
 
                                 if (model.data.carouse != null) {
