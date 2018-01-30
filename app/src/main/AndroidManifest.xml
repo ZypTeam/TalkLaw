@@ -1,27 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.com.talklaw">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.chuxin.law">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
     <application
-        android:name=".TalkLawApplication"
+        android:name="com.chuxin.law.TalkLawApplication"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.SplashActivity">
+        <activity android:name="com.chuxin.law.ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,100 +53,121 @@
         </activity>
 
         <!--登录-->
-        <activity android:name=".ui.activity.LoginActivity" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.LoginActivity"
+            android:launchMode="singleTask" />
 
         <!--首页-->
-        <activity android:name=".ui.activity.HomeActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.HomeActivity" />
         <!--音频详情-->
-        <activity android:name=".ui.activity.AudioDetailsActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.AudioDetailsActivity" />
         <!--免费专区-->
-        <activity android:name=".ui.activity.ArrondiActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.ArrondiActivity" />
         <!--注释-->
-        <activity android:name=".ui.activity.ProductiListActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.ProductiListActivity" />
 
         <!-- 积分首页 -->
-        <activity android:name=".ui.activity.IntegralActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.IntegralActivity" />
 
         <!-- 兑换记录 -->
-        <activity android:name=".ui.activity.ExchangeRecordsActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.ExchangeRecordsActivity" />
 
         <!-- 兑换详情 -->
-        <activity android:name=".ui.activity.RedeemDetailsActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.RedeemDetailsActivity" />
 
         <!--个人信息-->
-        <activity android:name=".ui.activity.MyInfoActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.MyInfoActivity" />
 
         <!--消息列表-->
-        <activity android:name=".ui.activity.MyMsgListActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.MyMsgListActivity" />
 
         <!--积分详情-->
-        <activity android:name=".ui.activity.IntegralDetailActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.IntegralDetailActivity" />
 
         <!--已购产品-->
-        <activity android:name=".ui.activity.AlreadyPurchaseActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.AlreadyPurchaseActivity" />
 
         <!--我的关注-->
-        <activity android:name=".ui.activity.MyAttentionActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.MyAttentionActivity" />
 
         <!--设置-->
-        <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.SettingActivity" />
 
         <!--我的咨询-->
-        <activity android:name=".ui.activity.MyConsultActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.MyConsultActivity" />
 
         <!--推荐有礼-->
-        <activity android:name=".ui.activity.RecommendCourtesyActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.RecommendCourtesyActivity" />
 
         <!--日期计算器-->
-        <activity android:name=".ui.activity.DateCalculatorActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.DateCalculatorActivity" />
         <!--律师详情-->
-        <activity android:name=".ui.activity.LawyerDefautActivity"/>
+        <activity android:name="com.chuxin.law.ui.activity.LawyerDefautActivity" />
 
 
         <!--诉讼计算器-->
-        <activity android:name=".ui.activity.LitigationCalculatorActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.LitigationCalculatorActivity" />
 
         <!--律师计算器-->
-        <activity android:name=".ui.activity.LawyerCalculatorActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.LawyerCalculatorActivity" />
 
         <!--个税计算器-->
-        <activity android:name=".ui.activity.AtaxCalculatorActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.AtaxCalculatorActivity" />
 
         <!--搜索页面-->
-        <activity android:name=".ui.activity.SearchActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.SearchActivity" />
 
         <!--添加地址-->
-        <activity android:name=".ui.activity.SelectAreaActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.SelectAreaActivity" />
 
         <!--添加地址-->
-        <activity android:name=".ui.activity.AreaListActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.AreaListActivity" />
 
         <!--添加地址-->
-        <activity android:name=".ui.activity.SelectCountryActivity" />
+        <activity android:name="com.chuxin.law.ui.activity.SelectCountryActivity" />
+
+        <!--律师介绍-->
+        <activity android:name="com.chuxin.law.ui.activity.LawyerIntroductionActivity" />
+
+        <!--购买-->
+        <activity android:name="com.chuxin.law.ui.activity.BuyProductActivity" />
+
+        <!--打赏-->
+        <activity android:name="com.chuxin.law.ui.activity.GratuityActivity" />
+
+        <!--打赏支付-->
+        <activity android:name="com.chuxin.law.ui.activity.GratuityPayActivity" />
+
 
         <!--积分商城 所有商品页面-->
-        <activity android:name=".ui.activity.AllGoodsActivity" />
+        <activity android:name="cn.com.talklaw.ui.activity.AllGoodsActivity" />
 
+
+        <!--聊天页面-->
+        <activity android:name="cn.com.talklaw.xh.ui.ChatActivity" />
+
+        <!--积分产品详情-->
+        <activity android:name=".ui.activity.IntegralWebViewActivity" />
 
 
         <!--新浪分享-->
         <activity
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+        <activity
+            android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
             android:windowSoftInputMode="adjustResize">
 
         </activity>
         <activity
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
             android:launchMode="singleTask"
-            android:name="com.sina.weibo.sdk.share.WbShareTransActivity">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -136,36 +180,166 @@
         <activity
             android:name="com.umeng.qq.tencent.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="tencent100424468" />
             </intent-filter>
         </activity>
 
         <activity
             android:name="com.umeng.qq.tencent.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!--qq分享-->
 
         <!--微信分享-->
         <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:name="com.chuxin.law.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data android:name="UMENG_APPKEY"
+            android:value="5a3a0da5b27b0a4ed200002f"/>
+
+
+        <!-- 开机自启动服务 -->
+        <receiver android:name="cn.com.talklaw.xh.receiver.StartServiceReceiver">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
+
+        <!-- FCM required start -->
+        <service android:name="cn.com.talklaw.xh.fcm.EMFCMMSGService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service android:name="cn.com.talklaw.xh.fcm.EMFCMTokenRefreshService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <!-- FCM required end -->
+
+        <!-- mi push -->
+        <service
+            android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedService" />
+        <service
+            android:name="com.xiaomi.mipush.sdk.MessageHandleService"
+            android:enabled="true" />
+
+        <receiver
+            android:name="com.hyphenate.chat.EMMipushReceiver"
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.ERROR" />
+            </intent-filter>
+        </receiver>
+        <!-- mi push end -->
+
+        <!--华为 HMS Config-->
+        <meta-data
+            android:name="com.huawei.hms.client.appid"
+            android:value="10492024" />
+        <!--华为推送 start-->
+        <receiver android:name="com.hyphenate.chat.EMHWPushReceiver">
+            <intent-filter>
+                <!-- 必须,用于接收 TOKEN -->
+                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+                <!-- 必须，用于接收消息 -->
+                <action android:name="com.huawei.android.push.intent.RECEIVE" />
+                <!-- 可选，用于点击通知栏或通知栏上的按钮后触发 onEvent 回调 -->
+                <action android:name="com.huawei.android.push.intent.CLICK" />
+                <!-- 可选，查看 PUSH 通道是否连接，不查看则不需要 -->
+                <action android:name="com.huawei.intent.action.PUSH_STATE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.huawei.hms.support.api.push.PushEventReceiver">
+            <intent-filter>
+                <!-- 接收通道发来的通知栏消息，兼容老版本 PUSH -->
+                <action android:name="com.huawei.intent.action.PUSH" />
+            </intent-filter>
+        </receiver>
+        <!-- huawei push end -->
+
+        <!--<service-->
+        <!--android:name="com.umeng.update.net.DownloadingService"-->
+        <!--android:process=":DownloadingService" />-->
+
+        <!--<activity-->
+        <!--android:name="com.umeng.update.UpdateDialogActivity"-->
+        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
+
+        <!-- 设置环信应用的appkey -->
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="1119171218115776#chuxinlaw" />
+        <!-- 声明sdk所需的service -->
+        <service
+            android:name="com.hyphenate.chat.EMChatService"
+            android:exported="true"
+            tools:ignore="ExportedService" />
+        <service
+            android:name="com.hyphenate.chat.EMJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <!-- 声明sdk所需的receiver -->
+        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+            <!-- 可选filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 百度地图所需的service -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
 
 
         <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="5a3a0da5b27b0a4ed200002f" >
-        </meta-data>
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="3ecea51f560650b1ed8a4b99808f52e8" />
+
+        <!-- fabric start -->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="6b54bd4edc63eba3ef59d69f8e0a5070bea384e2" />
+        <!-- fabric end -->
+
     </application>
 
 </manifest>

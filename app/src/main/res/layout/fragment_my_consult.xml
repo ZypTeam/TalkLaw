@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <cn.com.talklaw.ui.widget.xRecyclerView.XRecyclerView
+    <com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"

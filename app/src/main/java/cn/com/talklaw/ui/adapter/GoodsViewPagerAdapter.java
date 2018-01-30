@@ -3,13 +3,11 @@ package cn.com.talklaw.ui.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.text.TextUtils;
-import android.util.Log;
 
-import java.util.ArrayList;
+import com.chuxin.law.model.IntegralModel;
+
 import java.util.List;
 
-import cn.com.talklaw.model.IntegralModel;
 import cn.com.talklaw.ui.fragment.GoodsListFragment;
 
 /**

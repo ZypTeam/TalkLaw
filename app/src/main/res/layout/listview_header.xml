@@ -56,7 +56,7 @@
             android:layout_toLeftOf="@id/listview_header_text"
             android:src="@mipmap/ic_pulltorefresh_arrow" />
 
-        <cn.com.talklaw.ui.widget.xRecyclerView.SimpleViewSwitcher
+        <com.chuxin.law.ui.widget.xRecyclerView.SimpleViewSwitcher
             android:id="@+id/listview_header_progressbar"
             android:layout_width="30dip"
             android:layout_height="30dip"

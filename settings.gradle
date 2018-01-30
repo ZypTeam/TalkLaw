@@ -1,1 +1,1 @@
-include ':app', ':baselibrary', ':dblibrary', ':zxing'
+include ':app', ':baselibrary', ':dblibrary', ':zxing', ':easeui', ':redpacketlibrary'

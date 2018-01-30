@@ -3,13 +3,13 @@ package cn.com.talklaw.ui.activity;
 import android.support.v4.view.ViewPager;
 import android.widget.RelativeLayout;
 
+import com.chuxin.law.R;
+import com.chuxin.law.base.BaseTalkLawActivity;
+import com.chuxin.law.model.IntegralModel;
+import com.chuxin.law.ui.widget.BackTitleView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
-import cn.com.talklaw.R;
-import cn.com.talklaw.base.BaseTalkLawActivity;
-import cn.com.talklaw.model.IntegralModel;
 import cn.com.talklaw.ui.adapter.GoodsViewPagerAdapter;
-import cn.com.talklaw.ui.widget.BackTitleView;
 
 /**
  * @author zhaoyapeng

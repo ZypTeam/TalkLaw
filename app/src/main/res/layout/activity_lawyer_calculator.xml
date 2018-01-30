@@ -7,7 +7,7 @@
     >
 
 
-    <cn.com.talklaw.ui.widget.BackTitleView
+    <com.chuxin.law.ui.widget.BackTitleView
         android:id="@+id/back_title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -5,7 +5,7 @@
     android:background="#e8e8e8"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <cn.com.talklaw.ui.widget.BackTitleView
+    <com.chuxin.law.ui.widget.BackTitleView
         android:id="@+id/titleView"
         android:background="#fff"
         app:layout_constraintTop_toTopOf="parent"
@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"/>
     
-    <android.support.v7.widget.RecyclerView
+    <com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView
         android:id="@+id/list"
         android:overScrollMode="never"
         android:layout_marginTop="1px"

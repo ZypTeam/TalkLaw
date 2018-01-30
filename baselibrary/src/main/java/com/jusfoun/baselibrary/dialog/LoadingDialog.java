@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.jusfoun.baselibrary.R;
 
-
 /**
  * @author wangcc
  * @date 2018/1/17
@@ -56,6 +55,7 @@ public class LoadingDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("tag", "LoadingDialog");
     }
 
     private void initViews() {
@@ -65,6 +65,7 @@ public class LoadingDialog extends Dialog {
     }
 
     public void setText(String text) {
+        Log.e("tag", "loading_text=" + loading_text);
         loading_text.setText(text);
     }
 
