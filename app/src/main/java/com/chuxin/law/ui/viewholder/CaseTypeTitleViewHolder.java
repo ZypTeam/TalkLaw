@@ -35,7 +35,7 @@ public class CaseTypeTitleViewHolder extends BaseViewHolder<CaseTypeModel.CaseTy
             @Override
             public void onClick(View v) {
                 if(callBack!=null)
-                callBack.getCaseTyoe(model);
+                callBack.getCaseType(model);
             }
         });
     }

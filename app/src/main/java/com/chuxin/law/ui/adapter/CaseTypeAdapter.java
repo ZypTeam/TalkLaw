@@ -74,7 +74,7 @@ public class CaseTypeAdapter extends RecyclerView.Adapter {
     private CallBack callBack;
 
     public interface CallBack {
-        void getCaseTyoe(CaseTypeModel.CaseTypeItemModel model);
+        void getCaseType(CaseTypeModel.CaseTypeItemModel model);
     }
 
     public void setCallBack(CallBack callBack) {

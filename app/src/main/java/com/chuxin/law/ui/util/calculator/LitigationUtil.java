@@ -1,7 +1,5 @@
 package com.chuxin.law.ui.util.calculator;
 
-import android.util.Log;
-
 /**
  * @author zhaoyapeng
  * @version create time:18/1/2616:46
@@ -15,7 +13,7 @@ public class LitigationUtil {
     public String getCost(int id, int price, boolean isHalved) {
         switch (id) {
             case 1:
-                if (isHalved) {
+                if (!isHalved) {
                     return (int) getPropertyCase(price) + "";
                 } else {
                     return (int) getPropertyCase(price) / 2 + "";
@@ -24,6 +22,22 @@ public class LitigationUtil {
                 return getDivorceCases(price,isHalved);
             case 3:
                 return getPersonality(price,isHalved);
+            case 4:
+                return getIntellectualProperty(price, isHalved);
+            case 5:
+                return getLaborDispute(price, isHalved);
+            case 6:
+                return getJurisdictionNoSetUp(price, isHalved);
+            case 7:
+                return getAdministrative(price, isHalved);
+            case 8:
+                return getOtherAdministrative(price, isHalved);
+            case 9:
+                return getExcuteCost(price, isHalved);
+            case 10:
+                return getPayCost(price, isHalved);
+            case 11:
+                return getServiceByPublication(price, isHalved);
         }
         return "";
     }
@@ -103,4 +117,125 @@ public class LitigationUtil {
     }
 
 
+    /**
+     * 知识产权
+     * @param price
+     * @param isHalved
+     * @return
+     */
+    private String getIntellectualProperty(int price, boolean isHalved){
+        return "";
+    }
+
+    /**
+     * 劳动争议案件
+     * @param price
+     * @param isHalved
+     * @return
+     */
+    private String getLaborDispute(int price, boolean isHalved){
+        if(isHalved){
+            return "5";
+        }
+        return "10";
+    }
+    /**
+     * 管辖权异议不成立的案件
+     * @param price
+     * @param isHalved
+     * @return
+     */
+    private String getJurisdictionNoSetUp(int price, boolean isHalved){
+        if(isHalved){
+            return "50";
+        }
+        return "100";
+    }
+    /**
+     * 行政案件-商标、专利、海事行政案件
+     * @param price
+     * @param isHalved
+     * @return
+     */
+    private String getAdministrative(int price, boolean isHalved){
+        if(isHalved){
+            return "50";
+        }
+        return "100";
+    }
+    /**
+     * 行政案件 - 其他行政案件
+     * @param price
+     * @param isHalved
+     * @return
+     */
+    private String getOtherAdministrative(int price, boolean isHalved){
+        if(isHalved){
+            return "25";
+        }
+        return "50";
+    }
+    /**
+     * 执行费
+     * @param price
+     * @param isHalved
+     * @return
+     */
+    private String getExcuteCost(int price, boolean isHalved){
+        double p = 0;
+        if(price <= 0){
+            if(isHalved){
+                return "25~250";
+            }else {
+                return "50~500";
+            }
+        }else if(price > 0 && price <= UNIT){
+            if(isHalved){
+                return "25";
+            }else {
+                return "50";
+            }
+        }else if(price > UNIT && price <= 50 * UNIT){
+            p = price * 0.015 - 100;
+        }else if(price > 50 * UNIT && price <= 500 * UNIT){
+            p = price * 0.01 + 2400;
+        }else if(price > 500 * UNIT && price <= 1000 * UNIT){
+            p = price * 0.005 + 27400;
+        }else if(price > 1000 * UNIT){
+            p = price * 0.001 + 67400;
+        }
+
+        if(isHalved){
+            return p / 2 + "";
+        }
+        return p + "";
+    }
+
+    /**
+     * 支付令
+     * @param price
+     * @param isHalved
+     * @return
+     */
+    private String getPayCost(int price, boolean isHalved){
+        double p = getPropertyCase(price) * (1/3);
+
+        if(isHalved){
+            return p / 2 + "";
+        }
+        return p + "";
+    }
+
+    /**
+     * 支付令
+     * @param price
+     * @param isHalved
+     * @return
+     */
+    private String getServiceByPublication(int price, boolean isHalved){
+        if(isHalved){
+            return "50";
+        }
+        return "100";
+    }
 }

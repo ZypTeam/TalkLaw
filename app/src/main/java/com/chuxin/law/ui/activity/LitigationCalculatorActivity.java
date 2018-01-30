@@ -16,6 +16,7 @@ import com.chuxin.law.ui.adapter.CaseTypeAdapter;
 import com.chuxin.law.ui.util.calculator.LitigationUtil;
 import com.chuxin.law.ui.view.CaseTypeDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
+import com.jusfoun.baselibrary.Util.AppUtil;
 import com.jusfoun.baselibrary.Util.KeyBoardUtil;
 
 import com.chuxin.law.R;
@@ -65,7 +66,8 @@ public class LitigationCalculatorActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-        caseTypeDialog = new CaseTypeDialog(mContext);
+        String typeJson = AppUtil.getRowJson(mContext, R.raw.casetype);
+        caseTypeDialog = new CaseTypeDialog(mContext,typeJson);
         litigationUtil = new LitigationUtil();
     }
 
@@ -102,7 +104,7 @@ public class LitigationCalculatorActivity extends BaseTalkLawActivity {
         });
         caseTypeDialog.setCallBack(new CaseTypeAdapter.CallBack() {
             @Override
-            public void getCaseTyoe(CaseTypeModel.CaseTypeItemModel model) {
+            public void getCaseType(CaseTypeModel.CaseTypeItemModel model) {
                 caseTypeItemModel = model;
                 if (model.type != 0) {
                     caseTypeDialog.dismiss();
