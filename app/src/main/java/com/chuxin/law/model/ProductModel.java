@@ -1,5 +1,6 @@
 package com.chuxin.law.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.jusfoun.baselibrary.base.BaseModel;
 
 /**
@@ -27,4 +28,105 @@ public class ProductModel extends BaseModel {
     public String comment_num;
     public String like_num;
 
+    private String url;
+    private int sort;
+    private int type;
+    private int state;
+    private int atype;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getLawyer() {
+        return lawyer;
+    }
+
+    public void setLawyer(String lawyer) {
+        this.lawyer = lawyer;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
+    public String getComment_num() {
+        return comment_num;
+    }
+
+    public void setComment_num(String comment_num) {
+        this.comment_num = comment_num;
+    }
+
+    public String getLike_num() {
+        return like_num;
+    }
+
+    public void setLike_num(String like_num) {
+        this.like_num = like_num;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getSort() {
+        return sort;
+    }
+
+    public void setSort(int sort) {
+        this.sort = sort;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public int getAtype() {
+        return atype;
+    }
+
+    public void setAtype(int atype) {
+        this.atype = atype;
+    }
 }

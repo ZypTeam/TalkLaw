@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.chuxin.law.R;
+import com.chuxin.law.model.ProductModel;
+import com.chuxin.law.ui.util.UIUtils;
 
 /**
  * @author wangcc
@@ -21,7 +24,7 @@ import com.chuxin.law.R;
  */
 
 public class ArrondiTopAdapter extends PagerAdapter {
-    private List<String> list=new ArrayList<>();
+    private List<ProductModel> list=new ArrayList<>();
     private LayoutInflater inflater;
     private Context context;
 
@@ -40,14 +43,21 @@ public class ArrondiTopAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         View view=inflater.inflate(R.layout.item_arrondi_top,null);
         ImageView imageView=view.findViewById(R.id.image);
+        String string=list.get(position)==null?"":list.get(position).getImg();
         Glide.with(context)
-                .load(list.get(position))
+                .load(string)
                 .centerCrop()
                 .into(imageView);
         container.addView(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UIUtils.goLawyerDef(context,list.get(position).getId());
+            }
+        });
         return view;
     }
 
@@ -56,7 +66,7 @@ public class ArrondiTopAdapter extends PagerAdapter {
         container.removeView((View) object);
     }
 
-    public void refresh(List<String> list){
+    public void refresh(List<ProductModel> list){
         if (list==null){
             list=new ArrayList<>();
         }

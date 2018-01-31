@@ -35,7 +35,7 @@ public class UserModel implements Serializable {
 
     private String id;
     private int type;
-    private int level;
+    private String level;
     private String phone;
     private String createtime;
     private String userid;
@@ -53,7 +53,10 @@ public class UserModel implements Serializable {
     private String accessToken;
     private String auth_key;
     private String appToken;
+    private String praise;
+    private String win;
 
+    private String donenum;
     public String getId() {
         return id;
     }
@@ -70,11 +73,11 @@ public class UserModel implements Serializable {
         this.type = type;
     }
 
-    public int getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 
@@ -212,5 +215,29 @@ public class UserModel implements Serializable {
 
     public void setAppToken(String appToken) {
         this.appToken = appToken;
+    }
+
+    public String getDonenum() {
+        return donenum;
+    }
+
+    public void setDonenum(String donenum) {
+        this.donenum = donenum;
+    }
+
+    public String getPraise() {
+        return praise;
+    }
+
+    public void setPraise(String praise) {
+        this.praise = praise;
+    }
+
+    public String getWin() {
+        return win;
+    }
+
+    public void setWin(String win) {
+        this.win = win;
     }
 }

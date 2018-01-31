@@ -1,5 +1,7 @@
 package com.chuxin.law.ui.util;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.text.SpannableStringBuilder;
@@ -7,6 +9,11 @@ import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+
+import com.chuxin.law.ui.activity.CommentListActivity;
+import com.chuxin.law.ui.activity.GratuityActivity;
+import com.chuxin.law.ui.activity.LawyerDefautActivity;
+import com.chuxin.law.ui.adapter.CommentListAdapter;
 
 /**
  * @author wangcc
@@ -51,6 +58,27 @@ public class UIUtils {
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#000000")),0,txt1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#999999")),txt1.length(),txt1.length()+txt2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return builder;
+    }
+
+    public static void goLawyerDef(Context context,String id){
+        Intent intent=new Intent(context, LawyerDefautActivity.class);
+        intent.putExtra(LawyerDefautActivity.ID,id);
+        context.startActivity(intent);
+
+    }
+
+    public static void goGratuity(Context context,String id){
+        Intent intent=new Intent(context, GratuityActivity.class);
+        intent.putExtra(LawyerDefautActivity.ID,id);
+        context.startActivity(intent);
+
+    }
+
+    public static void goCommentList(Context context,String id){
+        Intent intent=new Intent(context, CommentListActivity.class);
+        intent.putExtra(CommentListActivity.ID,id);
+        context.startActivity(intent);
+
     }
 
 }

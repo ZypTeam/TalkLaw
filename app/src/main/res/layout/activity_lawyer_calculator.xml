@@ -26,7 +26,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:paddingRight="16dp">
+            android:paddingRight="16dp"
+            android:visibility="gone"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -63,7 +65,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="#e7e7e7" />
+            android:background="#e7e7e7"
+            android:visibility="gone"
+            />
 
         <RelativeLayout
             android:id="@+id/rl_case_type"
@@ -112,6 +116,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/rl_is_InvolveProperty"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:paddingRight="16dp">
@@ -132,11 +137,13 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_yes_or_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_no_yes">
 
                     <TextView
+                        android:id="@+id/tv_no"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -146,6 +153,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tv_yes"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -159,11 +167,13 @@
         </RelativeLayout>
 
         <View
+            android:id="@+id/line_check"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="#e7e7e7" />
 
         <RelativeLayout
+            android:id="@+id/rl_suit_money"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:paddingRight="16dp">
@@ -195,6 +205,7 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/line_edit"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="#e7e7e7" />
@@ -244,5 +255,6 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="20dp"
         android:textColor="#999999"
+        android:lineSpacingMultiplier="1.5"
         android:textSize="16sp" />
 </LinearLayout>

@@ -72,12 +72,25 @@
                 android:textColor="#000"
                 android:text="法盲群众"
                 app:layout_constraintLeft_toRightOf="@+id/icon_head"
-                app:layout_constraintTop_toTopOf="@+id/icon_head"
-                app:layout_constraintBottom_toBottomOf="@+id/icon_head"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="35dp"
                 android:layout_marginLeft="16dp"
                 android:gravity="center_vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp" />
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/auth"
+                android:textColor="@color/app_red_color"
+                android:textSize="14sp"
+                android:text="专家级"
+                app:layout_constraintLeft_toLeftOf="@+id/name"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                android:layout_marginTop="5dp"
+                android:drawablePadding="5dp"
+                android:drawableRight="@mipmap/icon_lawyer_auth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/recommend"
@@ -356,6 +369,7 @@
                 android:layout_height="wrap_content" />
 
             <View
+                android:visibility="gone"
                 android:id="@+id/view_my_address"
                 android:layout_marginTop="16dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -367,6 +381,7 @@
                 android:layout_height="0dp"/>
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/my_address"
                 android:text="我的地址"
                 android:textColor="#999"
@@ -379,6 +394,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/edit_address"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/my_address"
@@ -393,6 +409,7 @@
                 android:layout_height="wrap_content" />
 
             <ImageView
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/my_address"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -404,6 +421,7 @@
                 android:layout_height="85dp" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/my_address_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"

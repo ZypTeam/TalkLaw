@@ -82,6 +82,17 @@ public class ArrondiActivity extends BaseTalkLawActivity {
     public void initAction() {
 
         list.setPullRefreshEnabled(false);
+        list.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                getData(false,true);
+            }
+
+            @Override
+            public void onLoadMore() {
+                getData(true,true);
+            }
+        });
 
         switch (type) {
             case 0:
@@ -103,12 +114,7 @@ public class ArrondiActivity extends BaseTalkLawActivity {
         top.setAdapter(topAdapter)
                 .setDelayTime(3000)
                 .setOffscreenPageLimit(3);
-        top.start();
-        List<String> images = new ArrayList<>();
-        images.add("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2825366391,814429300&fm=27&gp=0.jpg");
-        images.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514130772757&di=3406bedb79ff4c9c5ea4d6b0292df2df&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F2fdda3cc7cd98d10261a710a2a3fb80e7bec903a.jpg");
-        images.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514130772756&di=4a72c3fb61b47a254c5c20404a3011c2&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F9825bc315c6034a8ab2411bac0134954082376c3.jpg");
-        topAdapter.refresh(top.getList(images));
+
         top.setCurrentItem(1, false);
 
         list.setLayoutManager(new LinearLayoutManager(mContext));
@@ -126,14 +132,8 @@ public class ArrondiActivity extends BaseTalkLawActivity {
             }
         });
 
-        List<ProductModel> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ProductModel model = new ProductModel();
-            list.add(model);
-        }
-        listAdapter.refreshList(list);
-
         initProduct();
+        getData(true,true);
     }
 
     private void getData(boolean isShow,boolean isRefresh){
@@ -150,6 +150,25 @@ public class ArrondiActivity extends BaseTalkLawActivity {
                         hideLoadDialog();
                         list.refreshComplete();
                         list.loadMoreComplete();
+                        if (arrondiModel.getCode()==CommentConstant.NET_SUC_CODE){
+                            ArrondiModel.DataBean dataBean=arrondiModel.getData();
+                            if (dataBean!=null){
+                                if (dataBean.getArticle()==null||dataBean.getArticle().size()==0){
+                                    List<ProductModel> list = new ArrayList<>();
+                                    for (int i = 0; i < 10; i++) {
+                                        ProductModel model = new ProductModel();
+                                        model.setId("1");
+                                        list.add(model);
+                                    }
+                                    listAdapter.refreshList(list);
+                                }else {
+                                    listAdapter.refreshList(dataBean.getArticle());
+                                }
+                                topAdapter.refresh(dataBean.getCarouse());
+                                top.start();
+                            }
+                        }
+
                     }
                 }, new Action1<Throwable>() {
                     @Override

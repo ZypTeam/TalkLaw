@@ -37,7 +37,7 @@ public class GratuityActivity extends BaseTalkLawActivity {
 
     @Override
     public void initView() {
-        titleBar = (BackTitleView) findViewById(R.id.title_bar);
+        titleBar = (BackTitleView) findViewById(R.id.title_view);
         iconGratuity = (ImageView) findViewById(R.id.icon_gratuity);
         content = (TextView) findViewById(R.id.content);
         one = (TextView) findViewById(R.id.one);
