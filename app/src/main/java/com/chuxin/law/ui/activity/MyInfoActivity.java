@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.activity;
 
-import android.text.TextUtils;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.chuxin.law.R;
 import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.comment.ApiService;
@@ -19,9 +21,6 @@ import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
-import com.jusfoun.baselibrary.widget.GlideRoundTransform;
-
-import com.chuxin.law.R;
 
 import java.util.HashMap;
 
@@ -34,6 +33,11 @@ import rx.functions.Action1;
  */
 
 public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyListener {
+    private final int NAME_REQUEST_CODE = 101;
+    private final int NICKNAME_REQUEST_CODE = 102;
+    private final int PHONE_REQUEST_CODE = 103;
+    private final int EMAIL_REQUEST_CODE = 104;
+
     protected BackTitleView titleView;
     protected TextView head;
     protected ImageView iconHead;
@@ -79,6 +83,45 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
             @Override
             public void onClick(View view) {
                 goActivity(null,SelectAreaActivity.class);
+            }
+        });
+        userName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(EditUserInfoActivity.UPDATE_TYPE, 0);
+                bundle.putString(EditUserInfoActivity.UPDATE_VALUE, userModel.getName());
+                goActivityForResult(bundle, EditUserInfoActivity.class, NAME_REQUEST_CODE);
+            }
+        });
+
+        userNickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(EditUserInfoActivity.UPDATE_TYPE, 1);
+                bundle.putString(EditUserInfoActivity.UPDATE_VALUE, userModel.getHx_username());
+                goActivityForResult(bundle, EditUserInfoActivity.class, NICKNAME_REQUEST_CODE);
+            }
+        });
+
+        userNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(EditUserInfoActivity.UPDATE_TYPE, 2);
+                bundle.putString(EditUserInfoActivity.UPDATE_VALUE, userModel.getPhone());
+                goActivityForResult(bundle, EditUserInfoActivity.class, PHONE_REQUEST_CODE);
+            }
+        });
+
+        userMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(EditUserInfoActivity.UPDATE_TYPE, 3);
+                bundle.putString(EditUserInfoActivity.UPDATE_VALUE, userModel.getEmail());
+                goActivityForResult(bundle, EditUserInfoActivity.class, EMAIL_REQUEST_CODE);
             }
         });
 
@@ -243,5 +286,19 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            return;
+        }
+
+        if(requestCode == NAME_REQUEST_CODE || requestCode == NICKNAME_REQUEST_CODE
+                || requestCode == PHONE_REQUEST_CODE || requestCode == EMAIL_REQUEST_CODE){
+            userModel = TalkLawApplication.getUserInfo();
+            updateUserInfo();
+        }
     }
 }

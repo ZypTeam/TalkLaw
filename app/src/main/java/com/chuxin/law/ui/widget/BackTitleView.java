@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,7 @@ import com.chuxin.law.R;
 
 public class BackTitleView extends FrameLayout {
     protected ImageView back,right;
-    protected TextView title;
+    protected TextView title,rightText;
     protected TitleStatusBarView titleBar;
     private Context context;
 
@@ -50,6 +51,8 @@ public class BackTitleView extends FrameLayout {
         right = (ImageView) findViewById(R.id.right);
         title = (TextView) findViewById(R.id.title);
         titleBar = (TitleStatusBarView) findViewById(R.id.title_bar);
+        rightText = findViewById(R.id.right_text);
+        rightText.setVisibility(View.GONE);
         right.setVisibility(GONE);
     }
 
@@ -90,4 +93,15 @@ public class BackTitleView extends FrameLayout {
     public void setTitle(int resId){
         this.title.setText(resId);
     }
+
+    public void setRightText(String text, View.OnClickListener listener){
+        if(TextUtils.isEmpty(text)){
+            rightText.setVisibility(View.GONE);
+        } else {
+            rightText.setVisibility(VISIBLE);
+            rightText.setText(text);
+        }
+        rightText.setOnClickListener(listener);
+    }
+
 }

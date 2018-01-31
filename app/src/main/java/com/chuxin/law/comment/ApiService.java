@@ -84,7 +84,8 @@ public interface ApiService {
      * @param params
      * @return
      */
-    @POST("/user/info")
+    @FormUrlEncoded
+    @POST("/edit/info")
     Observable<NoDataModel> changeUserInfo(@FieldMap Map<String,String> params);
 
     /**
