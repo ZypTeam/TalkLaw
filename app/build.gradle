@@ -11,6 +11,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86"
+        }
     }
 
     signingConfigs
@@ -66,4 +69,6 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:11.4.0'
     compile 'com.parse:parse-android:1.13.1'
     compile 'com.android.support:multidex:1.0.1'
+
 }
+
