@@ -28,6 +28,7 @@
 
     <com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView
         android:id="@+id/list"
+        android:background="#fff"
         app:layout_constraintTop_toBottomOf="@+id/title_bar"
         app:layout_constraintBottom_toTopOf="@+id/bottom_line"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -38,7 +39,7 @@
     <View
         android:id="@+id/bottom_line"
         android:layout_width="0dp"
-        android:layout_height="12dp"
+        android:layout_height="1px"
         android:layout_marginBottom="45dp"
         android:background="#d7d6dc"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -101,9 +102,10 @@
             android:gravity="left|top"
             android:background="@drawable/bg_lawyer_def_comment_edit"
             android:padding="8dp"
+            android:focusable="true"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:text="说点什么。。。"
+            android:hint="说点什么。。。"
             android:textColor="#bbb"
             android:textSize="13dp"
             android:layout_marginBottom="16dp"

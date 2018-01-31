@@ -1,9 +1,11 @@
 package com.chuxin.law.ui.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
@@ -14,6 +16,8 @@ import com.chuxin.law.ui.activity.CommentListActivity;
 import com.chuxin.law.ui.activity.GratuityActivity;
 import com.chuxin.law.ui.activity.LawyerDefautActivity;
 import com.chuxin.law.ui.adapter.CommentListAdapter;
+
+import static com.chuxin.law.comment.CommentConstant.COMMENT_RESULT_CODE;
 
 /**
  * @author wangcc
@@ -74,11 +78,16 @@ public class UIUtils {
 
     }
 
-    public static void goCommentList(Context context,String id){
-        Intent intent=new Intent(context, CommentListActivity.class);
+    public static void goCommentList(Object context,String id){
+        Intent intent=new Intent();
         intent.putExtra(CommentListActivity.ID,id);
-        context.startActivity(intent);
-
+        if (context instanceof Activity){
+            intent.setClass((Activity) context,CommentListActivity.class);
+            ((Activity) context).startActivityForResult(intent,COMMENT_RESULT_CODE);
+        }else if (context instanceof Fragment){
+            intent.setClass( ((Fragment) context).getContext(),CommentListActivity.class);
+            ((Fragment) context).startActivityForResult(intent,COMMENT_RESULT_CODE);
+        }
     }
 
 }

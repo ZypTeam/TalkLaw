@@ -44,7 +44,7 @@ public class ProductViewHolder extends BaseViewHolder<ProductModel> {
 
 
         title.setText(model.title);
-        date.setText(model.lawyer+" "+model.createtime);
+        date.setText(model.getLawyer()+" "+model.createtime);
         comment.setText(model.comment_num);
         thumbsUp.setText(model.like_num);
 

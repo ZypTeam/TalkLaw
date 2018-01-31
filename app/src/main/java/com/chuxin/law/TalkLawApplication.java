@@ -3,6 +3,7 @@ package com.chuxin.law;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.google.gson.Gson;
 import com.jusfoun.baselibrary.BaseApplication;
 import com.jusfoun.baselibrary.Util.LogUtil;
@@ -51,6 +52,8 @@ public class TalkLawApplication extends BaseApplication{
 
         DemoHelper.getInstance().init(this);
         Config.DEBUG=true;
+
+        FeedbackAPI.init(this, "24769686");
     }
 
     public static TalkLawApplication getInstance() {

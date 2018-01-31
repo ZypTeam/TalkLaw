@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.comment.ApiService;
+import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
 import com.chuxin.law.ui.util.ImageLoderUtil;
 import com.chuxin.law.ui.widget.BackTitleView;
@@ -28,6 +30,7 @@ import rx.functions.Action1;
  */
 
 public class LawyerIntroductionActivity extends BaseTalkLawActivity {
+    public static final String ID="id";
     protected BackTitleView titleView;
     protected ImageView iconHead;
     protected TextView name;
@@ -40,15 +43,11 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     protected RecyclerView list;
     protected TextView no;
     protected TextView zixun;
-    protected View lineTitle;
-    protected View line;
-    protected View line2;
-    protected TextView jianjie;
-    protected View line3;
-    protected TextView producte;
     protected TextView textBushnegsu;
+    private String id;
 
     private ProductListAdapter adapter;
+    private LawyerIntroModel.LawyerIntroData data;
 
     @Override
     public int getLayoutResId() {
@@ -58,6 +57,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
         adapter = new ProductListAdapter(mContext);
+        id=getIntent().getStringExtra(ID);
     }
 
     @Override
@@ -74,12 +74,6 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         list = (RecyclerView) findViewById(R.id.list);
         no = (TextView) findViewById(R.id.no);
         zixun = (TextView) findViewById(R.id.zixun);
-        lineTitle = (View) findViewById(R.id.line_title);
-        line = (View) findViewById(R.id.line);
-        line2 = (View) findViewById(R.id.line2);
-        jianjie = (TextView) findViewById(R.id.jianjie);
-        line3 = (View) findViewById(R.id.line3);
-        producte = (TextView) findViewById(R.id.producte);
         textBushnegsu = (TextView) findViewById(R.id.text_bushnegsu);
 
     }
@@ -89,7 +83,6 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         titleView.setTitle("律师介绍");
         list.setLayoutManager(new LinearLayoutManager(mContext));
         list.setAdapter(adapter);
-        ImageLoderUtil.loadCircleImage(mContext, iconHead, "http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg", R.mipmap.icon_head_def_cir);
 
         zixun.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +103,52 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                 startActivity(intent);
             }
         });
+
+        attention.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (data!=null){
+                    if (data.getLaw()!=null){
+
+                    }
+                }
+            }
+        });
+
+        getData();
+    }
+
+    private void getData(){
+        showLoadDialog();
+        HashMap<String,String> params=new HashMap<>();
+        params.put("id",id);
+        addNetwork(Api.getInstance().getService(ApiService.class).getLawIntro(params)
+                , new Action1<LawyerIntroModel>() {
+                    @Override
+                    public void call(LawyerIntroModel model) {
+                        hideLoadDialog();
+                        if (model.getCode()== CommentConstant.NET_SUC_CODE){
+                            updateView(model.getData());
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
+    }
+
+    private void updateView(LawyerIntroModel.LawyerIntroData data){
+        if (data==null){
+            return;
+        }
+        this.data=data;
+        if (data.getLaw().getName()!=null) {
+            name.setText(data.getLaw().getName());
+            ImageLoderUtil.loadCircleImage(mContext, iconHead, "http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg", R.mipmap.icon_head_def_cir);
+        }
+        adapter.refreshList(data.getList());
     }
 
     private void addFollow(String touserid) {
