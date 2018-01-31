@@ -96,6 +96,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
             public void onClick(View view) {
                 Intent intent  = new Intent(LawyerIntroductionActivity.this, ChatActivity.class);
                 intent.putExtra("userId", "20");
+                intent.putExtra("userName", "王律师");
                 startActivity(intent);
             }
         });
@@ -105,6 +106,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
             public void onClick(View view) {
                 Intent intent  = new Intent(LawyerIntroductionActivity.this, ChatActivity.class);
                 intent.putExtra("userId", "20");
+                intent.putExtra("userName", "王律师");
                 startActivity(intent);
             }
         });
