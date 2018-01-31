@@ -229,4 +229,12 @@ public interface ApiService {
     @GET("/user/my-points")
     Observable<IntegralDetailDataModel> getIntegralDetail();
 
+    /**
+     * 获取积分详情
+     * @param params
+     * @return
+     */
+    @GET("/user/my-points")
+    Observable<IntegralDetailDataModel> integralExchangeNet(@QueryMap Map<String,String> params);
+
 }
