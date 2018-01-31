@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     android:orientation="vertical"
-    android:paddingBottom="2dip"
-    android:paddingTop="2dip" >
+   >
 
     <View
         android:layout_width="match_parent"
@@ -14,11 +13,11 @@
     <LinearLayout
         android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="#aaffffff"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingTop="4dp" >
+         >
 
         <Button
             android:id="@+id/btn_set_mode_voice"
@@ -26,7 +25,8 @@
             android:layout_height="32dp"
             android:layout_marginLeft="6dp"
             android:background="@drawable/ease_chatting_setmode_voice_btn"
-            android:visibility="visible" />
+            android:visibility="gone"
+            />
 
         <Button
             android:id="@+id/btn_set_mode_keyboard"
@@ -62,25 +62,21 @@
             android:id="@+id/edittext_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
+            android:paddingLeft="8dp"
             android:layout_weight="1"
-            android:gravity="bottom" >
+            android:gravity="center_vertical"
+            >
 
             <EditText
                 android:id="@+id/et_sendmessage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="35dip"
-                android:background="@null"
+                android:layout_height="35dp"
+                android:background="@drawable/bg_edit_chat_input"
                 android:maxLines="3"
-                android:minHeight="40dp"
-                android:paddingBottom="3dp"
-                android:paddingLeft="1dp"
+                android:paddingLeft="10dp"
                 android:paddingRight="1dp"
-                android:paddingTop="3dp"
-                android:textSize="18sp"
+                android:layout_centerVertical="true"
+                android:textSize="16sp"
                 android:imeOptions="actionSend"/>
 
             <RelativeLayout 
@@ -89,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:visibility="gone"
                 >
             <ImageView
                 android:id="@+id/iv_face_normal"
@@ -97,7 +94,7 @@
                 android:layout_margin="1dip"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ease_chatting_biaoqing_btn_normal"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/iv_face_checked"
@@ -106,18 +103,18 @@
                 android:layout_margin="1dip"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ease_chatting_biaoqing_btn_enable"
-                android:visibility="invisible" />
+                android:visibility="gone" />
             
             </RelativeLayout>
         </RelativeLayout>
 
         <Button
             android:id="@+id/btn_more"
-            android:layout_width="32dip"
-            android:layout_height="32dip"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/ease_type_select_btn" />
+            android:layout_width="28dip"
+            android:layout_height="28dip"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/img_chat_more" />
 
         <Button
             android:id="@+id/btn_send"

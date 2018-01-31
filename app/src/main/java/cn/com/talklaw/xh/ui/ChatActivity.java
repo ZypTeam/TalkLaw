@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 
 import com.chuxin.law.R;
 import cn.com.talklaw.xh.runtimepermissions.PermissionsManager;
+
+import com.chuxin.law.ui.widget.BackTitleView;
 import com.hyphenate.easeui.ui.EaseChatFragment;
 import com.hyphenate.util.EasyUtils;
 
@@ -17,6 +19,9 @@ public class ChatActivity extends BaseActivity{
     public static ChatActivity activityInstance;
     private EaseChatFragment chatFragment;
     String toChatUsername;
+    String userName="";
+    private BackTitleView backTitleView;
+
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -24,12 +29,21 @@ public class ChatActivity extends BaseActivity{
         setContentView(R.layout.em_activity_chat);
         activityInstance = this;
         //get user id or group id
-        toChatUsername = getIntent().getExtras().getString("userId");
+        if(getIntent().getExtras()!=null) {
+            toChatUsername = getIntent().getExtras().getString("userId");
+            userName = getIntent().getExtras().getString("userName");
+        }
+
+        backTitleView = (BackTitleView)findViewById(R.id.back_title_view);
+
         //use EaseChatFratFragment
         chatFragment = new ChatFragment();
         //pass parameters to chat fragment
         chatFragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
+
+
+        backTitleView.setTitle(userName);
         
     }
     

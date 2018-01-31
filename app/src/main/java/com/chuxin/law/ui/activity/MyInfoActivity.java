@@ -16,6 +16,7 @@ import com.chuxin.law.comment.ApiService;
 import com.chuxin.law.comment.CommentConstant;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
+import com.chuxin.law.ui.view.wheel.dialog.SelectorDateDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
@@ -48,9 +49,14 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
     protected TextView userBirthday;
     protected TextView userNumber;
     protected TextView userMail;
+    protected TextView birthday;
 
     private HashMap<String,String> editUserMap=new HashMap<>();
     private UserModel userModel;
+
+    private SelectorDateDialog dialog;
+
+    private int mYear = 2018,mMonth = 1,mDay = 29;
 
     @Override
     public int getLayoutResId() {
@@ -59,7 +65,7 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
 
     @Override
     public void initDatas() {
-
+        dialog = new SelectorDateDialog(mContext, R.style.my_dialog);
     }
 
     @Override
@@ -74,6 +80,7 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
         userBirthday = (TextView) findViewById(R.id.user_birthday);
         userNumber = (TextView) findViewById(R.id.user_number);
         userMail = (TextView) findViewById(R.id.user_mail);
+        birthday =  findViewById(R.id.birthday);
 
     }
 
@@ -122,6 +129,30 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
                 bundle.putInt(EditUserInfoActivity.UPDATE_TYPE, 3);
                 bundle.putString(EditUserInfoActivity.UPDATE_VALUE, userModel.getEmail());
                 goActivityForResult(bundle, EditUserInfoActivity.class, EMAIL_REQUEST_CODE);
+            }
+        });
+
+        birthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.show(mYear, mMonth - 1, mDay);
+            }
+        });
+
+        dialog.setOnClickListener(new SelectorDateDialog.OnClickListener() {
+            @Override
+            public boolean onSure(int year, int month, int day, long time) {
+                mYear = year;
+                mMonth = month ;
+                mDay = day;
+
+                userBirthday.setText(mYear + "-" + (mMonth + 1)+ "-" +mDay);
+                return false;
+            }
+
+            @Override
+            public boolean onCancel() {
+                return false;
             }
         });
 

@@ -154,7 +154,12 @@
 
 
         <!--聊天页面-->
-        <activity android:name="cn.com.talklaw.xh.ui.ChatActivity" />
+        <activity
+            android:name="cn.com.talklaw.xh.ui.ChatActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize" />
 
         <!--积分产品详情-->
         <activity android:name=".ui.activity.IntegralWebViewActivity" />
