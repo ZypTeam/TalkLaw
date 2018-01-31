@@ -13,6 +13,8 @@ public abstract class BaseModel implements Serializable {
 
     protected String msg;
 
+    protected String message;
+
     protected String error;
 
     public int getCode() {
@@ -45,5 +47,13 @@ public abstract class BaseModel implements Serializable {
 
     public void setError(String error) {
         this.error = error;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

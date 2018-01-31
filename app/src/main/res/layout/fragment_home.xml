@@ -20,7 +20,11 @@
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                app:banner_default_image="@drawable/img_banner_datil" />
+                app:indicator_width="7dp"
+                app:indicator_drawable_selected="@drawable/indicator_drawable_selected_color"
+                app:indicator_height="7dp"
+                app:banner_default_image="@drawable/img_banner_datil"
+                app:indicator_margin="5dp"/>
 
             <com.chuxin.law.ui.view.HomeTabIconView
                 android:layout_width="wrap_content"

@@ -97,10 +97,10 @@
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                app:indicator_width="6dp"
-                app:indicator_drawable_selected="@color/write"
-                app:indicator_height="6dp"
-                app:indicator_margin="9dp"/>
+                app:indicator_width="7dp"
+                app:indicator_drawable_selected="@drawable/indicator_drawable_selected_color"
+                app:indicator_height="7dp"
+                app:indicator_margin="5dp"/>
 
 
             <android.support.v7.widget.RecyclerView
@@ -120,6 +120,7 @@
     </ScrollView>
 
     <TextView
+        android:id="@+id/text_get_integral"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"

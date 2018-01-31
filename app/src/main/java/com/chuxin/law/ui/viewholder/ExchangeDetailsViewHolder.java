@@ -11,7 +11,7 @@ import com.jusfoun.baselibrary.widget.GlideRoundTransform;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
-import com.chuxin.law.model.ExchangeRecordsItemModel;
+import com.chuxin.law.model.ExchangeRecordsDataModel;
 
 /**
  * @author wangcc
@@ -19,7 +19,7 @@ import com.chuxin.law.model.ExchangeRecordsItemModel;
  * @describe 兑换记录aviewholder
  */
 
-public class ExchangeDetailsViewHolder extends BaseViewHolder<ExchangeRecordsItemModel> {
+public class ExchangeDetailsViewHolder extends BaseViewHolder<ExchangeRecordsDataModel> {
 
     protected TextView textTitle;
     protected TextView textIntegral;
@@ -32,7 +32,7 @@ public class ExchangeDetailsViewHolder extends BaseViewHolder<ExchangeRecordsIte
     }
 
     @Override
-    public void update(ExchangeRecordsItemModel model) {
+    public void update(ExchangeRecordsDataModel model) {
         Glide.with(mContext)
                 .load(R.mipmap.logo)
                 .transform(new CenterCrop(mContext),new GlideRoundTransform(mContext,5))

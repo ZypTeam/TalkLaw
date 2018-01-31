@@ -2,6 +2,8 @@ package com.chuxin.law.comment;
 
 import com.chuxin.law.model.ArrondiModel;
 import com.chuxin.law.model.CommentListModel;
+import com.chuxin.law.model.ExchangeRecordsDataModel;
+import com.chuxin.law.model.IntegralDetailDataModel;
 import com.chuxin.law.model.IntegralModel;
 import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.model.LawyerProductModel;
@@ -85,7 +87,8 @@ public interface ApiService {
      * @param params
      * @return
      */
-    @POST("/user/info")
+    @FormUrlEncoded
+    @POST("/edit/info")
     Observable<NoDataModel> changeUserInfo(@FieldMap Map<String,String> params);
 
     /**
@@ -219,5 +222,30 @@ public interface ApiService {
     Observable<LawyerIntroModel> getLawIntro(@QueryMap Map<String,String> params);
 
 
+    /**
+     * 获取兑换记录
+     * @param params
+     * @return
+     */
+    @GET("/goods/buy-log")
+    Observable<ExchangeRecordsDataModel> getExchangeRecords();
+
+
+
+    /**
+     * 获取积分详情
+     * @param params
+     * @return
+     */
+    @GET("/user/my-points")
+    Observable<IntegralDetailDataModel> getIntegralDetail();
+
+    /**
+     * 获取积分详情
+     * @param params
+     * @return
+     */
+    @GET("/goods/buy")
+    Observable<IntegralDetailDataModel> integralExchangeNet(@QueryMap Map<String,String> params);
 
 }

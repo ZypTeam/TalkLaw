@@ -12,7 +12,8 @@ import com.chuxin.law.ui.activity.RedeemDetailsActivity;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
-import com.chuxin.law.model.ExchangeRecordsItemModel;
+import com.chuxin.law.model.ExchangeRecordsDataModel;
+import com.chuxin.law.ui.util.ImageLoderUtil;
 
 /**
  * @author wangcc
@@ -20,7 +21,7 @@ import com.chuxin.law.model.ExchangeRecordsItemModel;
  * @describe 兑换记录aviewholder
  */
 
-public class ExchangeRecordsViewHolder extends BaseViewHolder<ExchangeRecordsItemModel> {
+public class ExchangeRecordsViewHolder extends BaseViewHolder<ExchangeRecordsDataModel.ExchangeRecordsItemModel> {
     protected TextView textNum;
     protected TextView textState;
     protected RelativeLayout layoutTitle;
@@ -37,16 +38,17 @@ public class ExchangeRecordsViewHolder extends BaseViewHolder<ExchangeRecordsIte
     }
 
     @Override
-    public void update(ExchangeRecordsItemModel model) {
-        Glide.with(mContext)
-                .load(R.mipmap.logo)
-                .into(imgProductIcon);
+    public void update(ExchangeRecordsDataModel.ExchangeRecordsItemModel model) {
+        if(model.goods==null){
+            return;
+        }
+        ImageLoderUtil.loadRoundSmailImage(mContext,imgProductIcon,model.img);
 
-        textNum.setText("订单号：123456789000");
+        textNum.setText("订单号："+model.createtime);
         textState.setText("交易成功");
-        textCount.setText("共6件商品");
-        textIntegral.setText("299积分");
-        desText.setText("律师书籍");
+        textCount.setText("");
+        textIntegral.setText(model.goods.point+"积分");
+        desText.setText(model.goods.title);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

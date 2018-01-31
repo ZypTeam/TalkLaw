@@ -36,6 +36,20 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="15dp" />
+
+            <TextView
+                android:id="@+id/right_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:textColor="#333"
+                android:textSize="19sp"
+
+                />
+
+
         </RelativeLayout>
     </com.jusfoun.baselibrary.widget.TitleStatusBarView>
 </FrameLayout>
