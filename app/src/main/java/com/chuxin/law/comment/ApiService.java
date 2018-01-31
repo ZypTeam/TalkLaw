@@ -234,7 +234,7 @@ public interface ApiService {
      * @param params
      * @return
      */
-    @GET("/user/my-points")
+    @GET("/goods/buy")
     Observable<IntegralDetailDataModel> integralExchangeNet(@QueryMap Map<String,String> params);
 
 }

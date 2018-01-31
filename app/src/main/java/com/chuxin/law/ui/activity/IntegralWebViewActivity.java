@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.comment.ApiService;
+import com.chuxin.law.model.IntegralDetailDataModel;
 import com.chuxin.law.model.IntegralProductDetailModel;
 import com.chuxin.law.ui.view.IntegralDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
@@ -95,6 +96,7 @@ public class IntegralWebViewActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View view) {
                 integralDialog.dismiss();
+                exchange();
             }
         });
         delMsg();
@@ -143,25 +145,22 @@ public class IntegralWebViewActivity extends BaseTalkLawActivity {
                 });
     }
 
-    private void delMsg() {
+    private void exchange() {
         showLoadDialog();
         HashMap<String,String> map = new HashMap<>();
         map.put("id",id);
-        addNetwork(Api.getInstance().getService(ApiService.class).getInteralProductDetail(map)
-                , new Action1<IntegralProductDetailModel>() {
+        map.put("remarks","北京");
+
+        addNetwork(Api.getInstance().getService(ApiService.class).integralExchangeNet(map)
+                , new Action1<IntegralDetailDataModel>() {
                     @Override
-                    public void call(IntegralProductDetailModel model) {
+                    public void call(IntegralDetailDataModel model) {
                         hideLoadDialog();
-                        integralProductDetailModel = model;
-                        if (model != null && model.getCode() == NET_SUC_CODE) {
-                            if (model.data != null) {
-                                webView.loadUrl(model.data.url);
-                                textPrice.setText(model.data.point);
-                                integralDialog.setTtile(model.data.point);
-//                                textCountIntegral.setText();
-                            }
+                        if (model.getCode() == NET_SUC_CODE) {
+                            Toast.makeText(mContext,"兑换成功",Toast.LENGTH_SHORT).show();
+                            finish();
                         }else{
-                            Toast.makeText(mContext,"获取失败",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext,model.getMsg(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Action1<Throwable>() {
