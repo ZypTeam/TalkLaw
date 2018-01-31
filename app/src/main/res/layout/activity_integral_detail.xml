@@ -15,7 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp">
+            android:paddingRight="16dp"
+            android:layout_marginTop="20dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -42,6 +43,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/text_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -58,6 +60,7 @@
             android:paddingRight="25dp">
 
             <TextView
+                android:id="@+id/text_shop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_ingral_text"
@@ -70,6 +73,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/text_zhuanqu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -83,6 +87,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/text_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -105,6 +110,11 @@
             android:scaleType="centerCrop"
             android:src="@drawable/img_bolang"
             />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/write"
+            android:layout_marginTop="-2dp"/>
     </LinearLayout>
 
     <TextView
@@ -114,12 +124,15 @@
         android:paddingLeft="16dp"
         android:text="积分明细"
         android:textColor="#333333"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/img_bofang"
+        android:layout_marginTop="20dp"
         android:background="@color/write" />
 
 
