@@ -1,8 +1,13 @@
 package com.chuxin.law.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,8 +17,10 @@ import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.comment.ApiService;
 import com.chuxin.law.comment.CommentConstant;
 import com.chuxin.law.model.LawyerIntroModel;
+import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
 import com.chuxin.law.ui.util.ImageLoderUtil;
+import com.chuxin.law.ui.util.UIUtils;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
@@ -114,6 +121,13 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         });
 
         getData();
+
+        setNoTxt();
+        yiban.setText(UIUtils.getText("100","已办"));
+        level.setText(UIUtils.getText("专业级","等级"));
+        haoping.setText(UIUtils.getText("100%","好评"));
+        suc.setText(UIUtils.getText("100%","胜率"));
+        ImageLoderUtil.loadCircleImage(mContext, iconHead, "http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg", R.mipmap.icon_head_def_cir);
     }
 
     private void getData(){
@@ -142,8 +156,14 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
             return;
         }
         this.data=data;
-        if (data.getLaw().getName()!=null) {
+        UserModel userModel=data.getLaw();
+        if (userModel!=null) {
+
             name.setText(data.getLaw().getName());
+            yiban.setText(UIUtils.getText(userModel.getDonenum(),"已办"));
+            level.setText(UIUtils.getText("专业级","等级"));
+            haoping.setText(UIUtils.getText(userModel.getPraise()+"%","好评"));
+            suc.setText(UIUtils.getText(userModel.getWin()+"%","胜率"));
             ImageLoderUtil.loadCircleImage(mContext, iconHead, "http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg", R.mipmap.icon_head_def_cir);
         }
         adapter.refreshList(data.getList());
@@ -183,5 +203,14 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                         hideLoadDialog();
                     }
                 });
+    }
+
+    private void setNoTxt(){
+        String txt="沟通咨询：1小时对话";
+        String txt2="¥20.00/次";
+        SpannableStringBuilder builder=new SpannableStringBuilder(txt+txt2);
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")),0,txt.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#cb1e28")),txt.length(),txt.length()+txt2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textBushnegsu.setText(builder);
     }
 }

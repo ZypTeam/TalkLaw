@@ -1,5 +1,7 @@
 package com.chuxin.law.model;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 /**
@@ -17,6 +19,7 @@ public class ShareModel implements Serializable {
     private String eName;
     private String time;
     private String id;
+    private Bitmap bitmap;
     private boolean isWords;
 
     public String getShareTitle() {
@@ -81,5 +84,13 @@ public class ShareModel implements Serializable {
 
     public void setWords(boolean words) {
         isWords = words;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 }

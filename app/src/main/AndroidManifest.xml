@@ -36,6 +36,8 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
+    <uses-sdk tools:overrideLibrary="tv.danmaku.ijk.media.player_x86_64,tv.danmaku.ijk.media.player_arm64" />
+
     <application
         android:name="com.chuxin.law.TalkLawApplication"
         android:allowBackup="false"

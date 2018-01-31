@@ -12,6 +12,8 @@ import com.chuxin.law.base.BaseTalkLawFragment;
 import com.chuxin.law.ui.util.LawyerDefViewPagerUtils;
 import com.chuxin.law.ui.util.UIUtils;
 
+import witmob.com.videolibrary.media.VideoPlayView;
+
 /**
  * @author wangcc
  * @date 2018/1/21
@@ -30,6 +32,7 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
     private String mContent;
     private String url;
     private String imgUrl;
+    private VideoPlayView videoPlayView;
 
     public static LawyerDefVedioFragment getInstance(Bundle args) {
         LawyerDefVedioFragment fragment = new LawyerDefVedioFragment();
@@ -52,6 +55,7 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
         mContent = getArguments().getString(LawyerDefViewPagerUtils.CONTENT);
         url = getArguments().getString(LawyerDefViewPagerUtils.URL);
         imgUrl = getArguments().getString(LawyerDefViewPagerUtils.IMAGE);
+        videoPlayView=new VideoPlayView(mContext);
     }
 
     @Override
@@ -63,6 +67,8 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
         seek = (SeekBar) rootView.findViewById(R.id.seek);
         content = (TextView) rootView.findViewById(R.id.content);
         dashang = (TextView) rootView.findViewById(R.id.dashang);
+
+        video.addView(videoPlayView);
 
     }
 
@@ -76,5 +82,6 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
                 UIUtils.goGratuity(mContext,"");
             }
         });
+        videoPlayView.setUri(url);
     }
 }

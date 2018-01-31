@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chuxin.law.model.ShareModel;
 import com.chuxin.law.ui.util.ShareUtils;
 import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
@@ -36,6 +37,7 @@ public class ShareDialog extends Dialog {
     private ShareUtils shareUtils;
 
     private Activity activity;
+    private ShareModel shareModel;
 
     public ShareDialog(@NonNull Activity context) {
         this(context, R.style.my_dialog);
@@ -69,28 +71,28 @@ public class ShareDialog extends Dialog {
         qq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shareUtils.shareWeb(SHARE_MEDIA.QQ,"http://www.baidu.com",R.mipmap.logo);
+                shareUtils.shareWeb(SHARE_MEDIA.QQ,shareModel);
             }
         });
 
         wechat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shareUtils.shareWeb(SHARE_MEDIA.WEIXIN,"http://www.baidu.com",R.mipmap.logo);
+                shareUtils.shareWeb(SHARE_MEDIA.WEIXIN,shareModel);
             }
         });
 
         pengyou.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shareUtils.shareWeb(SHARE_MEDIA.WEIXIN_CIRCLE,"http://www.baidu.com",R.mipmap.logo);
+                shareUtils.shareWeb(SHARE_MEDIA.WEIXIN_CIRCLE,shareModel);
             }
         });
 
         sina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shareUtils.shareWeb(SHARE_MEDIA.SINA,"http://www.baidu.com",R.mipmap.logo);
+                shareUtils.shareWeb(SHARE_MEDIA.SINA,shareModel);
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -126,4 +128,7 @@ public class ShareDialog extends Dialog {
         });
     }
 
+    public void setShareModel(ShareModel shareModel) {
+        this.shareModel = shareModel;
+    }
 }

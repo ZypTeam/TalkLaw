@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chuxin.law.model.ShareModel;
 import com.google.zxing.utils.WiterQRUtil;
 import com.jusfoun.baselibrary.Util.IOUtil;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
@@ -105,6 +106,12 @@ public class RecommendCourtesyActivity extends BaseTalkLawActivity {
         titleView.setRightListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ShareModel shareModel=new ShareModel();
+                shareModel.setShareUrl("www.baidu.com");
+                shareModel.setShareTitle("说法");
+                shareModel.setShareContent("说法");
+                shareModel.setBitmap(qrcodeBitmap);
+                shareDialog.setShareModel(shareModel);
                 shareDialog.show();
             }
         });

@@ -59,7 +59,11 @@ public class ShareUtils {
         }
         UMImage thumb=null;
         if (TextUtils.isEmpty(model.getShareImgUrl())){
-            thumb=new UMImage(activity, R.mipmap.logo);
+            if (model.getBitmap()==null) {
+                thumb = new UMImage(activity, R.mipmap.logo);
+            }else {
+                thumb = new UMImage(activity, model.getBitmap());
+            }
         }else {
             thumb=new UMImage(activity, model.getShareImgUrl());
         }

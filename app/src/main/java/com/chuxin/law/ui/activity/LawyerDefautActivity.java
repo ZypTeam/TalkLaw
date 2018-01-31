@@ -16,6 +16,7 @@ import com.chuxin.law.comment.ApiService;
 import com.chuxin.law.comment.CommentConstant;
 import com.chuxin.law.model.LawyerAudioModel;
 import com.chuxin.law.model.LawyerProductModel;
+import com.chuxin.law.model.ShareModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.adapter.LawyerDefPagerAdapter;
 import com.chuxin.law.ui.dialog.ShareDialog;
@@ -73,6 +74,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     private ShareDialog shareDialog;
 
     private LawyerDefPagerAdapter adapter;
+    private UserModel userModel;
     @Override
     public int getLayoutResId() {
         return R.layout.activity_lawyer_defaut;
@@ -146,7 +148,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent();
-                intent.putExtra(LawyerIntroductionActivity.ID,id);
+                intent.putExtra(LawyerIntroductionActivity.ID,userModel!=null?userModel.getId():"");
                 intent.setClass(mContext, LawyerIntroductionActivity.class);
                 mContext.startActivity(intent);
             }
@@ -202,6 +204,14 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (audioModel==null){
+                    return;
+                }
+                ShareModel shareModel=new ShareModel();
+                shareModel.setShareUrl(audioModel.getUrl());
+                shareModel.setShareTitle("说法");
+                shareModel.setShareContent("说法");
+                shareDialog.setShareModel(shareModel);
                 shareDialog.show();
             }
         });
@@ -275,7 +285,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         if (data==null){
             return;
         }
-        UserModel userModel=data.getLawyer();
+        userModel=data.getLawyer();
         if (StringUtil.isEmpty(userModel.getName())){
             name.setText("王律师");
         }else {
@@ -284,7 +294,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         yiban.setText(UIUtils.getText(userModel.getDonenum(),"已办"));
         dengji.setText(UIUtils.getText("专业级","等级"));
         haoping.setText(UIUtils.getText(userModel.getPraise()+"%","好评"));
-        shenglv.setText(UIUtils.getText("100%","胜率"));
+        shenglv.setText(UIUtils.getText(userModel.getWin()+"%","胜率"));
 
         audioModel=data.getArticle();
         price.setText(audioModel.getPrice());
