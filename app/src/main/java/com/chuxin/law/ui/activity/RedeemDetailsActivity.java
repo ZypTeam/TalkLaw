@@ -13,7 +13,7 @@ import java.util.List;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.model.ExchangeRecordsItemModel;
+import com.chuxin.law.model.ExchangeRecordsDataModel;
 import com.chuxin.law.ui.adapter.ExchangeDetailsAdapter;
 import com.chuxin.law.ui.widget.BackTitleView;
 
@@ -76,9 +76,9 @@ public class RedeemDetailsActivity extends BaseTalkLawActivity {
         list.setLayoutManager(new LinearLayoutManager(mContext));
         list.setAdapter(adapter);
 
-        List<ExchangeRecordsItemModel>list = new ArrayList<>();
+        List<ExchangeRecordsDataModel>list = new ArrayList<>();
         for(int i=0;i<10;i++){
-            list.add(new ExchangeRecordsItemModel());
+            list.add(new ExchangeRecordsDataModel());
         }
         adapter.refreshList(list);
 

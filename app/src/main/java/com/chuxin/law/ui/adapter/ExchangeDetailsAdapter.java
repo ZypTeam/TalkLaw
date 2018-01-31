@@ -6,7 +6,7 @@ import android.view.View;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseAdapter;
 import com.chuxin.law.base.BaseViewHolder;
-import com.chuxin.law.model.ExchangeRecordsItemModel;
+import com.chuxin.law.model.ExchangeRecordsDataModel;
 import com.chuxin.law.ui.viewholder.ExchangeDetailsViewHolder;
 
 /**
@@ -15,7 +15,7 @@ import com.chuxin.law.ui.viewholder.ExchangeDetailsViewHolder;
  * @describe  兑换详情
  */
 
-public class ExchangeDetailsAdapter extends BaseAdapter<ExchangeRecordsItemModel> {
+public class ExchangeDetailsAdapter extends BaseAdapter<ExchangeRecordsDataModel> {
     public ExchangeDetailsAdapter(Context context) {
         super(context);
     }

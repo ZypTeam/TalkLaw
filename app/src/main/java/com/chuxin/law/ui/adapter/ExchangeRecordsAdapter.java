@@ -8,7 +8,7 @@ import com.chuxin.law.ui.viewholder.ExchangeRecordsViewHolder;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseAdapter;
 import com.chuxin.law.base.BaseViewHolder;
-import com.chuxin.law.model.ExchangeRecordsItemModel;
+import com.chuxin.law.model.ExchangeRecordsDataModel;
 
 /**
  * @author wangcc
@@ -16,7 +16,7 @@ import com.chuxin.law.model.ExchangeRecordsItemModel;
  * @describe 专区 产品 list adapter
  */
 
-public class ExchangeRecordsAdapter extends BaseAdapter<ExchangeRecordsItemModel> {
+public class ExchangeRecordsAdapter extends BaseAdapter<ExchangeRecordsDataModel.ExchangeRecordsItemModel> {
     public ExchangeRecordsAdapter(Context context) {
         super(context);
     }

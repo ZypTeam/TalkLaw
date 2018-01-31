@@ -8,9 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:paddingLeft="15dp"
         android:background="@color/write"
-        android:paddingRight="15dp">
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/text_title"
@@ -36,7 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_title"
-        android:layout_marginTop="10dp"
         android:paddingBottom="50dp"
         android:clipToPadding="true"/>
 </RelativeLayout>

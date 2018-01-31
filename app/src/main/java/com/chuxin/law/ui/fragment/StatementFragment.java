@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.chuxin.law.ui.activity.AudioDetailsActivity;
 import com.chuxin.law.ui.util.GlideImageLoader;
 import com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
@@ -138,6 +140,14 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
             @Override
             public void onClick(View view) {
                 goActivity(null, SearchActivity.class);
+            }
+        });
+
+        imgAudio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, AudioDetailsActivity.class);
+                mContext.startActivity(intent);
             }
         });
     }

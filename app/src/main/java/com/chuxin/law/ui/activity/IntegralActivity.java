@@ -8,22 +8,18 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.chuxin.law.R;
+import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.comment.ApiService;
+import com.chuxin.law.model.IntegralModel;
+import com.chuxin.law.ui.adapter.IntegralGoodsAdapter;
 import com.chuxin.law.ui.util.GlideImageLoader;
 import com.chuxin.law.ui.view.IntegralListProductView;
+import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.net.Api;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import com.chuxin.law.R;
-import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.model.IntegralModel;
-import com.chuxin.law.ui.adapter.IntegralGoodsAdapter;
-import com.chuxin.law.ui.widget.BackTitleView;
 
 import cn.com.talklaw.ui.activity.AllGoodsActivity;
 import rx.functions.Action1;
@@ -44,6 +40,7 @@ public class IntegralActivity extends BaseTalkLawActivity {
     protected LinearLayout integralLayout;
     protected TextView textCountIntegral;
     protected RecyclerView viewGoodsRecycleview;
+    protected TextView textGetIntegral;
     private IntegralGoodsAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
 
@@ -74,6 +71,7 @@ public class IntegralActivity extends BaseTalkLawActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         viewGoodsRecycleview.setLayoutManager(linearLayoutManager);
         viewGoodsRecycleview.setAdapter(adapter);
+        textGetIntegral = (TextView) findViewById(R.id.text_get_integral);
     }
 
     @Override
@@ -127,6 +125,14 @@ public class IntegralActivity extends BaseTalkLawActivity {
 
             }
         });
+
+        textCountIntegral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goActivity(null,RecommendCourtesyActivity.class);
+            }
+        });
+
         delMsg();
     }
 
