@@ -3,6 +3,7 @@ package com.chuxin.law.comment;
 import com.chuxin.law.model.ArrondiModel;
 import com.chuxin.law.model.CommentListModel;
 import com.chuxin.law.model.IntegralModel;
+import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.model.IntegralProductDetailModel;
 import com.chuxin.law.model.MoveModel;
@@ -207,7 +208,16 @@ public interface ApiService {
     @GET("/article-collection/del")
     Observable<NoDataModel> delCollection(@QueryMap Map<String,String> params);
 
-    Observable<CommentListModel> getCommentList();
+    @GET("/article-comment/list")
+    Observable<CommentListModel> getCommentList(@QueryMap Map<String,String> params);
+
+    @FormUrlEncoded
+    @POST("/article-comment/add")
+    Observable<NoDataModel> sendComment(@FieldMap Map<String,String> params);
+
+    @GET("/law-info/view")
+    Observable<LawyerIntroModel> getLawIntro(@QueryMap Map<String,String> params);
+
 
 
 }

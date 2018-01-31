@@ -1,8 +1,10 @@
 package com.chuxin.law.ui.activity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.chuxin.law.TalkLawApplication;
 
 import com.chuxin.law.R;
@@ -59,6 +61,13 @@ public class SettingActivity extends BaseTalkLawActivity {
                 goActivity(null,LoginActivity.class);
                 finish();
                 TalkLawApplication.exitUser();
+            }
+        });
+
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FeedbackAPI.openFeedbackActivity();
             }
         });
     }

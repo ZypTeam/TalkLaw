@@ -21,14 +21,20 @@ public class ProductModel extends BaseModel {
 //              "like_num":"234234234",//赞数
 
     public String id;
-    public String lawyer;
+    private String userid;
     public String img;
     public String title;
+    private String point;
+    private String price;
+    private String readnum;
+    private String lawyer;
+    private String volume;
     public String createtime;
     public String comment_num;
     public String like_num;
 
     private String url;
+    private int category;
     private int sort;
     private int type;
     private int state;
@@ -128,5 +134,53 @@ public class ProductModel extends BaseModel {
 
     public void setAtype(int atype) {
         this.atype = atype;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getPoint() {
+        return point;
+    }
+
+    public void setPoint(String point) {
+        this.point = point;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getReadnum() {
+        return readnum;
+    }
+
+    public void setReadnum(String readnum) {
+        this.readnum = readnum;
+    }
+
+    public String getVolume() {
+        return volume;
+    }
+
+    public void setVolume(String volume) {
+        this.volume = volume;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
     }
 }

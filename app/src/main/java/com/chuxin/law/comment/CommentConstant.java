@@ -17,4 +17,7 @@ public class CommentConstant {
     public static final int MSG_TYPY_0=0;
     public static final int MSG_TYPY_1=1;
 
+    //评论返回
+    public static final int COMMENT_RESULT_CODE=100;
+
 }

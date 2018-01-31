@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
@@ -17,17 +18,22 @@ import com.chuxin.law.model.LawyerAudioModel;
 import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.adapter.LawyerDefPagerAdapter;
+import com.chuxin.law.ui.dialog.ShareDialog;
 import com.chuxin.law.ui.util.UIUtils;
+import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 import com.jusfoun.baselibrary.widget.TitleStatusBarView;
 
 import com.chuxin.law.R;
+import com.umeng.socialize.UMShareAPI;
 
 import java.util.HashMap;
 
 import rx.functions.Action1;
+
+import static com.chuxin.law.ui.activity.CommentListActivity.COMMENT_COUNT;
 
 /**
  * @author wangcc
@@ -64,6 +70,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
 
     private String id;
     private LawyerAudioModel audioModel;
+    private ShareDialog shareDialog;
 
     private LawyerDefPagerAdapter adapter;
     @Override
@@ -75,6 +82,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     public void initDatas() {
 
         id=getIntent().getStringExtra(ID);
+        shareDialog=new ShareDialog(this);
     }
 
     @Override
@@ -138,6 +146,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent();
+                intent.putExtra(LawyerIntroductionActivity.ID,id);
                 intent.setClass(mContext, LawyerIntroductionActivity.class);
                 mContext.startActivity(intent);
             }
@@ -148,9 +157,9 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
             public void onClick(View v) {
                 if (audioModel!=null){
                     if (audioModel.getIs_like()==1){
-                        unlike();
+                        uncollection();
                     }else {
-                        like();
+                        collection();
                     }
                 }
             }
@@ -161,11 +170,39 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
             public void onClick(View v) {
                 if (audioModel!=null){
                     if (audioModel.getIs_colle()==1){
-                        uncollection();
+                        unlike();
                     }else {
-                        collection();
+                        like();
                     }
                 }
+            }
+        });
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UIUtils.goCommentList(mContext,id);
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UIUtils.goCommentList(mContext,id);
+            }
+        });
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareDialog.show();
             }
         });
 
@@ -198,6 +235,19 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(mContext).onActivityResult(requestCode,resultCode,data);
+        if (requestCode==CommentConstant.COMMENT_RESULT_CODE){
+            if (data!=null&&audioModel!=null){
+                String count=data.getStringExtra(COMMENT_COUNT);
+                commentCount.setText(count);
+                audioModel.setCommment_num(count);
+            }
+        }
+    }
+
     private void getData(){
         showLoadDialog();
         HashMap<String,String> params=new HashMap<>();
@@ -226,7 +276,11 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
             return;
         }
         UserModel userModel=data.getLawyer();
-        name.setText(userModel.getName());
+        if (StringUtil.isEmpty(userModel.getName())){
+            name.setText("王律师");
+        }else {
+            name.setText(userModel.getName());
+        }
         yiban.setText(UIUtils.getText(userModel.getDonenum(),"已办"));
         dengji.setText(UIUtils.getText("专业级","等级"));
         haoping.setText(UIUtils.getText(userModel.getPraise()+"%","好评"));

@@ -34,15 +34,23 @@ public class UserModel implements Serializable {
      */
 
     private String id;
+    private String userid;
+
     private int type;
     private String level;
     private String phone;
     private String createtime;
-    private String userid;
     private String name;
     private String headimg;
     private String intro;
+    private String starttime;
+    private String endtime;
+    private String law_firm;
+    private String certificate;
+    private String certificate_year;
+    private String price;
     private int sex;
+    private int state;
     private String birthday;
     private String province;
     private String county;
@@ -239,5 +247,61 @@ public class UserModel implements Serializable {
 
     public void setWin(String win) {
         this.win = win;
+    }
+
+    public String getStarttime() {
+        return starttime;
+    }
+
+    public void setStarttime(String starttime) {
+        this.starttime = starttime;
+    }
+
+    public String getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(String endtime) {
+        this.endtime = endtime;
+    }
+
+    public String getLaw_firm() {
+        return law_firm;
+    }
+
+    public void setLaw_firm(String law_firm) {
+        this.law_firm = law_firm;
+    }
+
+    public String getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(String certificate) {
+        this.certificate = certificate;
+    }
+
+    public String getCertificate_year() {
+        return certificate_year;
+    }
+
+    public void setCertificate_year(String certificate_year) {
+        this.certificate_year = certificate_year;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }
