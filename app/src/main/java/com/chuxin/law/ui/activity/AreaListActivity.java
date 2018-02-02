@@ -1,26 +1,35 @@
 package com.chuxin.law.ui.activity;
 
-import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.chuxin.law.R;
+import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
+import com.chuxin.law.comment.ApiService;
+import com.chuxin.law.comment.CommentConstant;
 import com.chuxin.law.model.AreaBean;
+import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.adapter.BaseAreaCityAdapter;
 import com.chuxin.law.ui.adapter.BaseAreaNameAdapter;
 import com.chuxin.law.ui.widget.BackTitleView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.jusfoun.baselibrary.base.NoDataModel;
+import com.jusfoun.baselibrary.net.Api;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import rx.functions.Action1;
 
 /**
  * @author zhaoyapeng
@@ -66,7 +75,27 @@ public class AreaListActivity extends BaseTalkLawActivity {
 
         lv_first_level = (ListView) findViewById(R.id.lv_first_level);
         lv_second_level = (ListView) findViewById(R.id.lv_second_level);
-        backTitleView = (BackTitleView)findViewById(R.id.view_title_bar);
+        backTitleView = (BackTitleView) findViewById(R.id.view_title_bar);
+
+        backTitleView.setRightText("确定", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (selectCity == null) {
+                    Toast.makeText(mContext, "请选择城市", Toast.LENGTH_SHORT).show();
+                } else if (selectProvince == null) {
+                    Toast.makeText(mContext, "请选择省份", Toast.LENGTH_SHORT).show();
+                } else {
+//                    intent.putExtra("provinceId", selectProvince.getId());
+//                    intent.putExtra("provinceName", selectProvince.getName());
+//                    intent.putExtra("cityBean", selectCity);
+//                    startActivity(intent);
+                    submitInfo();
+                }
+
+
+            }
+        });
 
         area_city_adpter = new BaseAreaNameAdapter(AreaListActivity.this);
         area_city_adpter.setData(list_city);
@@ -100,25 +129,25 @@ public class AreaListActivity extends BaseTalkLawActivity {
                 area_city_adpter.notifyDataSetChanged();
 //                city_id = area_city_adpter.getSelectId(arg2);
                 selectCity = area_city_adpter.getSelect(arg2);
-                // TODO: 2017/4/24 选择县
-                Intent intent = new Intent(AreaListActivity.this,
-                        SelectCountryActivity.class);
-                intent.putExtra("type", type);
-
-//                    province_id = city_id();
-
-//                    city_id = getList2("id");
-
-                if (selectCity == null) {
-                    Toast.makeText(mContext,"请选择城市",Toast.LENGTH_SHORT).show();
-                } else if (selectProvince == null) {
-                    Toast.makeText(mContext,"请选择省份",Toast.LENGTH_SHORT).show();
-                } else {
-                    intent.putExtra("provinceId", selectProvince.getId());
-                    intent.putExtra("provinceName", selectProvince.getName());
-                    intent.putExtra("cityBean", selectCity);
-                    startActivity(intent);
-                }
+//                // TODO: 2017/4/24 选择县
+//                Intent intent = new Intent(AreaListActivity.this,
+//                        SelectCountryActivity.class);
+//                intent.putExtra("type", type);
+//
+////                    province_id = city_id();
+//
+////                    city_id = getList2("id");
+//
+//                if (selectCity == null) {
+//                    Toast.makeText(mContext,"请选择城市",Toast.LENGTH_SHORT).show();
+//                } else if (selectProvince == null) {
+//                    Toast.makeText(mContext,"请选择省份",Toast.LENGTH_SHORT).show();
+//                } else {
+//                    intent.putExtra("provinceId", selectProvince.getId());
+//                    intent.putExtra("provinceName", selectProvince.getName());
+//                    intent.putExtra("cityBean", selectCity);
+////                    startActivity(intent);
+//                }
                 // }
             }
         });
@@ -129,8 +158,6 @@ public class AreaListActivity extends BaseTalkLawActivity {
     public void initAction() {
         backTitleView.setTitle("地区");
     }
-
-
 
 
 //    public String getList1() {
@@ -204,9 +231,9 @@ public class AreaListActivity extends BaseTalkLawActivity {
             finish();
         } else {
             if (selectCity == null) {
-                Toast.makeText(mContext,"请选择城市",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "请选择城市", Toast.LENGTH_SHORT).show();
             } else if (selectProvince == null) {
-                Toast.makeText(mContext,"请选择省份",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "请选择省份", Toast.LENGTH_SHORT).show();
             } else {
 //                if (NetworkUtil.isNetWorkConnected()) {
 //                    Map<String, String> paramMap = new HashMap<>();
@@ -242,4 +269,37 @@ public class AreaListActivity extends BaseTalkLawActivity {
 //                break;
 //        }
 //    }
+
+    private void submitInfo() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("province", selectProvince.getName());
+        map.put("city", selectCity.getName());
+        showLoadDialog();
+        Log.e("tag", "map===" + map);
+        addNetwork(Api.getInstance().getService(ApiService.class).changeUserInfo(map), new Action1<NoDataModel>() {
+            @Override
+            public void call(NoDataModel noDataModel) {
+                hideLoadDialog();
+                if (noDataModel.getCode() == CommentConstant.NET_SUC_CODE) {
+                    UserModel userModel = TalkLawApplication.getUserInfo();
+                    userModel.setCity(selectCity.getName());
+                    userModel.setProvince(selectProvince.getName());
+                    showToast("修改地址陈宫");
+
+                    TalkLawApplication.saveUserInfo(userModel);
+
+                    setResult(RESULT_OK);
+                    finish();
+                } else {
+                    showToast(noDataModel.getMsg());
+                }
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                hideLoadDialog();
+                showToast(throwable.getMessage());
+            }
+        });
+    }
 }

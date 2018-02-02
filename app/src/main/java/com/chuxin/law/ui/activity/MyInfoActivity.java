@@ -1,7 +1,11 @@
 package com.chuxin.law.ui.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,6 +22,9 @@ import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.view.wheel.dialog.SelectorDateDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
+import com.chuxin.law.ui.widget.NumberPickerPopupwinow;
+import com.chuxin.law.ui.widget.SexNumberPickerPopup;
+import com.jusfoun.baselibrary.Util.PhoneUtil;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
@@ -38,6 +45,7 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
     private final int NICKNAME_REQUEST_CODE = 102;
     private final int PHONE_REQUEST_CODE = 103;
     private final int EMAIL_REQUEST_CODE = 104;
+    private final int ADDRESS_REQUEST_CODE = 104;
 
     protected BackTitleView titleView;
     protected TextView head;
@@ -50,13 +58,30 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
     protected TextView userNumber;
     protected TextView userMail;
     protected TextView birthday;
+    protected TextView name;
+    protected ImageView ivNameArrow;
+    protected View lineName;
+    protected TextView nickname;
+    protected ImageView ivNicknameArrow;
+    protected View lineNickname;
+    protected TextView sex;
+    protected ImageView ivSexArrow;
+    protected View lineSex;
+    protected TextView tvAddressValue;
+    protected View lineAddress;
+    protected TextView number;
+    protected View lineNumber;
+    protected TextView mail;
 
-    private HashMap<String,String> editUserMap=new HashMap<>();
+    private HashMap<String, String> editUserMap = new HashMap<>();
     private UserModel userModel;
 
     private SelectorDateDialog dialog;
 
-    private int mYear = 2018,mMonth = 1,mDay = 29;
+    private int mYear = 2018, mMonth = 1, mDay = 29;
+    private SexNumberPickerPopup sexNumPicPop;
+    private ConstraintLayout rootLayout;
+    private NumberPickerPopupwinow numPickPop;
 
     @Override
     public int getLayoutResId() {
@@ -66,6 +91,42 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
     @Override
     public void initDatas() {
         dialog = new SelectorDateDialog(mContext, R.style.my_dialog);
+        sexNumPicPop = new SexNumberPickerPopup(MyInfoActivity.this,
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        editUserMap.clear();
+                        editUserMap.put("sex", userSex.getText().toString());
+                        if (StringUtil.equals(userName.getText().toString(), "女")) {
+                            userModel.setSex(2);
+                            editUserMap.put("sex", "2");
+                        } else {
+                            userModel.setSex(1);
+                            editUserMap.put("sex", "1");
+                        }
+
+                        userSex.setText(sexNumPicPop.getData());
+                        editUserInfo();
+                        sexNumPicPop.dismiss();
+                    }
+                });
+
+        numPickPop = new NumberPickerPopupwinow(MyInfoActivity.this,
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        numPickPop.dismiss();
+                        userBirthday.setText(numPickPop.getData2());
+                        if (!StringUtil.isEmpty(userBirthday.getText().toString())) {
+                            editUserMap.clear();
+                            editUserMap.put("birthday", userBirthday.getText().toString());
+                            userModel.setBirthday(userBirthday.getText().toString());
+                            editUserInfo();
+                        } else {
+                            showToast("不能为空");
+                        }
+                    }
+                });
     }
 
     @Override
@@ -80,7 +141,22 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
         userBirthday = (TextView) findViewById(R.id.user_birthday);
         userNumber = (TextView) findViewById(R.id.user_number);
         userMail = (TextView) findViewById(R.id.user_mail);
-        birthday =  findViewById(R.id.birthday);
+        birthday = findViewById(R.id.birthday);
+        rootLayout = (ConstraintLayout) findViewById(R.id.layout_root1);
+        name = (TextView) findViewById(R.id.name);
+        ivNameArrow = (ImageView) findViewById(R.id.iv_name_arrow);
+        lineName = (View) findViewById(R.id.line_name);
+        nickname = (TextView) findViewById(R.id.nickname);
+        ivNicknameArrow = (ImageView) findViewById(R.id.iv_nickname_arrow);
+        lineNickname = (View) findViewById(R.id.line_nickname);
+        sex = (TextView) findViewById(R.id.sex);
+        ivSexArrow = (ImageView) findViewById(R.id.iv_sex_arrow);
+        lineSex = (View) findViewById(R.id.line_sex);
+        tvAddressValue = (TextView) findViewById(R.id.tv_address_value);
+        lineAddress = (View) findViewById(R.id.line_address);
+        number = (TextView) findViewById(R.id.number);
+        lineNumber = (View) findViewById(R.id.line_number);
+        mail = (TextView) findViewById(R.id.mail);
 
     }
 
@@ -89,10 +165,10 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
         address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goActivity(null,SelectAreaActivity.class);
+                goActivityForResult(null, AreaListActivity.class,ADDRESS_REQUEST_CODE);
             }
         });
-        userName.setOnClickListener(new View.OnClickListener() {
+        name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
@@ -102,7 +178,7 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
             }
         });
 
-        userNickname.setOnClickListener(new View.OnClickListener() {
+        nickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
@@ -112,7 +188,7 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
             }
         });
 
-        userNumber.setOnClickListener(new View.OnClickListener() {
+        number.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
@@ -122,7 +198,7 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
             }
         });
 
-        userMail.setOnClickListener(new View.OnClickListener() {
+        mail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
@@ -135,7 +211,15 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
         birthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.show(mYear, mMonth - 1, mDay);
+//                dialog.show(mYear, mMonth - 1, mDay);
+                // 显示窗口
+                if ("R7Plus".equals(Build.MODEL)) {
+                    numPickPop.showAtLocation(rootLayout, Gravity.BOTTOM
+                            | Gravity.CENTER_HORIZONTAL, 0, PhoneUtil.dip2px(MyInfoActivity.this, 36));
+                } else {
+                    numPickPop.showAtLocation(rootLayout, Gravity.BOTTOM
+                            | Gravity.CENTER_HORIZONTAL, 0, 0);
+                }
             }
         });
 
@@ -143,10 +227,10 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
             @Override
             public boolean onSure(int year, int month, int day, long time) {
                 mYear = year;
-                mMonth = month ;
+                mMonth = month;
                 mDay = day;
 
-                userBirthday.setText(mYear + "-" + (mMonth + 1)+ "-" +mDay);
+                userBirthday.setText(mYear + "-" + (mMonth + 1) + "-" + mDay);
                 return false;
             }
 
@@ -156,9 +240,23 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
             }
         });
 
+
+        sex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 显示窗口
+                if ("R7Plus".equals(Build.MODEL)) {
+                    sexNumPicPop.showAtLocation(rootLayout, Gravity.BOTTOM
+                            | Gravity.CENTER_HORIZONTAL, 0, PhoneUtil.dip2px(mContext, 36));
+                } else {
+                    sexNumPicPop.showAtLocation(rootLayout, Gravity.BOTTOM
+                            | Gravity.CENTER_HORIZONTAL, 0, 0);
+                }
+            }
+        });
+
         userName.setOnKeyListener(this);
         userNickname.setOnKeyListener(this);
-        userSex.setOnKeyListener(this);
         userNumber.setOnKeyListener(this);
         userMail.setOnKeyListener(this);
         userBirthday.setOnKeyListener(this);
@@ -167,16 +265,21 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
     }
 
 
-
-    private void getUserInfo(){
+    private void getUserInfo() {
         showLoadDialog();
         addNetwork(Api.getInstance().getService(ApiService.class).getUserInfo()
                 , new Action1<UserInfoModel>() {
                     @Override
                     public void call(UserInfoModel model) {
                         hideLoadDialog();
-                        if (model!=null&&model.getCode()== CommentConstant.NET_SUC_CODE&&model.getData()!=null){
+                        if (model != null && model.getCode() == CommentConstant.NET_SUC_CODE && model.getData() != null) {
                             TalkLawApplication.saveUserInfo(model.getData());
+                            userName.setText(model.getData().getName());
+                            if (1 == model.getData().getSex()) {
+                                userSex.setText("男");
+                            } else {
+                                userSex.setText("女");
+                            }
                         }
                         updateUserInfo();
                     }
@@ -189,40 +292,41 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
                 });
     }
 
-    private void updateUserInfo(){
-        userModel= TalkLawApplication.getUserInfo();
-        if (userModel==null){
-            goActivity(null,LoginActivity.class);
+    private void updateUserInfo() {
+        userModel = TalkLawApplication.getUserInfo();
+        if (userModel == null) {
+            goActivity(null, LoginActivity.class);
             return;
         }
         Glide.with(mContext)
                 .load("http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg")
                 .placeholder(R.mipmap.icon_head_def_cir)
                 .error(R.mipmap.icon_head_def_cir)
-                .transform(new CenterCrop(mContext),new GlideCircleTransform(mContext))
+                .transform(new CenterCrop(mContext), new GlideCircleTransform(mContext))
                 .crossFade()
                 .into(iconHead);
 
         userName.setText(userModel.getName());
         userNickname.setText(userModel.getHx_username());
-        if (userModel.getSex()==1){
+        if (userModel.getSex() == 1) {
             userSex.setText("男");
-        }else {
+        } else {
             userSex.setText("女");
         }
+        tvAddressValue.setText(userModel.getProvince()+"-"+userModel.getCity());
         userBirthday.setText(userModel.getBirthday());
         userMail.setText(userModel.getEmail());
         userNumber.setText(userModel.getPhone());
     }
 
-    private void editUserInfo(){
+    private void editUserInfo() {
         showLoadDialog();
         addNetwork(Api.getInstance().getService(ApiService.class).editUserInfo(editUserMap)
                 , new Action1<NoDataModel>() {
                     @Override
                     public void call(NoDataModel model) {
                         hideLoadDialog();
-                        if (model.getCode()==CommentConstant.NET_SUC_CODE){
+                        if (model.getCode() == CommentConstant.NET_SUC_CODE) {
                             TalkLawApplication.saveUserInfo(userModel);
                         }
                         showToast(model.getMsg());
@@ -237,83 +341,87 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
-        if (event.getAction()==KeyEvent.ACTION_DOWN&&keyCode==KeyEvent.KEYCODE_ENTER){
-            if (userModel==null){
-                goActivity(null,LoginActivity.class);
+        if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+            if (userModel == null) {
+                goActivity(null, LoginActivity.class);
                 return false;
             }
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.user_name:
                     if (!StringUtil.isEmpty(userName.getText().toString())) {
                         editUserMap.clear();
-                        editUserMap.put("name",userName.getText().toString());
+                        editUserMap.put("name", userName.getText().toString());
                         userModel.setName(userName.getText().toString());
                         editUserInfo();
-                    }else {
+                    } else {
                         showToast("不能为空");
                     }
                     break;
                 case R.id.user_nickname:
                     if (!StringUtil.isEmpty(userNickname.getText().toString())) {
                         editUserMap.clear();
-                        editUserMap.put("intro",userNickname.getText().toString());
+                        editUserMap.put("intro", userNickname.getText().toString());
                         userModel.setHx_username(userNickname.getText().toString());
                         editUserInfo();
-                    }else {
+                    } else {
                         showToast("不能为空");
                     }
                     break;
                 case R.id.user_number:
                     if (!StringUtil.isEmpty(userNumber.getText().toString())) {
                         editUserMap.clear();
-                        editUserMap.put("phone",userNumber.getText().toString());
+                        editUserMap.put("phone", userNumber.getText().toString());
                         userModel.setName(userNumber.getText().toString());
                         editUserInfo();
-                    }else {
+                    } else {
                         showToast("不能为空");
                     }
                     break;
                 case R.id.user_birthday:
-                    if (!StringUtil.isEmpty(userBirthday.getText().toString())) {
-                        editUserMap.clear();
-                        editUserMap.put("birthday",userBirthday.getText().toString());
-                        userModel.setName(userBirthday.getText().toString());
-                        editUserInfo();
-                    }else {
-                        showToast("不能为空");
-                    }
+//                    if (!StringUtil.isEmpty(userBirthday.getText().toString())) {
+//                        editUserMap.clear();
+//                        editUserMap.put("birthday",userBirthday.getText().toString());
+//                        userModel.setName(userBirthday.getText().toString());
+//                        editUserInfo();
+//                    }else {
+//                        showToast("不能为空");
+//                    }
                     break;
                 case R.id.user_mail:
                     if (!StringUtil.isEmpty(userMail.getText().toString())) {
                         editUserMap.clear();
-                        editUserMap.put("email",userMail.getText().toString());
+                        editUserMap.put("email", userMail.getText().toString());
                         userModel.setName(userMail.getText().toString());
                         editUserInfo();
-                    }else {
+                    } else {
                         showToast("不能为空");
                     }
                     break;
                 case R.id.user_sex:
-                    if (!StringUtil.isEmpty(userName.getText().toString())
-                            &&(!StringUtil.equals(userName.getText().toString(),"男")
-                    ||!StringUtil.equals(userName.getText().toString(),"女"))) {
-                        editUserMap.clear();
-                        editUserMap.put("sex",userSex.getText().toString());
-                        if(StringUtil.equals(userName.getText().toString(),"女")){
-                            userModel.setSex(2);
-                            editUserMap.put("sex","2");
-                        }else {
-                            userModel.setSex(1);
-                            editUserMap.put("sex","1");
-                        }
-                        editUserInfo();
-                    }else {
-                        showToast("请输入男或女");
-                    }
+                    Log.e("tag", "user_sex==1");
+//                    if (!StringUtil.isEmpty(userName.getText().toString())
+//                            &&(!StringUtil.equals(userName.getText().toString(),"男")
+//                    ||!StringUtil.equals(userName.getText().toString(),"女"))) {
+//                        editUserMap.clear();
+//                        editUserMap.put("sex",userSex.getText().toString());
+//                        if(StringUtil.equals(userName.getText().toString(),"女")){
+//                            userModel.setSex(2);
+//                            editUserMap.put("sex","2");
+//                        }else {
+//                            userModel.setSex(1);
+//                            editUserMap.put("sex","1");
+//                        }
+//                        editUserInfo();
+//                    }else {
+//                        showToast("请输入男或女");
+//                    }
+
+
                     break;
+
             }
             return true;
-        }else if (event.getAction()==KeyEvent.ACTION_UP&&keyCode==KeyEvent.KEYCODE_ENTER){
+        } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
             return true;
         }
         return false;
@@ -322,13 +430,12 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK){
+        if (resultCode != RESULT_OK) {
             return;
         }
-
-        if(requestCode == NAME_REQUEST_CODE || requestCode == NICKNAME_REQUEST_CODE
-                || requestCode == PHONE_REQUEST_CODE || requestCode == EMAIL_REQUEST_CODE){
-            userModel = TalkLawApplication.getUserInfo();
+        if (requestCode == NAME_REQUEST_CODE || requestCode == NICKNAME_REQUEST_CODE
+                || requestCode == PHONE_REQUEST_CODE || requestCode == EMAIL_REQUEST_CODE) {
+//            userModel = TalkLawApplication.getUserInfo();
             updateUserInfo();
         }
     }

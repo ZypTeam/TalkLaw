@@ -3,6 +3,7 @@ package com.chuxin.law.ui.activity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -116,6 +117,7 @@ public class EditUserInfoActivity extends BaseTalkLawActivity{
         }
 
         showLoadDialog();
+        Log.e("tag","map==="+map);
         addNetwork(Api.getInstance().getService(ApiService.class).changeUserInfo(map), new Action1<NoDataModel>() {
             @Override
             public void call(NoDataModel noDataModel) {
