@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.fragment;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.activity.MyMsgListActivity;
 import com.chuxin.law.ui.activity.RecommendCourtesyActivity;
 import com.chuxin.law.ui.activity.SettingActivity;
+import com.chuxin.law.ui.activity.ShippingAddressActivity;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 
@@ -114,6 +116,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         buyCount.setOnClickListener(this);
         recommend.setOnClickListener(this);
         msg.setOnClickListener(this);
+        editAddress.setOnClickListener(this);
 
 
     }
@@ -141,6 +144,9 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
                 break;
             case R.id.recommend:
                 goActivity(null, RecommendCourtesyActivity.class);
+                break;
+            case R.id.edit_address:
+                goActivity(null, ShippingAddressActivity.class);
                 break;
             default:
                 break;

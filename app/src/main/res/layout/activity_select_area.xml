@@ -114,13 +114,13 @@
             android:textColor="#333333"
             android:textSize="17sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/text_select_city"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:text="请选择城市"
+            android:text="请输入城市"
             android:textColor="#b2b2b2"
             android:textSize="17sp" />
 
@@ -140,12 +140,13 @@
             android:textColor="#333333"
             android:textSize="17sp" />
 
-        <TextView
+        <EditText
+            android:id="@+id/edit_area"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="请选择小区,大厦或地区"
+            android:hint="请请输入小区,大厦或地区"
             android:textColor="#b2b2b2"
             android:textSize="17sp" />
 
@@ -166,6 +167,7 @@
             android:textSize="17sp" />
 
         <EditText
+            android:id="@+id/edit_detail_address"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
