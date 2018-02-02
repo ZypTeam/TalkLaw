@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.model.ProductModel;
 import com.chuxin.law.ui.activity.AudioDetailsActivity;
 
@@ -29,6 +30,8 @@ public class ProductViewHolder extends BaseViewHolder<ProductModel> {
     protected TextView comment;
     private ImageView image;
     private Context context;
+    private AdapterCallback commentCall;
+    private AdapterCallback thumbsCall;
 
     public ProductViewHolder(View itemView, Context mContext) {
         super(itemView, mContext);
@@ -42,6 +45,7 @@ public class ProductViewHolder extends BaseViewHolder<ProductModel> {
                 .load(model.img)
                 .into(image);
 
+        itemView.setTag(model);
 
         title.setText(model.title);
         date.setText(model.getLawyer()+" "+model.createtime);
@@ -54,6 +58,24 @@ public class ProductViewHolder extends BaseViewHolder<ProductModel> {
                 UIUtils.goLawyerDef(mContext,model.getId());
             }
         });
+
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (commentCall!=null){
+                    commentCall.callback(model,getAdapterPosition());
+                }
+            }
+        });
+
+        thumbsUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (thumbsCall!=null){
+                    thumbsCall.callback(model,getAdapterPosition());
+                }
+            }
+        });
     }
 
     private void initView(View rootView) {
@@ -63,5 +85,21 @@ public class ProductViewHolder extends BaseViewHolder<ProductModel> {
         line = (View) rootView.findViewById(R.id.line);
         thumbsUp = (TextView) rootView.findViewById(R.id.thumbs_up);
         comment = (TextView) rootView.findViewById(R.id.comment);
+    }
+
+    public AdapterCallback getCommentCall() {
+        return commentCall;
+    }
+
+    public void setCommentCall(AdapterCallback commentCall) {
+        this.commentCall = commentCall;
+    }
+
+    public AdapterCallback getThumbsCall() {
+        return thumbsCall;
+    }
+
+    public void setThumbsCall(AdapterCallback thumbsCall) {
+        this.thumbsCall = thumbsCall;
     }
 }

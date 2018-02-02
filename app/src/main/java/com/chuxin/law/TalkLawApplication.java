@@ -15,8 +15,8 @@ import com.umeng.socialize.UMShareAPI;
 
 import cn.com.talklaw.xh.DemoHelper;
 
-import com.chuxin.law.comment.DaoInstance;
-import com.chuxin.law.comment.SharePrefenceConstant;
+import com.chuxin.law.common.DaoInstance;
+import com.chuxin.law.common.SharePrefenceConstant;
 import com.chuxin.law.model.UserModel;
 
 /**

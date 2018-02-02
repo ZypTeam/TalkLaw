@@ -2,16 +2,14 @@ package com.chuxin.law.ui.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.chuxin.law.comment.AdapterDelCallback;
-import com.chuxin.law.comment.ApiService;
-import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.common.AdapterCallback;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.MyAttentionListModel;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
@@ -72,9 +70,9 @@ public class MyAttentionActivity extends BaseTalkLawActivity {
         });
 
         getFollowList(true,true);
-        adapter.setCallback(new AdapterDelCallback() {
+        adapter.setCallback(new AdapterCallback() {
             @Override
-            public void del(Object model, int position) {
+            public void callback(Object model, int position) {
                 delFollow((MyAttentionModel) model);
             }
         });
@@ -105,7 +103,7 @@ public class MyAttentionActivity extends BaseTalkLawActivity {
             showLoadDialog();
         }
         HashMap<String,String> params=new HashMap<>();
-        params.put("size", CommentConstant.LIST_PAGE_SIZE);
+        params.put("size", CommonConstant.LIST_PAGE_SIZE);
         params.put("page",(isRefresh?1:page+1)+"");
         addNetwork(Api.getInstance().getService(ApiService.class).getFollowList(params)
                 , new Action1<MyAttentionListModel>() {
@@ -114,7 +112,7 @@ public class MyAttentionActivity extends BaseTalkLawActivity {
                         hideLoadDialog();
                         attentionList.refreshComplete();
                         attentionList.loadMoreComplete();
-                       if (myAttentionListModel.getCode()==CommentConstant.NET_SUC_CODE
+                       if (myAttentionListModel.getCode()== CommonConstant.NET_SUC_CODE
                                &&myAttentionListModel.getData()!=null){
                            if (isRefresh){
                                adapter.refreshList(myAttentionListModel.getData());

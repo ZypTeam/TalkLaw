@@ -12,8 +12,8 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.R;
 import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.comment.ApiService;
-import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.view.wheel.dialog.SelectorDateDialog;
@@ -175,7 +175,7 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
                     @Override
                     public void call(UserInfoModel model) {
                         hideLoadDialog();
-                        if (model!=null&&model.getCode()== CommentConstant.NET_SUC_CODE&&model.getData()!=null){
+                        if (model!=null&&model.getCode()== CommonConstant.NET_SUC_CODE&&model.getData()!=null){
                             TalkLawApplication.saveUserInfo(model.getData());
                         }
                         updateUserInfo();
@@ -222,7 +222,7 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
                     @Override
                     public void call(NoDataModel model) {
                         hideLoadDialog();
-                        if (model.getCode()==CommentConstant.NET_SUC_CODE){
+                        if (model.getCode()== CommonConstant.NET_SUC_CODE){
                             TalkLawApplication.saveUserInfo(userModel);
                         }
                         showToast(model.getMsg());

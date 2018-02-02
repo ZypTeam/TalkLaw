@@ -1,4 +1,4 @@
-package com.chuxin.law.comment;
+package com.chuxin.law.common;
 
 /**
  * @author wangcc

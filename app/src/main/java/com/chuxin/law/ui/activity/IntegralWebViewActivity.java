@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.comment.ApiService;
+import com.chuxin.law.common.ApiService;
 import com.chuxin.law.model.IntegralDetailDataModel;
 import com.chuxin.law.model.IntegralProductDetailModel;
 import com.chuxin.law.ui.view.IntegralDialog;
@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 import rx.functions.Action1;
 
-import static com.chuxin.law.comment.CommentConstant.NET_SUC_CODE;
+import static com.chuxin.law.common.CommonConstant.NET_SUC_CODE;
 
 /**
  * @author zhaoyapeng

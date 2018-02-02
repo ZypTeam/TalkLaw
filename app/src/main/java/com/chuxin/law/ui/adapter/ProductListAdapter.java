@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.chuxin.law.base.BaseAdapter;
+import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.ui.viewholder.ProductViewHolder;
 
 import com.chuxin.law.R;
@@ -18,6 +19,8 @@ import com.chuxin.law.model.ProductModel;
  */
 
 public class ProductListAdapter extends BaseAdapter<ProductModel> {
+    private AdapterCallback commentCall;
+    private AdapterCallback thumbsCall;
     public ProductListAdapter(Context context) {
         super(context);
     }
@@ -29,6 +32,17 @@ public class ProductListAdapter extends BaseAdapter<ProductModel> {
 
     @Override
     protected <E extends BaseViewHolder> E getViewHolder(int viewType, View view) {
-        return (E) new ProductViewHolder(view,context);
+        ProductViewHolder viewHolder=new ProductViewHolder(view,context);
+        viewHolder.setCommentCall(commentCall);
+        viewHolder.setThumbsCall(thumbsCall);
+        return (E) viewHolder;
+    }
+
+    public void setCommentCall(AdapterCallback commentCall) {
+        this.commentCall = commentCall;
+    }
+
+    public void setThumbsCall(AdapterCallback thumbsCall) {
+        this.thumbsCall = thumbsCall;
     }
 }

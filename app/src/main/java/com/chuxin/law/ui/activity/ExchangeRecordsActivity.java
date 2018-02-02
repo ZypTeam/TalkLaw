@@ -4,13 +4,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.comment.ApiService;
-import com.chuxin.law.model.ProductListModel;
+import com.chuxin.law.common.ApiService;
 import com.chuxin.law.ui.adapter.ExchangeRecordsAdapter;
 import com.chuxin.law.ui.widget.BackTitleView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import com.chuxin.law.R;
 
@@ -19,7 +15,7 @@ import com.jusfoun.baselibrary.net.Api;
 
 import rx.functions.Action1;
 
-import static com.chuxin.law.comment.CommentConstant.NET_SUC_CODE;
+import static com.chuxin.law.common.CommonConstant.NET_SUC_CODE;
 
 /**
  * @author zhaoyapeng

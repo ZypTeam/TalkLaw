@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.chuxin.law.R;
-import com.chuxin.law.comment.ApiService;
+import com.chuxin.law.common.ApiService;
 import com.chuxin.law.model.IntegralModel;
 import com.jusfoun.baselibrary.base.BaseViewPagerFragment;
 import com.jusfoun.baselibrary.net.Api;
@@ -18,7 +18,7 @@ import cn.com.talklaw.model.GoodsDataModel;
 import cn.com.talklaw.ui.adapter.GoodsListAdapter;
 import rx.functions.Action1;
 
-import static com.chuxin.law.comment.CommentConstant.NET_SUC_CODE;
+import static com.chuxin.law.common.CommonConstant.NET_SUC_CODE;
 
 /**
  * @author zhaoyapeng
