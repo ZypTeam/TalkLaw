@@ -25,6 +25,7 @@
             android:textSize="17sp" />
 
         <EditText
+            android:id="@+id/text_username"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
@@ -49,6 +50,7 @@
             android:src="@drawable/img_sex_afirm" />
 
         <TextView
+            android:id="@+id/text_sex_man"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -65,6 +67,7 @@
             android:src="@drawable/img_sex_no_select" />
 
         <TextView
+            android:id="@+id/text_sex_woman"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -90,6 +93,7 @@
             android:textSize="17sp" />
 
         <EditText
+            android:id="@+id/edit_phone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
@@ -120,7 +124,7 @@
             android:layout_height="match_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:text="请输入城市"
+            android:hint="请输入城市"
             android:textColor="#b2b2b2"
             android:textSize="17sp" />
 
