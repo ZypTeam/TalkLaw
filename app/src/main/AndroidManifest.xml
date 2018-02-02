@@ -168,6 +168,9 @@
         <activity android:name=".ui.activity.CommentListActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
 
+
+        <!--收货地址-->
+        <activity android:name=".ui.activity.ShippingAddressActivity" />
         <!--新浪分享-->
         <activity
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"
