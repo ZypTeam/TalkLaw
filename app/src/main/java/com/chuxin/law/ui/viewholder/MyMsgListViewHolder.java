@@ -4,12 +4,12 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import com.chuxin.law.comment.AdapterDelCallback;
+import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.model.MyMsgModel;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
-import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.common.CommonConstant;
 
 /**
  * @author wangcc
@@ -34,7 +34,7 @@ public class MyMsgListViewHolder extends BaseViewHolder<MyMsgModel> {
         time.setText(model.getCreatetime());
         content.setText(model.getContent());
         switch (model.getType()) {
-            case CommentConstant.MSG_TYPY_0:
+            case CommonConstant.MSG_TYPY_0:
                 break;
             default:
                 title.setText("系统消息");
@@ -44,15 +44,15 @@ public class MyMsgListViewHolder extends BaseViewHolder<MyMsgModel> {
             @Override
             public void onClick(View v) {
                 if (delCallback != null) {
-                    delCallback.del(model, getAdapterPosition());
+                    delCallback.callback(model, getAdapterPosition());
                 }
             }
         });
     }
 
-    private AdapterDelCallback delCallback;
+    private AdapterCallback delCallback;
 
-    public MyMsgListViewHolder setDelCallback(AdapterDelCallback delCallback) {
+    public MyMsgListViewHolder setDelCallback(AdapterCallback delCallback) {
         this.delCallback = delCallback;
         return this;
     }

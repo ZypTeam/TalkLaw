@@ -1,4 +1,4 @@
-package com.chuxin.law.comment;
+package com.chuxin.law.common;
 
 import com.chuxin.law.model.ArrondiModel;
 import com.chuxin.law.model.CommentListModel;
@@ -112,7 +112,7 @@ public interface ApiService {
      * @param params
      * @return
      */
-    @GET("/follow/del")
+    @GET("/follow/callback")
     Observable<NoDataModel> delFollow(@QueryMap Map<String,String> params);
 
     /**
@@ -128,7 +128,7 @@ public interface ApiService {
      * @param params
      * @return
      */
-    @GET("/sysmsg/del")
+    @GET("/sysmsg/callback")
     Observable<NoDataModel> allMsgRead(@QueryMap Map<String,String> params);
 
     /**
@@ -195,6 +195,20 @@ public interface ApiService {
     Observable<ArrondiModel> getFreeList(@QueryMap Map<String,String> params);
 
     /**
+     * 私人顾问接口
+     * @return
+     */
+    @GET("/article/private")
+    Observable<ArrondiModel> getPrivate(@QueryMap Map<String,String> params);
+
+    /**
+     * 公司顾问接口
+     * @return
+     */
+    @GET("/article/company")
+    Observable<ArrondiModel> getCompany(@QueryMap Map<String,String> params);
+
+    /**
      * 产品详情接口
      * @param params
      * @return
@@ -204,11 +218,11 @@ public interface ApiService {
 
     @GET("/article-like/set")
     Observable<NoDataModel> setLike(@QueryMap Map<String,String> params);
-    @GET("/article-like/del")
+    @GET("/article-like/callback")
     Observable<NoDataModel> delLike(@QueryMap Map<String,String> params);
     @GET("/article-collection/set")
     Observable<NoDataModel> setCollection(@QueryMap Map<String,String> params);
-    @GET("/article-collection/del")
+    @GET("/article-collection/callback")
     Observable<NoDataModel> delCollection(@QueryMap Map<String,String> params);
 
     @GET("/article-comment/list")

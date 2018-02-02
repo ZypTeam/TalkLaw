@@ -13,8 +13,9 @@ import android.widget.Toast;
 
 import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.comment.ApiService;
+import com.chuxin.law.common.ApiService;
 import com.chuxin.law.model.UserInfoModel;
+import com.chuxin.law.model.UserModel;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.jusfoun.baselibrary.Util.LogUtil;
@@ -96,6 +97,7 @@ public class LoginActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
         mShareAPI = UMShareAPI.get(mContext);
+        TAG=getClass().getSimpleName();
     }
 
     @Override
@@ -171,6 +173,12 @@ public class LoginActivity extends BaseTalkLawActivity {
                         if (userInfoModel != null && userInfoModel.getCode() == 10000) {
                             loginHx(userInfoModel);
                         } else {
+                            hideLoadDialog();
+                            UserModel model=new UserModel();
+                            model.setId("0");
+                            model.setName("律师");
+                            TalkLawApplication.saveUserInfo(model);
+                            goActivity(null,HomeActivity.class);
                             Toast.makeText(mContext, userInfoModel.getMsg(), Toast.LENGTH_SHORT).show();
                         }
                     }

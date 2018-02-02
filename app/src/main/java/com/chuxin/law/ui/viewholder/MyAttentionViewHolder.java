@@ -3,7 +3,6 @@ package com.chuxin.law.ui.viewholder;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.AudioDeviceCallback;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
@@ -15,14 +14,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.base.BaseViewHolder;
-import com.chuxin.law.comment.AdapterDelCallback;
+import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.model.MyAttentionModel;
 import com.chuxin.law.ui.activity.LawyerIntroductionActivity;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 
 import com.chuxin.law.R;
-
-import com.chuxin.law.ui.activity.LawyerDefautActivity;
 
 /**
  * @author wangcc
@@ -56,7 +53,7 @@ public class MyAttentionViewHolder extends BaseViewHolder<MyAttentionModel> {
             @Override
             public void onClick(View v) {
                 if (callback!=null){
-                    callback.del(model,getAdapterPosition());
+                    callback.callback(model,getAdapterPosition());
                 }
             }
         });
@@ -82,8 +79,8 @@ public class MyAttentionViewHolder extends BaseViewHolder<MyAttentionModel> {
 
     }
 
-    private AdapterDelCallback callback;
-    public void setDelCallBack(AdapterDelCallback callBack){
+    private AdapterCallback callback;
+    public void setDelCallBack(AdapterCallback callBack){
         this.callback=callBack;
     }
     public SpannableStringBuilder getText(String txt1,String txt2){

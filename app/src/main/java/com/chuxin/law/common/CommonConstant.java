@@ -1,4 +1,4 @@
-package com.chuxin.law.comment;
+package com.chuxin.law.common;
 
 /**
  * @author wangcc
@@ -6,7 +6,7 @@ package com.chuxin.law.comment;
  * @describe 公用常量
  */
 
-public class CommentConstant {
+public class CommonConstant {
 
     //网络请求成功code
     public static final int NET_SUC_CODE=10000;

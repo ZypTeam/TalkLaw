@@ -16,16 +16,16 @@ import java.util.Map;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.comment.ApiService;
-import com.chuxin.law.comment.CommentConstant;
-import com.chuxin.law.comment.AdapterDelCallback;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
+import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.model.MyMsgListModel;
 import com.chuxin.law.model.MyMsgModel;
 import com.chuxin.law.ui.adapter.MyMsgListAdapter;
 
 import rx.functions.Action1;
 
-import static com.chuxin.law.comment.CommentConstant.NET_SUC_CODE;
+import static com.chuxin.law.common.CommonConstant.NET_SUC_CODE;
 
 /**
  * @author wangcc
@@ -43,7 +43,7 @@ public class MyMsgListActivity extends BaseTalkLawActivity {
     private MyMsgListAdapter adapter;
 
     private int page=1;
-    private String size= CommentConstant.LIST_PAGE_SIZE;
+    private String size= CommonConstant.LIST_PAGE_SIZE;
 
     @Override
     public int getLayoutResId() {
@@ -86,9 +86,9 @@ public class MyMsgListActivity extends BaseTalkLawActivity {
 
         getData(true,true);
 
-        adapter.setCallback(new AdapterDelCallback() {
+        adapter.setCallback(new AdapterCallback() {
             @Override
-            public void del(Object model, int position) {
+            public void callback(Object model, int position) {
                 delMsg((MyMsgModel) model);
             }
         });

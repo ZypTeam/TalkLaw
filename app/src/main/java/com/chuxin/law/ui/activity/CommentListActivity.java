@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.comment.ApiService;
-import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.CommentListModel;
 import com.chuxin.law.ui.adapter.CommentListAdapter;
 import com.chuxin.law.ui.view.KeyboardChangeView;
@@ -168,7 +168,7 @@ public class CommentListActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         KeyBoardUtil.hideSoftKeyboard(mContext,commentEdit);
-                        if (noDataModel.getCode()==CommentConstant.NET_SUC_CODE){
+                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE){
                             getCommentList(true,true);
                         }else {
                             hideLoadDialog();
@@ -190,7 +190,7 @@ public class CommentListActivity extends BaseTalkLawActivity {
         }
         HashMap<String,String> params=new HashMap<>();
         params.put("id",id);
-        params.put("size", CommentConstant.LIST_PAGE_SIZE);
+        params.put("size", CommonConstant.LIST_PAGE_SIZE);
         params.put("page",(isRefresh?1:page+1)+"");
         addNetwork(Api.getInstance().getService(ApiService.class).getCommentList(params)
                 , new Action1<CommentListModel>() {
@@ -199,7 +199,7 @@ public class CommentListActivity extends BaseTalkLawActivity {
                         hideLoadDialog();
                         list.refreshComplete();
                         list.loadMoreComplete();
-                        if (commentListModel.getCode()==CommentConstant.NET_SUC_CODE){
+                        if (commentListModel.getCode()== CommonConstant.NET_SUC_CODE){
                             if (isRefresh){
                                 adapter.refreshList(commentListModel.getData());
                             }else {

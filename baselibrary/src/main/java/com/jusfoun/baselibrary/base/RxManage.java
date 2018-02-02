@@ -37,11 +37,19 @@ public class RxManage {
      * @param action1
      * @param error
      */
-    public <T extends BaseModel> void add(Observable<T> observable,Action1<T> action1,Action1<Throwable> error){
+    public <T extends BaseModel> void add(Observable<T> observable, Action1<T> action1, final Action1<Throwable> error){
         mCompositeSubscription.add(
                 observable.observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
-                        .subscribe(action1,error)
+                        .subscribe(action1, new Action1<Throwable>() {
+                            @Override
+                            public void call(Throwable throwable) {
+                                LogUtil.e("throwable",throwable.getMessage());
+                                if (error!=null) {
+                                    error.call(throwable);
+                                }
+                            }
+                        })
         );
     }
 

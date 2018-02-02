@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.chuxin.law.base.BaseAdapter;
 import com.chuxin.law.base.BaseViewHolder;
-import com.chuxin.law.comment.AdapterDelCallback;
+import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.ui.viewholder.MyMsgListViewHolder;
 
 import com.chuxin.law.R;
@@ -35,9 +35,9 @@ public class MyMsgListAdapter extends BaseAdapter<MyMsgModel> {
         return (E)viewHolder;
     }
 
-    private AdapterDelCallback callback;
+    private AdapterCallback callback;
 
-    public void setCallback(AdapterDelCallback callback) {
+    public void setCallback(AdapterCallback callback) {
         this.callback = callback;
     }
 }

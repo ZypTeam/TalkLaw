@@ -1,19 +1,17 @@
 package com.chuxin.law.ui.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.comment.ApiService;
-import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.LawyerAudioModel;
 import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.model.ShareModel;
@@ -249,7 +247,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(mContext).onActivityResult(requestCode,resultCode,data);
-        if (requestCode==CommentConstant.COMMENT_RESULT_CODE){
+        if (requestCode== CommonConstant.COMMENT_RESULT_CODE){
             if (data!=null&&audioModel!=null){
                 String count=data.getStringExtra(COMMENT_COUNT);
                 commentCount.setText(count);
@@ -267,7 +265,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(LawyerProductModel lawyerProductModel) {
                         hideLoadDialog();
-                        if (lawyerProductModel.getCode()== CommentConstant.NET_SUC_CODE){
+                        if (lawyerProductModel.getCode()== CommonConstant.NET_SUC_CODE){
                             updateView(lawyerProductModel.getData());
                         }else {
                             showToast(lawyerProductModel.getMsg());
@@ -327,7 +325,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()==CommentConstant.NET_SUC_CODE){
+                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE){
                             audioModel.setIs_like(1);
                             thumbsUp.setImageResource(R.mipmap.icon_lawyer_like);
                         }
@@ -349,7 +347,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()==CommentConstant.NET_SUC_CODE){
+                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE){
                             audioModel.setIs_colle(0);
                             collection.setImageResource(R.mipmap.icon_lawyer_collection_un);
                         }
@@ -371,7 +369,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()==CommentConstant.NET_SUC_CODE){
+                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE){
                             audioModel.setIs_like(0);
                             thumbsUp.setImageResource(R.mipmap.icon_lawyer_like_un);
                         }
@@ -393,7 +391,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()==CommentConstant.NET_SUC_CODE){
+                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE){
                             audioModel.setIs_colle(1);
                             collection.setImageResource(R.mipmap.icon_lawyer_collection);
                         }

@@ -11,7 +11,7 @@ import com.youth.banner.Transformer;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawFragment;
-import com.chuxin.law.comment.ApiService;
+import com.chuxin.law.common.ApiService;
 import com.chuxin.law.model.StatementListModel;
 import com.chuxin.law.ui.view.HomeListProductView;
 import com.chuxin.law.ui.view.HomeNeedView;
@@ -19,7 +19,7 @@ import com.chuxin.law.ui.view.HomeScrollView;
 import com.chuxin.law.ui.widget.BackTitleView;
 import rx.functions.Action1;
 
-import static com.chuxin.law.comment.CommentConstant.NET_SUC_CODE;
+import static com.chuxin.law.common.CommonConstant.NET_SUC_CODE;
 
 /**
  * @author zhaoyapeng

@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
-import com.chuxin.law.comment.ApiService;
-import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.common.AdapterCallback;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.ArrondiModel;
+import com.chuxin.law.ui.util.UIUtils;
 import com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
 
@@ -26,9 +29,13 @@ import com.chuxin.law.ui.adapter.ArrondiTopAdapter;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.chuxin.law.ui.widget.LoopScrollView;
+import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 
+import rx.Observable;
 import rx.functions.Action1;
+
+import static com.chuxin.law.ui.activity.CommentListActivity.COMMENT_COUNT;
 
 /**
  * @author wangcc
@@ -81,7 +88,7 @@ public class ArrondiActivity extends BaseTalkLawActivity {
     @Override
     public void initAction() {
 
-        list.setPullRefreshEnabled(false);
+        list.setPullRefreshEnabled(true);
         list.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -132,25 +139,116 @@ public class ArrondiActivity extends BaseTalkLawActivity {
             }
         });
 
+        listAdapter.setCommentCall(new AdapterCallback() {
+            @Override
+            public void callback(Object model, int position) {
+                if (model==null){
+                    return;
+                }
+                ProductModel productModel= (ProductModel) model;
+//                UIUtils.goCommentList(mContext,productModel.getId());
+            }
+        });
+
+        listAdapter.setThumbsCall(new AdapterCallback() {
+            @Override
+            public void callback(Object model, int position) {
+                ProductModel productModel= (ProductModel) model;
+                if (productModel==null){
+                    return;
+                }
+
+            }
+        });
+
         initProduct();
         getData(true,true);
     }
 
-    private void getData(boolean isShow,boolean isRefresh){
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode== CommonConstant.COMMENT_RESULT_CODE){
+            if (data!=null){
+                String count=data.getStringExtra(COMMENT_COUNT);
+            }
+        }
+    }
+
+    private void unlike(final ProductModel model, final int position){
+        if (model==null){
+            return;
+        }
+        showLoadDialog();
+        HashMap<String,String> params=new HashMap<>();
+        params.put("id",model.getId());
+        addNetwork(Api.getInstance().getService(ApiService.class).delLike(params)
+                , new Action1<NoDataModel>() {
+                    @Override
+                    public void call(NoDataModel noDataModel) {
+                        hideLoadDialog();
+                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE){
+                            listAdapter.refreshItem(model,position);
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
+    }
+
+    private void like(final ProductModel model, final int position){
+        if (model==null){
+            return;
+        }
+        showLoadDialog();
+        HashMap<String,String> params=new HashMap<>();
+        params.put("id",model.getId());
+        addNetwork(Api.getInstance().getService(ApiService.class).setLike(params)
+                , new Action1<NoDataModel>() {
+                    @Override
+                    public void call(NoDataModel noDataModel) {
+                        hideLoadDialog();
+                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE){
+                            listAdapter.refreshItem(model,position);
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
+    }
+
+    private void getData(boolean isShow, boolean isRefresh){
         if (isShow){
             showLoadDialog();
         }
         HashMap<String,String> params=new HashMap<>();
-        params.put("size", CommentConstant.LIST_PAGE_SIZE);
+        params.put("size", CommonConstant.LIST_PAGE_SIZE);
         params.put("page",(isRefresh?1:page+1)+"");
-        addNetwork(Api.getInstance().getService(ApiService.class).getFreeList(params)
-                , new Action1<ArrondiModel>() {
+        Observable observable=null;
+        switch (type){
+            case 0:
+                observable=Api.getInstance().getService(ApiService.class).getFreeList(params);
+                break;
+            case 1:
+                observable=Api.getInstance().getService(ApiService.class).getPrivate(params);
+                break;
+            case 2:
+                observable=Api.getInstance().getService(ApiService.class).getCompany(params);
+                break;
+        }
+        addNetwork(observable, new Action1<ArrondiModel>() {
                     @Override
                     public void call(ArrondiModel arrondiModel) {
                         hideLoadDialog();
                         list.refreshComplete();
                         list.loadMoreComplete();
-                        if (arrondiModel.getCode()==CommentConstant.NET_SUC_CODE){
+                        if (arrondiModel.getCode()== CommonConstant.NET_SUC_CODE){
                             ArrondiModel.DataBean dataBean=arrondiModel.getData();
                             if (dataBean!=null){
                                 if (dataBean.getArticle()==null||dataBean.getArticle().size()==0){

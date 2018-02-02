@@ -11,6 +11,7 @@ import com.chuxin.law.R;
 
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.ui.widget.BackTitleView;
+import com.jusfoun.baselibrary.Util.CacheUtil;
 
 /**
  * @author wangcc
@@ -64,11 +65,29 @@ public class SettingActivity extends BaseTalkLawActivity {
             }
         });
 
+        setCacheCount();
+
+        clearCache.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCacheCount();
+            }
+        });
+
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FeedbackAPI.openFeedbackActivity();
             }
         });
+    }
+
+    private void setCacheCount(){
+        try {
+            String cathe=CacheUtil.getTotalCacheSize(mContext);
+            cacheCount.setText(cathe);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

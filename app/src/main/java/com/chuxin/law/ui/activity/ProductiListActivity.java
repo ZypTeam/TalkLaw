@@ -1,19 +1,14 @@
 package com.chuxin.law.ui.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.comment.ApiService;
-import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.ArrondiProductModel;
-import com.chuxin.law.model.ProductListModel;
-import com.chuxin.law.model.ProductModel;
 import com.chuxin.law.model.ProductsModel;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
 import com.chuxin.law.ui.widget.BackTitleView;
@@ -65,6 +60,7 @@ public class ProductiListActivity extends BaseTalkLawActivity {
         list.setLayoutManager(new LinearLayoutManager(mContext));
         list.setAdapter(adapter);
 
+        list.setPullRefreshEnabled(true);
         list.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -87,7 +83,7 @@ public class ProductiListActivity extends BaseTalkLawActivity {
         }
         HashMap<String,String> params=new HashMap<>();
         params.put("catid","1");
-        params.put("size", CommentConstant.LIST_PAGE_SIZE);
+        params.put("size", CommonConstant.LIST_PAGE_SIZE);
         params.put("page",(isRefresh?1:page+1)+"");
         addNetwork(Api.getInstance().getService(ApiService.class).getProductList(params)
                 , new Action1<ProductsModel>() {
@@ -96,7 +92,7 @@ public class ProductiListActivity extends BaseTalkLawActivity {
                         hideLoadDialog();
                         list.refreshComplete();
                         list.loadMoreComplete();
-                        if (productListModel.getCode()==CommentConstant.NET_SUC_CODE){
+                        if (productListModel.getCode()== CommonConstant.NET_SUC_CODE){
                             if (isRefresh){
                                 adapter.refreshList(productListModel.getData());
                             }else {

@@ -1,6 +1,5 @@
 package com.chuxin.law.ui.fragment;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -9,8 +8,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.TalkLawApplication;
-import com.chuxin.law.comment.ApiService;
 import com.chuxin.law.model.ShippingAddressModel;
+import com.chuxin.law.common.ApiService;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.activity.IntegralActivity;
@@ -25,7 +24,7 @@ import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 import com.chuxin.law.R;
 
 import com.chuxin.law.base.BaseTalkLawFragment;
-import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.ui.activity.AlreadyPurchaseActivity;
 import com.chuxin.law.ui.activity.MyAttentionActivity;
 import com.chuxin.law.ui.activity.MyConsultActivity;
@@ -172,7 +171,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
                     @Override
                     public void call(UserInfoModel model) {
                         hideLoadDialog();
-                        if (model!=null&&model.getCode()== CommentConstant.NET_SUC_CODE&&model.getData()!=null){
+                        if (model!=null&&model.getCode()== CommonConstant.NET_SUC_CODE&&model.getData()!=null){
                             TalkLawApplication.saveUserInfo(model.getData());
                         }
                         updateUserInfo();

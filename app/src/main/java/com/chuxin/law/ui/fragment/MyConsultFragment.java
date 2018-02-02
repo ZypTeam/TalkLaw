@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
-import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.MyConsultModel;
 import com.chuxin.law.ui.util.MyConsultPagerUtils;
 import com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView;
@@ -27,7 +27,7 @@ import com.chuxin.law.ui.adapter.MyConsultListAdapter;
 public class MyConsultFragment extends BaseTalkLawFragment {
     protected XRecyclerView list;
     private int type;
-    private String size= CommentConstant.LIST_PAGE_SIZE;
+    private String size= CommonConstant.LIST_PAGE_SIZE;
     private int page;
 
     private MyConsultListAdapter adapter;

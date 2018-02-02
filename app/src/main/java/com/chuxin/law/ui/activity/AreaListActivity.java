@@ -10,8 +10,8 @@ import android.widget.Toast;
 import com.chuxin.law.R;
 import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.comment.ApiService;
-import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.AreaBean;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.adapter.BaseAreaCityAdapter;
@@ -280,7 +280,7 @@ public class AreaListActivity extends BaseTalkLawActivity {
             @Override
             public void call(NoDataModel noDataModel) {
                 hideLoadDialog();
-                if (noDataModel.getCode() == CommentConstant.NET_SUC_CODE) {
+                if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                     UserModel userModel = TalkLawApplication.getUserInfo();
                     userModel.setCity(selectCity.getName());
                     userModel.setProvince(selectProvince.getName());

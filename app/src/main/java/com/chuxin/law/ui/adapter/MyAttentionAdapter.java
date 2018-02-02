@@ -8,7 +8,7 @@ import com.chuxin.law.base.BaseAdapter;
 import com.chuxin.law.R;
 
 import com.chuxin.law.base.BaseViewHolder;
-import com.chuxin.law.comment.AdapterDelCallback;
+import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.model.MyAttentionModel;
 import com.chuxin.law.ui.viewholder.MyAttentionViewHolder;
 
@@ -35,9 +35,9 @@ public class MyAttentionAdapter extends BaseAdapter<MyAttentionModel> {
         return (E) viewHolder;
     }
 
-    private AdapterDelCallback callback;
+    private AdapterCallback callback;
 
-    public void setCallback(AdapterDelCallback callback) {
+    public void setCallback(AdapterCallback callback) {
         this.callback = callback;
     }
 }

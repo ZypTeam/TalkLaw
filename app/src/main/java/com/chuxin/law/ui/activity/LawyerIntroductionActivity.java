@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,8 +13,8 @@ import android.widget.TextView;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.comment.ApiService;
-import com.chuxin.law.comment.CommentConstant;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
@@ -141,7 +140,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(LawyerIntroModel model) {
                         hideLoadDialog();
-                        if (model.getCode()== CommentConstant.NET_SUC_CODE){
+                        if (model.getCode()== CommonConstant.NET_SUC_CODE){
                             updateView(model.getData());
                         }
                     }

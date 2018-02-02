@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.comment.ApiService;
+import com.chuxin.law.common.ApiService;
 import com.chuxin.law.model.IntegralModel;
 import com.chuxin.law.ui.adapter.IntegralGoodsAdapter;
 import com.chuxin.law.ui.util.GlideImageLoader;
@@ -24,7 +24,7 @@ import com.youth.banner.Transformer;
 import cn.com.talklaw.ui.activity.AllGoodsActivity;
 import rx.functions.Action1;
 
-import static com.chuxin.law.comment.CommentConstant.NET_SUC_CODE;
+import static com.chuxin.law.common.CommonConstant.NET_SUC_CODE;
 
 /**
  * @author zhaoyapeng

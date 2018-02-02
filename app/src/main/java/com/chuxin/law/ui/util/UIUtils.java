@@ -15,9 +15,8 @@ import android.view.View;
 import com.chuxin.law.ui.activity.CommentListActivity;
 import com.chuxin.law.ui.activity.GratuityActivity;
 import com.chuxin.law.ui.activity.LawyerDefautActivity;
-import com.chuxin.law.ui.adapter.CommentListAdapter;
 
-import static com.chuxin.law.comment.CommentConstant.COMMENT_RESULT_CODE;
+import static com.chuxin.law.common.CommonConstant.COMMENT_RESULT_CODE;
 
 /**
  * @author wangcc
