@@ -2,6 +2,7 @@ package com.chuxin.law.ui.viewholder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import com.chuxin.law.ui.activity.ProductiListActivity;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
+import com.chuxin.law.ui.util.ImageLoderUtil;
 
 /**
  * @author wangcc
@@ -33,10 +35,8 @@ public class ArrondiProductListViewHolder extends BaseViewHolder<ArrondiProductM
 
     @Override
     public void update(final ArrondiProductModel model) {
-        Glide.with(context)
-                .load(model.getImageResId())
-                .into(icon);
         name.setText(model.getName());
+        ImageLoderUtil.loadNormalImg(context,icon,model.getImg());
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,7 @@
 package com.chuxin.law.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author wangcc
@@ -65,6 +66,27 @@ public class UserModel implements Serializable {
     private String win;
 
     private String donenum;
+    /**
+     * id : 5
+     * createtime : 1515429997
+     * userid : 5
+     * birthday : 0
+     * province : 0
+     * county : 0
+     * city : 0
+     * law : []
+     * points :
+     * money :
+     * follow : 0
+     * qrcode :
+     */
+
+    private String points;
+    private String money;
+    private String follow;
+    private String qrcode;
+    private List<?> law;
+
     public String getId() {
         return id;
     }
@@ -303,5 +325,45 @@ public class UserModel implements Serializable {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public String getPoints() {
+        return points;
+    }
+
+    public void setPoints(String points) {
+        this.points = points;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String getFollow() {
+        return follow;
+    }
+
+    public void setFollow(String follow) {
+        this.follow = follow;
+    }
+
+    public String getQrcode() {
+        return qrcode;
+    }
+
+    public void setQrcode(String qrcode) {
+        this.qrcode = qrcode;
+    }
+
+    public List<?> getLaw() {
+        return law;
+    }
+
+    public void setLaw(List<?> law) {
+        this.law = law;
     }
 }

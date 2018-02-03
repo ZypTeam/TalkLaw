@@ -74,6 +74,10 @@ public class BackTitleView extends FrameLayout {
         right.setImageResource(resId);
     }
 
+    public void setBackListener(OnClickListener listener){
+        back.setOnClickListener(listener);
+    }
+
     public void setRightListener(OnClickListener listener){
         right.setOnClickListener(listener);
     }

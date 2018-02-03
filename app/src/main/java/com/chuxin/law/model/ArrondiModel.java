@@ -26,7 +26,7 @@ public class ArrondiModel extends BaseModel {
         private List<ProductModel> article;
         private List<ProductModel> carouse;
         private String price;
-//        private List<ArrondiProductModel> catList;
+        private List<ArrondiProductModel> catList;
 
         public List<ProductModel> getArticle() {
             return article;
@@ -52,12 +52,12 @@ public class ArrondiModel extends BaseModel {
             this.price = price;
         }
 
-        /*  public List<ArrondiProductModel> getCatList() {
+        public List<ArrondiProductModel> getCatList() {
             return catList;
         }
 
         public void setCatList(List<ArrondiProductModel> catList) {
             this.catList = catList;
-        }*/
+        }
     }
 }

@@ -1,5 +1,7 @@
 package com.chuxin.law.ui.fragment;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -61,6 +63,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
     private ImageView setting;
     private TextView recommend;
     private ImageView msg;
+    private UserModel userModel;
 
     public static MyFragment getInstance() {
         MyFragment fragment = new MyFragment();
@@ -137,13 +140,18 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
                 goActivity(null, SettingActivity.class);
                 break;
             case R.id.follow_count:
-                goActivity(null, MyAttentionActivity.class);
+                Intent intent = new Intent(mContext, MyAttentionActivity.class);
+                startActivityForResult(intent, CommonConstant.FOLLOW_RESULT_CODE);
                 break;
             case R.id.buy_count:
                 goActivity(null, AlreadyPurchaseActivity.class);
                 break;
             case R.id.recommend:
-                goActivity(null, RecommendCourtesyActivity.class);
+                Bundle bundle = new Bundle();
+                if (userModel != null) {
+                    bundle.putString(RecommendCourtesyActivity.URL, userModel.getQrcode());
+                }
+                goActivity(bundle, RecommendCourtesyActivity.class);
                 break;
             case R.id.edit_address:
                 goActivity(null, ShippingAddressActivity.class);
@@ -154,18 +162,33 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case CommonConstant.FOLLOW_RESULT_CODE:
+                if (data!=null){
+                    userModel.setFollow(data.getStringExtra(MyAttentionActivity.FOLLOW_COUNT));
+                    TalkLawApplication.saveUserInfo(userModel);
+                }
+                break;
+            case CommonConstant.LAWYER_AUTH_RESULT_CODE:
+                break;
+        }
+    }
+
+    @Override
     protected void refreshData() {
         getUserInfo();
     }
 
-    private void getUserInfo(){
+    private void getUserInfo() {
         showLoadDialog();
         addNetwork(Api.getInstance().getService(ApiService.class).getUserInfo()
                 , new Action1<UserInfoModel>() {
                     @Override
                     public void call(UserInfoModel model) {
                         hideLoadDialog();
-                        if (model!=null&&model.getCode()== CommonConstant.NET_SUC_CODE&&model.getData()!=null){
+                        if (model != null && model.getCode() == CommonConstant.NET_SUC_CODE && model.getData() != null) {
                             TalkLawApplication.saveUserInfo(model.getData());
                         }
                         updateUserInfo();
@@ -179,19 +202,25 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
                 });
     }
 
-    private void updateUserInfo(){
-        UserModel model= TalkLawApplication.getUserInfo();
-        if (model==null){
+    private void updateUserInfo() {
+        userModel = TalkLawApplication.getUserInfo();
+        if (userModel == null) {
             return;
         }
         Glide.with(mContext)
                 .load("http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg")
                 .placeholder(R.mipmap.icon_head_def_cir)
                 .error(R.mipmap.icon_head_def_cir)
-                .transform(new CenterCrop(mContext),new GlideCircleTransform(mContext))
+                .transform(new CenterCrop(mContext), new GlideCircleTransform(mContext))
                 .crossFade()
                 .into(iconHead);
 
-        name.setText(model.getName());
+        name.setText(userModel.getName());
+//        yxlCount.setText(userModel.getLevel());
+        followCount.setText(userModel.getFollow());
+        myAddressContent.setText(userModel.getAddress());
+        zhuanghuCount.setText("¥" + userModel.getMoney());
+        jifenCount.setText(userModel.getPoints());
+
     }
 }

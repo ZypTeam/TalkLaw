@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import com.chuxin.law.model.ShareModel;
 import com.google.zxing.utils.WiterQRUtil;
 import com.jusfoun.baselibrary.Util.IOUtil;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
+import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.permissiongen.PermissionFail;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
 import com.jusfoun.baselibrary.permissiongen.PermissionSuccess;
@@ -31,6 +33,7 @@ import com.chuxin.law.ui.dialog.ShareDialog;
  */
 
 public class RecommendCourtesyActivity extends BaseTalkLawActivity {
+    public static final String URL="url";
     protected BackTitleView titleView;
     protected View bg;
     protected ImageView qrcode;
@@ -40,6 +43,7 @@ public class RecommendCourtesyActivity extends BaseTalkLawActivity {
     private TextView rules;
 
     private Bitmap qrcodeBitmap;
+    private String url;
 
     @Override
     public int getLayoutResId() {
@@ -55,6 +59,13 @@ public class RecommendCourtesyActivity extends BaseTalkLawActivity {
         });
         shareDialog = new ShareDialog(this);
         rulesDialog = new RecommendationRulesDialog(mContext);
+        if (getIntent().getExtras()!=null){
+            url=getIntent().getExtras().getString(URL);
+        }
+
+        if (StringUtil.isEmpty(url)){
+            url="http://www.baidu.com";
+        }
     }
 
     @Override
@@ -89,7 +100,7 @@ public class RecommendCourtesyActivity extends BaseTalkLawActivity {
     private void saveQrcode() {
 
         while (qrcodeBitmap != null && !qrcodeBitmap.isRecycled()) {
-            qrcodeBitmap = WiterQRUtil.witerQRCenterLogo("哈哈哈", BitmapFactory.decodeResource(getResources(), R.mipmap.logo)
+            qrcodeBitmap = WiterQRUtil.witerQRCenterLogo(url, BitmapFactory.decodeResource(getResources(), R.mipmap.logo)
                     , PhoneUtil.dip2px(mContext, 271), Color.BLACK, Color.WHITE);
             break;
         }

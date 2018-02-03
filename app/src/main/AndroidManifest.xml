@@ -153,6 +153,8 @@
         <activity android:name="cn.com.talklaw.ui.activity.AllGoodsActivity" />
 
 
+
+
         <!--聊天页面-->
         <activity
             android:name="cn.com.talklaw.xh.ui.ChatActivity"

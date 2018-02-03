@@ -58,6 +58,7 @@ public class ArrondiActivity extends BaseTalkLawActivity {
     private int disY;
     private int page=0;
     private int type;
+    private int PAGE_COUNT=8;
 
     @Override
     public int getLayoutResId() {
@@ -89,6 +90,7 @@ public class ArrondiActivity extends BaseTalkLawActivity {
     public void initAction() {
 
         list.setPullRefreshEnabled(true);
+        list.setLoadingMoreEnabled(false);
         list.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -161,7 +163,8 @@ public class ArrondiActivity extends BaseTalkLawActivity {
             }
         });
 
-        initProduct();
+        arrondi.setAdapter(productAdapter);
+//        initProduct();
         getData(true,true);
     }
 
@@ -251,19 +254,10 @@ public class ArrondiActivity extends BaseTalkLawActivity {
                         if (arrondiModel.getCode()== CommonConstant.NET_SUC_CODE){
                             ArrondiModel.DataBean dataBean=arrondiModel.getData();
                             if (dataBean!=null){
-                                if (dataBean.getArticle()==null||dataBean.getArticle().size()==0){
-                                    List<ProductModel> list = new ArrayList<>();
-                                    for (int i = 0; i < 10; i++) {
-                                        ProductModel model = new ProductModel();
-                                        model.setId("1");
-                                        list.add(model);
-                                    }
-                                    listAdapter.refreshList(list);
-                                }else {
-                                    listAdapter.refreshList(dataBean.getArticle());
-                                }
+                                listAdapter.refreshList(dataBean.getArticle());
                                 topAdapter.refresh(dataBean.getCarouse());
                                 top.start();
+                                settProduct(dataBean.getCatList());
                             }
                         }
 
@@ -278,43 +272,29 @@ public class ArrondiActivity extends BaseTalkLawActivity {
                 });
     }
 
-    private void initProduct() {
+    private void settProduct(List<ArrondiProductModel> list) {
+        if (list==null||list.size()==0){
+            return;
+        }
         List<List<ArrondiProductModel>> lists = new ArrayList<>();
-        List<ArrondiProductModel> list = new ArrayList<>();
-        ArrondiProductModel model1 = new ArrondiProductModel();
-        model1.setImageResId(R.mipmap.icon_hunyin);
-        model1.setName("婚姻");
-        list.add(model1);
-        ArrondiProductModel model2 = new ArrondiProductModel();
-        model2.setImageResId(R.mipmap.icon_gongsi);
-        model2.setName("公司");
-        list.add(model2);
-        ArrondiProductModel model3 = new ArrondiProductModel();
-        model3.setImageResId(R.mipmap.icon_xingshi);
-        model3.setName("刑事");
-        list.add(model3);
-        ArrondiProductModel model4 = new ArrondiProductModel();
-        model4.setImageResId(R.mipmap.icon_laowu);
-        model4.setName("劳务");
-        list.add(model4);
-        ArrondiProductModel model5 = new ArrondiProductModel();
-        model5.setImageResId(R.mipmap.icon_susong);
-        model5.setName("诉讼");
-        list.add(model5);
-        ArrondiProductModel model6 = new ArrondiProductModel();
-        model6.setImageResId(R.mipmap.icon_jiaotong);
-        model6.setName("交通");
-        list.add(model6);
-        ArrondiProductModel model7 = new ArrondiProductModel();
-        model7.setImageResId(R.mipmap.icon_hetong);
-        model7.setName("合同");
-        list.add(model7);
-        ArrondiProductModel model8 = new ArrondiProductModel();
-        model8.setImageResId(R.mipmap.icon_gongsi);
-        model8.setName("官司");
-        list.add(model8);
-        lists.add(list);
-        arrondi.setAdapter(productAdapter);
+        int pageSize;
+        int size = list.size();
+        if (size % PAGE_COUNT == 0) {
+            pageSize = size / PAGE_COUNT;
+        } else {
+            pageSize = size / PAGE_COUNT + 1;
+        }
+        for (int i = 0; i < pageSize; i++) {
+            List<ArrondiProductModel> models = new ArrayList<>();
+            for (int j = 0; j < PAGE_COUNT; j++) {
+                if (i * PAGE_COUNT + j >= size) {
+                    break;
+                } else {
+                    models.add(list.get(i * PAGE_COUNT + j));
+                }
+            }
+            lists.add(models);
+        }
         productAdapter.refresh(lists);
     }
 }

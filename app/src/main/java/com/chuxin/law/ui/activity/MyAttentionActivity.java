@@ -1,6 +1,9 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.KeyEvent;
+import android.view.View;
 
 import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.common.ApiService;
@@ -27,6 +30,7 @@ import rx.functions.Action1;
  */
 
 public class MyAttentionActivity extends BaseTalkLawActivity {
+    public static final String FOLLOW_COUNT="follow_count";
     protected BackTitleView titleView;
     protected XRecyclerView attentionList;
     private MyAttentionAdapter adapter;
@@ -56,6 +60,14 @@ public class MyAttentionActivity extends BaseTalkLawActivity {
 
         titleView.setTitle("我的关注");
 
+        titleView.setBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back();
+                onBackPressed();
+            }
+        });
+
         attentionList.setAdapter(adapter);
         attentionList.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -78,6 +90,21 @@ public class MyAttentionActivity extends BaseTalkLawActivity {
         });
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==KeyEvent.KEYCODE_BACK){
+            back();
+            onBackPressed();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void back(){
+        Intent intent=new Intent();
+        intent.putExtra(FOLLOW_COUNT,adapter.getItemCount()+"");
+        setResult(RESULT_OK,intent);
+    }
 
     private void delFollow(final MyAttentionModel model){
         showLoadDialog();

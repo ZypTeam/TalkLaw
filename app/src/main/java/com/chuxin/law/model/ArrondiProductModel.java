@@ -10,9 +10,10 @@ import com.jusfoun.baselibrary.base.BaseModel;
 
 public class ArrondiProductModel extends BaseModel {
     private int imageResId;
-    private String imgeUrl;
+    private String img;
     private String name;
     private String title;
+    private String id;
 
     public int getImageResId() {
         return imageResId;
@@ -20,14 +21,6 @@ public class ArrondiProductModel extends BaseModel {
 
     public void setImageResId(int imageResId) {
         this.imageResId = imageResId;
-    }
-
-    public String getImgeUrl() {
-        return imgeUrl;
-    }
-
-    public void setImgeUrl(String imgeUrl) {
-        this.imgeUrl = imgeUrl;
     }
 
     public String getName() {
@@ -44,5 +37,13 @@ public class ArrondiProductModel extends BaseModel {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

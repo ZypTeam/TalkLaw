@@ -262,4 +262,13 @@ public interface ApiService {
     @GET("/goods/buy")
     Observable<IntegralDetailDataModel> integralExchangeNet(@QueryMap Map<String,String> params);
 
+    /**
+     * 律师认证
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @GET("/law-info/submit")
+    Observable<NoDataModel> lawyerAuth(@FieldMap Map<String,String> params);
+
 }

@@ -20,4 +20,10 @@ public class CommonConstant {
     //评论返回
     public static final int COMMENT_RESULT_CODE=100;
 
+    //律师认证返回
+    public static final int LAWYER_AUTH_RESULT_CODE=101;
+
+    //关注返回
+    public static final int FOLLOW_RESULT_CODE=102;
+
 }

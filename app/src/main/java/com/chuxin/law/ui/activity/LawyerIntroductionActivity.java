@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
@@ -64,6 +65,9 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     public void initDatas() {
         adapter = new ProductListAdapter(mContext);
         id=getIntent().getStringExtra(ID);
+        if (TextUtils.isEmpty(id)){
+            id="5";
+        }
     }
 
     @Override
