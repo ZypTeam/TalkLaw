@@ -11,13 +11,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.TalkLawApplication;
+import com.chuxin.law.model.ShippingAddressModel;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
+import com.chuxin.law.ui.activity.IntegralActivity;
 import com.chuxin.law.ui.activity.MyMsgListActivity;
 import com.chuxin.law.ui.activity.RecommendCourtesyActivity;
 import com.chuxin.law.ui.activity.SettingActivity;
 import com.chuxin.law.ui.activity.ShippingAddressActivity;
+import com.chuxin.law.ui.sharedpreferences.ShippingAddressSp;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 
@@ -122,6 +125,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         editAddress.setOnClickListener(this);
 
 
+
     }
 
     @Override
@@ -155,6 +159,9 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
                 break;
             case R.id.edit_address:
                 goActivity(null, ShippingAddressActivity.class);
+                break;
+            case R.id.btn_jifen:
+                goActivity(null, IntegralActivity.class);
                 break;
             default:
                 break;
@@ -221,6 +228,18 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         myAddressContent.setText(userModel.getAddress());
         zhuanghuCount.setText("¥" + userModel.getMoney());
         jifenCount.setText(userModel.getPoints());
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ShippingAddressModel.ShippingAddressItemModel model =  ShippingAddressSp.getSelectShippingAddress(mContext);
+        if(model==null){
+            myAddressContent.setText("暂无");
+        }else{
+            myAddressContent.setText(model.city);
+        }
 
     }
 }
