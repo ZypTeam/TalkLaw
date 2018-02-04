@@ -1,6 +1,8 @@
 package com.chuxin.law.ui.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,11 +18,13 @@ import com.chuxin.law.common.ApiService;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.activity.IntegralActivity;
+import com.chuxin.law.ui.activity.LawyerAuthActivity;
 import com.chuxin.law.ui.activity.MyMsgListActivity;
 import com.chuxin.law.ui.activity.RecommendCourtesyActivity;
 import com.chuxin.law.ui.activity.SettingActivity;
 import com.chuxin.law.ui.activity.ShippingAddressActivity;
 import com.chuxin.law.ui.sharedpreferences.ShippingAddressSp;
+import com.chuxin.law.ui.util.UIUtils;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 
@@ -62,11 +66,12 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
     protected TextView myAddress;
     protected TextView editAddress;
     protected ImageView imgAddress;
-    protected TextView myAddressContent;
+    protected TextView myAddressContent, auth;
     private ImageView setting;
     private TextView recommend;
     private ImageView msg;
     private UserModel userModel;
+    private Drawable dAuthUn,dAuth;
 
     public static MyFragment getInstance() {
         MyFragment fragment = new MyFragment();
@@ -80,7 +85,10 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
 
     @Override
     public void initDatas() {
-
+        dAuth=mContext.getResources().getDrawable(R.mipmap.icon_lawyer_auth);
+        dAuth.setBounds(0,0,dAuth.getIntrinsicWidth(),dAuth.getIntrinsicHeight());
+        dAuthUn=mContext.getResources().getDrawable(R.mipmap.icon_lawyer_auth_un);
+        dAuthUn.setBounds(0,0,dAuthUn.getIntrinsicWidth(),dAuthUn.getIntrinsicHeight());
     }
 
     @Override
@@ -106,6 +114,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         imgAddress = (ImageView) rootView.findViewById(R.id.img_address);
         myAddressContent = (TextView) rootView.findViewById(R.id.my_address_content);
         recommend = (TextView) rootView.findViewById(R.id.recommend);
+        auth = (TextView) rootView.findViewById(R.id.auth);
         msg = (ImageView) rootView.findViewById(R.id.msg);
 
         setting = rootView.findViewById(R.id.setting);
@@ -123,7 +132,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         recommend.setOnClickListener(this);
         msg.setOnClickListener(this);
         editAddress.setOnClickListener(this);
-
+        auth.setOnClickListener(this);
 
 
     }
@@ -163,6 +172,13 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
             case R.id.btn_jifen:
                 goActivity(null, IntegralActivity.class);
                 break;
+            case R.id.auth:
+                if (userModel!=null) {
+                    if (userModel.getType()==1) {
+                        UIUtils.goLawyerAuth(mContext);
+                    }
+                }
+                break;
             default:
                 break;
         }
@@ -173,7 +189,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case CommonConstant.FOLLOW_RESULT_CODE:
-                if (data!=null){
+                if (data != null) {
                     userModel.setFollow(data.getStringExtra(MyAttentionActivity.FOLLOW_COUNT));
                     TalkLawApplication.saveUserInfo(userModel);
                 }
@@ -185,7 +201,8 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
 
     @Override
     protected void refreshData() {
-        getUserInfo();
+//        getUserInfo();
+        updateUserInfo();
     }
 
     private void getUserInfo() {
@@ -228,16 +245,25 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         myAddressContent.setText(userModel.getAddress());
         zhuanghuCount.setText("¥" + userModel.getMoney());
         jifenCount.setText(userModel.getPoints());
+        if (userModel.getType() ==1) {
+            auth.setText("未认证");
+            auth.setTextColor(Color.parseColor("#bababa"));
+            auth.setCompoundDrawables(null,null,dAuthUn,null);
+        } else {
+            auth.setTextColor(getResources().getColor(R.color.app_red_color));
+            auth.setText(userModel.getLaw().getLevel());
+            auth.setCompoundDrawables(null,null,dAuth,null);
+        }
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        ShippingAddressModel.ShippingAddressItemModel model =  ShippingAddressSp.getSelectShippingAddress(mContext);
-        if(model==null){
+        ShippingAddressModel.ShippingAddressItemModel model = ShippingAddressSp.getSelectShippingAddress(mContext);
+        if (model == null) {
             myAddressContent.setText("暂无");
-        }else{
+        } else {
             myAddressContent.setText(model.city);
         }
 

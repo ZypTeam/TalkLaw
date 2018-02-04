@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.chuxin.law.ui.activity.CommentListActivity;
 import com.chuxin.law.ui.activity.GratuityActivity;
+import com.chuxin.law.ui.activity.LawyerAuthActivity;
 import com.chuxin.law.ui.activity.LawyerDefautActivity;
 
 import static com.chuxin.law.common.CommonConstant.COMMENT_RESULT_CODE;
@@ -87,6 +88,11 @@ public class UIUtils {
             intent.setClass( ((Fragment) context).getContext(),CommentListActivity.class);
             ((Fragment) context).startActivityForResult(intent,COMMENT_RESULT_CODE);
         }
+    }
+
+    public static void goLawyerAuth(Context context){
+        Intent intent=new Intent(context, LawyerAuthActivity.class);
+        context.startActivity(intent);
     }
 
 }
