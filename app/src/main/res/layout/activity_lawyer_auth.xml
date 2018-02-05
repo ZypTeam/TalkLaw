@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f0eff5"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.chuxin.law.ui.widget.BackTitleView
@@ -13,11 +14,196 @@
         android:layout_height="wrap_content"/>
     
     <TextView
+        android:id="@+id/upload_head"
         app:layout_constraintTop_toBottomOf="@+id/title_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:gravity=""
+        android:layout_marginTop="5dp"
+        android:background="@color/write"
+        android:gravity="right|center_vertical"
+        android:paddingRight="16dp"
+        android:drawableRight="@mipmap/icon_arrow_gray_right"
+        android:text="上传头像"
+        android:textSize="16sp"
+        android:textColor="#999"
+        android:drawablePadding="7dp"
         android:layout_width="0dp"
         android:layout_height="80dp" />
+    
+    <ImageView
+        android:id="@+id/icon_head"
+        app:layout_constraintTop_toTopOf="@+id/upload_head"
+        app:layout_constraintBottom_toBottomOf="@+id/upload_head"
+        app:layout_constraintLeft_toLeftOf="@+id/upload_head"
+        android:layout_marginLeft="16dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+    
+    <TextView
+        android:id="@+id/name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_head"
+        android:layout_marginTop="5dp"
+        android:background="@color/write"
+        android:text="与证书一致"
+        android:drawablePadding="7dp"
+        android:textColor="#999"
+        android:textSize="16sp"
+        android:gravity="center_vertical|right"
+        android:paddingRight="16dp"
+        android:layout_width="0dp"
+        android:layout_height="45dp" />
+
+    <TextView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_head"
+        android:layout_marginTop="5dp"
+        android:background="@color/write"
+        android:text="姓名"
+        android:textColor="#333"
+        android:textSize="16sp"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp" />
+
+    <View
+        android:background="#f0eff5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/name"
+        android:layout_marginLeft="16dp"
+        android:layout_width="0dp"
+        android:layout_height="1px"/>
+
+    <TextView
+        android:id="@+id/time"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        android:background="@color/write"
+        android:text="选择时间"
+        android:drawablePadding="7dp"
+        android:textColor="#999"
+        android:textSize="16sp"
+        android:gravity="center_vertical|right"
+        android:paddingRight="16dp"
+        android:layout_width="0dp"
+        android:layout_height="45dp" />
+
+    <TextView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        android:background="@color/write"
+        android:text="执业起始时间"
+        android:textColor="#333"
+        android:textSize="16sp"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp" />
+
+    <View
+        android:background="#f0eff5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/time"
+        android:layout_marginLeft="16dp"
+        android:layout_width="0dp"
+        android:layout_height="1px"/>
+
+    <TextView
+        android:id="@+id/lawyer"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time"
+        android:background="@color/write"
+        android:text="选择律所"
+        android:drawablePadding="7dp"
+        android:textColor="#999"
+        android:textSize="16sp"
+        android:gravity="center_vertical|right"
+        android:paddingRight="16dp"
+        android:layout_width="0dp"
+        android:layout_height="45dp" />
+
+    <TextView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time"
+        android:background="@color/write"
+        android:text="执业律所"
+        android:textColor="#333"
+        android:textSize="16sp"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp" />
+
+    <View
+        android:id="@+id/bg_image"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lawyer"
+        android:layout_marginTop="5dp"
+        android:background="@color/write"
+        android:layout_width="0dp"
+        android:layout_height="140dp"/>
+
+    <ImageView
+        android:id="@+id/bg_yingye"
+        app:layout_constraintRight_toLeftOf="@+id/bg_nianjian"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bg_image"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_image"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_width="0dp"
+        android:layout_height="106dp" />
+
+    <ImageView
+        android:id="@+id/bg_nianjian"
+        app:layout_constraintLeft_toRightOf="@+id/bg_yingye"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bg_image"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_image"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="0dp"
+        android:layout_height="106dp" />
+
+    <ImageView
+        android:id="@+id/yingye"
+        app:layout_constraintLeft_toLeftOf="@+id/bg_yingye"
+        app:layout_constraintRight_toRightOf="@+id/bg_yingye"
+        app:layout_constraintTop_toTopOf="@+id/bg_yingye"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_yingye"
+        android:layout_margin="1dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <ImageView
+        android:id="@+id/nianjian"
+        app:layout_constraintLeft_toLeftOf="@+id/bg_nianjian"
+        app:layout_constraintRight_toRightOf="@+id/bg_nianjian"
+        app:layout_constraintTop_toTopOf="@+id/bg_nianjian"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_nianjian"
+        android:layout_margin="1dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+
+    <TextView
+        android:id="@+id/next"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/app_red_color"
+        android:textSize="18sp"
+        android:textColor="@color/write"
+        android:text="下一步"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="49dp" />
 
 </android.support.constraint.ConstraintLayout>

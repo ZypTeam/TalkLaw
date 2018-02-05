@@ -26,4 +26,10 @@ public class CommonConstant {
     //关注返回
     public static final int FOLLOW_RESULT_CODE=102;
 
+    public static final int REQUEST_IMAGE_HEAD=102;
+
+    public static final int REQUEST_IMAGE_PHOTO=103;
+
+    public static final int REQUEST_IMAGE_PAGE=103;
+
 }

@@ -12,6 +12,7 @@ import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
 import com.chuxin.law.ui.activity.LawyerDefautActivity;
 import com.chuxin.law.ui.util.ImageLoderUtil;
+import com.chuxin.law.ui.util.UIUtils;
 
 /**
  * @author zhaoyapeng
@@ -38,7 +39,7 @@ public class CarouselViewHolder extends BaseViewHolder<ProductItemModel> {
 
 
     @Override
-    public void update(ProductItemModel model) {
+    public void update(final ProductItemModel model) {
         ImageLoderUtil.loadRoundImage(mContext,imgAvatar,model.img,10);
         textName.setText(model.lawyer);
         textTime.setText(model.createtime);
@@ -48,8 +49,8 @@ public class CarouselViewHolder extends BaseViewHolder<ProductItemModel> {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, LawyerDefautActivity.class);
-                mContext.startActivity(intent);
+                UIUtils.goLawyerDef(mContext,model.id);
+
             }
         });
     }

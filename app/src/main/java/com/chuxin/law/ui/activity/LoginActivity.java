@@ -96,6 +96,7 @@ public class LoginActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
+        TAG=getClass().getSimpleName();
         mShareAPI = UMShareAPI.get(mContext);
         TAG=getClass().getSimpleName();
     }
@@ -120,7 +121,7 @@ public class LoginActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View view) {
                 startCode();
-                getCode(code.getText().toString());
+                getCode(number.getText().toString());
 
             }
         });
@@ -172,14 +173,6 @@ public class LoginActivity extends BaseTalkLawActivity {
                     public void call(UserInfoModel userInfoModel) {
                         if (userInfoModel != null && userInfoModel.getCode() == 10000) {
                             loginHx(userInfoModel);
-                        } else {
-                            hideLoadDialog();
-                            UserModel model=new UserModel();
-                            model.setId("0");
-                            model.setName("律师");
-                            TalkLawApplication.saveUserInfo(model);
-                            goActivity(null,HomeActivity.class);
-                            Toast.makeText(mContext, userInfoModel.getMsg(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -330,7 +323,8 @@ public class LoginActivity extends BaseTalkLawActivity {
                     @Override
                     public void run() {
                         hideLoadDialog();
-                        Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show();
+                        goActivity(null,HomeActivity.class);
                     }
                 });
             }

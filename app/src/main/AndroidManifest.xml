@@ -173,6 +173,12 @@
 
         <!--收货地址-->
         <activity android:name=".ui.activity.ShippingAddressActivity" />
+
+        <!--律师认证-->
+        <activity android:name=".ui.activity.LawyerAuthActivity"/>
+
+        <!--提交认证-->
+        <activity android:name=".ui.activity.SubmitAuthActivity"/>
         <!--新浪分享-->
         <activity
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"
@@ -229,6 +235,27 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!--支付宝支付-->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+
+        <!--Image Selector Entry-->
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
 
         <meta-data android:name="UMENG_APPKEY"
             android:value="5a3a0da5b27b0a4ed200002f"/>

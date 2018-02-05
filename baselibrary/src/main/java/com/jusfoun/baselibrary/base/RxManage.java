@@ -25,6 +25,8 @@ import rx.subscriptions.CompositeSubscription;
  */
 public class RxManage {
 
+    public RxBus mRxbus=RxBus.getInstance();
+
     private CompositeSubscription mCompositeSubscription=new CompositeSubscription();
 
     public void add(Subscription m){
@@ -51,6 +53,14 @@ public class RxManage {
                             }
                         })
         );
+    }
+
+    public void post(Object tag, Object content){
+        mRxbus.post(tag, content);
+    }
+
+    public void post(Object event){
+        mRxbus.post(event);
     }
 
     public void clear(){
