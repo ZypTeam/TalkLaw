@@ -123,7 +123,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         recommend.setOnClickListener(this);
         msg.setOnClickListener(this);
         editAddress.setOnClickListener(this);
-
+        btnJifen.setOnClickListener(this);
 
 
     }

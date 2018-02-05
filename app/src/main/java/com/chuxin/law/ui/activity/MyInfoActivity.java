@@ -255,6 +255,15 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
             }
         });
 
+//        iconHead.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Multi image selector form an Activity
+//                MultiImageSelector.create(Context)
+//                        .start(Activity, REQUEST_IMAGE);
+//            }
+//        });
+
         userName.setOnKeyListener(this);
         userNickname.setOnKeyListener(this);
         userNumber.setOnKeyListener(this);

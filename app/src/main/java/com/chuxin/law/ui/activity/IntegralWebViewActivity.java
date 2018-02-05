@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.util.Log;
 import android.view.View;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -150,6 +151,8 @@ public class IntegralWebViewActivity extends BaseTalkLawActivity {
         HashMap<String,String> map = new HashMap<>();
         map.put("id",id);
         map.put("remarks","北京");
+
+        Log.e("tag","exchangeexchange="+map);
 
         addNetwork(Api.getInstance().getService(ApiService.class).integralExchangeNet(map)
                 , new Action1<IntegralDetailDataModel>() {
