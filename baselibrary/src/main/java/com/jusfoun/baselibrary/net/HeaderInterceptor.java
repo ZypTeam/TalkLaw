@@ -54,7 +54,7 @@ public class HeaderInterceptor implements Interceptor {
                 .addHeader(SEAVER_TOKEN, "c9f06dbe8619b276f9472b25ca44e2f8")
                 .build();
         String requestContent = bodyToString(request);
-        LogUtil.e("request", "url==" + request.url().toString());
+        LogUtil.e("request", "url==" + request.url().toString()+" "+request.headers() );
 //        Log.e("request", "url==" + request.url().toString()+"?"+requestContent);
         long t1 = System.nanoTime();
         Response response = null;
