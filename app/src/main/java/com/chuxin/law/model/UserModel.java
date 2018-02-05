@@ -1,5 +1,7 @@
 package com.chuxin.law.model;
 
+import com.wang.dblibrary.User;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -86,6 +88,7 @@ public class UserModel implements Serializable {
     private String follow;
     private String qrcode;
     private UserModel law;
+
 
     public String getId() {
         return id;

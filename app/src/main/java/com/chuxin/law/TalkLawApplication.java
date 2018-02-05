@@ -5,6 +5,10 @@ import android.support.multidex.MultiDex;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.google.gson.Gson;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMCallManager;
+import com.hyphenate.chat.EMChatManager;
+import com.hyphenate.chat.EMClient;
 import com.jusfoun.baselibrary.BaseApplication;
 import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.SharePrefenceUtils;
@@ -63,6 +67,27 @@ public class TalkLawApplication extends BaseApplication{
 
     public static void exitUser(){
         SharePrefenceUtils.getInstance().setString(SharePrefenceConstant.USER_MODEL,"");
+        //此方法为异步方法
+        EMClient.getInstance().logout(true,new EMCallBack() {
+
+            @Override
+            public void onSuccess() {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                // TODO Auto-generated method stub
+
+            }
+        });
     }
 
     public static void saveUserInfo(UserModel model){

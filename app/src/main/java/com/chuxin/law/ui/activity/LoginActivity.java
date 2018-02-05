@@ -96,6 +96,7 @@ public class LoginActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
+        TAG=getClass().getSimpleName();
         mShareAPI = UMShareAPI.get(mContext);
         TAG=getClass().getSimpleName();
     }
@@ -322,7 +323,8 @@ public class LoginActivity extends BaseTalkLawActivity {
                     @Override
                     public void run() {
                         hideLoadDialog();
-                        Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show();
+                        goActivity(null,HomeActivity.class);
                     }
                 });
             }
