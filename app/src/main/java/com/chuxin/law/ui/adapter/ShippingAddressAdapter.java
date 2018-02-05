@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseAdapter;
 import com.chuxin.law.base.BaseViewHolder;
-import com.chuxin.law.model.ShippingAddressModel;
+import com.chuxin.law.sharedpreferences.ShippingAddressModel;
 
 /**
  * @author wangcc

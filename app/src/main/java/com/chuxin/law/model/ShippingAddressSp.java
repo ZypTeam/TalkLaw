@@ -1,10 +1,10 @@
-package com.chuxin.law.ui.sharedpreferences;
+package com.chuxin.law.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-import com.chuxin.law.model.ShippingAddressModel;
+import com.chuxin.law.sharedpreferences.ShippingAddressModel;
 import com.google.gson.Gson;
 
 /**

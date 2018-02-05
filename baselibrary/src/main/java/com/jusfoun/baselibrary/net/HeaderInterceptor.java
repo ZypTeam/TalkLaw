@@ -51,8 +51,9 @@ public class HeaderInterceptor implements Interceptor {
 ////                .addHeader(Channel, AppUtil.getChannelName(mContext))
 //                .addHeader(Deviceid, PhoneUtil.getIMEI(mContext))
                 .addHeader(APIVersion, "1.0")
-                .addHeader(SEAVER_TOKEN, "c9f06dbe8619b276f9472b25ca44e2f8")
+                .addHeader(SEAVER_TOKEN, "d6115638dbf7d1b4a63513fc50d573d3")
                 .build();
+
         String requestContent = bodyToString(request);
         LogUtil.e("request", "url==" + request.url().toString()+" "+request.headers() );
 //        Log.e("request", "url==" + request.url().toString()+"?"+requestContent);

@@ -7,9 +7,9 @@ import android.view.View;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.model.ShippingAddressModel;
+import com.chuxin.law.sharedpreferences.ShippingAddressModel;
 import com.chuxin.law.ui.adapter.ShippingAddressAdapter;
-import com.chuxin.law.ui.sharedpreferences.ShippingAddressSp;
+import com.chuxin.law.model.ShippingAddressSp;
 import com.chuxin.law.ui.widget.BackTitleView;
 
 /**
@@ -79,10 +79,8 @@ public class ShippingAddressActivity extends BaseTalkLawActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("tag", "onResumeonResume1");
         ShippingAddressModel model = ShippingAddressSp.getShippingAddress(mContext);
         if (model != null && model.list != null) {
-            Log.e("tag", "onResumeonResume2=" + model.list.size());
             addressAdapter.refreshList(model.list);
         }
 

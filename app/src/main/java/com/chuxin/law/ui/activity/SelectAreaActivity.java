@@ -7,8 +7,8 @@ import android.widget.Toast;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.model.ShippingAddressModel;
-import com.chuxin.law.ui.sharedpreferences.ShippingAddressSp;
+import com.chuxin.law.sharedpreferences.ShippingAddressModel;
+import com.chuxin.law.model.ShippingAddressSp;
 import com.chuxin.law.ui.widget.BackTitleView;
 
 import java.util.ArrayList;

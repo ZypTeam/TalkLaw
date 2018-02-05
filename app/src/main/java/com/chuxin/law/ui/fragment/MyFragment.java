@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,17 +12,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.TalkLawApplication;
-import com.chuxin.law.model.ShippingAddressModel;
+import com.chuxin.law.sharedpreferences.ShippingAddressModel;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.activity.IntegralActivity;
-import com.chuxin.law.ui.activity.LawyerAuthActivity;
 import com.chuxin.law.ui.activity.MyMsgListActivity;
 import com.chuxin.law.ui.activity.RecommendCourtesyActivity;
 import com.chuxin.law.ui.activity.SettingActivity;
 import com.chuxin.law.ui.activity.ShippingAddressActivity;
-import com.chuxin.law.ui.sharedpreferences.ShippingAddressSp;
+import com.chuxin.law.model.ShippingAddressSp;
 import com.chuxin.law.ui.util.UIUtils;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
@@ -233,7 +231,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
             return;
         }
         Glide.with(mContext)
-                .load("http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg")
+                .load(userModel.getHeadimg())
                 .placeholder(R.mipmap.icon_head_def_cir)
                 .error(R.mipmap.icon_head_def_cir)
                 .transform(new CenterCrop(mContext), new GlideCircleTransform(mContext))

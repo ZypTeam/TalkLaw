@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.webkit.JsResult;
@@ -16,6 +17,8 @@ import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.model.IntegralDetailDataModel;
 import com.chuxin.law.model.IntegralProductDetailModel;
+import com.chuxin.law.model.ShippingAddressSp;
+import com.chuxin.law.sharedpreferences.ShippingAddressModel;
 import com.chuxin.law.ui.view.IntegralDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.net.Api;
@@ -97,7 +100,14 @@ public class IntegralWebViewActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View view) {
                 integralDialog.dismiss();
-                exchange();
+
+                ShippingAddressModel.ShippingAddressItemModel model=  ShippingAddressSp.getSelectShippingAddress(mContext);
+                if(model==null){
+                    goActivityForResult(null,ShippingAddressActivity.class,1001);
+                }else{
+                    exchange(model);
+                }
+
             }
         });
         delMsg();
@@ -146,11 +156,11 @@ public class IntegralWebViewActivity extends BaseTalkLawActivity {
                 });
     }
 
-    private void exchange() {
+    private void exchange( ShippingAddressModel.ShippingAddressItemModel model) {
         showLoadDialog();
         HashMap<String,String> map = new HashMap<>();
         map.put("id",id);
-        map.put("remarks","北京");
+        map.put("remarks",model.city+"-"+model.area+"-"+model.address);
 
         Log.e("tag","exchangeexchange="+map);
 
@@ -172,5 +182,16 @@ public class IntegralWebViewActivity extends BaseTalkLawActivity {
                         hideLoadDialog();
                     }
                 });
+    }
+
+    @Override
+    public void onActivityReenter(int resultCode, Intent data) {
+        super.onActivityReenter(resultCode, data);
+        ShippingAddressModel.ShippingAddressItemModel model=  ShippingAddressSp.getSelectShippingAddress(mContext);
+        if(resultCode==1001){
+            if(model!=null){
+                exchange(model);
+            }
+        }
     }
 }

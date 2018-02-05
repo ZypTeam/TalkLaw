@@ -126,7 +126,7 @@ public class IntegralActivity extends BaseTalkLawActivity {
             }
         });
 
-        textCountIntegral.setOnClickListener(new View.OnClickListener() {
+        textGetIntegral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goActivity(null,RecommendCourtesyActivity.class);

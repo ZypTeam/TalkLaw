@@ -1,4 +1,4 @@
-package com.chuxin.law.model;
+package com.chuxin.law.sharedpreferences;
 
 import com.jusfoun.baselibrary.base.BaseModel;
 

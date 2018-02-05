@@ -270,7 +270,7 @@ public interface ApiService {
      * @param params
      * @return
      */
-    @GET("/goods/buy")
+    @POST("/goods/buy")
     Observable<IntegralDetailDataModel> integralExchangeNet(@QueryMap Map<String,String> params);
 
     /**
