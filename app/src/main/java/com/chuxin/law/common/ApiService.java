@@ -23,6 +23,7 @@ import cn.com.talklaw.model.GoodsDataModel;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
@@ -81,6 +82,16 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/user/info")
     Observable<NoDataModel> editUserInfo(@FieldMap Map<String,String> params);
+
+
+    /**
+     * 修改用户信息
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/user/info")
+    Observable<NoDataModel> editUserInfo(@FieldMap Map<String,String> params,@Header("data") String lang);
 
     /**
      * 修改用户信息

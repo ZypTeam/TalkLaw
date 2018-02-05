@@ -20,6 +20,8 @@ import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
+import com.chuxin.law.ui.util.base64.Base64Util;
+import com.chuxin.law.ui.util.base64.EncodeCallBack;
 import com.chuxin.law.ui.view.wheel.dialog.SelectorDateDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.chuxin.law.ui.widget.NumberPickerPopupwinow;
@@ -31,7 +33,10 @@ import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 
 import java.util.HashMap;
+import java.util.List;
 
+import me.nereo.multi_image_selector.MultiImageSelector;
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 import rx.functions.Action1;
 
 /**
@@ -40,12 +45,14 @@ import rx.functions.Action1;
  * @describe
  */
 
-public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyListener {
+public class MyInfoActivity extends BaseTalkLawActivity  {
+//    implements View.OnKeyListener
     private final int NAME_REQUEST_CODE = 101;
     private final int NICKNAME_REQUEST_CODE = 102;
     private final int PHONE_REQUEST_CODE = 103;
     private final int EMAIL_REQUEST_CODE = 104;
-    private final int ADDRESS_REQUEST_CODE = 104;
+    private final int ADDRESS_REQUEST_CODE = 105;
+    private final int REQUEST_IMAGE = 105;
 
     protected BackTitleView titleView;
     protected TextView head;
@@ -106,7 +113,7 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
                         }
 
                         userSex.setText(sexNumPicPop.getData());
-                        editUserInfo();
+                        editUserInfo(false);
                         sexNumPicPop.dismiss();
                     }
                 });
@@ -121,7 +128,7 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
                             editUserMap.clear();
                             editUserMap.put("birthday", userBirthday.getText().toString());
                             userModel.setBirthday(userBirthday.getText().toString());
-                            editUserInfo();
+                            editUserInfo(false);
                         } else {
                             showToast("不能为空");
                         }
@@ -165,7 +172,7 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
         address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goActivityForResult(null, AreaListActivity.class,ADDRESS_REQUEST_CODE);
+                goActivityForResult(null, AreaListActivity.class, ADDRESS_REQUEST_CODE);
             }
         });
         name.setOnClickListener(new View.OnClickListener() {
@@ -255,20 +262,24 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
             }
         });
 
-//        iconHead.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Multi image selector form an Activity
-//                MultiImageSelector.create(Context)
-//                        .start(Activity, REQUEST_IMAGE);
-//            }
-//        });
+        iconHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Multi image selector form an Activity
+                MultiImageSelector.create(MyInfoActivity.this)
+                        .showCamera(true) // 是否显示相机. 默认为显示
+                        .count(1) // 最大选择图片数量, 默认为9. 只有在选择模式为多选时有效
+                        .single() // 单选模式
+                        .multi() // 多选模式, 默认模式;
+                        .start(MyInfoActivity.this, REQUEST_IMAGE);
+            }
+        });
 
-        userName.setOnKeyListener(this);
-        userNickname.setOnKeyListener(this);
-        userNumber.setOnKeyListener(this);
-        userMail.setOnKeyListener(this);
-        userBirthday.setOnKeyListener(this);
+//        userName.setOnKeyListener(this);
+//        userNickname.setOnKeyListener(this);
+//        userNumber.setOnKeyListener(this);
+//        userMail.setOnKeyListener(this);
+//        userBirthday.setOnKeyListener(this);
 
         getUserInfo();
     }
@@ -281,7 +292,7 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
                     @Override
                     public void call(UserInfoModel model) {
                         hideLoadDialog();
-                        if (model!=null&&model.getCode()== CommonConstant.NET_SUC_CODE&&model.getData()!=null){
+                        if (model != null && model.getCode() == CommonConstant.NET_SUC_CODE && model.getData() != null) {
                             TalkLawApplication.saveUserInfo(model.getData());
                             userName.setText(model.getData().getName());
                             if (1 == model.getData().getSex()) {
@@ -322,119 +333,138 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
         } else {
             userSex.setText("女");
         }
-        tvAddressValue.setText(userModel.getProvince()+"-"+userModel.getCity());
+        tvAddressValue.setText(userModel.getProvince() + "-" + userModel.getCity());
         userBirthday.setText(userModel.getBirthday());
         userMail.setText(userModel.getEmail());
         userNumber.setText(userModel.getPhone());
     }
 
-    private void editUserInfo() {
+    private void editUserInfo(boolean isEditHeadImg) {
         showLoadDialog();
-        addNetwork(Api.getInstance().getService(ApiService.class).editUserInfo(editUserMap)
-                , new Action1<NoDataModel>() {
-                    @Override
-                    public void call(NoDataModel model) {
-                        hideLoadDialog();
-                        if (model.getCode() == CommonConstant.NET_SUC_CODE) {
-                            TalkLawApplication.saveUserInfo(userModel);
+        if(isEditHeadImg) {
+            addNetwork(Api.getInstance().getService(ApiService.class).editUserInfo(editUserMap)
+                    , new Action1<NoDataModel>() {
+                        @Override
+                        public void call(NoDataModel model) {
+                            hideLoadDialog();
+                            if (model.getCode() == CommonConstant.NET_SUC_CODE) {
+                                TalkLawApplication.saveUserInfo(userModel);
+                            }
+                            showToast(model.getMsg());
                         }
-                        showToast(model.getMsg());
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        showToast("修改失败");
-                    }
-                });
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            showToast("修改失败");
+                        }
+                    });
+        }else{
+            addNetwork(Api.getInstance().getService(ApiService.class).editUserInfo(editUserMap,"image/jpeg;base64,")
+                    , new Action1<NoDataModel>() {
+                        @Override
+                        public void call(NoDataModel model) {
+                            hideLoadDialog();
+                            if (model.getCode() == CommonConstant.NET_SUC_CODE) {
+                                TalkLawApplication.saveUserInfo(userModel);
+                            }
+                            showToast(model.getMsg());
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            showToast("修改失败");
+                        }
+                    });
+        }
     }
 
-    @Override
-    public boolean onKey(View v, int keyCode, KeyEvent event) {
-        if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-            if (userModel == null) {
-                goActivity(null, LoginActivity.class);
-                return false;
-            }
-            switch (v.getId()) {
-                case R.id.user_name:
-                    if (!StringUtil.isEmpty(userName.getText().toString())) {
-                        editUserMap.clear();
-                        editUserMap.put("name", userName.getText().toString());
-                        userModel.setName(userName.getText().toString());
-                        editUserInfo();
-                    } else {
-                        showToast("不能为空");
-                    }
-                    break;
-                case R.id.user_nickname:
-                    if (!StringUtil.isEmpty(userNickname.getText().toString())) {
-                        editUserMap.clear();
-                        editUserMap.put("intro", userNickname.getText().toString());
-                        userModel.setHx_username(userNickname.getText().toString());
-                        editUserInfo();
-                    } else {
-                        showToast("不能为空");
-                    }
-                    break;
-                case R.id.user_number:
-                    if (!StringUtil.isEmpty(userNumber.getText().toString())) {
-                        editUserMap.clear();
-                        editUserMap.put("phone", userNumber.getText().toString());
-                        userModel.setName(userNumber.getText().toString());
-                        editUserInfo();
-                    } else {
-                        showToast("不能为空");
-                    }
-                    break;
-                case R.id.user_birthday:
-//                    if (!StringUtil.isEmpty(userBirthday.getText().toString())) {
+//    @Override
+//    public boolean onKey(View v, int keyCode, KeyEvent event) {
+//        if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+//            if (userModel == null) {
+//                goActivity(null, LoginActivity.class);
+//                return false;
+//            }
+//            switch (v.getId()) {
+//                case R.id.user_name:
+//                    if (!StringUtil.isEmpty(userName.getText().toString())) {
 //                        editUserMap.clear();
-//                        editUserMap.put("birthday",userBirthday.getText().toString());
-//                        userModel.setName(userBirthday.getText().toString());
-//                        editUserInfo();
-//                    }else {
+//                        editUserMap.put("name", userName.getText().toString());
+//                        userModel.setName(userName.getText().toString());
+//                        editUserInfo(false);
+//                    } else {
 //                        showToast("不能为空");
 //                    }
-                    break;
-                case R.id.user_mail:
-                    if (!StringUtil.isEmpty(userMail.getText().toString())) {
-                        editUserMap.clear();
-                        editUserMap.put("email", userMail.getText().toString());
-                        userModel.setName(userMail.getText().toString());
-                        editUserInfo();
-                    } else {
-                        showToast("不能为空");
-                    }
-                    break;
-                case R.id.user_sex:
-                    Log.e("tag", "user_sex==1");
-//                    if (!StringUtil.isEmpty(userName.getText().toString())
-//                            &&(!StringUtil.equals(userName.getText().toString(),"男")
-//                    ||!StringUtil.equals(userName.getText().toString(),"女"))) {
+//                    break;
+//                case R.id.user_nickname:
+//                    if (!StringUtil.isEmpty(userNickname.getText().toString())) {
 //                        editUserMap.clear();
-//                        editUserMap.put("sex",userSex.getText().toString());
-//                        if(StringUtil.equals(userName.getText().toString(),"女")){
-//                            userModel.setSex(2);
-//                            editUserMap.put("sex","2");
-//                        }else {
-//                            userModel.setSex(1);
-//                            editUserMap.put("sex","1");
-//                        }
+//                        editUserMap.put("intro", userNickname.getText().toString());
+//                        userModel.setHx_username(userNickname.getText().toString());
 //                        editUserInfo();
-//                    }else {
-//                        showToast("请输入男或女");
+//                    } else {
+//                        showToast("不能为空");
 //                    }
-
-
-                    break;
-
-            }
-            return true;
-        } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
-            return true;
-        }
-        return false;
-    }
+//                    break;
+//                case R.id.user_number:
+//                    if (!StringUtil.isEmpty(userNumber.getText().toString())) {
+//                        editUserMap.clear();
+//                        editUserMap.put("phone", userNumber.getText().toString());
+//                        userModel.setName(userNumber.getText().toString());
+//                        editUserInfo();
+//                    } else {
+//                        showToast("不能为空");
+//                    }
+//                    break;
+//                case R.id.user_birthday:
+////                    if (!StringUtil.isEmpty(userBirthday.getText().toString())) {
+////                        editUserMap.clear();
+////                        editUserMap.put("birthday",userBirthday.getText().toString());
+////                        userModel.setName(userBirthday.getText().toString());
+////                        editUserInfo();
+////                    }else {
+////                        showToast("不能为空");
+////                    }
+//                    break;
+//                case R.id.user_mail:
+//                    if (!StringUtil.isEmpty(userMail.getText().toString())) {
+//                        editUserMap.clear();
+//                        editUserMap.put("email", userMail.getText().toString());
+//                        userModel.setName(userMail.getText().toString());
+//                        editUserInfo();
+//                    } else {
+//                        showToast("不能为空");
+//                    }
+//                    break;
+//                case R.id.user_sex:
+//                    Log.e("tag", "user_sex==1");
+////                    if (!StringUtil.isEmpty(userName.getText().toString())
+////                            &&(!StringUtil.equals(userName.getText().toString(),"男")
+////                    ||!StringUtil.equals(userName.getText().toString(),"女"))) {
+////                        editUserMap.clear();
+////                        editUserMap.put("sex",userSex.getText().toString());
+////                        if(StringUtil.equals(userName.getText().toString(),"女")){
+////                            userModel.setSex(2);
+////                            editUserMap.put("sex","2");
+////                        }else {
+////                            userModel.setSex(1);
+////                            editUserMap.put("sex","1");
+////                        }
+////                        editUserInfo();
+////                    }else {
+////                        showToast("请输入男或女");
+////                    }
+//
+//
+//                    break;
+//
+//            }
+//            return true;
+//        } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
+//            return true;
+//        }
+//        return false;
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -446,6 +476,34 @@ public class MyInfoActivity extends BaseTalkLawActivity implements View.OnKeyLis
                 || requestCode == PHONE_REQUEST_CODE || requestCode == EMAIL_REQUEST_CODE) {
 //            userModel = TalkLawApplication.getUserInfo();
             updateUserInfo();
+        }
+
+        if (requestCode == REQUEST_IMAGE) {
+            final List<String> pathList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+            if (pathList != null && pathList.size() > 0) {
+
+                Base64Util.encodeBase64File(this,pathList.get(0), new EncodeCallBack() {
+                    @Override
+                    public void callBack(final String str) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                editUserMap.clear();
+                                editUserMap.put("headimg", userBirthday.getText().toString());
+                                editUserInfo(true);
+                                Glide.with(mContext)
+                                        .load(pathList.get(0))
+                                        .placeholder(R.mipmap.icon_head_def_cir)
+                                        .error(R.mipmap.icon_head_def_cir)
+                                        .transform(new CenterCrop(mContext), new GlideCircleTransform(mContext))
+                                        .crossFade()
+                                        .into(iconHead);
+                            }
+                        });
+                    }
+                });
+
+            }
         }
     }
 }
