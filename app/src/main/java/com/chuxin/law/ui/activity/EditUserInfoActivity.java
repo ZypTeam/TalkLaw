@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -81,8 +82,8 @@ public class EditUserInfoActivity extends BaseTalkLawActivity{
             ed_info.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         }else if (updateInfoType==4){
             //审核 输入姓名
-            titleView.setTitle("修改姓名");
-            ed_info.setHint("请输入姓名");
+            titleView.setTitle("律师事务所");
+            ed_info.setHint("请输入律师事务所姓名");
         }
 
         titleView.setRightText("确认", new View.OnClickListener() {
@@ -118,6 +119,7 @@ public class EditUserInfoActivity extends BaseTalkLawActivity{
                 Intent intent=new Intent();
                 intent.putExtra("name",info);
                 setResult(RESULT_OK,intent);
+                onBackPressed();
                 return;
         }
         if(TextUtils.isEmpty(info)){

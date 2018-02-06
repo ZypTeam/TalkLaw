@@ -29,6 +29,7 @@
 
     <EditText
         android:id="@+id/price"
+        android:inputType="number|numberDecimal"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_view"
         android:layout_marginTop="5dp"

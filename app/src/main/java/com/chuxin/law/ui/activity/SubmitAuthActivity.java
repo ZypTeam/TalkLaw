@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -65,14 +66,16 @@ public class SubmitAuthActivity extends BaseTalkLawActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 auth();
             }
         });
     }
 
     private void auth() {
-        if (StringUtil.isEmpty(price.getText().toString())){
+        try{
+            Float p=Float.parseFloat(price.getText().toString());
+        }catch (Exception e){
+            showToast("价格输入错误,请输入数字");
             return;
         }
         showLoadDialog();
@@ -97,7 +100,7 @@ public class SubmitAuthActivity extends BaseTalkLawActivity {
                 .flatMap(new Func1() {
                     @Override
                     public Object call(Object o) {
-                        return Api.getInstance().getService(ApiService.class).lawyerAuth(params);
+                        return Api.getInstance().getService(ApiService.class).lawyerAuth(params,"image/jpeg;base64,");
                     }
                 });
         addNetwork(observable, new Action1<NoDataModel>() {

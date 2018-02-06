@@ -182,6 +182,10 @@ public class LawyerAuthActivity extends BaseTalkLawActivity {
     }
 
     private void goNext() {
+        if (StringUtil.isEmpty(model.getStarttime())){
+            showToast("开始时间不能为空");
+            return;
+        }
         model.setLaw_firm(lawyer.getText().toString());
         Bundle bundle = new Bundle();
         bundle.putSerializable("model", model);

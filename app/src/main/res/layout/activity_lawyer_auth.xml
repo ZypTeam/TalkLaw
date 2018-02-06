@@ -167,7 +167,10 @@
         app:layout_constraintLeft_toLeftOf="@+id/bg_yingye"
         app:layout_constraintRight_toRightOf="@+id/bg_yingye"
         app:layout_constraintBottom_toBottomOf="@+id/bg_yingye"
-        android:text="上传营业"
+        android:text="上传律师执业证照片页"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -188,7 +191,10 @@
         app:layout_constraintLeft_toLeftOf="@+id/bg_nianjian"
         app:layout_constraintRight_toRightOf="@+id/bg_nianjian"
         app:layout_constraintBottom_toBottomOf="@+id/bg_nianjian"
-        android:text="上传律师"
+        android:text="上传律师执业证年检页"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
