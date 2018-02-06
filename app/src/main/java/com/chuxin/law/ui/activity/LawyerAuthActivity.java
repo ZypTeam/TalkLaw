@@ -177,31 +177,32 @@ public class LawyerAuthActivity extends BaseTalkLawActivity {
                 goNext();
             }
         });
-        ImageLoderUtil.loadRoundSmailImage(mContext, iconHead, userModel.getHeadimg(),R.mipmap.icon_head_def_round);
+        ImageLoderUtil.loadRoundSmailImage(mContext, iconHead, userModel.getHeadimg(), R.mipmap.icon_head_def_round);
         model.setHeadimg(TalkLawApplication.getUserInfo().getHeadimg());
     }
 
     private void goNext() {
-        if (StringUtil.isEmpty(model.getStarttime())){
+        if (StringUtil.isEmpty(model.getStarttime())) {
             showToast("开始时间不能为空");
             return;
         }
         model.setLaw_firm(lawyer.getText().toString());
         Bundle bundle = new Bundle();
         bundle.putSerializable("model", model);
-        goActivityForResult(bundle, SubmitAuthActivity.class,REQUEST_LAWYER_AUTH_SUC);
+        goActivityForResult(bundle, SubmitAuthActivity.class, REQUEST_LAWYER_AUTH_SUC);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
         if (requestCode == REQUEST_IMAGE_HEAD) {
-            if (resultCode == RESULT_OK) {
-                List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
-                if (path != null && path.size() > 0) {
-                    model.setHeadimg(path.get(0));
-                    ImageLoderUtil.loadRoundSmailImage(mContext, iconHead, path.get(0));
-                }
+            List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+            if (path != null && path.size() > 0) {
+                model.setHeadimg(path.get(0));
+                ImageLoderUtil.loadRoundSmailImage(mContext, iconHead, path.get(0));
             }
         } else if (requestCode == REQUEST_IMAGE_PAGE) {
             List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
@@ -215,13 +216,13 @@ public class LawyerAuthActivity extends BaseTalkLawActivity {
                 model.setCertificate(path.get(0));
                 ImageLoderUtil.loadRoundSmailImage(mContext, yingye, path.get(0));
             }
-        }else if (requestCode==NAME_REQUEST_CODE){
-            if (data!=null){
-                if (!StringUtil.isEmpty(data.getStringExtra("name"))){
+        } else if (requestCode == NAME_REQUEST_CODE) {
+            if (data != null) {
+                if (!StringUtil.isEmpty(data.getStringExtra("name"))) {
                     lawyer.setText(data.getStringExtra("name"));
                 }
             }
-        }else if (requestCode==REQUEST_LAWYER_AUTH_SUC){
+        } else if (requestCode == REQUEST_LAWYER_AUTH_SUC) {
             onBackPressed();
         }
     }
