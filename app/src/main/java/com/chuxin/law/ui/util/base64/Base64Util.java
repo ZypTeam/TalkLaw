@@ -47,6 +47,26 @@ public class Base64Util {
         });
     }
 
+    public static String encodeBase64File(Context mContext,final String path) {
+        final String compressPath = ImageCompressUtil.saveAndCompressPath(mContext, path);
+        String result="";
+        File file = new File(compressPath);
+        FileInputStream inputFile = null;
+        byte[] buffer = new byte[(int) file.length()];
+        try {
+            inputFile = new FileInputStream(file);
+            inputFile.read(buffer);
+            inputFile.close();
+            result = Base64.encodeToString(buffer, Base64.DEFAULT);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            return result;
+        }
+    }
+
     public static byte[] decode(String data) {
         return Base64.decode(data, Base64.DEFAULT);
     }

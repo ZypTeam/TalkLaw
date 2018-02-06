@@ -26,10 +26,18 @@ public class CommonConstant {
     //关注返回
     public static final int FOLLOW_RESULT_CODE=102;
 
-    public static final int REQUEST_IMAGE_HEAD=102;
+    public static final int REQUEST_IMAGE_HEAD=103;
 
-    public static final int REQUEST_IMAGE_PHOTO=103;
+    public static final int REQUEST_IMAGE_PHOTO=104;
 
-    public static final int REQUEST_IMAGE_PAGE=103;
+    public static final int REQUEST_IMAGE_PAGE=105;
+
+    //修改姓名返回
+    public static final int NAME_REQUEST_CODE=106;
+
+    //认证成功
+    public static final int REQUEST_LAWYER_AUTH_SUC=107;
+
+
 
 }

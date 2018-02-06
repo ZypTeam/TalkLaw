@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -78,6 +79,10 @@ public class EditUserInfoActivity extends BaseTalkLawActivity{
             titleView.setTitle("修改邮箱");
             ed_info.setHint("请输入邮箱账号");
             ed_info.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        }else if (updateInfoType==4){
+            //审核 输入姓名
+            titleView.setTitle("修改姓名");
+            ed_info.setHint("请输入姓名");
         }
 
         titleView.setRightText("确认", new View.OnClickListener() {
@@ -109,6 +114,11 @@ public class EditUserInfoActivity extends BaseTalkLawActivity{
                 toastText = "请输入邮箱";
                 map.put("email", info);
                 break;
+            case 4:
+                Intent intent=new Intent();
+                intent.putExtra("name",info);
+                setResult(RESULT_OK,intent);
+                return;
         }
         if(TextUtils.isEmpty(info)){
             map.clear();

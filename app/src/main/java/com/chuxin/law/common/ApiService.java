@@ -279,7 +279,7 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @GET("/law-info/submit")
+    @POST("/law-info/submit")
     Observable<NoDataModel> lawyerAuth(@FieldMap Map<String,String> params);
 
 }

@@ -32,6 +32,7 @@
     
     <ImageView
         android:id="@+id/icon_head"
+        android:src="@mipmap/icon_head_def_round"
         app:layout_constraintTop_toTopOf="@+id/upload_head"
         app:layout_constraintBottom_toBottomOf="@+id/upload_head"
         app:layout_constraintLeft_toLeftOf="@+id/upload_head"
@@ -156,10 +157,20 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/bg_image"
         app:layout_constraintBottom_toBottomOf="@+id/bg_image"
+        android:src="@mipmap/icon_lawyer_auth_select_img"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
         android:layout_width="0dp"
         android:layout_height="106dp" />
+
+    <TextView
+        app:layout_constraintLeft_toLeftOf="@+id/bg_yingye"
+        app:layout_constraintRight_toRightOf="@+id/bg_yingye"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_yingye"
+        android:text="上传营业"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/bg_nianjian"
@@ -168,9 +179,19 @@
         app:layout_constraintTop_toTopOf="@+id/bg_image"
         app:layout_constraintBottom_toBottomOf="@+id/bg_image"
         android:layout_marginLeft="8dp"
+        android:src="@mipmap/icon_lawyer_auth_select_img"
         android:layout_marginRight="16dp"
         android:layout_width="0dp"
         android:layout_height="106dp" />
+
+    <TextView
+        app:layout_constraintLeft_toLeftOf="@+id/bg_nianjian"
+        app:layout_constraintRight_toRightOf="@+id/bg_nianjian"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_nianjian"
+        android:text="上传律师"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/yingye"
