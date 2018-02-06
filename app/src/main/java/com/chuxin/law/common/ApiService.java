@@ -270,8 +270,9 @@ public interface ApiService {
      * @param params
      * @return
      */
+    @FormUrlEncoded
     @POST("/goods/buy")
-    Observable<IntegralDetailDataModel> integralExchangeNet(@QueryMap Map<String,String> params);
+    Observable<IntegralDetailDataModel> integralExchangeNet(@FieldMap Map<String,String> params);
 
     /**
      * 律师认证
