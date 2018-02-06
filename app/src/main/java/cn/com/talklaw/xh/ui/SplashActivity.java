@@ -18,7 +18,7 @@ import com.chuxin.law.R;
  */
 public class SplashActivity extends BaseActivity {
 
-	private static final int sleepTime = 4000;
+	private static final int sleepTime = 2000;
 
 	@Override
 	protected void onCreate(Bundle arg0) {

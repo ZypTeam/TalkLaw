@@ -173,7 +173,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
                 break;
             case R.id.auth:
                 if (userModel!=null) {
-                    if (userModel.getType()==1) {
+                    if (userModel.getType()!=2) {
                         UIUtils.goLawyerAuth(mContext);
                     }
                 }
@@ -244,7 +244,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         myAddressContent.setText(userModel.getAddress());
         zhuanghuCount.setText("¥" + userModel.getMoney());
         jifenCount.setText(userModel.getPoints());
-        if (userModel.getType() ==1) {
+        if (userModel.getType() !=2) {
             auth.setText("未认证");
             auth.setTextColor(Color.parseColor("#bababa"));
             auth.setCompoundDrawables(null,null,dAuthUn,null);
