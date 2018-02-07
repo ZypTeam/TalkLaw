@@ -10,10 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#b2b2b2" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="43dp"
-        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:text="请绑定持卡人本人银行卡"
         android:textColor="#888888"
@@ -44,6 +49,7 @@
                 android:layout_marginLeft="24dp"
                 android:background="@null"
                 android:gravity="center_vertical"
+                android:hint="持卡人姓名"
                 android:textColor="#b2b2b2"
                 android:textSize="17sp" />
         </LinearLayout>
@@ -72,8 +78,10 @@
                 android:layout_marginLeft="24dp"
                 android:background="@null"
                 android:gravity="center_vertical"
+                android:hint="银行卡号码"
                 android:textColor="#b2b2b2"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:inputType="number"/>
         </LinearLayout>
 
         <View
@@ -100,8 +108,10 @@
                 android:layout_marginLeft="24dp"
                 android:background="@null"
                 android:gravity="center_vertical"
+                android:hint="预留手机号"
                 android:textColor="#b2b2b2"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:inputType="number"/>
         </LinearLayout>
 
     </LinearLayout>

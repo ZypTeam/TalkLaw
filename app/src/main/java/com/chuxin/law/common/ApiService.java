@@ -1,6 +1,7 @@
 package com.chuxin.law.common;
 
 import com.chuxin.law.model.ArrondiModel;
+import com.chuxin.law.model.BackCardModel;
 import com.chuxin.law.model.CommentListModel;
 import com.chuxin.law.model.ExchangeRecordsDataModel;
 import com.chuxin.law.model.IntegralDetailDataModel;
@@ -283,4 +284,33 @@ public interface ApiService {
     @POST("/law-info/submit")
     Observable<NoDataModel> lawyerAuth(@FieldMap Map<String,String> params);
 
+    /**
+     * 新增银行卡
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/withdrawals/add-card")
+    Observable<NoDataModel> newAddCard(@FieldMap Map<String,String> params);
+
+
+
+    /**
+     * 新增银行卡
+     * @param params
+     * @return
+     */
+    @GET("/withdrawals/my-card")
+    Observable<BackCardModel> getCards();
+
+
+    /**
+     * 新增银行卡
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/withdrawals/apply")
+    Observable<BackCardModel> submitTixian(@FieldMap Map<String,String> params);
 }
+
