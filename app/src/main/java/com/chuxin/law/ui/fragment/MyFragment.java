@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.TalkLawApplication;
+import com.chuxin.law.common.UserInfoDelegate;
 import com.chuxin.law.sharedpreferences.ShippingAddressModel;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.model.UserInfoModel;
@@ -195,7 +196,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
             case CommonConstant.FOLLOW_RESULT_CODE:
                 if (data != null) {
                     userModel.setFollow(data.getStringExtra(MyAttentionActivity.FOLLOW_COUNT));
-                    TalkLawApplication.saveUserInfo(userModel);
+                    UserInfoDelegate.getInstance().saveUserInfo(userModel);
                 }
                 break;
             case CommonConstant.LAWYER_AUTH_RESULT_CODE:
@@ -217,7 +218,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
                     public void call(UserInfoModel model) {
                         hideLoadDialog();
                         if (model != null && model.getCode() == CommonConstant.NET_SUC_CODE && model.getData() != null) {
-                            TalkLawApplication.saveUserInfo(model.getData());
+                            UserInfoDelegate.getInstance().saveUserInfo(model.getData());
                         }
                         updateUserInfo();
                     }

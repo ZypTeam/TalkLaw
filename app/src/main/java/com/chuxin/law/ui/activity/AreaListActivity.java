@@ -12,6 +12,7 @@ import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
+import com.chuxin.law.common.UserInfoDelegate;
 import com.chuxin.law.model.AreaBean;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.adapter.BaseAreaCityAdapter;
@@ -286,7 +287,7 @@ public class AreaListActivity extends BaseTalkLawActivity {
                     userModel.setProvince(selectProvince.getName());
                     showToast("修改地址陈宫");
 
-                    TalkLawApplication.saveUserInfo(userModel);
+                    UserInfoDelegate.getInstance().saveUserInfo(userModel);
 
                     setResult(RESULT_OK);
                     finish();

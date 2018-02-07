@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
+import com.chuxin.law.common.HeaderTalkInterceptor;
+import com.chuxin.law.common.UserInfoDelegate;
 import com.google.gson.Gson;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMCallManager;
@@ -29,33 +31,36 @@ import com.chuxin.law.model.UserModel;
  * @describe
  */
 
-public class TalkLawApplication extends BaseApplication{
+public class TalkLawApplication extends BaseApplication {
 
     //各个平台的配置
     {
         PlatformConfig.setWeixin("wx6acb4c4141bd83a0", "fe02da59c24dcfd6429996bfca8ea577");
-        PlatformConfig.setSinaWeibo("1701976759", "c9f6b6d5015055964780e0c56c3e59a5","http:www.sharesdk.cn");
+        PlatformConfig.setSinaWeibo("1701976759", "c9f6b6d5015055964780e0c56c3e59a5", "http:www.sharesdk.cn");
         PlatformConfig.setQQZone("1106542171", "iLjGMwSEXLgyWWKG");
     }
+
     private static TalkLawApplication instance;
     /**
      * nickname for current user, the nickname instead of ID be shown when user receive notification from APNs
      */
     public static String currentUserNick = "";
+
     @Override
     public void onCreate() {
         MultiDex.install(this);
         super.onCreate();
         instance = this;
-
-        Api.getInstance().register(this,getString(R.string.url));
+        SharePrefenceUtils.getInstance().register(this, getPackageName());
+        Api.getInstance().register(this, getString(R.string.url))
+                .addInterceptro(new HeaderTalkInterceptor())
+                .build();
         DaoInstance.getInstance().regester(this);
-        SharePrefenceUtils.getInstance().register(this,getPackageName());
         LogUtil.setDebugable(BuildConfig.LOG_MODE);
         UMShareAPI.get(this);
 
         DemoHelper.getInstance().init(this);
-        Config.DEBUG=true;
+        Config.DEBUG = true;
 
         FeedbackAPI.init(this, "24769686");
     }
@@ -65,10 +70,10 @@ public class TalkLawApplication extends BaseApplication{
 
     }
 
-    public static void exitUser(){
-        SharePrefenceUtils.getInstance().setString(SharePrefenceConstant.USER_MODEL,"");
+    public static void exitUser() {
+        SharePrefenceUtils.getInstance().setString(SharePrefenceConstant.USER_MODEL, "");
         //此方法为异步方法
-        EMClient.getInstance().logout(true,new EMCallBack() {
+        EMClient.getInstance().logout(true, new EMCallBack() {
 
             @Override
             public void onSuccess() {
@@ -90,29 +95,15 @@ public class TalkLawApplication extends BaseApplication{
         });
     }
 
-    public static void saveUserInfo(UserModel model){
-        if (model==null){
-            return;
-        }
-        String string=new Gson().toJson(model);
-        SharePrefenceUtils.getInstance().setString(SharePrefenceConstant.USER_MODEL,string);
+
+    public static UserModel getUserInfo() {
+        return UserInfoDelegate.getInstance().getUserInfo();
     }
 
-    public static UserModel getUserInfo(){
-        UserModel model;
-        String string=SharePrefenceUtils.getInstance().getString(SharePrefenceConstant.USER_MODEL);
-        model=new Gson().fromJson(string,UserModel.class);
-        return model;
+    public static String getUserId() {
+        return UserInfoDelegate.getInstance().getUserId();
     }
 
-    public static String getUserId(){
-        String userId=null;
-        UserModel model=getUserInfo();
-        if (model!=null){
-            userId=model.getId();
-        }
-        return userId;
-    }
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
