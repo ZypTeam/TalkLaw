@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawFragment;
+import com.chuxin.law.model.LawyerProductModel;
+import com.chuxin.law.ui.util.ImageLoderUtil;
 import com.chuxin.law.ui.util.LawyerDefViewPagerUtils;
 import com.chuxin.law.ui.util.UIUtils;
 
@@ -31,7 +33,8 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
     protected TextView dashang;
     private String mContent;
     private String url;
-
+    private String id;
+    private LawyerProductModel.LawyerProductData data;
     public static LawyerDefAudioFragment getInstance(Bundle args) {
         LawyerDefAudioFragment fragment = new LawyerDefAudioFragment();
         fragment.setArguments(args);
@@ -50,8 +53,13 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
 
     @Override
     public void initDatas() {
-        mContent = getArguments().getString(LawyerDefViewPagerUtils.CONTENT);
-        url = getArguments().getString(LawyerDefViewPagerUtils.URL);
+        data= (LawyerProductModel.LawyerProductData) getArguments().getSerializable(LawyerDefViewPagerUtils.DATA);
+        if (data==null||data.getArticle()==null||data.getLawyer()==null){
+            return;
+        }
+        mContent = data.getArticle().getContent();
+        url = data.getArticle().getMp3();
+        id=data.getLawyer().getUserid();
     }
 
     @Override
@@ -72,13 +80,13 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
 
     @Override
     public void initAction() {
-        content.setText(mContent);
-
+        content.setText(UIUtils.getHtmlTxt(mContent));
         dashang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIUtils.goGratuity(mContext,"");
+                UIUtils.goGratuity(mContext,data);
             }
         });
+        ImageLoderUtil.loadNormalImg(mContext,imgAudio,data.getLawyer().getHeadimg());
     }
 }

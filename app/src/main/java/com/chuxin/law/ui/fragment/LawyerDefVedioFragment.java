@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawFragment;
+import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.ui.util.LawyerDefViewPagerUtils;
 import com.chuxin.law.ui.util.UIUtils;
 
@@ -33,6 +34,8 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
     private String url;
     private String imgUrl;
     private VideoPlayView videoPlayView;
+    private String id;
+    private LawyerProductModel.LawyerProductData data;
 
     public static LawyerDefVedioFragment getInstance(Bundle args) {
         LawyerDefVedioFragment fragment = new LawyerDefVedioFragment();
@@ -42,7 +45,7 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
 
     @Override
     protected void refreshData() {
-
+        videoPlayView.setUri(url);
     }
 
     @Override
@@ -52,10 +55,13 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
 
     @Override
     public void initDatas() {
-        mContent = getArguments().getString(LawyerDefViewPagerUtils.CONTENT);
-        url = getArguments().getString(LawyerDefViewPagerUtils.URL);
-        imgUrl = getArguments().getString(LawyerDefViewPagerUtils.IMAGE);
-        videoPlayView=new VideoPlayView(mContext);
+        data= (LawyerProductModel.LawyerProductData) getArguments().getSerializable(LawyerDefViewPagerUtils.DATA);
+        if (data==null||data.getArticle()==null||data.getLawyer()==null){
+            return;
+        }
+        mContent = data.getArticle().getContent();
+        url = data.getArticle().getMp4();
+        id=data.getLawyer().getUserid();
     }
 
     @Override
@@ -68,20 +74,26 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
         content = (TextView) rootView.findViewById(R.id.content);
         dashang = (TextView) rootView.findViewById(R.id.dashang);
 
+        videoPlayView=new VideoPlayView(mContext);
         video.addView(videoPlayView);
 
     }
 
     @Override
     public void initAction() {
-        content.setText(mContent);
-
+        content.setText(UIUtils.getHtmlTxt(mContent));
         dashang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIUtils.goGratuity(mContext,"");
+                UIUtils.goGratuity(mContext,data);
             }
         });
-        videoPlayView.setUri(url);
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        video.removeAllViews();
     }
 }

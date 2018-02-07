@@ -15,12 +15,18 @@ import com.chuxin.law.base.BaseTalkLawActivity;
  */
 
 public class GratuityPayActivity extends BaseTalkLawActivity {
+    public static final String ID="id";
+    public static final String PRICE="price";
+    public static final String ORDER="order";
     protected BackTitleView titleBar;
     protected ImageView iconGratuity;
     protected TextView price;
     protected TextView wechat;
     protected TextView zhifubao;
     protected TextView help;
+    private String id;
+    private String mPrice;
+    private String order;
 
     @Override
     public int getLayoutResId() {
@@ -30,11 +36,14 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
 
+        id=getIntent().getStringExtra(ID);
+        mPrice=getIntent().getStringExtra(PRICE);
+        order=getIntent().getStringExtra(ORDER);
     }
 
     @Override
     public void initView() {
-        titleBar = (BackTitleView) findViewById(R.id.title_bar);
+        titleBar = (BackTitleView) findViewById(R.id.title_view);
         iconGratuity = (ImageView) findViewById(R.id.icon_gratuity);
         price = (TextView) findViewById(R.id.price);
         wechat = (TextView) findViewById(R.id.wechat);
@@ -46,5 +55,9 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
     @Override
     public void initAction() {
         titleBar.setTitle("打赏");
+    }
+
+    private void pay(){
+
     }
 }

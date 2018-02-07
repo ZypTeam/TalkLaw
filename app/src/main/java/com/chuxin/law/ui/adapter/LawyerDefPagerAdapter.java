@@ -15,15 +15,15 @@ import com.chuxin.law.ui.util.LawyerDefViewPagerUtils;
  */
 
 public class LawyerDefPagerAdapter extends FragmentPagerAdapter {
-    private LawyerAudioModel model;
-    public LawyerDefPagerAdapter(FragmentManager fm, LawyerAudioModel model) {
+    private LawyerProductModel.LawyerProductData data;
+    public LawyerDefPagerAdapter(FragmentManager fm, LawyerProductModel.LawyerProductData data) {
         super(fm);
-        this.model=model;
+        this.data=data;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return LawyerDefViewPagerUtils.getFragment(position,model);
+        return LawyerDefViewPagerUtils.getFragment(position,data);
     }
 
     @Override

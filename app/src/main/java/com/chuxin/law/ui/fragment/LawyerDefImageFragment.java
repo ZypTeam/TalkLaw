@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.fragment;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,8 +10,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawFragment;
+import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.ui.util.LawyerDefViewPagerUtils;
 import com.chuxin.law.ui.util.UIUtils;
+import com.jusfoun.baselibrary.Util.StringUtil;
 
 /**
  * @author wangcc
@@ -26,6 +29,8 @@ public class LawyerDefImageFragment extends BaseTalkLawFragment {
     private String mContent;
     private String url;
     private String imgUrl;
+    private String id;
+    private LawyerProductModel.LawyerProductData data;
 
     public static LawyerDefImageFragment getInstance(Bundle args) {
         LawyerDefImageFragment fragment = new LawyerDefImageFragment();
@@ -45,9 +50,13 @@ public class LawyerDefImageFragment extends BaseTalkLawFragment {
 
     @Override
     public void initDatas() {
-        mContent = getArguments().getString(LawyerDefViewPagerUtils.CONTENT);
-        url = getArguments().getString(LawyerDefViewPagerUtils.URL);
-        imgUrl = getArguments().getString(LawyerDefViewPagerUtils.IMAGE);
+        data= (LawyerProductModel.LawyerProductData) getArguments().getSerializable(LawyerDefViewPagerUtils.DATA);
+        if (data==null||data.getArticle()==null||data.getLawyer()==null){
+            return;
+        }
+        mContent = data.getArticle().getContent();
+        imgUrl=data.getArticle().getImg();
+        id=data.getLawyer().getUserid();
     }
 
     @Override
@@ -60,6 +69,9 @@ public class LawyerDefImageFragment extends BaseTalkLawFragment {
 
     @Override
     public void initAction() {
+        if (StringUtil.isEmpty(imgUrl)||!imgUrl.startsWith("http://")) {
+            imgUrl = "http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg";
+        }
         Glide.with(mContext)
                 .load(imgUrl)
                 .placeholder(R.mipmap.logo)
@@ -68,12 +80,12 @@ public class LawyerDefImageFragment extends BaseTalkLawFragment {
                 .crossFade()
                 .into(img);
 
-        content.setText(mContent);
 
+        content.setText(UIUtils.getHtmlTxt(mContent));
         dashang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIUtils.goGratuity(mContext,"");
+                UIUtils.goGratuity(mContext,data);
             }
         });
     }

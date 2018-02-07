@@ -1,136 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.constraint.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/img_audio"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="18dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/play"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_lawyer_player"
-            app:layout_constraintBottom_toBottomOf="@+id/img_audio"
-            app:layout_constraintLeft_toLeftOf="@+id/img_audio"
-            app:layout_constraintRight_toRightOf="@+id/img_audio"
-            app:layout_constraintTop_toTopOf="@+id/img_audio" />
+            <ImageView
+                android:id="@+id/img_audio"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="18dp" />
 
-        <ImageView
-            android:id="@+id/last"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="27dp"
-            android:src="@mipmap/icon_lawyer_last"
-            app:layout_constraintBottom_toBottomOf="@+id/img_audio"
-            app:layout_constraintRight_toLeftOf="@+id/img_audio"
-            app:layout_constraintTop_toTopOf="@+id/img_audio" />
+            <ImageView
+                android:id="@+id/play"
+                app:layout_constraintBottom_toBottomOf="@+id/img_audio"
+                app:layout_constraintLeft_toLeftOf="@+id/img_audio"
+                app:layout_constraintRight_toRightOf="@+id/img_audio"
+                app:layout_constraintTop_toTopOf="@+id/img_audio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_lawyer_player" />
 
-        <ImageView
-            android:id="@+id/rewind"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="27dp"
-            android:src="@mipmap/icon_lawyer_kt"
-            app:layout_constraintBottom_toBottomOf="@+id/img_audio"
-            app:layout_constraintRight_toLeftOf="@+id/last"
-            app:layout_constraintTop_toTopOf="@+id/img_audio" />
+            <ImageView
+                android:id="@+id/last"
+                app:layout_constraintBottom_toBottomOf="@+id/img_audio"
+                app:layout_constraintRight_toLeftOf="@+id/img_audio"
+                app:layout_constraintTop_toTopOf="@+id/img_audio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="27dp"
+                android:src="@mipmap/icon_lawyer_last" />
 
-        <ImageView
-            android:id="@+id/next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="27dp"
-            android:src="@mipmap/icon_lawyer_next"
-            app:layout_constraintBottom_toBottomOf="@+id/img_audio"
-            app:layout_constraintLeft_toRightOf="@+id/img_audio"
-            app:layout_constraintTop_toTopOf="@+id/img_audio" />
+            <ImageView
+                android:id="@+id/rewind"
+                app:layout_constraintBottom_toBottomOf="@+id/img_audio"
+                app:layout_constraintRight_toLeftOf="@+id/last"
+                app:layout_constraintTop_toTopOf="@+id/img_audio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="27dp"
+                android:src="@mipmap/icon_lawyer_kt" />
 
-        <ImageView
-            android:id="@+id/forward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="27dp"
-            android:src="@mipmap/icon_lawyer_kj"
-            app:layout_constraintBottom_toBottomOf="@+id/img_audio"
-            app:layout_constraintLeft_toRightOf="@+id/next"
-            app:layout_constraintTop_toTopOf="@+id/img_audio" />
+            <ImageView
+                android:id="@+id/next"
+                app:layout_constraintBottom_toBottomOf="@+id/img_audio"
+                app:layout_constraintLeft_toRightOf="@+id/img_audio"
+                app:layout_constraintTop_toTopOf="@+id/img_audio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="27dp"
+                android:src="@mipmap/icon_lawyer_next" />
+
+            <ImageView
+                android:id="@+id/forward"
+                app:layout_constraintBottom_toBottomOf="@+id/img_audio"
+                app:layout_constraintLeft_toRightOf="@+id/next"
+                app:layout_constraintTop_toTopOf="@+id/img_audio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="27dp"
+                android:src="@mipmap/icon_lawyer_kj" />
+
+            <TextView
+                android:id="@+id/time"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_audio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="18dp"
+                android:text="02:02"
+                android:textColor="#cb1f28"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/time_all"
+                app:layout_constraintBottom_toBottomOf="@+id/time"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:text="02:02"
+                android:textColor="#cb1f28"
+                android:textSize="12dp" />
+
+            <SeekBar
+                android:id="@+id/seek"
+                app:layout_constraintBottom_toBottomOf="@+id/time_all"
+                app:layout_constraintLeft_toRightOf="@+id/time"
+                app:layout_constraintRight_toLeftOf="@+id/time_all"
+                app:layout_constraintTop_toTopOf="@+id/time_all"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxHeight="2dp"
+                android:progressDrawable="@drawable/bg_lawyer_def_audio_progress"
+                android:thumb="@mipmap/icon_lawyer_thumb" />
+
+        </android.support.constraint.ConstraintLayout>
 
         <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="18dp"
-            android:text="02:02"
-            android:textColor="#cb1f28"
-            android:textSize="12dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_audio" />
-
-        <TextView
-            android:id="@+id/time_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="24dp"
-            android:text="02:02"
-            android:textColor="#cb1f28"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="@+id/time"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/time" />
-
-        <SeekBar
-            android:id="@+id/seek"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:maxHeight="2dp"
-            android:progressDrawable="@drawable/bg_lawyer_def_audio_progress"
-            android:thumb="@mipmap/icon_lawyer_thumb"
-            app:layout_constraintBottom_toBottomOf="@+id/time_all"
-            app:layout_constraintLeft_toRightOf="@+id/time"
-            app:layout_constraintRight_toLeftOf="@+id/time_all"
-            app:layout_constraintTop_toTopOf="@+id/time_all" />
-
-        <TextView
-android:id="@+id/content"
-            android:layout_width="0dp"
+            android:id="@+id/content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="25dp"
             android:text="  党共中央十九大"
             android:textColor="#666"
-            android:textSize="17sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/time" />
+            android:textSize="17sp" />
 
         <TextView
-            app:layout_constraintTop_toBottomOf="@+id/content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="14dp"
             android:id="@+id/dashang"
-            android:text="打赏"
-            android:textSize="13sp"
-            android:textColor="#8d8e93"
-            android:paddingTop="45dp"
-            android:gravity="center_horizontal"
-            android:background="@mipmap/icon_dashang"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13dp"
+            android:background="@mipmap/icon_dashang"
+            android:paddingTop="45dp"
+            android:text="打赏"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#8d8e93"
+            android:textSize="13sp" />
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

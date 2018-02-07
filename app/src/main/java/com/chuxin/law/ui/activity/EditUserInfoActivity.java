@@ -85,6 +85,12 @@ public class EditUserInfoActivity extends BaseTalkLawActivity{
             //审核 输入姓名
             titleView.setTitle("律师事务所");
             ed_info.setHint("请输入律师事务所姓名");
+        }else if (updateInfoType==5){
+            titleView.setTitle("打赏金额");
+            ed_info.setHint("请输入打赏金额");
+        }else if (updateInfoType==6){
+            titleView.setTitle("修改姓名");
+            ed_info.setHint("请输入姓名");
         }
 
         titleView.setRightText("确认", new View.OnClickListener() {
@@ -99,6 +105,7 @@ public class EditUserInfoActivity extends BaseTalkLawActivity{
         final String info = ed_info.getText().toString();
         String toastText = "";
         HashMap<String, String> map = new HashMap<>();
+        Intent intent=new Intent();
         switch (updateInfoType){
             case 0:
                 toastText = "请输入姓名";
@@ -116,9 +123,14 @@ public class EditUserInfoActivity extends BaseTalkLawActivity{
                 toastText = "请输入邮箱";
                 map.put("email", info);
                 break;
+            case 6:
             case 4:
-                Intent intent=new Intent();
                 intent.putExtra("name",info);
+                setResult(RESULT_OK,intent);
+                onBackPressed();
+                return;
+            case 5:
+                intent.putExtra("price",info);
                 setResult(RESULT_OK,intent);
                 onBackPressed();
                 return;

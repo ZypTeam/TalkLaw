@@ -2,6 +2,8 @@ package com.chuxin.law.model;
 
 import com.jusfoun.baselibrary.base.BaseModel;
 
+import java.io.Serializable;
+
 /**
  * @author wangcc
  * @date 2018/1/30
@@ -19,7 +21,7 @@ public class LawyerProductModel extends BaseModel {
         this.data = data;
     }
 
-    public class LawyerProductData{
+    public class LawyerProductData implements Serializable{
         private UserModel lawyer;
         private LawyerAudioModel article;
 
