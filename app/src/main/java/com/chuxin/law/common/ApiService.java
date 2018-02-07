@@ -270,8 +270,9 @@ public interface ApiService {
      * @param params
      * @return
      */
+    @FormUrlEncoded
     @POST("/goods/buy")
-    Observable<IntegralDetailDataModel> integralExchangeNet(@QueryMap Map<String,String> params);
+    Observable<IntegralDetailDataModel> integralExchangeNet(@FieldMap Map<String,String> params);
 
     /**
      * 律师认证
@@ -280,6 +281,6 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("/law-info/submit")
-    Observable<NoDataModel> lawyerAuth(@FieldMap Map<String,String> params,@Header("data") String data);
+    Observable<NoDataModel> lawyerAuth(@FieldMap Map<String,String> params);
 
 }

@@ -89,18 +89,18 @@ public class SubmitAuthActivity extends BaseTalkLawActivity {
                     @Override
                     public Object call(Object o) {
                         String heading=Base64Util.encodeBase64File(mContext,model.getHeadimg());
-                        params.put("heading", heading);
+                        params.put("heading", "data:image/jpeg;base64,"+heading);
                         String cer = Base64Util.encodeBase64File(mContext, model.getCertificate());
-                        params.put("certificate", cer);
+                        params.put("certificate", "data:image/jpeg;base64,"+cer);
                         String year = Base64Util.encodeBase64File(mContext, model.getCertificate_year());
-                        params.put("certificate_year", year);
+                        params.put("certificate_year","data:image/jpeg;base64,"+ year);
                         return "";
                     }
                 })
                 .flatMap(new Func1() {
                     @Override
                     public Object call(Object o) {
-                        return Api.getInstance().getService(ApiService.class).lawyerAuth(params,"image/jpeg;base64,");
+                        return Api.getInstance().getService(ApiService.class).lawyerAuth(params);
                     }
                 });
         addNetwork(observable, new Action1<NoDataModel>() {

@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,8 +44,8 @@ import rx.functions.Action1;
  * @describe
  */
 
-public class MyInfoActivity extends BaseTalkLawActivity  {
-//    implements View.OnKeyListener
+public class MyInfoActivity extends BaseTalkLawActivity {
+    //    implements View.OnKeyListener
     private final int NAME_REQUEST_CODE = 101;
     private final int NICKNAME_REQUEST_CODE = 102;
     private final int PHONE_REQUEST_CODE = 103;
@@ -342,41 +340,22 @@ public class MyInfoActivity extends BaseTalkLawActivity  {
 
     private void editUserInfo(boolean isEditHeadImg) {
         showLoadDialog();
-        if(isEditHeadImg) {
-            addNetwork(Api.getInstance().getService(ApiService.class).editUserInfo(editUserMap)
-                    , new Action1<NoDataModel>() {
-                        @Override
-                        public void call(NoDataModel model) {
-                            hideLoadDialog();
-                            if (model.getCode() == CommonConstant.NET_SUC_CODE) {
-                                UserInfoDelegate.getInstance().saveUserInfo(userModel);
-                            }
-                            showToast(model.getMsg());
+        addNetwork(Api.getInstance().getService(ApiService.class).editUserInfo(editUserMap)
+                , new Action1<NoDataModel>() {
+                    @Override
+                    public void call(NoDataModel model) {
+                        hideLoadDialog();
+                        if (model.getCode() == CommonConstant.NET_SUC_CODE) {
+                            UserInfoDelegate.getInstance().saveUserInfo(userModel);
                         }
-                    }, new Action1<Throwable>() {
-                        @Override
-                        public void call(Throwable throwable) {
-                            showToast("修改失败");
-                        }
-                    });
-        }else{
-            addNetwork(Api.getInstance().getService(ApiService.class).editUserInfo(editUserMap,"image/jpeg;base64,")
-                    , new Action1<NoDataModel>() {
-                        @Override
-                        public void call(NoDataModel model) {
-                            hideLoadDialog();
-                            if (model.getCode() == CommonConstant.NET_SUC_CODE) {
-                                UserInfoDelegate.getInstance().saveUserInfo(userModel);
-                            }
-                            showToast(model.getMsg());
-                        }
-                    }, new Action1<Throwable>() {
-                        @Override
-                        public void call(Throwable throwable) {
-                            showToast("修改失败");
-                        }
-                    });
-        }
+                        showToast(model.getMsg());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        showToast("修改失败");
+                    }
+                });
     }
 
 //    @Override
@@ -483,14 +462,14 @@ public class MyInfoActivity extends BaseTalkLawActivity  {
             final List<String> pathList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
             if (pathList != null && pathList.size() > 0) {
 
-                Base64Util.encodeBase64File(this,pathList.get(0), new EncodeCallBack() {
+                Base64Util.encodeBase64File(this, pathList.get(0), new EncodeCallBack() {
                     @Override
                     public void callBack(final String str) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 editUserMap.clear();
-                                editUserMap.put("headimg", userBirthday.getText().toString());
+                                editUserMap.put("headimg", "data:image/jpeg;base64," + userBirthday.getText().toString());
                                 editUserInfo(true);
                                 Glide.with(mContext)
                                         .load(pathList.get(0))

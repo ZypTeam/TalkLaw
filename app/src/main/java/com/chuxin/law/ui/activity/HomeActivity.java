@@ -14,6 +14,7 @@ import com.chuxin.law.R;
 
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.ui.adapter.HomeAdapter;
+import com.jusfoun.baselibrary.view.HomeViewPager;
 
 /**
  * @author zhaoyapeng
@@ -24,7 +25,7 @@ import com.chuxin.law.ui.adapter.HomeAdapter;
 public class HomeActivity extends BaseTalkLawActivity {
 
 
-    private ViewPager viewPager;
+    private HomeViewPager viewPager;
     private HomeAdapter adapter;
     private LinearLayout opinionLayout, statementLayout, myLayout;
     private ImageView opinionImg, statementImg, myImg;
@@ -42,7 +43,7 @@ public class HomeActivity extends BaseTalkLawActivity {
 
     @Override
     public void initView() {
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (HomeViewPager) findViewById(R.id.viewpager);
         opinionLayout = (LinearLayout) findViewById(R.id.layout_opinion);
         statementLayout = (LinearLayout) findViewById(R.id.layout_statement);
         myLayout = (LinearLayout) findViewById(R.id.layout_my);
@@ -58,6 +59,7 @@ public class HomeActivity extends BaseTalkLawActivity {
 
     @Override
     public void initAction() {
+        viewPager.setNotTouchScoll(true);
         viewPager.setAdapter(adapter);
         opinionLayout.setOnClickListener(new View.OnClickListener() {
             @Override
