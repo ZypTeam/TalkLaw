@@ -17,6 +17,7 @@ import com.chuxin.law.sharedpreferences.ShippingAddressModel;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
+import com.chuxin.law.ui.activity.ApplyForWithdrawalsActivity;
 import com.chuxin.law.ui.activity.IntegralActivity;
 import com.chuxin.law.ui.activity.MyMsgListActivity;
 import com.chuxin.law.ui.activity.RecommendCourtesyActivity;
@@ -133,7 +134,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         editAddress.setOnClickListener(this);
         btnJifen.setOnClickListener(this);
         auth.setOnClickListener(this);
-
+        btnTixian.setOnClickListener(this);
 
     }
 
@@ -178,6 +179,10 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
                         UIUtils.goLawyerAuth(mContext);
                     }
                 }
+                break;
+
+            case  R.id.btn_tixian:
+                goActivity(null, ApplyForWithdrawalsActivity.class);
                 break;
             default:
                 break;
