@@ -318,7 +318,7 @@ public class MyInfoActivity extends BaseTalkLawActivity {
             return;
         }
         Glide.with(mContext)
-                .load("http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg")
+                .load(userModel.getHeadimg())
                 .placeholder(R.mipmap.icon_head_def_cir)
                 .error(R.mipmap.icon_head_def_cir)
                 .transform(new CenterCrop(mContext), new GlideCircleTransform(mContext))
