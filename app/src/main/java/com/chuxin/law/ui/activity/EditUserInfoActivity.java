@@ -15,6 +15,7 @@ import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
+import com.chuxin.law.common.UserInfoDelegate;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.base.NoDataModel;
@@ -155,7 +156,7 @@ public class EditUserInfoActivity extends BaseTalkLawActivity{
                             break;
                     }
 
-                    TalkLawApplication.saveUserInfo(userModel);
+                    UserInfoDelegate.getInstance().saveUserInfo(userModel);
 
                     setResult(RESULT_OK);
                     finish();

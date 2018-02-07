@@ -18,6 +18,7 @@ import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
+import com.chuxin.law.common.UserInfoDelegate;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.util.base64.Base64Util;
@@ -293,7 +294,7 @@ public class MyInfoActivity extends BaseTalkLawActivity  {
                     public void call(UserInfoModel model) {
                         hideLoadDialog();
                         if (model != null && model.getCode() == CommonConstant.NET_SUC_CODE && model.getData() != null) {
-                            TalkLawApplication.saveUserInfo(model.getData());
+                            UserInfoDelegate.getInstance().saveUserInfo(model.getData());
                             userName.setText(model.getData().getName());
                             if (1 == model.getData().getSex()) {
                                 userSex.setText("男");
@@ -348,7 +349,7 @@ public class MyInfoActivity extends BaseTalkLawActivity  {
                         public void call(NoDataModel model) {
                             hideLoadDialog();
                             if (model.getCode() == CommonConstant.NET_SUC_CODE) {
-                                TalkLawApplication.saveUserInfo(userModel);
+                                UserInfoDelegate.getInstance().saveUserInfo(userModel);
                             }
                             showToast(model.getMsg());
                         }
@@ -365,7 +366,7 @@ public class MyInfoActivity extends BaseTalkLawActivity  {
                         public void call(NoDataModel model) {
                             hideLoadDialog();
                             if (model.getCode() == CommonConstant.NET_SUC_CODE) {
-                                TalkLawApplication.saveUserInfo(userModel);
+                                UserInfoDelegate.getInstance().saveUserInfo(userModel);
                             }
                             showToast(model.getMsg());
                         }

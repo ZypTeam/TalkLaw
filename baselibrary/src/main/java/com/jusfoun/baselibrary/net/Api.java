@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.CertificatePinner;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -22,6 +23,7 @@ public class Api {
 
     private int TIMEOUT = 10000;
     private OkHttpClient okHttpClient;
+    private String baseUrl;
 
     public Retrofit retrofit;
 
@@ -38,7 +40,7 @@ public class Api {
      * @param mContext
      * @param baseUrl
      */
-    public void register(Context mContext, String baseUrl){
+    public Api register(Context mContext, String baseUrl){
         File cacheFile = new File(mContext.getApplicationContext().getCacheDir(), "cache");
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100);//100Mb
         //设置证书
@@ -54,6 +56,11 @@ public class Api {
                 .cache(cache)
                 .build();
 
+        this.baseUrl=baseUrl;
+        return this;
+    }
+
+    public void build(){
         retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -64,6 +71,19 @@ public class Api {
     }
 
     /**
+     * 添加Interceptor
+     * @param interceptor
+     */
+    public Api addInterceptro(Interceptor interceptor){
+        if (okHttpClient!=null){
+            okHttpClient=okHttpClient.newBuilder()
+                    .addInterceptor(interceptor)
+                    .build();
+        }
+        return this;
+    }
+
+    /**
      * 获取路由表
      * @param apiService
      * @param <T>
@@ -71,7 +91,7 @@ public class Api {
      */
     public <T> T getService(Class<T> apiService){
         if (retrofit==null){
-            throw new IllegalArgumentException("retrofit not register");
+            throw new IllegalArgumentException("retrofit not register build");
         }
         return retrofit.create(apiService);
     }

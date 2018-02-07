@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.UserInfoDelegate;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
 import com.hyphenate.EMCallBack;
@@ -199,7 +200,7 @@ public class LoginActivity extends BaseTalkLawActivity {
                         hideLoadDialog();
                         if (userInfoModel != null && userInfoModel.getCode() == 10000) {
                             Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
-                            TalkLawApplication.saveUserInfo(userInfoModel.getData());
+                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
                             goActivity(null, HomeActivity.class);
                         } else {
                             Toast.makeText(mContext, userInfoModel.getMsg(), Toast.LENGTH_SHORT).show();
@@ -289,7 +290,7 @@ public class LoginActivity extends BaseTalkLawActivity {
                     public void run() {
                         hideLoadDialog();
                         Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
-                        TalkLawApplication.saveUserInfo(userInfoModel.getData());
+                        UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
 
 
                         // ** manually load all local groups and conversation
