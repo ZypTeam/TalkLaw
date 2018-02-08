@@ -38,8 +38,8 @@ public class PaySucActivity extends BaseTalkLawActivity {
                 goNext();
                 return;
             }
-            timer.setText(getTimerTxt(second));
             second--;
+            timer.setText(getTimerTxt(second));
             handler.postDelayed(task,1000);
         }
     };
@@ -75,6 +75,7 @@ public class PaySucActivity extends BaseTalkLawActivity {
             }
         });
 
+        timer.setText(getTimerTxt(second));
         handler.postDelayed(task,1000);
     }
 
@@ -88,7 +89,7 @@ public class PaySucActivity extends BaseTalkLawActivity {
     private SpannableStringBuilder getTimerTxt(int second){
         SpannableStringBuilder builder=new SpannableStringBuilder(second+"秒后自动进入咨询页面...");
         int len1=(second+"秒").length();
-        int len2="后自动进入咨询yem...".length()+len1;
+        int len2="后自动进入咨询页面...".length()+len1;
 
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#fda263")),0,len1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#666666")),len1,len2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

@@ -72,4 +72,16 @@ public class PresentInstructionsDialog extends Dialog {
             }
         });
     }
+
+    public void setListener(View.OnClickListener listener){
+        textAfirm.setOnClickListener(listener);
+    }
+
+    public void setTextTitle(String title){
+        textTitle.setText(title);
+    }
+
+    public void setContent(String content){
+        textDes.setText(content);
+    }
 }

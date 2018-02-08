@@ -3,6 +3,7 @@ package com.chuxin.law.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
@@ -22,6 +23,7 @@ import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
 import com.chuxin.law.ui.util.ImageLoderUtil;
 import com.chuxin.law.ui.util.UIUtils;
+import com.chuxin.law.ui.view.PresentInstructionsDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
@@ -56,6 +58,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
 
     private ProductListAdapter adapter;
     private LawyerIntroModel.LawyerIntroData data;
+    private PresentInstructionsDialog dialog;
 
     @Override
     public int getLayoutResId() {
@@ -64,6 +67,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
+        dialog = new PresentInstructionsDialog(mContext);
         adapter = new ProductListAdapter(mContext);
         id=getIntent().getStringExtra(ID);
         if (TextUtils.isEmpty(id)){
@@ -95,9 +99,10 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         list.setLayoutManager(new LinearLayoutManager(mContext));
         list.setAdapter(adapter);
 
-        zixun.setOnClickListener(new View.OnClickListener() {
+        dialog.setListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                dialog.dismiss();
                 Bundle bundle=new Bundle();
                 bundle.putInt(BuyLawyerActivity.TYPE,0);
                 if (data==null||data.getLaw()==null){
@@ -106,6 +111,16 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                     bundle.putString(BuyLawyerActivity.PRICE,data.getLaw().getPrice());
                 }
                 goActivityForResult(bundle,BuyLawyerActivity.class, CommonConstant.REQUEST_PAY_SUCCUSE);
+            }
+        });
+
+        dialog.setTextTitle("温馨提示");
+        dialog.setContent("尊敬的用户您好！\n1.本次咨询1小时\n2.可向律师咨询1小时");
+
+        zixun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
             }
         });
 
@@ -122,9 +137,11 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         attention.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (data!=null){
-                    if (data.getLaw()!=null){
-
+                if (data!=null&&data.getLaw()!=null){
+                    if (data.getIs_follow()==1){
+                        delFollow(data.getLaw().getUserid());
+                    }else {
+                        addFollow(data.getLaw().getUserid());
                     }
                 }
             }
@@ -132,7 +149,6 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
 
         getData();
 
-        setNoTxt();
         yiban.setText(UIUtils.getText("100","已办"));
         level.setText(UIUtils.getText("专业级","等级"));
         haoping.setText(UIUtils.getText("100%","好评"));
@@ -167,7 +183,18 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         }
         this.data=data;
         UserModel userModel=data.getLaw();
+        if (data.getIs_follow()==0){
+            attention.setBackgroundResource(R.mipmap.icon_lawyer_follow);
+            attention.setText("关注");
+            attention.setTextColor(Color.parseColor("#ff8400"));
+        }else {
+            attention.setBackgroundResource(R.mipmap.icon_lawyer_follow_un);
+            attention.setTextColor(Color.parseColor("#d7d7d7"));
+            attention.setText("已关注");
+        }
         if (userModel!=null) {
+            setNoTxt(userModel.getPrice());
+            jianjieContent.setText(data.getLaw().getIntro());
 
             name.setText(data.getLaw().getName());
             yiban.setText(UIUtils.getText(userModel.getDonenum(),"已办"));
@@ -188,6 +215,13 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
+                        if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE){
+                            data.setIs_follow(1);
+                            attention.setBackgroundResource(R.mipmap.icon_lawyer_follow_un);
+                            attention.setTextColor(Color.parseColor("#d7d7d7"));
+                            attention.setText("已关注");
+                            showToast(noDataModel.getMsg());
+                        }
                     }
                 }, new Action1<Throwable>() {
                     @Override
@@ -206,6 +240,11 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
+                        data.setIs_follow(0);
+                        attention.setBackgroundResource(R.mipmap.icon_lawyer_follow);
+                        attention.setText("关注");
+                        attention.setTextColor(Color.parseColor("#ff8400"));
+                        showToast(noDataModel.getMsg());
                     }
                 }, new Action1<Throwable>() {
                     @Override
@@ -215,9 +254,9 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                 });
     }
 
-    private void setNoTxt(){
+    private void setNoTxt(String price){
         String txt="沟通咨询：1小时对话";
-        String txt2="¥20.00/次";
+        String txt2="¥"+price+"/次";
         SpannableStringBuilder builder=new SpannableStringBuilder(txt+txt2);
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")),0,txt.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#cb1e28")),txt.length(),txt.length()+txt2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

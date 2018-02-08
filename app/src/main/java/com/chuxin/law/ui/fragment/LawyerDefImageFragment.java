@@ -74,8 +74,8 @@ public class LawyerDefImageFragment extends BaseTalkLawFragment {
         }
         Glide.with(mContext)
                 .load(imgUrl)
-                .placeholder(R.mipmap.logo)
-                .error(R.mipmap.logo)
+                .placeholder(R.mipmap.icon_def_img)
+                .error(R.mipmap.icon_def_img)
                 .transform(new CenterCrop(mContext))
                 .crossFade()
                 .into(img);

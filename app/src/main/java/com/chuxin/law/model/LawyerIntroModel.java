@@ -24,6 +24,8 @@ public class LawyerIntroModel extends BaseModel {
 
     public class LawyerIntroData{
         private UserModel law;
+        private String effect;
+        private int is_follow;
         private List<ProductModel> list;
 
         public UserModel getLaw() {
@@ -40,6 +42,22 @@ public class LawyerIntroModel extends BaseModel {
 
         public void setList(List<ProductModel> list) {
             this.list = list;
+        }
+
+        public String getEffect() {
+            return effect;
+        }
+
+        public void setEffect(String effect) {
+            this.effect = effect;
+        }
+
+        public int getIs_follow() {
+            return is_follow;
+        }
+
+        public void setIs_follow(int is_follow) {
+            this.is_follow = is_follow;
         }
     }
 }

@@ -75,6 +75,8 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
                     return;
                 }
 
+                pay();
+
             }
         });
 
