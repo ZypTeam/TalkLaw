@@ -173,8 +173,15 @@ public class IntegralActivity extends BaseTalkLawActivity {
                                 }
 
                                 if (model.data.carouse != null) {
-                                    banner.setImages(model.data.carouse);
-                                    banner.start();
+                                    if(model.data.carouse.size()==0){
+                                        banner.setVisibility(View.GONE);
+                                    }else{
+                                        banner.setVisibility(View.VISIBLE);
+                                        banner.setImages(model.data.carouse);
+                                        banner.start();
+                                    }
+                                }else{
+                                    banner.setVisibility(View.GONE);
                                 }
 
                                 if (model.data.cat != null) {

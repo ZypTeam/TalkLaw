@@ -1,10 +1,12 @@
 package com.chuxin.law.ui.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TextView;
 
 import com.chuxin.law.model.ProductItemModel;
@@ -13,6 +15,7 @@ import java.util.List;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseView;
+import com.chuxin.law.ui.activity.HotAllProductActivity;
 import com.chuxin.law.ui.adapter.OpinionAdapter;
 
 /**
@@ -77,12 +80,21 @@ public class HomeListProductView extends BaseView {
             textTitle.setText("热门产品");
             allText.setVisibility(VISIBLE);
             viewLimited.setVisibility(GONE);
+            allText.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, HotAllProductActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (type == 2) {
             textTitle.setText("限时免费");
             viewLimited.setVisibility(VISIBLE);
             allText.setVisibility(GONE);
             viewLimited.setData(time);
         }
+
+
     }
 
 }

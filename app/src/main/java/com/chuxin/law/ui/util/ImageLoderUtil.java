@@ -30,6 +30,16 @@ public class ImageLoderUtil {
                 .into(imageView);
     }
 
+    public static void loadRoundImage(Context mContext, ImageView imageView, String url,int radius,int errorResId){
+        Glide.with(mContext)
+                .load(url)
+                .placeholder(errorResId)
+                .error(errorResId)
+                .transform(new CenterCrop(mContext),new GlideRoundTransform(mContext,radius))
+                .crossFade()
+                .into(imageView);
+    }
+
     public static void loadRoundSmailImage(Context mContext, ImageView imageView, String url,int errorResId){
         Glide.with(mContext)
                 .load(url)

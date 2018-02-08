@@ -30,7 +30,7 @@ public class HomeNeedHolder extends BaseViewHolder<ProductItemModel> {
 
     @Override
     public void update(ProductItemModel model) {
-        ImageLoderUtil.loadRoundImage(mContext, imgAvatar, model.img,100);
+        ImageLoderUtil.loadRoundImage(mContext, imgAvatar, model.img,100,R.drawable.img_defail_cainixuyao);
 
 
         textTitle.setText(model.title);
