@@ -15,6 +15,7 @@ public class AuthLawyerModel implements Serializable {
     private String headimg;
     private String certificate;
     private String certificate_year;
+    private String name;
 
     public String getStarttime() {
         return starttime;
@@ -62,5 +63,13 @@ public class AuthLawyerModel implements Serializable {
 
     public void setCertificate_year(String certificate_year) {
         this.certificate_year = certificate_year;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

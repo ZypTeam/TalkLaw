@@ -246,6 +246,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
 
         name.setText(userModel.getName());
 //        yxlCount.setText(userModel.getLevel());
+        buyCount.setText(userModel.getDonenum());
         followCount.setText(userModel.getFollow());
         myAddressContent.setText(userModel.getAddress());
         zhuanghuCount.setText("¥" + userModel.getMoney());

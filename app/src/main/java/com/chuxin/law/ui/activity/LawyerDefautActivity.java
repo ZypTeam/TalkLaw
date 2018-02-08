@@ -29,6 +29,7 @@ import com.chuxin.law.R;
 import com.umeng.socialize.UMShareAPI;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import rx.functions.Action1;
 
@@ -73,6 +74,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
 
     private LawyerDefPagerAdapter adapter;
     private UserModel userModel;
+    private LawyerProductModel.LawyerProductData data;
     @Override
     public int getLayoutResId() {
         return R.layout.activity_lawyer_defaut;
@@ -142,6 +144,13 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
 
             }
         });
+
+        jifen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buyForJifen();
+            }
+        });
         iconHead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,11 +161,20 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
             }
         });
 
+        buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (data!=null) {
+                    UIUtils.goBuyActivity(mContext, data);
+                }
+            }
+        });
+
         collection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (audioModel!=null){
-                    if (audioModel.getIs_like()==1){
+                    if (audioModel.getIs_colle()==1){
                         uncollection();
                     }else {
                         collection();
@@ -169,7 +187,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View v) {
                 if (audioModel!=null){
-                    if (audioModel.getIs_colle()==1){
+                    if (audioModel.getIs_like()==1){
                         unlike();
                     }else {
                         like();
@@ -283,6 +301,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         if (data==null){
             return;
         }
+        this.data=data;
         userModel=data.getLawyer();
         if (StringUtil.isEmpty(userModel.getName())){
             name.setText("王律师");
@@ -311,8 +330,29 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         title.setText(audioModel.getTitle());
         jifenCount.setText("积分："+audioModel.getPoint());
         commentCount.setText(audioModel.getCommment_num());
-        adapter=new LawyerDefPagerAdapter(getSupportFragmentManager(),audioModel);
+        adapter=new LawyerDefPagerAdapter(getSupportFragmentManager(),data);
         viewpager.setAdapter(adapter);
+
+        audio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectPosition(0);
+            }
+        });
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectPosition(1);
+            }
+        });
+
+        video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectPosition(2);
+            }
+        });
         selectPosition(0);
     }
 
@@ -395,6 +435,32 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                             audioModel.setIs_colle(1);
                             collection.setImageResource(R.mipmap.icon_lawyer_collection);
                         }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
+    }
+
+    private void buyForJifen(){
+        if (data==null||data.getArticle()==null){
+            return;
+        }
+        showLoadDialog();
+        Map<String,String> params=new HashMap<>();
+        params.put("id",data.getArticle().getId());
+        params.put("type","2");
+        addNetwork(Api.getInstance().getService(ApiService.class).buyProduct(params)
+                , new Action1<NoDataModel>() {
+                    @Override
+                    public void call(NoDataModel noDataModel) {
+                        hideLoadDialog();
+                        if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE){
+
+                        }
+                        showToast(noDataModel.getMsg());
                     }
                 }, new Action1<Throwable>() {
                     @Override

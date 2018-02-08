@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
+import com.chuxin.law.model.LawyerProductModel;
+import com.chuxin.law.ui.activity.BuyProductActivity;
 import com.chuxin.law.ui.activity.CommentListActivity;
 import com.chuxin.law.ui.activity.GratuityActivity;
 import com.chuxin.law.ui.activity.LawyerAuthActivity;
@@ -71,9 +74,9 @@ public class UIUtils {
 
     }
 
-    public static void goGratuity(Context context,String id){
+    public static void goGratuity(Context context,LawyerProductModel.LawyerProductData data){
         Intent intent=new Intent(context, GratuityActivity.class);
-        intent.putExtra(LawyerDefautActivity.ID,id);
+        intent.putExtra(GratuityActivity.DATA,data);
         context.startActivity(intent);
 
     }
@@ -94,5 +97,22 @@ public class UIUtils {
         Intent intent=new Intent(context, LawyerAuthActivity.class);
         context.startActivity(intent);
     }
+
+    public static void goBuyActivity(Context context, LawyerProductModel.LawyerProductData data){
+        Intent intent=new Intent(context, BuyProductActivity.class);
+        intent.putExtra(BuyProductActivity.DATA,data);
+        context.startActivity(intent);
+    }
+
+    public static Spanned getHtmlTxt(String html){
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html,Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(html);
+        }
+        return result;
+    }
+
 
 }

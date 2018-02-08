@@ -38,6 +38,15 @@ public class CommonConstant {
     //认证成功
     public static final int REQUEST_LAWYER_AUTH_SUC=107;
 
+    //打赏
+    public static final int REQUEST_LAWYER_GRATUITY=108;
+
+    //打赏金额
+    public static final int REQUEST_GRATUITY_PRICE=109;
+
+    //修改律师事务所姓名
+    public static final int NAME_LAWYER_REQUEST_CODE=110;
+
 
 
 }

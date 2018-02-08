@@ -19,26 +19,19 @@ import com.chuxin.law.ui.fragment.LawyerDefVedioFragment;
 public class LawyerDefViewPagerUtils {
 
     public static final int COUNT = 3;
-    public static final String CONTENT="content";
-    public static final String IMAGE="image";
-    public static final String URL="url";
-    public static final String ID="id";
-    public static Fragment getFragment(int position, LawyerAudioModel model) {
+    public static final String DATA="data";
+    public static Fragment getFragment(int position, LawyerProductModel.LawyerProductData data) {
         Fragment fragment = null;
         Bundle bundle=new Bundle();
-        bundle.putString(CONTENT,model.getContent());
-        bundle.putString(IMAGE,model.getImg());
-        bundle.putString(ID,model.getId());
+        bundle.putSerializable(DATA,data);
         switch (position) {
             case 0:
-                bundle.putString(URL,model.getMp3());
                 fragment= LawyerDefAudioFragment.getInstance(bundle);
                 break;
             case 1:
                 fragment= LawyerDefImageFragment.getInstance(bundle);
                 break;
             case 2:
-                bundle.putString(URL,model.getMp4());
                 fragment= LawyerDefVedioFragment.getInstance(bundle);
                 break;
             default:

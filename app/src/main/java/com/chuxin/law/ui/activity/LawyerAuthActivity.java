@@ -35,6 +35,7 @@ import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 import rx.functions.Action1;
 
+import static com.chuxin.law.common.CommonConstant.NAME_LAWYER_REQUEST_CODE;
 import static com.chuxin.law.common.CommonConstant.NAME_REQUEST_CODE;
 import static com.chuxin.law.common.CommonConstant.REQUEST_IMAGE_HEAD;
 import static com.chuxin.law.common.CommonConstant.REQUEST_IMAGE_PAGE;
@@ -117,13 +118,22 @@ public class LawyerAuthActivity extends BaseTalkLawActivity {
                 }
             }
         });
+        name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(EditUserInfoActivity.UPDATE_TYPE, 6);
+                bundle.putString(EditUserInfoActivity.UPDATE_VALUE, "");
+                goActivityForResult(bundle, EditUserInfoActivity.class, NAME_REQUEST_CODE);
+            }
+        });
         lawyer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putInt(EditUserInfoActivity.UPDATE_TYPE, 4);
                 bundle.putString(EditUserInfoActivity.UPDATE_VALUE, "");
-                goActivityForResult(bundle, EditUserInfoActivity.class, NAME_REQUEST_CODE);
+                goActivityForResult(bundle, EditUserInfoActivity.class, NAME_LAWYER_REQUEST_CODE);
             }
         });
         numPickPop = new NumberPickerPopupwinow(LawyerAuthActivity.this,
@@ -141,7 +151,7 @@ public class LawyerAuthActivity extends BaseTalkLawActivity {
                     }
                 });
 
-        iconHead.setOnClickListener(new View.OnClickListener() {
+        uploadHead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MultiImageSelector.create(mContext)
@@ -187,6 +197,7 @@ public class LawyerAuthActivity extends BaseTalkLawActivity {
             return;
         }
         model.setLaw_firm(lawyer.getText().toString());
+        model.setName(name.getText().toString());
         Bundle bundle = new Bundle();
         bundle.putSerializable("model", model);
         goActivityForResult(bundle, SubmitAuthActivity.class, REQUEST_LAWYER_AUTH_SUC);
@@ -219,11 +230,17 @@ public class LawyerAuthActivity extends BaseTalkLawActivity {
         } else if (requestCode == NAME_REQUEST_CODE) {
             if (data != null) {
                 if (!StringUtil.isEmpty(data.getStringExtra("name"))) {
-                    lawyer.setText(data.getStringExtra("name"));
+                    name.setText(data.getStringExtra("name"));
                 }
             }
         } else if (requestCode == REQUEST_LAWYER_AUTH_SUC) {
             onBackPressed();
+        }else if (requestCode==NAME_LAWYER_REQUEST_CODE){
+            if (data != null) {
+                if (!StringUtil.isEmpty(data.getStringExtra("name"))) {
+                    lawyer.setText(data.getStringExtra("name"));
+                }
+            }
         }
     }
 

@@ -6,9 +6,9 @@ import com.chuxin.law.model.CommentListModel;
 import com.chuxin.law.model.ExchangeRecordsDataModel;
 import com.chuxin.law.model.IntegralDetailDataModel;
 import com.chuxin.law.model.IntegralModel;
+import com.chuxin.law.model.IntegralProductDetailModel;
 import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.model.LawyerProductModel;
-import com.chuxin.law.model.IntegralProductDetailModel;
 import com.chuxin.law.model.MoveModel;
 import com.chuxin.law.model.MyAttentionListModel;
 import com.chuxin.law.model.MyMsgListModel;
@@ -230,11 +230,11 @@ public interface ApiService {
 
     @GET("/article-like/set")
     Observable<NoDataModel> setLike(@QueryMap Map<String,String> params);
-    @GET("/article-like/callback")
+    @GET("/article-like/del")
     Observable<NoDataModel> delLike(@QueryMap Map<String,String> params);
     @GET("/article-collection/set")
     Observable<NoDataModel> setCollection(@QueryMap Map<String,String> params);
-    @GET("/article-collection/callback")
+    @GET("/article-collection/del")
     Observable<NoDataModel> delCollection(@QueryMap Map<String,String> params);
 
     @GET("/article-comment/list")
@@ -312,5 +312,29 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/withdrawals/apply")
     Observable<BackCardModel> submitTixian(@FieldMap Map<String,String> params);
+    /**
+     * 打赏 获取订单号
+     * @param params
+     * @return
+     */
+    @GET("/reward/set")
+    Observable<NoDataModel> gratuityOrder(@QueryMap Map<String,String> params);
+
+    /**
+     * 产品详情 购买
+     */
+    @FormUrlEncoded
+    @POST("/article-buy/set")
+    Observable<NoDataModel> buyProduct(@FieldMap Map<String,String> params);
+
+    /**
+     * 我的购买
+     * @param params
+     * @return
+     */
+    @GET("/article/my-buy")
+    Observable<ProductsModel> myBuyList(@QueryMap Map<String,String> params);
+
+
 }
 
