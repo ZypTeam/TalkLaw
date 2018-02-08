@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,15 +12,18 @@ import android.widget.TextView;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
+import com.chuxin.law.model.CarouseModel;
 import com.chuxin.law.model.IntegralModel;
 import com.chuxin.law.ui.adapter.IntegralGoodsAdapter;
 import com.chuxin.law.ui.util.GlideImageLoader;
+import com.chuxin.law.ui.util.UIUtils;
 import com.chuxin.law.ui.view.IntegralListProductView;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.net.Api;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 
 import cn.com.talklaw.ui.activity.AllGoodsActivity;
 import rx.functions.Action1;
@@ -133,6 +137,24 @@ public class IntegralActivity extends BaseTalkLawActivity {
             }
         });
 
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                if (integralModel != null && integralModel.data != null && integralModel.data.carouse != null) {
+                    CarouseModel model = integralModel.data.carouse.get(position);
+                    if (model != null) {
+                        if ("0".equals(model.atype)) {
+                            UIUtils.goLawyerDef(mContext, model.id);
+                        } else {
+                            Intent intent = new Intent(mContext, WebViewActivity.class);
+                            intent.putExtra("url",model.url);
+                            mContext.startActivity(intent);
+                        }
+                    }
+                }
+
+            }
+        });
         delMsg();
     }
 
@@ -151,8 +173,15 @@ public class IntegralActivity extends BaseTalkLawActivity {
                                 }
 
                                 if (model.data.carouse != null) {
-                                    banner.setImages(model.data.carouse);
-                                    banner.start();
+                                    if(model.data.carouse.size()==0){
+                                        banner.setVisibility(View.GONE);
+                                    }else{
+                                        banner.setVisibility(View.VISIBLE);
+                                        banner.setImages(model.data.carouse);
+                                        banner.start();
+                                    }
+                                }else{
+                                    banner.setVisibility(View.GONE);
                                 }
 
                                 if (model.data.cat != null) {

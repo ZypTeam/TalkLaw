@@ -108,4 +108,8 @@ public class BackTitleView extends FrameLayout {
         rightText.setOnClickListener(listener);
     }
 
+    public void setLeftGone(){
+        back.setVisibility(GONE);
+    }
+
 }

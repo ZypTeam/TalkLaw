@@ -141,6 +141,13 @@
         <!--打赏支付-->
         <activity android:name="com.chuxin.law.ui.activity.GratuityPayActivity" />
 
+        <!--webview页面-->
+        <activity android:name="com.chuxin.law.ui.activity.WebViewActivity" />
+
+
+        <!--热门企业-->
+        <activity android:name="com.chuxin.law.ui.activity.HotAllProductActivity" />
+
         <!--编辑个人信息-->
         <activity
             android:name="com.chuxin.law.ui.activity.EditUserInfoActivity"

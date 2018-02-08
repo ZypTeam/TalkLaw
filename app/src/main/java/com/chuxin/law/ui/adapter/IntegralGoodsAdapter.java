@@ -49,7 +49,7 @@ public class IntegralGoodsAdapter extends BaseAdapter<IntegralModel.CatItemModel
 
         @Override
         public void update(IntegralModel.CatItemModel model) {
-            ImageLoderUtil.loadRoundSmailImage(mContext, imgItemGoods, model.img);
+            ImageLoderUtil.loadRoundSmailImage(mContext, imgItemGoods, model.img,R.drawable.img_defail_dianzichanpin);
             textTitle.setText(model.name);
 
             imgItemGoods.setOnClickListener(new View.OnClickListener() {

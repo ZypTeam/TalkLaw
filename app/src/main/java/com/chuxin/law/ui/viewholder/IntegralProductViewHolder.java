@@ -34,7 +34,7 @@ public class IntegralProductViewHolder extends BaseViewHolder<IntegralModel.Good
 
     @Override
     public void update(final IntegralModel.GoodsItemModel model) {
-        ImageLoderUtil.loadRoundSmailImage(mContext,imgProduct,model.img);
+        ImageLoderUtil.loadRoundSmailImage(mContext,imgProduct,model.img,R.drawable.img_product_normal);
         textTitle.setText(model.title);
         textCount.setText(model.point+"");
 

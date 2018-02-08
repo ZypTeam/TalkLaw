@@ -100,6 +100,8 @@
                 app:indicator_width="7dp"
                 app:indicator_drawable_selected="@drawable/indicator_drawable_selected_color"
                 app:indicator_height="7dp"
+                app:banner_default_image="@drawable/img_banner_default"
+                android:visibility="gone"
                 app:indicator_margin="5dp"/>
 
 

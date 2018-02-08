@@ -4,6 +4,7 @@ import com.chuxin.law.model.ArrondiModel;
 import com.chuxin.law.model.BackCardModel;
 import com.chuxin.law.model.CommentListModel;
 import com.chuxin.law.model.ExchangeRecordsDataModel;
+import com.chuxin.law.model.HotListData;
 import com.chuxin.law.model.IntegralDetailDataModel;
 import com.chuxin.law.model.IntegralModel;
 import com.chuxin.law.model.IntegralProductDetailModel;
@@ -335,6 +336,14 @@ public interface ApiService {
     @GET("/article/my-buy")
     Observable<ProductsModel> myBuyList(@QueryMap Map<String,String> params);
 
+
+    /**
+     * 热门产品列表
+     * @param params
+     * @return
+     */
+    @GET("/article/hot")
+    Observable<HotListData> getHotList(@QueryMap Map<String,String> params);
 
 }
 

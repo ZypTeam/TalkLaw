@@ -103,10 +103,10 @@ public class HomeActivity extends BaseTalkLawActivity {
             opinionImg.setImageResource(R.mipmap.img_opinion_select);
             opinionText.setTextColor(getResources().getColor(R.color.text_home_btn_select));
         } else if (index == 1) {
-            statementImg.setImageResource(R.mipmap.img_opinion_select);
+            statementImg.setImageResource(R.mipmap.img_statement_select);
             statementText.setTextColor(getResources().getColor(R.color.text_home_btn_select));
         } else if (index == 2) {
-            myImg.setImageResource(R.mipmap.img_opinion_select);
+            myImg.setImageResource(R.mipmap.img_my_select);
             myText.setTextColor(getResources().getColor(R.color.text_home_btn_select));
         }
     }

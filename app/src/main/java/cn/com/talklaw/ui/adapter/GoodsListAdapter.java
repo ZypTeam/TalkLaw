@@ -50,7 +50,7 @@ public class GoodsListAdapter extends BaseAdapter<IntegralModel.GoodsItemModel> 
 
         @Override
         public void update(final IntegralModel.GoodsItemModel model) {
-                ImageLoderUtil.loadRoundSmailImage(mContext, imgTitle, model.img);
+                ImageLoderUtil.loadRoundSmailImage(mContext, imgTitle, model.img,R.drawable.img_project);
             textTitle.setText(model.title);
             textIntegral.setText(model.point + "积分");
 

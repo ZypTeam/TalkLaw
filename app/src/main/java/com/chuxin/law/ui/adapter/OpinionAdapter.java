@@ -84,4 +84,11 @@ public class OpinionAdapter extends RecyclerView.Adapter implements OpinionItemC
         notifyDataSetChanged();
 
     }
+
+    public void addData(List<ProductItemModel> list, int type) {
+        this.type = type;
+        this.list.addAll(list);
+        notifyDataSetChanged();
+
+    }
 }

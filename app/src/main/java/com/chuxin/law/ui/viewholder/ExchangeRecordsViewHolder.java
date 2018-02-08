@@ -42,7 +42,7 @@ public class ExchangeRecordsViewHolder extends BaseViewHolder<ExchangeRecordsDat
         if(model.goods==null){
             return;
         }
-        ImageLoderUtil.loadRoundSmailImage(mContext,imgProductIcon,model.img);
+        ImageLoderUtil.loadRoundSmailImage(mContext,imgProductIcon,model.img,R.drawable.img_project);
 
         textNum.setText("订单号："+model.createtime);
         textState.setText("交易成功");
@@ -53,8 +53,8 @@ public class ExchangeRecordsViewHolder extends BaseViewHolder<ExchangeRecordsDat
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, RedeemDetailsActivity.class);
-                mContext.startActivity(intent);
+//                Intent intent = new Intent(mContext, RedeemDetailsActivity.class);
+//                mContext.startActivity(intent);
             }
         });
 

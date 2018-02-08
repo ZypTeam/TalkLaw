@@ -13,8 +13,10 @@ import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.model.BackCardModel;
 import com.chuxin.law.model.UserModel;
+import com.chuxin.law.ui.view.PresentInstructionsDialog;
 import com.chuxin.law.ui.view.SelectBankCardDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
+import com.jusfoun.baselibrary.Util.TouchUtil;
 import com.jusfoun.baselibrary.net.Api;
 
 import java.util.HashMap;
@@ -43,6 +45,9 @@ public class ApplyForWithdrawalsActivity extends BaseTalkLawActivity {
     protected TextView textName;
     private BackCardModel backCardModel;
     private SelectBankCardDialog selectBankCardDialog;
+    private ImageView img_wenhao;
+
+    private PresentInstructionsDialog dialog;
 
     private BackCardModel.BackCardItemModel backCardItemModel;
 
@@ -54,6 +59,7 @@ public class ApplyForWithdrawalsActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
         selectBankCardDialog = new SelectBankCardDialog(mContext, R.style.my_dialog);
+        dialog = new PresentInstructionsDialog(mContext);
     }
 
     @Override
@@ -69,6 +75,7 @@ public class ApplyForWithdrawalsActivity extends BaseTalkLawActivity {
         layoutAdd = (LinearLayout) findViewById(R.id.layout_add);
         layoutCard = (LinearLayout) findViewById(R.id.layout_card);
         textName = (TextView) findViewById(R.id.text_name);
+        img_wenhao =(ImageView)findViewById(R.id.img_wenhao);
 
     }
 
@@ -130,6 +137,14 @@ public class ApplyForWithdrawalsActivity extends BaseTalkLawActivity {
                 }
             }
         });
+
+        img_wenhao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+            }
+        });
+        TouchUtil.createTouchDelegate(img_wenhao,40);
         delMsg();
     }
 
