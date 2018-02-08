@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.chuxin.law.model.CarouseModel;
 import com.chuxin.law.ui.activity.AudioDetailsActivity;
+import com.chuxin.law.ui.activity.WebViewActivity;
 import com.chuxin.law.ui.util.GlideImageLoader;
+import com.chuxin.law.ui.util.UIUtils;
 import com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
 import com.jusfoun.baselibrary.net.Api;
@@ -28,6 +31,9 @@ import com.chuxin.law.ui.activity.LitigationCalculatorActivity;
 import com.chuxin.law.ui.activity.SearchActivity;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
 import com.chuxin.law.ui.widget.BackTitleView;
+import com.youth.banner.listener.OnBannerListener;
+
+import java.util.List;
 
 import rx.functions.Action1;
 
@@ -53,6 +59,7 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
     private ProductListAdapter adapter;
     private int listDy = 0;
     private int disY;
+    private  List<CarouseModel> carouseList;
 
 
     public static StatementFragment getInstance() {
@@ -150,6 +157,27 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
                 mContext.startActivity(intent);
             }
         });
+
+
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                if (carouseList != null) {
+                    CarouseModel model = carouseList.get(position);
+                    if (model != null) {
+                        if ("0".equals(model.atype)) {
+                            UIUtils.goLawyerDef(mContext, model.id);
+                        } else {
+                            Intent intent = new Intent(mContext, WebViewActivity.class);
+                            intent.putExtra("url",model.url);
+                            mContext.startActivity(intent);
+                        }
+                    }
+                }
+
+            }
+        });
+        backTitleView.setLeftGone();
     }
 
     @Override
@@ -186,6 +214,7 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
                                     adapter.refreshList(model.data.article);
                                 }
                                 if (model.data.carouse != null) {
+                                    carouseList = model.data.carouse;
                                     banner.setImages(model.data.carouse);
                                     banner.start();
 //                                    if(model.data.carouse.size()>0) {

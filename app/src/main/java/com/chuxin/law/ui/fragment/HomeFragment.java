@@ -1,22 +1,27 @@
 package com.chuxin.law.ui.fragment;
 
+import android.content.Intent;
 import android.view.View;
 
+import com.chuxin.law.R;
+import com.chuxin.law.base.BaseTalkLawFragment;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.model.CarouseModel;
+import com.chuxin.law.model.StatementListModel;
+import com.chuxin.law.ui.activity.WebViewActivity;
 import com.chuxin.law.ui.util.GlideImageLoader;
+import com.chuxin.law.ui.util.UIUtils;
+import com.chuxin.law.ui.view.HomeListProductView;
+import com.chuxin.law.ui.view.HomeNeedView;
+import com.chuxin.law.ui.view.HomeScrollView;
+import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
 import com.jusfoun.baselibrary.net.Api;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 
-import com.chuxin.law.R;
-import com.chuxin.law.base.BaseTalkLawFragment;
-import com.chuxin.law.common.ApiService;
-import com.chuxin.law.model.StatementListModel;
-import com.chuxin.law.ui.view.HomeListProductView;
-import com.chuxin.law.ui.view.HomeNeedView;
-import com.chuxin.law.ui.view.HomeScrollView;
-import com.chuxin.law.ui.widget.BackTitleView;
 import rx.functions.Action1;
 
 import static com.chuxin.law.common.CommonConstant.NET_SUC_CODE;
@@ -38,6 +43,8 @@ public class HomeFragment extends BaseTalkLawFragment {
     protected HomeScrollView scrollview;
     private int listDy = 0;
     private int disY;
+    private StatementListModel statementListModel;
+
     public static HomeFragment getInstance() {
         HomeFragment fragment = new HomeFragment();
         return fragment;
@@ -88,6 +95,24 @@ public class HomeFragment extends BaseTalkLawFragment {
         banner.setFocusableInTouchMode(true);
         banner.requestFocus();
 
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                if (statementListModel != null && statementListModel.data != null && statementListModel.data.carouse != null) {
+                    CarouseModel model = statementListModel.data.carouse.get(position);
+                    if (model != null) {
+                        if ("0".equals(model.atype)) {
+                            UIUtils.goLawyerDef(mContext, model.id);
+                        } else {
+                            Intent intent = new Intent(mContext, WebViewActivity.class);
+                            intent.putExtra("url",model.url);
+                            mContext.startActivity(intent);
+                        }
+                    }
+                }
+
+            }
+        });
 
         scrollview.setOnScrollChangedListener(new HomeScrollView.OnScrollChangedListener() {
             @Override
@@ -102,6 +127,7 @@ public class HomeFragment extends BaseTalkLawFragment {
 
         backTitleView.setAlpha(0f);
         backTitleView.setTitle("说法");
+        backTitleView.setLeftGone();
     }
 
     @Override
@@ -115,13 +141,14 @@ public class HomeFragment extends BaseTalkLawFragment {
                     @Override
                     public void call(StatementListModel model) {
                         hideLoadDialog();
+                        statementListModel = model;
                         if (model != null && model.getCode() == NET_SUC_CODE) {
                             if (model.data != null) {
                                 if (model.data.hot != null) {
-                                    viewHotProduct.setData(model.data.hot, 1,model.data.freetime);
+                                    viewHotProduct.setData(model.data.hot, 1, model.data.freetime);
                                 }
                                 if (model.data.free != null) {
-                                    viewFreeProduct.setData(model.data.free, 2,model.data.freetime);
+                                    viewFreeProduct.setData(model.data.free, 2, model.data.freetime);
                                 }
 
                                 if (model.data.need != null) {
