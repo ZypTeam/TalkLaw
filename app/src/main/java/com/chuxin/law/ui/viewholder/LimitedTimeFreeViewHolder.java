@@ -41,8 +41,7 @@ public class LimitedTimeFreeViewHolder extends BaseViewHolder<ProductItemModel> 
     @Override
     public void update(ProductItemModel model) {
 
-        ImageLoderUtil.loadRoundImage(mContext,imgAvatar,model.img,10);
-
+        ImageLoderUtil.loadRoundSmailImage(mContext,imgAvatar,model.img,R.drawable.img_product_normal);
         textCount.setText(model.comment_num);
         textTitle.setText(model.title);
         textMoney1.setText("￥"+model.price);

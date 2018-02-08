@@ -14,6 +14,7 @@ import com.chuxin.law.ui.activity.AudioDetailsActivity;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
 import com.chuxin.law.ui.activity.LawyerIntroductionActivity;
+import com.chuxin.law.ui.util.ImageLoderUtil;
 import com.chuxin.law.ui.util.UIUtils;
 
 /**
@@ -41,9 +42,11 @@ public class ProductViewHolder extends BaseViewHolder<ProductModel> {
 
     @Override
     public void update(final ProductModel model) {
-        Glide.with(context)
-                .load(model.img)
-                .into(image);
+//        Glide.with(context)
+//                .load(model.img)
+//                .into(image);
+
+        ImageLoderUtil.loadRoundSmailImage(mContext,image, model.img,R.drawable.img_product_normal);
 
         itemView.setTag(model);
 

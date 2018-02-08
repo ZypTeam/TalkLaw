@@ -7,7 +7,7 @@
 
     <com.youth.banner.Banner
         android:id="@+id/banner"
-        app:banner_default_image="@drawable/img_banner_datil"
+        app:banner_default_image="@drawable/img_banner_default"
         app:indicator_drawable_selected="@drawable/indicator_drawable_selected_color"
         app:indicator_height="7dp"
         app:indicator_margin="5dp"

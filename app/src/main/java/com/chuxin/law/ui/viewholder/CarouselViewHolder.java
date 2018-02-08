@@ -40,7 +40,7 @@ public class CarouselViewHolder extends BaseViewHolder<ProductItemModel> {
 
     @Override
     public void update(final ProductItemModel model) {
-        ImageLoderUtil.loadRoundImage(mContext,imgAvatar,model.img,10);
+        ImageLoderUtil.loadRoundSmailImage(mContext,imgAvatar,model.img,R.drawable.img_product_normal);
         textName.setText(model.lawyer);
         textTime.setText(model.createtime);
         textCount.setText(model.comment_num);

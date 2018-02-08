@@ -34,6 +34,7 @@ public class ImageLoderUtil {
         Glide.with(mContext)
                 .load(url)
                 .placeholder(errorResId)
+                .error(errorResId)
                 .transform(new CenterCrop(mContext),new GlideRoundTransform(mContext,10))
                 .crossFade()
                 .into(imageView);
