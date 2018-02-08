@@ -22,13 +22,13 @@ import static android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
 
 public class GratuityDialog extends Dialog {
 
-    protected View rootView;
     protected TextView content;
     protected TextView cancel;
     protected TextView sure;
+    private View line;
 
     public GratuityDialog(@NonNull Context context) {
-        super(context);
+        this(context,R.style.my_dialog);
     }
 
     public GratuityDialog(@NonNull Context context, int themeResId) {
@@ -49,6 +49,7 @@ public class GratuityDialog extends Dialog {
         content = (TextView) findViewById(R.id.content);
         cancel = (TextView) findViewById(R.id.cancel);
         sure = (TextView) findViewById(R.id.sure);
+        line =  findViewById(R.id.line);
 
     }
 
@@ -66,6 +67,25 @@ public class GratuityDialog extends Dialog {
                 dismiss();
             }
         });
+    }
+
+    public void setOkListener(View.OnClickListener listener){
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    public void setOneBtn(boolean isOne){
+        if (isOne){
+            line.setVisibility(View.VISIBLE);
+            sure.setVisibility(View.VISIBLE);
+        }else {
+            line.setVisibility(View.GONE);
+            sure.setVisibility(View.GONE);
+        }
     }
 
     public void setContent(String txt){

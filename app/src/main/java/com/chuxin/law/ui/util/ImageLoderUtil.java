@@ -16,9 +16,10 @@ import com.jusfoun.baselibrary.widget.GlideRoundTransform;
  */
 public class ImageLoderUtil {
 
-    public static  void loadNormalImg(Context mContext, ImageView imageView, String url){
+    public static  void loadNormalImg(Context mContext, ImageView imageView, String url,int resId){
         Glide.with(mContext)
                 .load(url)
+                .placeholder(resId)
                 .into(imageView);
     }
 

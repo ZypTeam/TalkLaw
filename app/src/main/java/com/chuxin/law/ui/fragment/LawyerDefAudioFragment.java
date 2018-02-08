@@ -87,6 +87,6 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
                 UIUtils.goGratuity(mContext,data);
             }
         });
-        ImageLoderUtil.loadNormalImg(mContext,imgAudio,data.getLawyer().getHeadimg());
+//        ImageLoderUtil.loadNormalImg(mContext,imgAudio,data.getLawyer().getHeadimg());
     }
 }

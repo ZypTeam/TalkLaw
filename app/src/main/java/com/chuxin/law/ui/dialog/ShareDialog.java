@@ -3,6 +3,7 @@ package com.chuxin.law.ui.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.support.annotation.NonNull;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -58,7 +59,7 @@ public class ShareDialog extends Dialog {
         WindowManager.LayoutParams lp = window.getAttributes();
         window.setWindowAnimations(R.style.dialog_enter_anim_up_down);
         lp.width = PhoneUtil.getDisplayWidth(getContext());
-        lp.height = PhoneUtil.getDisplayHeight(getContext());
+        lp.gravity= Gravity.BOTTOM;
         window.setAttributes(lp);
         cancel = (TextView) findViewById(R.id.cancel);
         pengyou = (ImageView) findViewById(R.id.pengyou);

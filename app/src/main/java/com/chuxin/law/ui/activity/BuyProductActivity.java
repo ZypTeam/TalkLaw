@@ -1,11 +1,14 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.ui.widget.BackTitleView;
 
@@ -53,9 +56,26 @@ public class BuyProductActivity extends BaseTalkLawActivity {
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (data==null||data.getArticle()==null){
+                    return;
+                }
+                Bundle bundle=new Bundle();
+                bundle.putInt(BuyLawyerActivity.TYPE,1);
+                bundle.putString(BuyLawyerActivity.PRICE,data.getArticle().getPrice());
+                goActivityForResult(bundle,BuyLawyerActivity.class, CommonConstant.REQUEST_PAY_SUCCUSE);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode!=RESULT_OK){
+            return;
+        }
+        if (requestCode==CommonConstant.REQUEST_PAY_SUCCUSE){
+            onBackPressed();
+        }
     }
 
     private void buy(){

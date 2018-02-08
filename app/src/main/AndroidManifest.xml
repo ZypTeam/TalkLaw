@@ -187,6 +187,12 @@
         <!--账户明细-->
         <activity android:name=".ui.activity.AccountDetailsActivity" />
 
+        <!--咨询支付-->
+        <activity android:name=".ui.activity.BuyLawyerActivity" />
+
+        <!--咨询支付成功-->
+        <activity android:name=".ui.activity.PaySucActivity" />
+
 
         <!--新浪分享-->
         <activity

@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_my_info"
+    android:background="@drawable/bg_dialog_gratuity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -24,7 +24,7 @@
         android:textSize="15sp"
         android:textColor="#333"
         android:layout_marginTop="80dp"
-        android:text="说法需要打开微信支付"
+        android:text="说法需要打开微信支付宝支付"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -46,6 +46,7 @@
         android:layout_height="1px"/>
     
     <View
+        android:id="@+id/line"
         app:layout_constraintTop_toTopOf="@+id/cancel"
         app:layout_constraintRight_toRightOf="@+id/cancel"
         android:background="#635f5f"

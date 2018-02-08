@@ -14,6 +14,7 @@ import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.LawyerProductModel;
+import com.chuxin.law.ui.dialog.GratuityDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
@@ -48,6 +49,7 @@ public class GratuityActivity extends BaseTalkLawActivity implements View.OnClic
     private String price="5";
     private TextView submit;
     private LawyerProductModel.LawyerProductData data;
+    private GratuityDialog dialog;
 
     @Override
     public int getLayoutResId() {
@@ -60,6 +62,8 @@ public class GratuityActivity extends BaseTalkLawActivity implements View.OnClic
         if (data!=null&&data.getLawyer()!=null) {
             id = data.getLawyer().getUserid();
         }
+        dialog=new GratuityDialog(mContext);
+        dialog.setContent("使用帮助");
     }
 
     @Override
@@ -93,6 +97,15 @@ public class GratuityActivity extends BaseTalkLawActivity implements View.OnClic
             @Override
             public void onClick(View v) {
                 gratuity();
+            }
+        });
+
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dialog!=null){
+                    dialog.show();
+                }
             }
         });
     }

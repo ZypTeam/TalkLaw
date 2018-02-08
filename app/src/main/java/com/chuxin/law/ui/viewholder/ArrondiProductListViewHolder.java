@@ -36,7 +36,7 @@ public class ArrondiProductListViewHolder extends BaseViewHolder<ArrondiProductM
     @Override
     public void update(final ArrondiProductModel model) {
         name.setText(model.getName());
-        ImageLoderUtil.loadNormalImg(context,icon,model.getImg());
+        ImageLoderUtil.loadNormalImg(context,icon,model.getImg(),R.mipmap.icon_def_zhuanqu);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

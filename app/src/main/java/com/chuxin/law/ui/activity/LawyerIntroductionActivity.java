@@ -2,6 +2,7 @@ package com.chuxin.law.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
@@ -97,10 +98,14 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         zixun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent  = new Intent(LawyerIntroductionActivity.this, ChatActivity.class);
-                intent.putExtra("userId", "20");
-                intent.putExtra("userName", "王律师");
-                startActivity(intent);
+                Bundle bundle=new Bundle();
+                bundle.putInt(BuyLawyerActivity.TYPE,0);
+                if (data==null||data.getLaw()==null){
+                    bundle.putString(BuyLawyerActivity.PRICE,"200");
+                }else {
+                    bundle.putString(BuyLawyerActivity.PRICE,data.getLaw().getPrice());
+                }
+                goActivityForResult(bundle,BuyLawyerActivity.class, CommonConstant.REQUEST_PAY_SUCCUSE);
             }
         });
 

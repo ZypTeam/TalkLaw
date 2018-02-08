@@ -49,6 +49,7 @@ public class ArrondiTopAdapter extends PagerAdapter {
         String string=list.get(position)==null?"":list.get(position).getImg();
         Glide.with(context)
                 .load(string)
+                .placeholder(R.mipmap.icon_def_img)
                 .centerCrop()
                 .into(imageView);
         container.addView(view);

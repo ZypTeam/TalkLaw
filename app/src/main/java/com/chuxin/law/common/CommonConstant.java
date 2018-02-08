@@ -47,6 +47,9 @@ public class CommonConstant {
     //修改律师事务所姓名
     public static final int NAME_LAWYER_REQUEST_CODE=110;
 
+    //购买成功
+    public static final int REQUEST_PAY_SUCCUSE=111;
+
 
 
 }

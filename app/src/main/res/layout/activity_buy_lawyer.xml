@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#f0eff5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.chuxin.law.ui.widget.BackTitleView
+        android:id="@+id/title_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/write"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_marginTop="1px"
+        app:layout_constraintTop_toBottomOf="@+id/title_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingRight="16dp"
+        android:gravity="right|center_vertical"
+        android:textSize="16sp"
+        android:textColor="@color/app_red_color"
+        android:layout_width="0dp"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:id="@+id/produte"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:paddingLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/price"
+        app:layout_constraintTop_toTopOf="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:drawableLeft="@mipmap/icon_zhifubao_pay"
+        android:drawablePadding="10dp"
+        android:text="选择支付方式"
+        android:textSize="14sp"
+        android:background="@color/write"
+        android:textColor="#888"
+        android:drawableRight="@drawable/icon_pay_select"
+        android:paddingRight="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/price"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="16sp"
+        android:layout_width="0dp"
+        android:layout_height="43dp" />
+    
+    <TextView
+        android:id="@+id/zhifubao"
+        android:drawableLeft="@mipmap/icon_weixin_pay"
+        android:drawableRight="@drawable/icon_pay_select"
+        android:paddingRight="16dp"
+        android:drawablePadding="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/price"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="43dp"
+        android:background="@color/write"
+        android:text="支付宝"
+        android:textSize="16sp"
+        android:paddingLeft="16dp"
+        android:textColor="#000"
+        android:gravity="center_vertical"
+        android:layout_width="0dp"
+        android:layout_height="45dp" />
+
+    <View
+        app:layout_constraintTop_toBottomOf="@+id/zhifubao"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="16dp"
+        android:background="#e7e7e7"
+        android:layout_width="0dp"
+        android:layout_height="1px"/>
+
+    <TextView
+        android:id="@+id/weixin"
+        app:layout_constraintTop_toBottomOf="@+id/zhifubao"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@color/write"
+        android:text="微信"
+        android:textSize="16sp"
+        android:paddingLeft="16dp"
+        android:textColor="#000"
+        android:gravity="center_vertical"
+        android:layout_width="0dp"
+        android:layout_height="45dp" />
+
+    <CheckBox
+        android:id="@+id/agree"
+        android:layout_marginLeft="16dp"
+        android:text="我同意用户使用协议"
+        android:button="@drawable/select_pay_agree"
+        android:paddingLeft="5dp"
+        android:textSize="13sp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weixin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/login"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/agree"
+        android:layout_marginTop="22dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:text="确认支付"
+        android:gravity="center"
+        android:textSize="18dp"
+        android:textColor="#fff"
+        android:background="@drawable/bg_login_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+</android.support.constraint.ConstraintLayout>
