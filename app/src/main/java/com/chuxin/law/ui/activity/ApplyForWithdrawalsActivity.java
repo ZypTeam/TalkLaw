@@ -144,7 +144,7 @@ public class ApplyForWithdrawalsActivity extends BaseTalkLawActivity {
                 dialog.show();
             }
         });
-//        TouchUtil.createTouchDelegate(img_wenhao);
+        TouchUtil.createTouchDelegate(img_wenhao,40);
         delMsg();
     }
 
