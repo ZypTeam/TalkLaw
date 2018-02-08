@@ -32,7 +32,7 @@ public class SplashActivity extends BaseActivity {
 
 		versionText.setText(getVersion());
 		AlphaAnimation animation = new AlphaAnimation(0.3f, 1.0f);
-		animation.setDuration(1500);
+		animation.setDuration(500);
 		rootLayout.startAnimation(animation);
 	}
 
