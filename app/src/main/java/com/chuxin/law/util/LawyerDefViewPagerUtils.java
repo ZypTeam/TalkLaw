@@ -1,10 +1,9 @@
-package com.chuxin.law.ui.util;
+package com.chuxin.law.util;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.chuxin.law.model.LawyerAudioModel;
 import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.ui.fragment.LawyerDefAudioFragment;
 import com.chuxin.law.ui.fragment.LawyerDefImageFragment;

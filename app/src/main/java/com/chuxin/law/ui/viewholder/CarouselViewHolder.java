@@ -1,7 +1,6 @@
 package com.chuxin.law.ui.viewholder;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,9 +9,8 @@ import com.chuxin.law.model.ProductItemModel;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
-import com.chuxin.law.ui.activity.LawyerDefautActivity;
-import com.chuxin.law.ui.util.ImageLoderUtil;
-import com.chuxin.law.ui.util.UIUtils;
+import com.chuxin.law.util.ImageLoderUtil;
+import com.chuxin.law.util.UIUtils;
 
 /**
  * @author zhaoyapeng

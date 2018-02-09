@@ -12,28 +12,21 @@ import android.widget.TextView;
 import com.chuxin.law.R;
 import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.common.ApiService;
-import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.AuthLawyerModel;
 import com.chuxin.law.model.UserModel;
-import com.chuxin.law.ui.util.ImageLoderUtil;
+import com.chuxin.law.util.ImageLoderUtil;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.chuxin.law.ui.widget.NumberPickerPopupwinow;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
 import com.jusfoun.baselibrary.Util.StringUtil;
-import com.jusfoun.baselibrary.base.NoDataModel;
-import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.permissiongen.PermissionFail;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
 import com.jusfoun.baselibrary.permissiongen.PermissionSuccess;
 
-import java.util.HashMap;
 import java.util.List;
 
-import cn.com.talklaw.xh.runtimepermissions.PermissionsManager;
 import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
-import rx.functions.Action1;
 
 import static com.chuxin.law.common.CommonConstant.NAME_LAWYER_REQUEST_CODE;
 import static com.chuxin.law.common.CommonConstant.NAME_REQUEST_CODE;

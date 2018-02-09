@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chuxin.law.model.ShareModel;
-import com.chuxin.law.ui.util.ShareUtils;
+import com.chuxin.law.util.ShareUtils;
 import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
 import com.umeng.socialize.UMShareListener;

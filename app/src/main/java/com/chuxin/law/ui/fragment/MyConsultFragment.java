@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.MyConsultModel;
-import com.chuxin.law.ui.util.MyConsultPagerUtils;
+import com.chuxin.law.util.MyConsultPagerUtils;
 import com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView;
 
 import java.util.ArrayList;

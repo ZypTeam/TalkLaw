@@ -11,7 +11,7 @@ import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
 import com.chuxin.law.model.IntegralModel;
 import com.chuxin.law.ui.activity.IntegralWebViewActivity;
-import com.chuxin.law.ui.util.ImageLoderUtil;
+import com.chuxin.law.util.ImageLoderUtil;
 
 /**
  * @author zhaoyapeng

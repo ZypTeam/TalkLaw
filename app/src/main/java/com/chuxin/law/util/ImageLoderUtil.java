@@ -1,4 +1,4 @@
-package com.chuxin.law.ui.util;
+package com.chuxin.law.util;
 
 import android.content.Context;
 import android.widget.ImageView;
@@ -20,6 +20,7 @@ public class ImageLoderUtil {
         Glide.with(mContext)
                 .load(url)
                 .placeholder(resId)
+                .crossFade()
                 .into(imageView);
     }
 

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    android:background="@android:color/black"
-    >
+    android:background="@android:color/black">
 
     <witmob.com.videolibrary.media.IjkVideoView
         android:id="@+id/main_video"
@@ -15,11 +14,17 @@
         />
 
     <ImageView
-        android:id="@+id/pause_image"
-        android:visibility="gone"
-        android:layout_centerInParent="true"
+        android:id="@+id/video_img"
+        android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/pause_image"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/video_stop_btn"
         />
 
     <include

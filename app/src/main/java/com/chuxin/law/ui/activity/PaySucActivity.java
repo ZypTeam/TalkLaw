@@ -33,7 +33,6 @@ public class PaySucActivity extends BaseTalkLawActivity {
         @Override
         public void run() {
             if (second==0){
-                onBackPressed();
                 handler.removeCallbacks(task);
                 goNext();
                 return;
@@ -84,6 +83,7 @@ public class PaySucActivity extends BaseTalkLawActivity {
         intent.putExtra("userId", "20");
         intent.putExtra("userName", "王律师");
         startActivity(intent);
+        onBackPressed();
     }
 
     private SpannableStringBuilder getTimerTxt(int second){

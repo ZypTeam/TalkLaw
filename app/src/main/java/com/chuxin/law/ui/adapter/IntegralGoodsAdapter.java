@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.chuxin.law.base.BaseAdapter;
 import com.chuxin.law.base.BaseViewHolder;
 import com.chuxin.law.model.IntegralModel;
-import com.chuxin.law.ui.util.ImageLoderUtil;
+import com.chuxin.law.util.ImageLoderUtil;
 
 import com.chuxin.law.R;
 

@@ -1,4 +1,4 @@
-package com.chuxin.law.ui.util;
+package com.chuxin.law.util;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

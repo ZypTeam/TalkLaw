@@ -1,7 +1,6 @@
 package com.chuxin.law.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,7 @@ import java.util.List;
 
 import com.chuxin.law.R;
 import com.chuxin.law.model.ProductModel;
-import com.chuxin.law.ui.util.UIUtils;
+import com.chuxin.law.util.UIUtils;
 
 /**
  * @author wangcc

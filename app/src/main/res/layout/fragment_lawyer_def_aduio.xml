@@ -29,7 +29,7 @@
                 app:layout_constraintTop_toTopOf="@+id/img_audio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icon_lawyer_player" />
+                android:src="@mipmap/icon_lawyer_pause" />
 
             <ImageView
                 android:id="@+id/last"

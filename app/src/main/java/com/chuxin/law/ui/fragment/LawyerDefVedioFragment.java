@@ -10,9 +10,12 @@ import android.widget.TextView;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawFragment;
 import com.chuxin.law.model.LawyerProductModel;
-import com.chuxin.law.ui.util.LawyerDefViewPagerUtils;
-import com.chuxin.law.ui.util.UIUtils;
+import com.chuxin.law.util.ImageLoderUtil;
+import com.chuxin.law.util.LawyerDefViewPagerUtils;
+import com.chuxin.law.util.UIUtils;
+import com.jusfoun.baselibrary.Util.LogUtil;
 
+import tv.danmaku.ijk.media.player.IMediaPlayer;
 import witmob.com.videolibrary.media.VideoPlayView;
 
 /**
@@ -36,6 +39,7 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
     private VideoPlayView videoPlayView;
     private String id;
     private LawyerProductModel.LawyerProductData data;
+    private ImageView videoImg;
 
     public static LawyerDefVedioFragment getInstance(Bundle args) {
         LawyerDefVedioFragment fragment = new LawyerDefVedioFragment();
@@ -45,7 +49,7 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
 
     @Override
     protected void refreshData() {
-        videoPlayView.setUri(url);
+        ImageLoderUtil.loadNormalImg(mContext,videoImg,imgUrl,R.mipmap.icon_def_img);
     }
 
     @Override
@@ -62,6 +66,9 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
         mContent = data.getArticle().getContent();
         url = data.getArticle().getMp4();
         id=data.getLawyer().getUserid();
+        imgUrl=data.getArticle().getImg();
+        //TODO 服务返回url不可用，暂时使用固定的  2018年02月09日11:15:36 by wang
+        url="http://flv2.bn.netease.com/tvmrepo/2016/4/G/O/EBKQOA8GO/SD/EBKQOA8GO-mobile.mp4";
     }
 
     @Override
@@ -76,7 +83,7 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
 
         videoPlayView=new VideoPlayView(mContext);
         video.addView(videoPlayView);
-
+        videoImg=videoPlayView.getVideoImage();
     }
 
     @Override
@@ -89,11 +96,39 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
             }
         });
 
+        videoPlayView.setCompletionListener(new VideoPlayView.CompletionListener() {
+            @Override
+            public void completion(IMediaPlayer mp) {
+                videoPlayView.release();
+            }
+        });
+        videoImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                videoPlayView.start(url);
+            }
+        });
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        video.removeAllViews();
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isVisibleToUser){
+            if (videoPlayView!=null){
+                if (videoPlayView.isPlay()){
+                    videoPlayView.stop();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (videoPlayView!=null){
+            if (videoPlayView.isPlay()){
+                videoPlayView.stop();
+            }
+        }
     }
 }

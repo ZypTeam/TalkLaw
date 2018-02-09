@@ -24,7 +24,7 @@ import com.chuxin.law.ui.activity.RecommendCourtesyActivity;
 import com.chuxin.law.ui.activity.SettingActivity;
 import com.chuxin.law.ui.activity.ShippingAddressActivity;
 import com.chuxin.law.model.ShippingAddressSp;
-import com.chuxin.law.ui.util.UIUtils;
+import com.chuxin.law.util.UIUtils;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 

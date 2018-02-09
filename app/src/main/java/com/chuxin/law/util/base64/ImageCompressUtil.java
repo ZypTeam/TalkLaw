@@ -1,4 +1,4 @@
-package com.chuxin.law.ui.util.base64;
+package com.chuxin.law.util.base64;
 
 import android.content.Context;
 import android.graphics.Bitmap;

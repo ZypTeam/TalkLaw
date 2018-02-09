@@ -1,21 +1,17 @@
 package com.chuxin.law.ui.viewholder;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.model.ProductModel;
-import com.chuxin.law.ui.activity.AudioDetailsActivity;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
-import com.chuxin.law.ui.activity.LawyerIntroductionActivity;
-import com.chuxin.law.ui.util.ImageLoderUtil;
-import com.chuxin.law.ui.util.UIUtils;
+import com.chuxin.law.util.ImageLoderUtil;
+import com.chuxin.law.util.UIUtils;
 
 /**
  * @author wangcc

@@ -1,4 +1,4 @@
-package com.chuxin.law.ui.util;
+package com.chuxin.law.util;
 
 import com.chuxin.law.ui.fragment.HomeFragment;
 import com.chuxin.law.ui.fragment.MyFragment;

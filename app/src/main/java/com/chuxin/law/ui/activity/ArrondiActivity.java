@@ -12,7 +12,6 @@ import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.ArrondiModel;
-import com.chuxin.law.ui.util.UIUtils;
 import com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
 

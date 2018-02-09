@@ -1,19 +1,15 @@
 package com.chuxin.law.ui.viewholder;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.chuxin.law.ui.activity.RedeemDetailsActivity;
-
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
 import com.chuxin.law.model.ExchangeRecordsDataModel;
-import com.chuxin.law.ui.util.ImageLoderUtil;
+import com.chuxin.law.util.ImageLoderUtil;
 
 /**
  * @author wangcc

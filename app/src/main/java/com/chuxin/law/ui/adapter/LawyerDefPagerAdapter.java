@@ -4,9 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.chuxin.law.model.LawyerAudioModel;
 import com.chuxin.law.model.LawyerProductModel;
-import com.chuxin.law.ui.util.LawyerDefViewPagerUtils;
+import com.chuxin.law.util.LawyerDefViewPagerUtils;
 
 /**
  * @author wangcc

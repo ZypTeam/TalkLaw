@@ -1,7 +1,6 @@
 package com.chuxin.law.ui.fragment;
 
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,8 +10,8 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawFragment;
 import com.chuxin.law.model.LawyerProductModel;
-import com.chuxin.law.ui.util.LawyerDefViewPagerUtils;
-import com.chuxin.law.ui.util.UIUtils;
+import com.chuxin.law.util.LawyerDefViewPagerUtils;
+import com.chuxin.law.util.UIUtils;
 import com.jusfoun.baselibrary.Util.StringUtil;
 
 /**

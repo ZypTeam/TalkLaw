@@ -1,29 +1,24 @@
 package com.chuxin.law.ui.activity;
 
-import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.AuthLawyerModel;
-import com.chuxin.law.ui.util.base64.Base64Util;
+import com.chuxin.law.util.base64.Base64Util;
 import com.chuxin.law.ui.widget.BackTitleView;
-import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 /**
  * @author wangcc

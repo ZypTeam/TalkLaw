@@ -8,7 +8,7 @@ import com.jusfoun.baselibrary.Util.PhoneUtil;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.ui.util.TextDrawable;
+import com.chuxin.law.util.TextDrawable;
 
 /**
  * @author zhaoyapeng

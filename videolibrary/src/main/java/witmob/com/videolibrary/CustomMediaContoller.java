@@ -296,18 +296,18 @@ public class CustomMediaContoller implements IMediaController {
     public void start() {
         pauseImage.setVisibility(View.GONE);
         itemView.setVisibility(View.GONE);
-        play.setImageResource(R.mipmap.video_stop_btn);
+        play.setImageResource(R.mipmap.video_play_btn);
         if (loadingProgress.getVisibility()==View.GONE)
             loadingProgress.setVisibility(View.VISIBLE);
     }
 
     public void onStop(){
-        play.setImageResource(R.mipmap.video_play_btn);
+        play.setImageResource(R.mipmap.video_stop_btn);
         full.setImageResource(R.mipmap.full_screen_icon);
     }
 
     public void pause() {
-        play.setImageResource(R.mipmap.video_play_btn);
+        play.setImageResource(R.mipmap.video_stop_btn);
         videoView.pause();
         bitmap = videoView.getBitmap();
         if (bitmap != null) {
@@ -317,7 +317,7 @@ public class CustomMediaContoller implements IMediaController {
     }
 
     public void reStart() {
-        play.setImageResource(R.mipmap.video_stop_btn);
+        play.setImageResource(R.mipmap.video_play_btn);
         videoView.start();
         if (bitmap != null) {
             handler.sendEmptyMessageDelayed(PAUSE_IMAGE_HIDE, 100);

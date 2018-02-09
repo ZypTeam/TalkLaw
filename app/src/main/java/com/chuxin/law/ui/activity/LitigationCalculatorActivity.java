@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.model.CaseTypeModel;
 import com.chuxin.law.ui.adapter.CaseTypeAdapter;
-import com.chuxin.law.ui.util.calculator.LitigationUtil;
+import com.chuxin.law.util.calculator.LitigationUtil;
 import com.chuxin.law.ui.view.CaseTypeDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.Util.AppUtil;

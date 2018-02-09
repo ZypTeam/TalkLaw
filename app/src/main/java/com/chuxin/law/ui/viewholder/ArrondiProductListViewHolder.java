@@ -2,19 +2,17 @@ package com.chuxin.law.ui.viewholder;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.chuxin.law.model.ArrondiProductModel;
 import com.chuxin.law.ui.activity.ProductiListActivity;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
-import com.chuxin.law.ui.util.ImageLoderUtil;
+import com.chuxin.law.util.ImageLoderUtil;
 
 /**
  * @author wangcc

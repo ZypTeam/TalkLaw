@@ -1,9 +1,9 @@
-package com.chuxin.law.ui.util.base64;
+package com.chuxin.law.util.base64;
 
 import android.content.Context;
 import android.util.Base64;
 
-import com.chuxin.law.ui.util.ThreadUtil;
+import com.chuxin.law.util.ThreadUtil;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -18,7 +18,7 @@ import com.chuxin.law.model.ShareModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.adapter.LawyerDefPagerAdapter;
 import com.chuxin.law.ui.dialog.ShareDialog;
-import com.chuxin.law.ui.util.UIUtils;
+import com.chuxin.law.util.UIUtils;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;

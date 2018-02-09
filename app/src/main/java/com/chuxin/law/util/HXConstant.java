@@ -1,4 +1,4 @@
-package com.chuxin.law.ui.util;
+package com.chuxin.law.util;
 
 /**
  * @author zhaoyapeng

@@ -1,4 +1,4 @@
-package com.chuxin.law.ui.util.calculator;
+package com.chuxin.law.util.calculator;
 
 /**
  * @author zhaoyapeng
