@@ -249,6 +249,12 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
                 like.setImageResource(R.mipmap.icon_audio_liked);
             }
         }
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         if (data.getLawyer()!=null){
             lawyerName.setText(data.getLawyer().getName());
         }
