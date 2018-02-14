@@ -2,6 +2,7 @@ package com.chuxin.law.ui.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.chuxin.law.model.ShareModel;
 import com.chuxin.law.util.ShareUtils;
 import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
@@ -127,6 +129,10 @@ public class ShareDialog extends Dialog {
                 dismiss();
             }
         });
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        UMShareAPI.get(getContext()).onActivityResult(requestCode,resultCode,data);
     }
 
     public void setShareModel(ShareModel shareModel) {

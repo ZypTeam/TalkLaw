@@ -24,15 +24,16 @@ public class VoiceManager {
     private VoiceManagerListener mPlayListener = null;
     private VoiceManagerListener mRecListener = null;
 
+    private static class SingelHolder{
+        private static VoiceManager instance=new VoiceManager();
+    }
+
     private VoiceManager() {
         mPlayer = new SparseArray<>();
     }
 
     public static VoiceManager getVoiceManager() {
-        if (self == null) {
-            self = new VoiceManager();
-        }
-        return self;
+        return SingelHolder.instance;
     }
 
     // **************play*******************

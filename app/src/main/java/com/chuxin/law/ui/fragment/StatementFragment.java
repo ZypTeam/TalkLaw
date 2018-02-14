@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.chuxin.law.common.CommonLogic;
 import com.chuxin.law.model.CarouseModel;
 import com.chuxin.law.ui.activity.AudioDetailsActivity;
 import com.chuxin.law.ui.activity.WebViewActivity;
@@ -153,8 +154,12 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         imgAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, AudioDetailsActivity.class);
-                mContext.startActivity(intent);
+                if (CommonLogic.getInstance().getLawyerProductData()!=null) {
+                    Intent intent = new Intent(mContext, AudioDetailsActivity.class);
+                    mContext.startActivity(intent);
+                }else {
+                    showToast("没有音频");
+                }
             }
         });
 

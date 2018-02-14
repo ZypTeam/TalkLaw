@@ -272,6 +272,10 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                 audioModel.setCommment_num(count);
             }
         }
+
+        if (shareDialog!=null){
+            shareDialog.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     private void getData(){

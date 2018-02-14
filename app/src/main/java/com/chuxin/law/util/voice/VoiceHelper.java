@@ -75,6 +75,10 @@ public class VoiceHelper {
         return mVoiceManager.isPlaying(MUSIC_INDEX);
     }
 
+    public boolean isPause(){
+        return mVoiceManager.isPaused(MUSIC_INDEX);
+    }
+
     public void pauseVoice() {
         LogUtil.i(TAG, "voice pause");
         pauseVoice(MUSIC_INDEX);

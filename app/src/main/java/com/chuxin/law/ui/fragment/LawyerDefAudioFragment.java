@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawFragment;
+import com.chuxin.law.common.CommonLogic;
 import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.util.ImageLoderUtil;
 import com.chuxin.law.util.LawyerDefViewPagerUtils;
@@ -73,7 +74,6 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
 
     @Override
     protected void refreshData() {
-        voiceHelper.initVoice(VoiceHelper.MUSIC_INDEX, url);
         ImageLoderUtil.loadCircleImage(mContext, imgAudio, imgUrl, R.mipmap.icon_head_def_cir);
     }
 
@@ -131,9 +131,14 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
                     handler.removeCallbacks(task);
                     voiceHelper.pauseVoice();
                     play.setImageResource(R.mipmap.icon_lawyer_pause);
-                } else {
+                }else if (voiceHelper.isPause()){
                     handler.postDelayed(task,1000);
                     voiceHelper.startVoice();
+                    play.setImageResource(R.mipmap.icon_lawyer_player);
+                }else {
+                    CommonLogic.getInstance().setLawyerProductData(data);
+                    handler.postDelayed(task,1000);
+                    voiceHelper.initVoice(VoiceHelper.MUSIC_INDEX, url);
                     play.setImageResource(R.mipmap.icon_lawyer_player);
                 }
             }
@@ -205,6 +210,12 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
             }
         });
 
+        if (voiceHelper.isPlay()){
+            handler.post(task);
+            timeAll.setText(setTimeAll(voiceHelper.getLength()));
+            play.setImageResource(R.mipmap.icon_lawyer_player);
+        }
+
     }
 
     private String setTimeAll(long time) {
@@ -239,17 +250,6 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
                     handler.removeCallbacks(task);
                     voiceHelper.stopVoice();
                 }
-            }
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (voiceHelper != null) {
-            if (voiceHelper.isPlay()) {
-                handler.removeCallbacks(task);
-                voiceHelper.stopVoice();
             }
         }
     }

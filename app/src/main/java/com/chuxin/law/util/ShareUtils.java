@@ -1,6 +1,7 @@
 package com.chuxin.law.util;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.Toast;
 

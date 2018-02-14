@@ -26,7 +26,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/lawyer_name"
         app:layout_constraintLeft_toLeftOf="parent"
         android:paddingLeft="16dp"
-        android:src="@mipmap/icon_audio_back"
+        android:src="@mipmap/icon_back_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -70,7 +70,7 @@
         android:layout_marginLeft="24dp"
         android:textColor="#fff"
         android:layout_marginTop="59dp"
-        android:text="02:02"
+        android:text="00:00"
         android:textSize="12dp"
         android:id="@+id/time"
         android:layout_width="wrap_content"

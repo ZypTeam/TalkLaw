@@ -12,4 +12,6 @@
     <string name="load_data_warn_str">数据加载中\u2026</string>
     <string name="app_exit_string">再按一次退出程序</string>
     <string name="key_wechat">wx6acb4c4141bd83a0</string>
+
+    <string name="share_url">http://www.baidu.com</string>
 </resources>
