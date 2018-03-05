@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/write"
     android:orientation="vertical"
+    android:id="@+id/layout_root"
     >
 
     <LinearLayout
@@ -26,6 +27,7 @@
                 android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/layout_select_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -33,6 +35,7 @@
 
 
                 <TextView
+                    android:id="@+id/text_select_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -69,6 +72,7 @@
 
 
             <EditText
+                android:id="@+id/edit_input_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -76,6 +80,7 @@
                 android:background="@null"
                 android:gravity="right"
                 android:hint="请输入天数"
+                android:inputType="number"
                 android:textColor="#b2b2b2"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -107,11 +112,13 @@
 
 
                 <LinearLayout
+                    android:id="@+id/layout_qian_hou"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_no_yes">
 
                     <TextView
+                        android:id="@+id/text_qian"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -121,6 +128,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/text_hou"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -164,6 +172,7 @@
                     android:background="@drawable/bg_no_yes">
 
                     <TextView
+                        android:id="@+id/text_fou"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -173,6 +182,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/text_shi"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -199,6 +209,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_reset_btn"
@@ -207,6 +218,7 @@
             android:textSize="18sp" />
 
         <Button
+            android:id="@+id/btn_jisuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"

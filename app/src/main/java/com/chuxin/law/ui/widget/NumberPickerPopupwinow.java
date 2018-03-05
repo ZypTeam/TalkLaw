@@ -2,8 +2,10 @@ package com.chuxin.law.ui.widget;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,6 +14,8 @@ import android.widget.NumberPicker;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import com.chuxin.law.R;
+
+import java.util.Calendar;
 
 /**
  * 日期 选择器
@@ -29,27 +33,30 @@ public final class NumberPickerPopupwinow extends PopupWindow {
     int year;
     int month;
     int day;
-    private Activity context;
+    private Context context;
     private Activity context1;
     // private int style;
     private View mMenuView;
     private NumberPicker np1, np2, np3;
     private TextView date_text;
     private TextView save;
+    private Calendar calendar;
 
-    public NumberPickerPopupwinow(Activity context, OnClickListener saveOnclick) {
+    public NumberPickerPopupwinow(Context context, OnClickListener saveOnclick) {
         super(context);
         this.context = context;
 
         LayoutInflater inflater = LayoutInflater.from(context);
         mMenuView = inflater.inflate(R.layout.numberpickpopupwindow, null);
 
+
+        calendar = Calendar.getInstance();
         np1 = (NumberPicker) mMenuView.findViewById(R.id.np1);
         np2 = (NumberPicker) mMenuView.findViewById(R.id.np2);
         np3 = (NumberPicker) mMenuView.findViewById(R.id.np3);
         date_text = (TextView) mMenuView.findViewById(R.id.date_text);
         save = (TextView) mMenuView.findViewById(R.id.btn_save);
-        date_text.setText(getDate());
+
         t = new Time();
         t.setToNow();
         year = t.year;
@@ -57,10 +64,23 @@ public final class NumberPickerPopupwinow extends PopupWindow {
         day = t.monthDay;
         np1.setMaxValue(year);
         np1.setMinValue(1940);
-        np1.setValue(1988);
+
+        np1.setValue(calendar.get(Calendar.YEAR));
+
         np1.setFocusableInTouchMode(true);
         np2.setFocusableInTouchMode(true);
         np3.setFocusableInTouchMode(true);
+
+//获取系统的日期
+//年
+         str1 = calendar.get(Calendar.YEAR)+"";
+//月
+        str2 = (calendar.get(Calendar.MONTH)+1)+"";
+//日
+        str3 = calendar.get(Calendar.DAY_OF_MONTH)+"";
+
+        Log.e("tag","calendar="+str1+" "+str2+" "+str3);
+
 
         np1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
 
@@ -109,6 +129,8 @@ public final class NumberPickerPopupwinow extends PopupWindow {
         np2.setMaxValue(12);
         np2.setMinValue(1);
 //		np2.setValue(month);
+        np2.setValue(calendar.get(Calendar.MONTH)+1);
+
         np2.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
 
             @Override
@@ -141,6 +163,7 @@ public final class NumberPickerPopupwinow extends PopupWindow {
         np3.setMaxValue(31);
         np3.setMinValue(1);
 //		np3.setValue(day);
+        np3.setValue(calendar.get(Calendar.DAY_OF_MONTH));
         np3.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
 
             @Override
@@ -165,6 +188,9 @@ public final class NumberPickerPopupwinow extends PopupWindow {
         // 设置SelectPicPopupWindow弹出窗体的背景
         this.setBackgroundDrawable(dw);
         // mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
+
+
+        date_text.setText(getDate());
     }
 
     public String getDate() {

@@ -8,6 +8,7 @@ import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.ui.adapter.CalculatorAdapter;
 import com.chuxin.law.ui.widget.BackTitleView;
+import com.chuxin.law.ui.widget.NumberPickerPopupwinow;
 
 /**
  * @author zhaoyapeng
@@ -21,6 +22,7 @@ public class DateCalculatorActivity extends BaseTalkLawActivity {
     protected RelativeLayout layoutDay;
     protected RelativeLayout layoutDate;
     private CalculatorAdapter calculatorAdapter;
+
 
     @Override
     public int getLayoutResId() {
@@ -58,5 +60,7 @@ public class DateCalculatorActivity extends BaseTalkLawActivity {
                 viewpager.setCurrentItem(1);
             }
         });
+
+
     }
 }
