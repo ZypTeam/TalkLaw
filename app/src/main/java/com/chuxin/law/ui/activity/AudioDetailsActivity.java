@@ -17,6 +17,7 @@ import com.chuxin.law.ui.dialog.ShareDialog;
 import com.chuxin.law.util.ImageLoderUtil;
 import com.chuxin.law.util.UIUtils;
 import com.chuxin.law.util.voice.VoiceHelper;
+import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.task.WeakHandler;
@@ -118,18 +119,19 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (voiceHelper.isPlay()) {
+                if (voiceHelper.isPlay() &&StringUtil.equals(url,voiceHelper.getPlayingVoicePath())) {
                     handler.removeCallbacks(task);
                     voiceHelper.pauseVoice();
                     play.setImageResource(R.mipmap.icon_audio_player);
-                }else if (voiceHelper.isPause()){
+                }else if (voiceHelper.isPause()&&StringUtil.equals(url,voiceHelper.getPlayingVoicePath())){
                     handler.postDelayed(task,1000);
                     voiceHelper.startVoice();
                     play.setImageResource(R.mipmap.icon_audio_pause);
                 }else {
                     CommonLogic.getInstance().setLawyerProductData(data);
-                    handler.postDelayed(task,1000);
+                    handler.post(task);
                     voiceHelper.initVoice(VoiceHelper.MUSIC_INDEX, url);
+                    voiceHelper.startVoice();
                     play.setImageResource(R.mipmap.icon_audio_pause);
                 }
             }
@@ -235,10 +237,15 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
             }
         });
 
-        if (voiceHelper.isPlay()){
+        if (voiceHelper.isPlay()&&StringUtil.equals(url,voiceHelper.getPlayingVoicePath())){
             handler.post(task);
             timeAll.setText(setTimeAll(voiceHelper.getLength()));
+            time.setText(setTimeAll(voiceHelper.getPlayingCurrPostion()));
             play.setImageResource(R.mipmap.icon_audio_pause);
+        }else if (voiceHelper.isPause()&&StringUtil.equals(url,voiceHelper.getPlayingVoicePath())){
+            timeAll.setText(setTimeAll(voiceHelper.getLength()));
+            time.setText(setTimeAll(voiceHelper.getPlayingCurrPostion()));
+            play.setImageResource(R.mipmap.icon_audio_player);
         }
         ImageLoderUtil.loadCircleImage(mContext, theme, imageUrl, R.mipmap.icon_head_def_cir);
         if (data.getArticle()!=null) {

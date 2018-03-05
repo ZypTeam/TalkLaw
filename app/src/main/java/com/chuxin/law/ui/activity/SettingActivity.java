@@ -10,6 +10,7 @@ import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.R;
 
 import com.chuxin.law.base.BaseTalkLawActivity;
+import com.chuxin.law.ui.dialog.GratuityDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.Util.CacheUtil;
 
@@ -28,6 +29,7 @@ public class SettingActivity extends BaseTalkLawActivity {
     protected TextView pingfen;
     protected TextView aboutUs;
     protected TextView exit;
+    private GratuityDialog dialog;
 
     @Override
     public int getLayoutResId() {
@@ -36,7 +38,7 @@ public class SettingActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-
+        dialog=new GratuityDialog(mContext);
     }
 
     @Override
@@ -66,18 +68,33 @@ public class SettingActivity extends BaseTalkLawActivity {
         });
 
         setCacheCount();
+        dialog.setContent("确定要清除缓存？");
+        dialog.setOkListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearCache();
+            }
+        });
 
         clearCache.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setCacheCount();
+                dialog.show();
             }
         });
 
+        FeedbackAPI.setBackIcon(R.drawable.img_back_black);
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FeedbackAPI.openFeedbackActivity();
+            }
+        });
+
+        aboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goActivity(null,AboutUsActivity.class);
             }
         });
     }
@@ -89,5 +106,11 @@ public class SettingActivity extends BaseTalkLawActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void clearCache(){
+        CacheUtil.clearAllCache(mContext);
+        setCacheCount();
+        dialog.dismiss();
     }
 }

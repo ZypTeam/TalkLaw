@@ -14,6 +14,7 @@ import com.chuxin.law.R;
 
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.ui.adapter.HomeAdapter;
+import com.chuxin.law.util.voice.VoiceHelper;
 import com.jusfoun.baselibrary.view.HomeViewPager;
 
 /**
@@ -30,6 +31,7 @@ public class HomeActivity extends BaseTalkLawActivity {
     private LinearLayout opinionLayout, statementLayout, myLayout;
     private ImageView opinionImg, statementImg, myImg;
     private TextView opinionText, statementText, myText;
+    private VoiceHelper helper;
 
     @Override
     public int getLayoutResId() {
@@ -39,6 +41,7 @@ public class HomeActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
         adapter = new HomeAdapter(getSupportFragmentManager());
+        helper=new VoiceHelper();
     }
 
     @Override
@@ -132,5 +135,13 @@ public class HomeActivity extends BaseTalkLawActivity {
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (helper.isPlay()||helper.isPause()){
+            helper.stopVoice();
+        }
+        super.onDestroy();
     }
 }

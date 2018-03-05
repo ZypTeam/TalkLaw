@@ -17,6 +17,7 @@ import com.chuxin.law.util.LawyerDefViewPagerUtils;
 import com.chuxin.law.util.UIUtils;
 import com.chuxin.law.util.voice.VoiceHelper;
 import com.jusfoun.baselibrary.Util.LogUtil;
+import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.task.WeakHandler;
 
 import java.util.Observable;
@@ -127,18 +128,19 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
         imgAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (voiceHelper.isPlay()) {
+                if (voiceHelper.isPlay()&&StringUtil.equals(url,voiceHelper.getPlayingVoicePath())) {
                     handler.removeCallbacks(task);
                     voiceHelper.pauseVoice();
                     play.setImageResource(R.mipmap.icon_lawyer_pause);
-                }else if (voiceHelper.isPause()){
+                }else if (voiceHelper.isPause()&&StringUtil.equals(url,voiceHelper.getPlayingVoicePath())){
                     handler.postDelayed(task,1000);
                     voiceHelper.startVoice();
                     play.setImageResource(R.mipmap.icon_lawyer_player);
                 }else {
                     CommonLogic.getInstance().setLawyerProductData(data);
-                    handler.postDelayed(task,1000);
+                    handler.post(task);
                     voiceHelper.initVoice(VoiceHelper.MUSIC_INDEX, url);
+                    voiceHelper.startVoice();
                     play.setImageResource(R.mipmap.icon_lawyer_player);
                 }
             }
@@ -210,10 +212,15 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
             }
         });
 
-        if (voiceHelper.isPlay()){
+        if (voiceHelper.isPlay()&& StringUtil.equals(url,voiceHelper.getPlayingVoicePath())){
             handler.post(task);
             timeAll.setText(setTimeAll(voiceHelper.getLength()));
+            time.setText(setTimeAll(voiceHelper.getPlayingCurrPostion()));
             play.setImageResource(R.mipmap.icon_lawyer_player);
+        }else if (voiceHelper.isPause()&&StringUtil.equals(url,voiceHelper.getPlayingVoicePath())){
+            timeAll.setText(setTimeAll(voiceHelper.getLength()));
+            time.setText(setTimeAll(voiceHelper.getPlayingCurrPostion()));
+            play.setImageResource(R.mipmap.icon_lawyer_pause);
         }
 
     }

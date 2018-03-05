@@ -62,7 +62,7 @@ public class TalkLawApplication extends BaseApplication {
         DemoHelper.getInstance().init(this);
         Config.DEBUG = true;
 
-        FeedbackAPI.init(this, "24769686");
+        FeedbackAPI.init(this, "24769686","13aeb43eb422a0703ab5e7ef8235e9b5");
     }
 
     public static TalkLawApplication getInstance() {

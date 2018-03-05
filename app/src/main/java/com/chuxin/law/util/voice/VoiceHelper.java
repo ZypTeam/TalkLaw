@@ -127,6 +127,10 @@ public class VoiceHelper {
         mVoiceManager.setPlayingVolume(MUSIC_INDEX, getVolume(MUSIC_INDEX, BKLevel));
     }
 
+    public String getPlayingVoicePath(){
+        return mVoiceManager.getPlayingVoicePath(MUSIC_INDEX);
+    }
+
     private float getVolume(int index, int level) {
         float volume = 0;
         if (index == MUSIC_INDEX) {

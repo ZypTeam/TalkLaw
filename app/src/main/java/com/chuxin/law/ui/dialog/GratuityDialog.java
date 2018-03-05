@@ -72,12 +72,7 @@ public class GratuityDialog extends Dialog {
     }
 
     public void setOkListener(View.OnClickListener listener){
-        sure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        sure.setOnClickListener(listener);
     }
 
     public void setOneBtn(boolean isOne){

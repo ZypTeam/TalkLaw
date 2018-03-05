@@ -337,6 +337,8 @@ public class LoginActivity extends BaseTalkLawActivity {
                     @Override
                     public void run() {
                         hideLoadDialog();
+                        //TODO: 环信登录失败暂时存储用户信息 修改聊天SDK后去掉 by wang 2018年03月05日
+                        UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
 //                        Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show();
                         goActivity(null,HomeActivity.class);
                     }
