@@ -105,7 +105,7 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
     @Override
     public void initAction() {
 
-
+        recyclerView.setPullRefreshEnabled(false);
         //设置banner样式
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置图片加载器
@@ -175,6 +175,7 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
                         } else {
                             Intent intent = new Intent(mContext, WebViewActivity.class);
                             intent.putExtra("url",model.url);
+                            intent.putExtra("title","详情");
                             mContext.startActivity(intent);
                         }
                     }

@@ -14,6 +14,7 @@ import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
 import com.chuxin.law.ui.activity.LawyerDefautActivity;
 import com.chuxin.law.util.ImageLoderUtil;
+import com.chuxin.law.util.UIUtils;
 
 /**
  * @author zhaoyapeng
@@ -39,7 +40,7 @@ public class LimitedTimeFreeViewHolder extends BaseViewHolder<ProductItemModel> 
     }
 
     @Override
-    public void update(ProductItemModel model) {
+    public void update(final ProductItemModel model) {
 
         ImageLoderUtil.loadRoundSmailImage(mContext,imgAvatar,model.img,R.drawable.img_product_normal);
         textCount.setText(model.comment_num);
@@ -47,6 +48,12 @@ public class LimitedTimeFreeViewHolder extends BaseViewHolder<ProductItemModel> 
         textMoney1.setText("￥"+model.price);
         textMoney2.setText("￥0");
         textMoney1.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UIUtils.goLawyerDef(mContext,model.id);
+            }
+        });
     }
 
     private void initView(View rootView) {
@@ -57,12 +64,5 @@ public class LimitedTimeFreeViewHolder extends BaseViewHolder<ProductItemModel> 
         layoutTitle = (LinearLayout) rootView.findViewById(R.id.layout_title);
         imgIconCount = (ImageView) rootView.findViewById(R.id.img_icon_count);
         textCount = (TextView) rootView.findViewById(R.id.text_count);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, LawyerDefautActivity.class);
-                mContext.startActivity(intent);
-            }
-        });
     }
 }

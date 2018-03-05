@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.activity;
 
 import android.content.Intent;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -152,6 +153,18 @@ public class LoginActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View v) {
                 mShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.QQ, umAuthListener);
+            }
+        });
+
+        loginAgree.setText(Html.fromHtml("登录既代表阅读并同意<font color='#CB1E28'>服务条款</font>"));
+
+        loginAgree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext,WebViewActivity.class);
+                intent.putExtra("url","http://api.law.wzgeek.com/service.html");
+                intent.putExtra("title","服务条款");
+                startActivity(intent);
             }
         });
     }

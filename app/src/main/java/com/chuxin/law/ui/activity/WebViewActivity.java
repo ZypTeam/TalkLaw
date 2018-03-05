@@ -40,7 +40,7 @@ public class WebViewActivity extends BaseTalkLawActivity {
     protected BackTitleView titleView;
     protected WebView webView;
     private String url;
-
+    private String title;
     @Override
     public int getLayoutResId() {
         return R.layout.activity_webview;
@@ -49,6 +49,7 @@ public class WebViewActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
         url = getIntent().getStringExtra("url");
+        title = getIntent().getStringExtra("title");
     }
 
     @Override
@@ -59,7 +60,7 @@ public class WebViewActivity extends BaseTalkLawActivity {
 
     @Override
     public void initAction() {
-        titleView.setTitle("详情");
+        titleView.setTitle(title);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setGeolocationEnabled(true);
         webView.getSettings().setAppCacheEnabled(false);

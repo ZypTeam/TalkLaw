@@ -106,6 +106,7 @@ public class HomeFragment extends BaseTalkLawFragment {
                         } else {
                             Intent intent = new Intent(mContext, WebViewActivity.class);
                             intent.putExtra("url",model.url);
+                            intent.putExtra("title","详情");
                             mContext.startActivity(intent);
                         }
                     }
