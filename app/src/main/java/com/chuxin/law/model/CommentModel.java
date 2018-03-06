@@ -24,6 +24,7 @@ public class CommentModel implements Serializable {
     private int userid;
     private String content;
     private String createtime;
+    private UserModel user;
 
     public String getId() {
         return id;
@@ -63,5 +64,13 @@ public class CommentModel implements Serializable {
 
     public void setCreatetime(String createtime) {
         this.createtime = createtime;
+    }
+
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 }

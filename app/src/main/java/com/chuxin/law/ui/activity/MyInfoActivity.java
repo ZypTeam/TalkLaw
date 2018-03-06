@@ -461,7 +461,7 @@ public class MyInfoActivity extends BaseTalkLawActivity {
         if (requestCode == REQUEST_IMAGE) {
             final List<String> pathList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
             if (pathList != null && pathList.size() > 0) {
-
+                userModel.setHeadimg(pathList.get(0));
                 Base64Util.encodeBase64File(this, pathList.get(0), new EncodeCallBack() {
                     @Override
                     public void callBack(final String str) {

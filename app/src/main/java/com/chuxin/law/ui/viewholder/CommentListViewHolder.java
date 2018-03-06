@@ -34,8 +34,10 @@ public class CommentListViewHolder extends BaseViewHolder<CommentModel> {
         }
 
         content.setText(model.getContent());
-//        name.setText(model.getUserid());
+        if (model.getUser()!=null){
+            name.setText(model.getUser().getName());
+            ImageLoderUtil.loadCircleImage(mContext,head,model.getUser().getHeadimg(),R.mipmap.icon_head_def_cir);
+        }
         time.setText(model.getCreatetime());
-        ImageLoderUtil.loadCircleImage(mContext,head,"http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg",R.mipmap.icon_head_def_cir);
     }
 }
