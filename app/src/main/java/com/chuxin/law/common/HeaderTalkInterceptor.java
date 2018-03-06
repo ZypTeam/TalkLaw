@@ -1,5 +1,6 @@
 package com.chuxin.law.common;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.chuxin.law.TalkLawApplication;
@@ -25,6 +26,7 @@ public class HeaderTalkInterceptor implements Interceptor {
 
     public HeaderTalkInterceptor(){
         token=UserInfoDelegate.getInstance().getToken();
+
 //        if (StringUtil.isEmpty(token)){
 //            //TODO 2018年02月07日 如果用户信息中没有token，使用个临时的测试 by wang
 //            token="d6115638dbf7d1b4a63513fc50d573d3";
@@ -33,9 +35,17 @@ public class HeaderTalkInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        Request request=chain.request().newBuilder()
-                .addHeader(SEAVER_TOKEN, token)
-                .build();
+
+        Request request;
+        if(TextUtils.isEmpty(token)){
+            request=chain.request().newBuilder()
+                    .build();
+        }else{
+            request=chain.request().newBuilder()
+                    .addHeader(SEAVER_TOKEN, token)
+                    .build();
+        }
+
         return chain.proceed(request);
     }
 }

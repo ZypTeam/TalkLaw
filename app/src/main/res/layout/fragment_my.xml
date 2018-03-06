@@ -310,7 +310,7 @@
 
             <TextView
                 android:id="@+id/my_zixun"
-                android:text="我的资讯"
+                android:text="我的咨询"
                 android:textSize="14sp"
                 android:layout_marginTop="16dp"
                 android:textColor="#999"

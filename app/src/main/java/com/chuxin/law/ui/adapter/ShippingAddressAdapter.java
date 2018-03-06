@@ -1,6 +1,8 @@
 package com.chuxin.law.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -10,6 +12,8 @@ import com.chuxin.law.R;
 import com.chuxin.law.base.BaseAdapter;
 import com.chuxin.law.base.BaseViewHolder;
 import com.chuxin.law.sharedpreferences.ShippingAddressModel;
+import com.chuxin.law.ui.activity.SelectAreaActivity;
+import com.jusfoun.baselibrary.Util.TouchUtil;
 
 /**
  * @author wangcc
@@ -64,6 +68,18 @@ public class ShippingAddressAdapter extends BaseAdapter<ShippingAddressModel.Shi
                    }
                 }
             });
+            imgXiugai.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext,SelectAreaActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("model",model);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
+                }
+            });
+
+            TouchUtil.createTouchDelegate(imgXiugai,40);
         }
 
         private void initView(View rootView) {
