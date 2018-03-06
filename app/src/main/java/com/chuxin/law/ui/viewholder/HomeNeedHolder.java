@@ -10,6 +10,7 @@ import com.chuxin.law.model.ProductItemModel;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
 import com.chuxin.law.util.ImageLoderUtil;
+import com.chuxin.law.util.UIUtils;
 
 /**
  * @author wangcc
@@ -29,12 +30,19 @@ public class HomeNeedHolder extends BaseViewHolder<ProductItemModel> {
     }
 
     @Override
-    public void update(ProductItemModel model) {
+    public void update(final ProductItemModel model) {
         ImageLoderUtil.loadRoundImage(mContext, imgAvatar, model.img,100,R.drawable.img_defail_cainixuyao);
 
 
         textTitle.setText(model.title);
         countText.setText(model.comment_num);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UIUtils.goLawyerDef(mContext,model.id);
+
+            }
+        });
     }
 
 }

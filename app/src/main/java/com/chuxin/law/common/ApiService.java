@@ -17,6 +17,7 @@ import com.chuxin.law.model.ProductListModel;
 import com.chuxin.law.model.ProductsModel;
 import com.chuxin.law.model.StatementListModel;
 import com.chuxin.law.model.UserInfoModel;
+import com.chuxin.law.model.UserModel;
 import com.jusfoun.baselibrary.base.NoDataModel;
 
 import java.util.Map;
@@ -83,7 +84,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("/user/info")
-    Observable<NoDataModel> editUserInfo(@FieldMap Map<String,String> params);
+    Observable<UserInfoModel> editUserInfo(@FieldMap Map<String,String> params);
 
 
     /**

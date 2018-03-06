@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -340,19 +341,22 @@ public class MyInfoActivity extends BaseTalkLawActivity {
 
     private void editUserInfo(boolean isEditHeadImg) {
         showLoadDialog();
+        Log.e("tag","editUserMap="+editUserMap);
         addNetwork(Api.getInstance().getService(ApiService.class).editUserInfo(editUserMap)
-                , new Action1<NoDataModel>() {
+                , new Action1<UserInfoModel>() {
                     @Override
-                    public void call(NoDataModel model) {
+                    public void call(UserInfoModel model) {
                         hideLoadDialog();
                         if (model.getCode() == CommonConstant.NET_SUC_CODE) {
-                            UserInfoDelegate.getInstance().saveUserInfo(userModel);
+                            UserInfoDelegate.getInstance().saveUserInfo(model.getData());
                         }
                         showToast(model.getMsg());
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
+                        hideLoadDialog();
+                        Log.e("tag","throwable="+throwable);
                         showToast("修改失败");
                     }
                 });
@@ -469,7 +473,7 @@ public class MyInfoActivity extends BaseTalkLawActivity {
                             @Override
                             public void run() {
                                 editUserMap.clear();
-                                editUserMap.put("headimg", "data:image/jpeg;base64," + userBirthday.getText().toString());
+                                editUserMap.put("headimg", "data:image/jpeg;base64," + str);
                                 editUserInfo(true);
                                 Glide.with(mContext)
                                         .load(pathList.get(0))

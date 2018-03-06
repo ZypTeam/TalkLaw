@@ -51,7 +51,7 @@ public class UserInfoDelegate {
     public String getToken() {
         String token = null;
         if (userModel != null) {
-            token = userModel.getAccessToken();
+            token = userModel.getAppToken();
         }
         return token;
     }
