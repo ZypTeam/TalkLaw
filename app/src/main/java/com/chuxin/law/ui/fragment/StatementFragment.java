@@ -143,6 +143,8 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
                 backTitleView.setAlpha(alpha);
             }
         });
+
+
         backTitleView.setTitle("看法");
         layoutSearchEdit.setOnClickListener(new View.OnClickListener() {
             @Override
