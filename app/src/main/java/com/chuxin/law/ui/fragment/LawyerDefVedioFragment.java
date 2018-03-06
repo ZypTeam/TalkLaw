@@ -68,7 +68,7 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
         id=data.getLawyer().getUserid();
         imgUrl=data.getArticle().getImg();
         //TODO 服务返回url不可用，暂时使用固定的  2018年02月09日11:15:36 by wang
-        url="http://flv2.bn.netease.com/tvmrepo/2016/4/G/O/EBKQOA8GO/SD/EBKQOA8GO-mobile.mp4";
+//        url="http://flv2.bn.netease.com/tvmrepo/2016/4/G/O/EBKQOA8GO/SD/EBKQOA8GO-mobile.mp4";
     }
 
     @Override
@@ -105,6 +105,10 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
         videoImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (data==null||data.getArticle()==null||data.getArticle().getIs_buy()==0){
+                    showToast("请先购买");
+                    return;
+                }
                 videoPlayView.start(url);
             }
         });

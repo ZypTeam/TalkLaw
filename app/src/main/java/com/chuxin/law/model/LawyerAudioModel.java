@@ -43,6 +43,7 @@ public class LawyerAudioModel implements Serializable {
     private String like_num;
     private int is_like;
     private int is_colle;
+    private int is_buy;
     private String url;
 
     public String getId() {
@@ -163,5 +164,13 @@ public class LawyerAudioModel implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public int getIs_buy() {
+        return is_buy;
+    }
+
+    public void setIs_buy(int is_buy) {
+        this.is_buy = is_buy;
     }
 }

@@ -62,6 +62,7 @@ public class BuyProductActivity extends BaseTalkLawActivity {
                 Bundle bundle=new Bundle();
                 bundle.putInt(BuyLawyerActivity.TYPE,1);
                 bundle.putString(BuyLawyerActivity.PRICE,data.getArticle().getPrice());
+                bundle.putSerializable(BuyLawyerActivity.DATA,data);
                 goActivityForResult(bundle,BuyLawyerActivity.class, CommonConstant.REQUEST_PAY_SUCCUSE);
             }
         });

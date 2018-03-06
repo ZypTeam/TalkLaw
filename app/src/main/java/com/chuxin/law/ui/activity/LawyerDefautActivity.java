@@ -14,6 +14,7 @@ import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.LawyerAudioModel;
 import com.chuxin.law.model.LawyerProductModel;
+import com.chuxin.law.model.OrderResultModel;
 import com.chuxin.law.model.ShareModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.adapter.LawyerDefPagerAdapter;
@@ -457,9 +458,9 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         params.put("id",data.getArticle().getId());
         params.put("type","2");
         addNetwork(Api.getInstance().getService(ApiService.class).buyProduct(params)
-                , new Action1<NoDataModel>() {
+                , new Action1<OrderResultModel>() {
                     @Override
-                    public void call(NoDataModel noDataModel) {
+                    public void call(OrderResultModel noDataModel) {
                         hideLoadDialog();
                         if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE){
 

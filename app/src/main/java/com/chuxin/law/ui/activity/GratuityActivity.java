@@ -131,9 +131,13 @@ public class GratuityActivity extends BaseTalkLawActivity implements View.OnClic
             showToast("打赏金额不能为空");
             return;
         }
+        if (data==null||data.getArticle()==null){
+            showToast("连接服务器失败");
+            return;
+        }
         showLoadDialog();
         Map<String,String> params=new HashMap<>();
-        params.put("artid",id);
+        params.put("artid",data.getArticle().getId());
         params.put("money",price);
         addNetwork(Api.getInstance().getService(ApiService.class).gratuityOrder(params)
                 , new Action1<NoDataModel>() {
@@ -142,8 +146,8 @@ public class GratuityActivity extends BaseTalkLawActivity implements View.OnClic
                         hideLoadDialog();
                         if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE){
                             Intent intent=new Intent();
-                            intent.putExtra(GratuityPayActivity.ID,id);
                             intent.putExtra(GratuityPayActivity.PRICE,price);
+                            intent.putExtra(GratuityPayActivity.DATA,data);
                             goActivityForResult(null,GratuityPayActivity.class, CommonConstant.REQUEST_LAWYER_GRATUITY);
                         }else {
                             showToast(noDataModel.getMsg());

@@ -101,6 +101,7 @@
 
     <CheckBox
         android:id="@+id/agree"
+        android:checked="true"
         android:layout_marginLeft="16dp"
         android:text="我同意用户使用协议"
         android:button="@drawable/select_pay_agree"

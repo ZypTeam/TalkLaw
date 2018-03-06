@@ -14,6 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chuxin.law.R;
+import com.chuxin.law.model.ProductModel;
+import com.chuxin.law.model.ProductsModel;
+import com.chuxin.law.ui.adapter.ProductListAdapter;
 
 /**
  * SearchGuideView
@@ -28,6 +31,8 @@ public class SearchGuideView extends LinearLayout {
     protected ImageView imgDelete;
     protected RelativeLayout layoutHis;
     private Context mContext;
+
+
 
     private FlowLayout mHistory, mHot;
     private TextView mDeleteHistory;
@@ -69,6 +74,7 @@ public class SearchGuideView extends LinearLayout {
 
     private void initData(Context context) {
         this.mContext = context;
+
     }
 
     private void initView() {
@@ -137,6 +143,10 @@ public class SearchGuideView extends LinearLayout {
             optionName.setBackgroundResource(R.drawable.option_unselected);
             mHot.addView(itemview);
         }
+    }
+
+    public void refreshData(ProductsModel models){
+
     }
 
     public void setSearchType(String type) {

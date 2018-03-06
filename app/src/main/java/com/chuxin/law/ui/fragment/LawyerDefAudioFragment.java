@@ -127,6 +127,11 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
         imgAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (data==null||data.getArticle()==null||data.getArticle().getIs_buy()==0){
+                    showToast("请先购买");
+                    return;
+                }
                 if (voiceHelper.isPlay()&&StringUtil.equals(url,voiceHelper.getPlayingVoicePath())) {
                     handler.removeCallbacks(task);
                     voiceHelper.pauseVoice();
