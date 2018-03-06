@@ -1,5 +1,7 @@
 package com.chuxin.law.ui.activity;
 
+import android.text.Selection;
+import android.text.Spannable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -7,8 +9,8 @@ import android.widget.Toast;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.chuxin.law.sharedpreferences.ShippingAddressModel;
 import com.chuxin.law.model.ShippingAddressSp;
+import com.chuxin.law.sharedpreferences.ShippingAddressModel;
 import com.chuxin.law.ui.widget.BackTitleView;
 
 import java.util.ArrayList;
@@ -29,6 +31,8 @@ public class SelectAreaActivity extends BaseTalkLawActivity {
     protected TextView textSexWoman;
     protected EditText editPhone;
 
+    private ShippingAddressModel.ShippingAddressItemModel mModel;
+
     @Override
     public int getLayoutResId() {
         return R.layout.activity_select_area;
@@ -36,7 +40,8 @@ public class SelectAreaActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-
+        if (getIntent() != null && getIntent().getExtras() != null && getIntent().getExtras().getSerializable("model") != null)
+            mModel = (ShippingAddressModel.ShippingAddressItemModel) getIntent().getExtras().getSerializable("model");
     }
 
     @Override
@@ -55,6 +60,22 @@ public class SelectAreaActivity extends BaseTalkLawActivity {
     @Override
     public void initAction() {
         viewTitleBar.setTitle("添加地址");
+
+
+        if (mModel != null) {
+            viewTitleBar.setTitle("编辑地址");
+            textUsername.setText(mModel.name);
+
+            textUsername.setSelection(textUsername.getText().length());
+
+            editPhone.setText(mModel.phone);
+            textSelectCity.setText(mModel.city);
+            editArea.setText(mModel.area);
+            textUsername.setText(mModel.name);
+            editDetailAddress.setText(mModel.address);
+        }
+
+
         viewTitleBar.setRightText("确定", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,8 +101,8 @@ public class SelectAreaActivity extends BaseTalkLawActivity {
                     return;
                 }
 
-                ShippingAddressModel model =  ShippingAddressSp.getShippingAddress(mContext);
-                if(model==null){
+                ShippingAddressModel model = ShippingAddressSp.getShippingAddress(mContext);
+                if (model == null) {
                     model = new ShippingAddressModel();
                     model.list = new ArrayList<>();
                 }
@@ -92,11 +113,23 @@ public class SelectAreaActivity extends BaseTalkLawActivity {
                 shippingAddressItemModel.city = textSelectCity.getText().toString();
                 shippingAddressItemModel.area = editArea.getText().toString();
                 shippingAddressItemModel.address = editDetailAddress.getText().toString();
-                shippingAddressItemModel.id = model.list.size()+1;
-                model.list.add(shippingAddressItemModel);
-                ShippingAddressSp.saveShippingAddress(mContext,model);
+                if (mModel != null) {
+                    shippingAddressItemModel.id = mModel.id;
+                    model.list.set(mModel.id - 1, shippingAddressItemModel);
+                } else {
+                    shippingAddressItemModel.id = model.list.size() + 1;
+                    model.list.add(shippingAddressItemModel);
 
-                Toast.makeText(mContext,"添加成功",Toast.LENGTH_SHORT).show();
+                }
+
+                ShippingAddressSp.saveShippingAddress(mContext, model);
+
+                if (mModel != null) {
+                    Toast.makeText(mContext, "修改成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(mContext, "添加成功", Toast.LENGTH_SHORT).show();
+                }
+
                 finish();
             }
         });

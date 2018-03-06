@@ -269,15 +269,12 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
+        updateUserInfo();
         ShippingAddressModel.ShippingAddressItemModel model = ShippingAddressSp.getSelectShippingAddress(mContext);
         if (model == null) {
             myAddressContent.setText("暂无");
         } else {
             myAddressContent.setText(model.city);
         }
-
-        Log.e("tag","onResumeonResumeonResumeonResume");
-        updateUserInfo();
-
     }
 }
