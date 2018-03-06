@@ -105,6 +105,7 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
     @Override
     public void initAction() {
 
+        recyclerView.setHasFixedSize(true);
         recyclerView.setPullRefreshEnabled(false);
         //设置banner样式
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
@@ -124,9 +125,9 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         banner.setIndicatorGravity(BannerConfig.CENTER);
 
 
-        banner.setFocusable(true);
-        banner.setFocusableInTouchMode(true);
-        banner.requestFocus();
+//        banner.setFocusable(true);
+//        banner.setFocusableInTouchMode(true);
+//        banner.requestFocus();
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
@@ -143,6 +144,8 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
                 backTitleView.setAlpha(alpha);
             }
         });
+
+
         backTitleView.setTitle("看法");
         layoutSearchEdit.setOnClickListener(new View.OnClickListener() {
             @Override

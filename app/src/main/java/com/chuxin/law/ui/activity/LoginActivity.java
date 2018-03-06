@@ -18,8 +18,6 @@ import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.UserInfoDelegate;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
 import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
@@ -32,7 +30,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import cn.com.talklaw.xh.DemoHelper;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -292,59 +289,67 @@ public class LoginActivity extends BaseTalkLawActivity {
      * 登录环信
      */
     private void loginHx(final UserInfoModel userInfoModel) {
-        EMClient.getInstance().login(userInfoModel.getData().getHx_username(), StringUtil.getMD5Str(userInfoModel.getData().getHx_username()), new EMCallBack() {
+//        EMClient.getInstance().login(userInfoModel.getData().getHx_username(), StringUtil.getMD5Str(userInfoModel.getData().getHx_username()), new EMCallBack() {
+//
+//            @Override
+//            public void onSuccess() {
+//                Log.d(TAG, "login: onSuccess");
+//
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        hideLoadDialog();
+//                        Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
+//                        UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
+//
+//
+//                        // ** manually load all local groups and conversation
+//                        EMClient.getInstance().groupManager().loadAllGroups();
+//                        EMClient.getInstance().chatManager().loadAllConversations();
+//
+//                        // update current user's display name for APNs
+//                        boolean updatenick = EMClient.getInstance().pushManager().updatePushNickname(
+//                                TalkLawApplication.currentUserNick.trim());
+//                        if (!updatenick) {
+//                            Log.e("LoginActivity", "update current user nick fail");
+//                        }
+//                        DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
+//                        goActivity(null, HomeActivity.class);
+//                        finish();
+//
+//                    }
+//                });
+//
+//            }
+//
+//            @Override
+//            public void onProgress(int progress, String status) {
+//                Log.d(TAG, "login: onProgress");
+//            }
+//
+//            @Override
+//            public void onError(final int code, final String message) {
+//                Log.d(TAG, "login: onError: " + code);
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        hideLoadDialog();
+//                        //TODO: 环信登录失败暂时存储用户信息 修改聊天SDK后去掉 by wang 2018年03月05日
+//                        UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
+////                        Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show();
+//                        goActivity(null,HomeActivity.class);
+//                    }
+//                });
+//            }
+//        });
 
-            @Override
-            public void onSuccess() {
-                Log.d(TAG, "login: onSuccess");
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideLoadDialog();
-                        Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
-                        UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
+        hideLoadDialog();
+        Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
+        UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
+        goActivity(null, HomeActivity.class);
+        finish();
 
-
-                        // ** manually load all local groups and conversation
-                        EMClient.getInstance().groupManager().loadAllGroups();
-                        EMClient.getInstance().chatManager().loadAllConversations();
-
-                        // update current user's display name for APNs
-                        boolean updatenick = EMClient.getInstance().pushManager().updatePushNickname(
-                                TalkLawApplication.currentUserNick.trim());
-                        if (!updatenick) {
-                            Log.e("LoginActivity", "update current user nick fail");
-                        }
-                        DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
-                        goActivity(null, HomeActivity.class);
-                        finish();
-
-                    }
-                });
-
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-                Log.d(TAG, "login: onProgress");
-            }
-
-            @Override
-            public void onError(final int code, final String message) {
-                Log.d(TAG, "login: onError: " + code);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideLoadDialog();
-                        //TODO: 环信登录失败暂时存储用户信息 修改聊天SDK后去掉 by wang 2018年03月05日
-                        UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
-//                        Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show();
-                        goActivity(null,HomeActivity.class);
-                    }
-                });
-            }
-        });
     }
 
     private long mLastTime;

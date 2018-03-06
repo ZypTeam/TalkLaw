@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -236,6 +237,8 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         if (userModel == null) {
             return;
         }
+
+        Log.e("tag","updateUserInfo="+userModel.getHeadimg());
         Glide.with(mContext)
                 .load(userModel.getHeadimg())
                 .placeholder(R.mipmap.icon_head_def_cir)
@@ -272,6 +275,9 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         } else {
             myAddressContent.setText(model.city);
         }
+
+        Log.e("tag","onResumeonResumeonResumeonResume");
+        updateUserInfo();
 
     }
 }

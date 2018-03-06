@@ -2,12 +2,9 @@ package com.chuxin.law.util.voice;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.text.TextUtils;
 
 import com.jusfoun.baselibrary.Util.LogUtil;
-import com.ta.utdid2.android.utils.StringUtils;
-
-import tv.danmaku.ijk.media.player.IMediaPlayer;
-import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
 import static com.chuxin.law.util.voice.VoiceManagerConstant.VM_PLAY_PREPARED;
 
@@ -109,7 +106,7 @@ public class VoicePlayer {
                 }
                 return;
             }
-            if (StringUtils.isEmpty(path)) {
+            if (TextUtils.isEmpty(path)) {
                 LogUtil.e(TAG, path);
                 if (mListener != null) {
                     mListener.onPlayNotify(VoiceManagerConstant.VM_PLAY_COMPLETE, mIndex, 0);
@@ -204,7 +201,7 @@ public class VoicePlayer {
                 }
                 return;
             }
-            if (StringUtils.isEmpty(path)) {
+            if (TextUtils.isEmpty(path)) {
                 LogUtil.e(TAG, path);
                 if (mListener != null) {
                     mListener.onPlayNotify(VoiceManagerConstant.VM_PLAY_COMPLETE, mIndex, 0);
