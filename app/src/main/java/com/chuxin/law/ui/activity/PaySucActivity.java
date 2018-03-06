@@ -13,7 +13,6 @@ import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.task.WeakHandler;
 
-import cn.com.talklaw.xh.ui.ChatActivity;
 
 /**
  * @author wangcc
@@ -79,10 +78,10 @@ public class PaySucActivity extends BaseTalkLawActivity {
     }
 
     private void goNext(){
-        Intent intent  = new Intent(mContext, ChatActivity.class);
-        intent.putExtra("userId", "20");
-        intent.putExtra("userName", "王律师");
-        startActivity(intent);
+//        Intent intent  = new Intent(mContext, ChatActivity.class);
+//        intent.putExtra("userId", "20");
+//        intent.putExtra("userName", "王律师");
+//        startActivity(intent);
         onBackPressed();
     }
 

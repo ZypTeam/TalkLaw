@@ -4,7 +4,6 @@ import android.util.SparseArray;
 
 import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
-import com.hyphenate.util.VoiceRecorder;
 
 import java.io.IOException;
 

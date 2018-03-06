@@ -6,11 +6,6 @@ import android.support.multidex.MultiDex;
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.chuxin.law.common.HeaderTalkInterceptor;
 import com.chuxin.law.common.UserInfoDelegate;
-import com.google.gson.Gson;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMCallManager;
-import com.hyphenate.chat.EMChatManager;
-import com.hyphenate.chat.EMClient;
 import com.jusfoun.baselibrary.BaseApplication;
 import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.SharePrefenceUtils;
@@ -19,7 +14,6 @@ import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
-import cn.com.talklaw.xh.DemoHelper;
 
 import com.chuxin.law.common.DaoInstance;
 import com.chuxin.law.common.SharePrefenceConstant;
@@ -59,7 +53,6 @@ public class TalkLawApplication extends BaseApplication {
         LogUtil.setDebugable(BuildConfig.LOG_MODE);
         UMShareAPI.get(this);
 
-        DemoHelper.getInstance().init(this);
         Config.DEBUG = true;
 
         FeedbackAPI.init(this, "24769686","13aeb43eb422a0703ab5e7ef8235e9b5");
@@ -72,27 +65,6 @@ public class TalkLawApplication extends BaseApplication {
 
     public static void exitUser() {
         SharePrefenceUtils.getInstance().setString(SharePrefenceConstant.USER_MODEL, "");
-        //此方法为异步方法
-        EMClient.getInstance().logout(true, new EMCallBack() {
-
-            @Override
-            public void onSuccess() {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onError(int code, String message) {
-                // TODO Auto-generated method stub
-
-            }
-        });
     }
 
 
