@@ -254,7 +254,7 @@ public class VoicePlayer {
                 mediaPlayer.reset();
             }
             mediaPlayer.setDataSource(path);
-            mediaPlayer.prepareAsync();
+            mediaPlayer.prepare();
 
             // 设置播放结束时监听
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {

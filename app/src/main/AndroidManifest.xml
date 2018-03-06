@@ -96,6 +96,9 @@
         <!--设置-->
         <activity android:name="com.chuxin.law.ui.activity.SettingActivity" />
 
+        <!--关于我们-->
+        <activity android:name=".ui.activity.AboutUsActivity"/>
+
         <!--我的咨询-->
         <activity android:name="com.chuxin.law.ui.activity.MyConsultActivity" />
 

@@ -52,6 +52,7 @@
 
     <TextView
         android:id="@+id/help"
+        android:visibility="gone"
         android:paddingRight="16dp"
         android:background="#fff"
         android:text="帮助"
@@ -78,7 +79,7 @@
 
     <TextView
         android:id="@+id/feedback"
-        android:text="意见反馈"
+        android:text="帮助与反馈"
         app:layout_constraintTop_toBottomOf="@+id/help"
         android:gravity="center_vertical|left"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -94,6 +95,7 @@
 
     <TextView
         android:id="@+id/pingfen"
+        android:visibility="gone"
         android:gravity="center_vertical|left"
         app:layout_constraintTop_toBottomOf="@+id/feedback"
         android:layout_marginTop="5dp"

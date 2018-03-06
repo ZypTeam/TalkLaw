@@ -69,8 +69,10 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.10'
     compile project(':zxing')
     compile 'com.android.support:design:27.0.2'
-    compile(name: 'alisdk-feedback-2.5.2', ext: 'aar')
-    compile(name: 'securityguardaar3-5.1.96', ext: 'aar')
+    compile 'com.aliyun.ams:alicloud-android-feedback:3.1.2'
+    compile 'com.aliyun.ams:alicloud-android-utdid:1.1.5.3'
+    compile 'com.aliyun.ams:alicloud-android-ut:5.1.0'
+    compile 'com.aliyun.ams:alicloud-android-utils:1.1.1'
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     //Optional: see how to use the utility.
     compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
