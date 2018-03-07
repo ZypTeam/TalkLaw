@@ -50,6 +50,7 @@ public class CommonConstant {
     //购买成功
     public static final int REQUEST_PAY_SUCCUSE=111;
 
-
+    //my fragment 修改头像
+    public static final int REQUEST_HEAD_CHANGE=111;
 
 }

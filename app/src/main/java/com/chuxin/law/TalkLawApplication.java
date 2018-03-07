@@ -72,7 +72,7 @@ public class TalkLawApplication extends BaseApplication {
 
     //各个平台的配置
     {
-        PlatformConfig.setWeixin("wx6acb4c4141bd83a0", "fe02da59c24dcfd6429996bfca8ea577");
+        PlatformConfig.setWeixin("wx6acb4c4141bd83a0", "JUxHEcBlebY7YrUwmBaMgNc5xt1jpp");
         PlatformConfig.setSinaWeibo("1701976759", "c9f6b6d5015055964780e0c56c3e59a5", "http:www.sharesdk.cn");
         PlatformConfig.setQQZone("1106542171", "iLjGMwSEXLgyWWKG");
     }
@@ -99,8 +99,6 @@ public class TalkLawApplication extends BaseApplication {
         Config.DEBUG = true;
 
         FeedbackAPI.init(this, "24769686","13aeb43eb422a0703ab5e7ef8235e9b5");
-
-
 
         initRongYun();
     }

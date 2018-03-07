@@ -60,18 +60,19 @@ public class PayUitl {
     public static final void WechatPay(OrderPayModel.WxPayOrderDic item){
 
         Context context= TalkLawApplication.getInstance();
-        IWXAPI iwxapi= WXAPIFactory.createWXAPI(context,context.getString(R.string.key_wechat),false);
+        IWXAPI iwxapi= WXAPIFactory.createWXAPI(context,context.getString(R.string.key_wechat));
         if (!iwxapi.isWXAppInstalled()){
             Toast.makeText(context,"请安装微信",Toast.LENGTH_SHORT).show();
             return;
         }
+        item.setPackagestr("Sign=WXPay");
         iwxapi.registerApp(context.getString(R.string.key_wechat));
         PayReq req=new PayReq();
         req.appId = item.getAppid();
-        req.partnerId = item.getPartnerid();
-        req.prepayId = item.getPrepayId();
-        req.nonceStr = item.getNoncestr();
-        req.timeStamp = item.getTimestamp();
+        req.partnerId = item.getMch_id();
+        req.prepayId = item.getPrepay_id();
+        req.nonceStr = item.getNonce_str();
+        req.timeStamp = System.currentTimeMillis()/1000+"";
         req.packageValue = item.getPackagestr();
         req.sign = item.getSign();
 //        req.extData="app data";

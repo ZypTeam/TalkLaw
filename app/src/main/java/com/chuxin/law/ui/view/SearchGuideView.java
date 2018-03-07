@@ -14,9 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chuxin.law.R;
+import com.chuxin.law.model.HotKeyListModel;
 import com.chuxin.law.model.ProductModel;
 import com.chuxin.law.model.ProductsModel;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
+
+import java.util.List;
 
 /**
  * SearchGuideView
@@ -112,16 +115,19 @@ public class SearchGuideView extends LinearLayout {
     /**
      * 设置 历史搜索显示
      *
-     * @param history 本地数据库中的历史搜索记录
+     * @param list 本地数据库中的历史搜索记录
      */
-    public void setHistoryData() {
+    public void setHistoryData(List<HotKeyListModel.HotKeyModel> list) {
+        if (list==null){
+            return;
+        }
         mHistoryLayout.setVisibility(VISIBLE);
         mHistory.removeAllViews();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < list.size(); i++) {
             View itemview = LayoutInflater.from(mContext).inflate(R.layout.item_option_item, null);
             TextView optionName = (TextView) itemview.findViewById(R.id.item_option_name);
-            optionName.setText("测试");
+            optionName.setText(list.get(i).getKeyword());
             optionName.setBackgroundResource(R.drawable.option_unselected);
             mHistory.addView(itemview);
         }
@@ -131,15 +137,18 @@ public class SearchGuideView extends LinearLayout {
     /**
      * 设置 热门搜索 显示
      *
-     * @param hot 服务器返回的热门搜索结果列表
+     * @param  list 服务器返回的热门搜索结果列表
      */
-    public void setHotSearchData() {
+    public void setHotSearchData(List<HotKeyListModel.HotKeyModel> list) {
+        if (list==null){
+            return;
+        }
         mHotLayout.setVisibility(VISIBLE);
         mHot.removeAllViews();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < list.size(); i++) {
             View itemview = LayoutInflater.from(mContext).inflate(R.layout.item_option_item, null);
             TextView optionName = (TextView) itemview.findViewById(R.id.item_option_name);
-            optionName.setText("测试");
+            optionName.setText(list.get(i).getKeyword());
             optionName.setBackgroundResource(R.drawable.option_unselected);
             mHot.addView(itemview);
         }

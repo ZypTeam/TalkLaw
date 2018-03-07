@@ -490,4 +490,10 @@ public class MyInfoActivity extends BaseTalkLawActivity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(RESULT_OK);
+    }
 }

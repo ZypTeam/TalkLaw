@@ -19,6 +19,7 @@ import com.chuxin.law.model.ShareModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.adapter.LawyerDefPagerAdapter;
 import com.chuxin.law.ui.dialog.ShareDialog;
+import com.chuxin.law.util.ImageLoderUtil;
 import com.chuxin.law.util.UIUtils;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
@@ -120,14 +121,6 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
 
     @Override
     public void initAction() {
-
-        Glide.with(mContext)
-                .load("http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg")
-                .placeholder(R.mipmap.logo)
-                .error(R.mipmap.logo)
-                .transform(new CenterCrop(mContext),new GlideCircleTransform(mContext))
-                .crossFade()
-                .into(iconHead);
 
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -308,6 +301,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         }
         this.data=data;
         userModel=data.getLawyer();
+        ImageLoderUtil.loadCircleImage(mContext,iconHead,userModel.getHeadimg(),R.mipmap.icon_head_def_cir);
         if (StringUtil.isEmpty(userModel.getName())){
             name.setText("王律师");
         }else {

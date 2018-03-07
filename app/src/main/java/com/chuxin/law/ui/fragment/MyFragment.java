@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -72,7 +73,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
     private TextView recommend;
     private ImageView msg;
     private UserModel userModel;
-    private Drawable dAuthUn,dAuth;
+    private Drawable dAuthUn, dAuth;
 
     public static MyFragment getInstance() {
         MyFragment fragment = new MyFragment();
@@ -86,10 +87,10 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
 
     @Override
     public void initDatas() {
-        dAuth=mContext.getResources().getDrawable(R.mipmap.icon_lawyer_auth);
-        dAuth.setBounds(0,0,dAuth.getIntrinsicWidth(),dAuth.getIntrinsicHeight());
-        dAuthUn=mContext.getResources().getDrawable(R.mipmap.icon_lawyer_auth_un);
-        dAuthUn.setBounds(0,0,dAuthUn.getIntrinsicWidth(),dAuthUn.getIntrinsicHeight());
+        dAuth = mContext.getResources().getDrawable(R.mipmap.icon_lawyer_auth);
+        dAuth.setBounds(0, 0, dAuth.getIntrinsicWidth(), dAuth.getIntrinsicHeight());
+        dAuthUn = mContext.getResources().getDrawable(R.mipmap.icon_lawyer_auth_un);
+        dAuthUn.setBounds(0, 0, dAuthUn.getIntrinsicWidth(), dAuthUn.getIntrinsicHeight());
     }
 
     @Override
@@ -143,7 +144,8 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.icon_head:
-                goActivity(null, MyInfoActivity.class);
+                Intent intent1 = new Intent(mContext, MyInfoActivity.class);
+                startActivityForResult(intent1, CommonConstant.REQUEST_HEAD_CHANGE);
                 break;
             case R.id.my_zixun_all:
                 goActivity(null, MyConsultActivity.class);
@@ -175,14 +177,14 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
                 goActivity(null, IntegralActivity.class);
                 break;
             case R.id.auth:
-                if (userModel!=null) {
-                    if (userModel.getType()!=2) {
+                if (userModel != null) {
+                    if (userModel.getType() != 2) {
                         UIUtils.goLawyerAuth(mContext);
                     }
                 }
                 break;
 
-            case  R.id.btn_tixian:
+            case R.id.btn_tixian:
                 goActivity(null, ApplyForWithdrawalsActivity.class);
                 break;
             default:
@@ -193,6 +195,9 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
         switch (requestCode) {
             case CommonConstant.FOLLOW_RESULT_CODE:
                 if (data != null) {
@@ -201,6 +206,9 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
                 }
                 break;
             case CommonConstant.LAWYER_AUTH_RESULT_CODE:
+                break;
+            case CommonConstant.REQUEST_HEAD_CHANGE:
+                updateUserInfo();
                 break;
         }
     }
@@ -238,7 +246,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
             return;
         }
 
-        Log.e("tag","updateUserInfo="+userModel.getHeadimg());
+        Log.e("tag", "updateUserInfo=" + userModel.getHeadimg());
         Glide.with(mContext)
                 .load(userModel.getHeadimg())
                 .placeholder(R.mipmap.icon_head_def_cir)
@@ -254,14 +262,14 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         myAddressContent.setText(userModel.getAddress());
         zhuanghuCount.setText("¥" + userModel.getMoney());
         jifenCount.setText(userModel.getPoints());
-        if (userModel.getType() !=2) {
+        if (userModel.getType() != 2) {
             auth.setText("未认证");
             auth.setTextColor(Color.parseColor("#bababa"));
-            auth.setCompoundDrawables(null,null,dAuthUn,null);
+            auth.setCompoundDrawables(null, null, dAuthUn, null);
         } else {
             auth.setTextColor(getResources().getColor(R.color.app_red_color));
             auth.setText(userModel.getLaw().getLevel());
-            auth.setCompoundDrawables(null,null,dAuth,null);
+            auth.setCompoundDrawables(null, null, dAuth, null);
         }
 
     }

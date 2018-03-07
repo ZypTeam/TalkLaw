@@ -49,12 +49,27 @@ public class OrderPayModel {
 
     public class WxPayOrderDic implements Serializable {
         private String appid;
-        private String partnerid;
-        private String prepayId;
-        private String noncestr;
         private String timestamp;
         private String packagestr;
         private String sign;
+        /**
+         * return_code : SUCCESS
+         * return_msg : OK
+         * mch_id : 1497704102
+         * nonce_str : 3eha8F5q80LzXqYK
+         * result_code : SUCCESS
+         * prepay_id : wx201803072210572cb8d5c1d30068797230
+         * trade_type : APP
+         */
+
+        private String return_code;
+        private String return_msg;
+        private String mch_id;
+        private String nonce_str;
+        private String result_code;
+        private String prepay_id;
+        private String trade_type;
+
 
         public String getSign() {
             return sign;
@@ -70,30 +85,6 @@ public class OrderPayModel {
 
         public void setAppid(String appid) {
             this.appid = appid;
-        }
-
-        public String getPartnerid() {
-            return partnerid;
-        }
-
-        public void setPartnerid(String partnerid) {
-            this.partnerid = partnerid;
-        }
-
-        public String getPrepayId() {
-            return prepayId;
-        }
-
-        public void setPrepayId(String prepayId) {
-            this.prepayId = prepayId;
-        }
-
-        public String getNoncestr() {
-            return noncestr;
-        }
-
-        public void setNoncestr(String noncestr) {
-            this.noncestr = noncestr;
         }
 
         public String getTimestamp() {
@@ -116,13 +107,68 @@ public class OrderPayModel {
         @Override
         public String toString() {
             return "appid"+appid
-                    +"\npartnerid=="+partnerid
-                    +"\nprepayId=="+ prepayId
-                    +"\nnoncestr=="+noncestr
+                    +"\nprepayId=="+ prepay_id
+                    +"\nnoncestr=="+nonce_str
                     +"\ntimestamp=="+timestamp
                     +"\npackagestr=="+packagestr
                     +"\nsign=="+sign
                     ;
+        }
+
+        public String getReturn_code() {
+            return return_code;
+        }
+
+        public void setReturn_code(String return_code) {
+            this.return_code = return_code;
+        }
+
+        public String getReturn_msg() {
+            return return_msg;
+        }
+
+        public void setReturn_msg(String return_msg) {
+            this.return_msg = return_msg;
+        }
+
+        public String getMch_id() {
+            return mch_id;
+        }
+
+        public void setMch_id(String mch_id) {
+            this.mch_id = mch_id;
+        }
+
+        public String getNonce_str() {
+            return nonce_str;
+        }
+
+        public void setNonce_str(String nonce_str) {
+            this.nonce_str = nonce_str;
+        }
+
+        public String getResult_code() {
+            return result_code;
+        }
+
+        public void setResult_code(String result_code) {
+            this.result_code = result_code;
+        }
+
+        public String getPrepay_id() {
+            return prepay_id;
+        }
+
+        public void setPrepay_id(String prepay_id) {
+            this.prepay_id = prepay_id;
+        }
+
+        public String getTrade_type() {
+            return trade_type;
+        }
+
+        public void setTrade_type(String trade_type) {
+            this.trade_type = trade_type;
         }
     }
 }

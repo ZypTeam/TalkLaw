@@ -63,16 +63,15 @@
         android:layout_height="1px"
         android:background="#e7e7e7" />
 
+    <com.chuxin.law.ui.view.SearchGuideView
+        android:id="@+id/view_search_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView
         android:id="@+id/result"
         android:overScrollMode="never"
         android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-    <com.chuxin.law.ui.view.SearchGuideView
-        android:id="@+id/view_search_guide"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
 </LinearLayout>
