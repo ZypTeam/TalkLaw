@@ -83,5 +83,15 @@ dependencies {
     compile 'com.github.lovetuzitong:MultiImageSelector:1.2'
     compile project(':videolibrary')
     compile files('libs/alipaySdk-20170922.jar')
+
+    compile project(':recognizer')
+    compile project(':contactcard')
+    compile project(':sticker')
+    compile 'com.facebook.stetho:stetho:1.4.1'
+    compile project(':IMKit')
+    compile project(':CallKit')
+    compile project(':RedPacket')
+    compile(name: 'HMS-SDK-2.4.0.300', ext: 'aar')
+
 }
 

@@ -9,6 +9,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,16 +20,18 @@ import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.model.UserModel;
+import com.chuxin.law.ry.ui.activity.ConversationActivity;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
-import com.chuxin.law.util.ImageLoderUtil;
-import com.chuxin.law.util.UIUtils;
 import com.chuxin.law.ui.view.PresentInstructionsDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
+import com.chuxin.law.util.ImageLoderUtil;
+import com.chuxin.law.util.UIUtils;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 
 import java.util.HashMap;
 
+import io.rong.imkit.RongIM;
 import rx.functions.Action1;
 
 /**
@@ -38,7 +41,7 @@ import rx.functions.Action1;
  */
 
 public class LawyerIntroductionActivity extends BaseTalkLawActivity {
-    public static final String ID="id";
+    public static final String ID = "id";
     protected BackTitleView titleView;
     protected ImageView iconHead;
     protected TextView name;
@@ -67,9 +70,9 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     public void initDatas() {
         dialog = new PresentInstructionsDialog(mContext);
         adapter = new ProductListAdapter(mContext);
-        id=getIntent().getStringExtra(ID);
-        if (TextUtils.isEmpty(id)){
-            id="5";
+        id = getIntent().getStringExtra(ID);
+        if (TextUtils.isEmpty(id)) {
+            id = "5";
         }
     }
 
@@ -101,14 +104,14 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Bundle bundle=new Bundle();
-                bundle.putInt(BuyLawyerActivity.TYPE,0);
-                if (data==null||data.getLaw()==null){
-                    bundle.putString(BuyLawyerActivity.PRICE,"200");
-                }else {
-                    bundle.putString(BuyLawyerActivity.PRICE,data.getLaw().getPrice());
+                Bundle bundle = new Bundle();
+                bundle.putInt(BuyLawyerActivity.TYPE, 0);
+                if (data == null || data.getLaw() == null) {
+                    bundle.putString(BuyLawyerActivity.PRICE, "200");
+                } else {
+                    bundle.putString(BuyLawyerActivity.PRICE, data.getLaw().getPrice());
                 }
-                goActivityForResult(bundle,BuyLawyerActivity.class, CommonConstant.REQUEST_PAY_SUCCUSE);
+                goActivityForResult(bundle, BuyLawyerActivity.class, CommonConstant.REQUEST_PAY_SUCCUSE);
             }
         });
 
@@ -122,23 +125,34 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
             }
         });
 
-        textBushnegsu.setOnClickListener(new View.OnClickListener() {
+        no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Intent intent  = new Intent(LawyerIntroductionActivity.this, ChatActivity.class);
 //                intent.putExtra("userId", "20");
 //                intent.putExtra("userName", "王律师");
 //                startActivity(intent);
+
+                if (data != null && data.getLaw() != null) {
+
+//                    Intent intent = new Intent(mContext, ConversationActivity.class);
+//                    intent.putExtra("targetId",data.getLaw().getUserid());
+//                    intent.putExtra("title",data.getLaw().getName());
+//                    mContext.startActivity(intent);
+//                    data.getLaw().getUserid()
+                    RongIM.getInstance().startPrivateChat(mContext, "65", data.getLaw().getName());
+                }
             }
         });
+
 
         attention.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (data!=null&&data.getLaw()!=null){
-                    if (data.getIs_follow()==1){
+                if (data != null && data.getLaw() != null) {
+                    if (data.getIs_follow() == 1) {
                         delFollow(data.getLaw().getUserid());
-                    }else {
+                    } else {
                         addFollow(data.getLaw().getUserid());
                     }
                 }
@@ -147,23 +161,25 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
 
         getData();
 
-        yiban.setText(UIUtils.getText("100","已办"));
-        level.setText(UIUtils.getText("专业级","等级"));
-        haoping.setText(UIUtils.getText("100%","好评"));
-        suc.setText(UIUtils.getText("100%","胜率"));
+        yiban.setText(UIUtils.getText("100", "已办"));
+        level.setText(UIUtils.getText("专业级", "等级"));
+        haoping.setText(UIUtils.getText("100%", "好评"));
+        suc.setText(UIUtils.getText("100%", "胜率"));
         ImageLoderUtil.loadCircleImage(mContext, iconHead, "http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg", R.mipmap.icon_head_def_cir);
     }
 
-    private void getData(){
+    private void getData() {
         showLoadDialog();
-        HashMap<String,String> params=new HashMap<>();
-        params.put("id",id);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", id);
         addNetwork(Api.getInstance().getService(ApiService.class).getLawIntro(params)
                 , new Action1<LawyerIntroModel>() {
                     @Override
                     public void call(LawyerIntroModel model) {
+                        Log.e("tag","updateView="+model.getCode()+ " "+CommonConstant.NET_SUC_CODE+" "+(model.getCode()==CommonConstant.NET_SUC_CODE) );
                         hideLoadDialog();
-                        if (model.getCode()== CommonConstant.NET_SUC_CODE){
+                        if (model.getCode() == CommonConstant.NET_SUC_CODE) {
+                            Log.e("tag","updateView1");
                             updateView(model.getData());
                         }
                     }
@@ -175,30 +191,32 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                 });
     }
 
-    private void updateView(LawyerIntroModel.LawyerIntroData data){
-        if (data==null){
+    private void updateView(LawyerIntroModel.LawyerIntroData data) {
+        Log.e("tag","updateView2="+data);
+        if (data == null) {
             return;
         }
-        this.data=data;
-        UserModel userModel=data.getLaw();
-        if (data.getIs_follow()==0){
+        Log.e("tag","updateView3=");
+        this.data = data;
+        UserModel userModel = data.getLaw();
+        if (data.getIs_follow() == 0) {
             attention.setBackgroundResource(R.mipmap.icon_lawyer_follow);
             attention.setText("关注");
             attention.setTextColor(Color.parseColor("#ff8400"));
-        }else {
+        } else {
             attention.setBackgroundResource(R.mipmap.icon_lawyer_follow_un);
             attention.setTextColor(Color.parseColor("#d7d7d7"));
             attention.setText("已关注");
         }
-        if (userModel!=null) {
+        if (userModel != null) {
             setNoTxt(userModel.getPrice());
             jianjieContent.setText(data.getLaw().getIntro());
 
             name.setText(data.getLaw().getName());
-            yiban.setText(UIUtils.getText(userModel.getDonenum(),"已办"));
-            level.setText(UIUtils.getText("专业级","等级"));
-            haoping.setText(UIUtils.getText(userModel.getPraise()+"%","好评"));
-            suc.setText(UIUtils.getText(userModel.getWin()+"%","胜率"));
+            yiban.setText(UIUtils.getText(userModel.getDonenum(), "已办"));
+            level.setText(UIUtils.getText("专业级", "等级"));
+            haoping.setText(UIUtils.getText(userModel.getPraise() + "%", "好评"));
+            suc.setText(UIUtils.getText(userModel.getWin() + "%", "胜率"));
             ImageLoderUtil.loadCircleImage(mContext, iconHead, "http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg", R.mipmap.icon_head_def_cir);
         }
         adapter.refreshList(data.getList());
@@ -213,7 +231,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE){
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             data.setIs_follow(1);
                             attention.setBackgroundResource(R.mipmap.icon_lawyer_follow_un);
                             attention.setTextColor(Color.parseColor("#d7d7d7"));
@@ -252,12 +270,12 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                 });
     }
 
-    private void setNoTxt(String price){
-        String txt="沟通咨询：1小时对话";
-        String txt2="¥"+price+"/次";
-        SpannableStringBuilder builder=new SpannableStringBuilder(txt+txt2);
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")),0,txt.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#cb1e28")),txt.length(),txt.length()+txt2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    private void setNoTxt(String price) {
+        String txt = "沟通咨询：1小时对话";
+        String txt2 = "¥" + price + "/次";
+        SpannableStringBuilder builder = new SpannableStringBuilder(txt + txt2);
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 0, txt.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#cb1e28")), txt.length(), txt.length() + txt2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textBushnegsu.setText(builder);
     }
 }

@@ -1,10 +1,8 @@
 package com.chuxin.law.model;
 
 import com.jusfoun.baselibrary.base.BaseModel;
-import com.wang.dblibrary.User;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author wangcc
@@ -12,7 +10,7 @@ import java.util.List;
  * @describe 用户信息
  */
 
-public class UserModel extends BaseModel implements Serializable  {
+public class UserModel extends BaseModel implements Serializable {
 
     /**
      * id : 2
@@ -67,6 +65,7 @@ public class UserModel extends BaseModel implements Serializable  {
     private String appToken;
     private String praise;
     private String win;
+    public String rToken;
 
     private String donenum;
     /**

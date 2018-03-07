@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,6 +19,8 @@ import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.UserInfoDelegate;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
+import com.chuxin.law.ry.SealConst;
+import com.chuxin.law.ry.SealUserInfoManager;
 import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
@@ -30,6 +33,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -59,6 +64,8 @@ public class LoginActivity extends BaseTalkLawActivity {
     private Subscription timer;
     private UMShareAPI mShareAPI;
 
+    private SharedPreferences sp;
+    private SharedPreferences.Editor editor;
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onStart(SHARE_MEDIA platform) {
@@ -98,6 +105,9 @@ public class LoginActivity extends BaseTalkLawActivity {
         TAG=getClass().getSimpleName();
         mShareAPI = UMShareAPI.get(mContext);
         TAG=getClass().getSimpleName();
+
+        sp = getSharedPreferences("config", MODE_PRIVATE);
+        editor = sp.edit();
     }
 
     @Override
@@ -182,8 +192,11 @@ public class LoginActivity extends BaseTalkLawActivity {
                 , new Action1<UserInfoModel>() {
                     @Override
                     public void call(UserInfoModel userInfoModel) {
-                        if (userInfoModel != null && userInfoModel.getCode() == 10000) {
+                        if (userInfoModel != null&&userInfoModel.getData()!=null && userInfoModel.getCode() == 10000) {
                             loginHx(userInfoModel);
+                        }else{
+                            hideLoadDialog();
+                            Toast.makeText(mContext, "登录失败", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -191,7 +204,7 @@ public class LoginActivity extends BaseTalkLawActivity {
                     public void call(Throwable throwable) {
                         hideLoadDialog();
                         LogUtil.e("login", throwable.getMessage());
-                        Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "登录失败", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -288,7 +301,55 @@ public class LoginActivity extends BaseTalkLawActivity {
     /**
      * 登录环信
      */
+
     private void loginHx(final UserInfoModel userInfoModel) {
+
+
+        RongIM.connect(userInfoModel.getData().rToken, new RongIMClient.ConnectCallback() {
+            @Override
+            public void onTokenIncorrect() {
+                Log.e("connect", "onTokenIncorrect");
+//                reGetToken();
+                hideLoadDialog();
+                Toast.makeText(mContext, "登录失败", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSuccess(String s) {
+
+                hideLoadDialog();
+
+
+                editor.putString(SealConst.SEALTALK_LOGIN_ID, s);
+                editor.commit();
+                SealUserInfoManager.getInstance().openDB();
+
+                editor.putString("loginToken", userInfoModel.getData().rToken);
+//                editor.putString(SealConst.SEALTALK_LOGING_PHONE, phoneString);
+//                editor.putString(SealConst.SEALTALK_LOGING_PASSWORD, passwordString);
+                editor.commit();
+
+                Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
+                UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
+                goActivity(null, HomeActivity.class);
+                finish();
+
+//                connectResultId = s;
+//                NLog.e("connect", "onSuccess userid:" + s);
+//                editor.putString(SealConst.SEALTALK_LOGIN_ID, s);
+//                editor.commit();
+//                SealUserInfoManager.getInstance().openDB();
+//                request(SYNC_USER_INFO, true);
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+                hideLoadDialog();
+                Toast.makeText(mContext, "登录失败", Toast.LENGTH_SHORT).show();
+                Log.e("connect", "onError errorcode:" + errorCode.getValue());
+            }
+        });
+
 //        EMClient.getInstance().login(userInfoModel.getData().getHx_username(), StringUtil.getMD5Str(userInfoModel.getData().getHx_username()), new EMCallBack() {
 //
 //            @Override
@@ -344,11 +405,7 @@ public class LoginActivity extends BaseTalkLawActivity {
 //        });
 
 
-        hideLoadDialog();
-        Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
-        UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
-        goActivity(null, HomeActivity.class);
-        finish();
+
 
     }
 

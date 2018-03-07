@@ -28,6 +28,7 @@ public class LawyerIntroModel extends BaseModel {
         private int is_follow;
         private List<ProductModel> list;
 
+
         public UserModel getLaw() {
             return law;
         }
