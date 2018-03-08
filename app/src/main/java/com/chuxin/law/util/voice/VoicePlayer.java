@@ -140,7 +140,7 @@ public class VoicePlayer {
             //LogUtil.w(LogUtil.DANNY_TEST_TAG, "test 201612301700, path: " + path);
 
             mediaPlayer.setDataSource(path);
-            mediaPlayer.prepare();
+            mediaPlayer.prepareAsync();
             // 设置播放结束时监听
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
@@ -251,7 +251,7 @@ public class VoicePlayer {
                 mediaPlayer.reset();
             }
             mediaPlayer.setDataSource(path);
-            mediaPlayer.prepare();
+            mediaPlayer.prepareAsync();
 
             // 设置播放结束时监听
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {

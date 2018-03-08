@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -75,6 +76,8 @@ public class SearchActivity extends BaseTalkLawActivity {
 
         result.setPullRefreshEnabled(true);
         result.setLoadingMoreEnabled(false);
+        result.setLayoutManager(new LinearLayoutManager(mContext));
+        result.setAdapter(adapter);
         result.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -145,6 +148,7 @@ public class SearchActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(ProductsModel productsModel) {
                         hideLoadDialog();
+                        result.setVisibility(View.VISIBLE);
                         if (productsModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             if (isRefrsh) {
                                 page = 1;
