@@ -40,7 +40,7 @@ public class SplashActivity extends BaseTalkLawActivity {
 
     @Override
     public void initAction() {
-        handler.postDelayed(task,1000);
+        handler.postDelayed(task,3000);
     }
 
     @Override

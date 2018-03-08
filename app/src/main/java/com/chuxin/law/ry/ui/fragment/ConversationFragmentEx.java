@@ -1,5 +1,6 @@
 package com.chuxin.law.ry.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.chuxin.law.ry.ui.activity.ReadReceiptDetailActivity;
 import com.chuxin.law.ry.ui.widget.BottomEvaluateDialog;
 import io.rong.imkit.RongExtension;
 import io.rong.imkit.fragment.ConversationFragment;
+import io.rong.imkit.widget.adapter.MessageListAdapter;
 import io.rong.imlib.CustomServiceConfig;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.cs.CustomServiceManager;
@@ -171,5 +173,10 @@ public class ConversationFragmentEx extends ConversationFragment {
                 }
             }, 100);
         }
+    }
+
+    @Override
+    public MessageListAdapter onResolveAdapter(Context context) {
+        return super.onResolveAdapter(context);
     }
 }
