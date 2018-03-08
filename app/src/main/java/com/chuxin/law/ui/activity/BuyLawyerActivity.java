@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -147,6 +148,7 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
         params.put("id",data.getArticle().getId());
         params.put("type","1");
         params.put("method",zhifubao.isSelected()?"1":"2");
+        Log.e("tag","params"+params);
         addNetwork(Api.getInstance().getService(ApiService.class).buyProduct(params)
                 , new Action1<OrderResultModel>() {
                     @Override
