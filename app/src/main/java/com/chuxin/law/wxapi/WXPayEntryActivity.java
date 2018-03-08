@@ -2,6 +2,7 @@ package com.chuxin.law.wxapi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
@@ -25,8 +26,10 @@ public class WXPayEntryActivity extends BaseTalkLawActivity implements IWXAPIEve
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e("aaaaa","create");
         super.onCreate(savedInstanceState);
-        iwxapi= WXAPIFactory.createWXAPI(this, mContext.getString(R.string.key_wechat));
+        iwxapi= WXAPIFactory.createWXAPI(this, null);
+        iwxapi.registerApp(getString(R.string.key_wechat));
         iwxapi.handleIntent(getIntent(),this);
     }
 
@@ -64,6 +67,7 @@ public class WXPayEntryActivity extends BaseTalkLawActivity implements IWXAPIEve
 
     @Override
     public void onResp(BaseResp baseResp) {
+        Log.e("aaaaa","baseResp=="+baseResp.errCode);
         switch (baseResp.errCode){
             case 0:
                 rxManage.post(PayUitl.WECHATPAY,"");
@@ -75,6 +79,6 @@ public class WXPayEntryActivity extends BaseTalkLawActivity implements IWXAPIEve
                 rxManage.post(PayUitl.PAY_FIALD,"");
                 break;
         }
-        finish();
+//        finish();
     }
 }

@@ -60,7 +60,7 @@ public class PayUitl {
     public static final void WechatPay(OrderPayModel.WxPayOrderDic item){
 
         Context context= TalkLawApplication.getInstance();
-        IWXAPI iwxapi= WXAPIFactory.createWXAPI(context,context.getString(R.string.key_wechat));
+        IWXAPI iwxapi= WXAPIFactory.createWXAPI(context,null);
         if (!iwxapi.isWXAppInstalled()){
             Toast.makeText(context,"请安装微信",Toast.LENGTH_SHORT).show();
             return;
@@ -73,6 +73,7 @@ public class PayUitl {
         req.prepayId = item.getPrepay_id();
         req.nonceStr = item.getNonce_str();
         req.timeStamp = System.currentTimeMillis()/1000+"";
+        Log.e("aaaa",req.timeStamp);
         req.packageValue = item.getPackagestr();
         req.sign = item.getSign();
 //        req.extData="app data";
