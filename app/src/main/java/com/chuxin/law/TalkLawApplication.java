@@ -72,7 +72,7 @@ public class TalkLawApplication extends BaseApplication {
 
     //各个平台的配置
     {
-        PlatformConfig.setWeixin("wx6acb4c4141bd83a0", "JUxHEcBlebY7YrUwmBaMgNc5xt1jpp");
+        PlatformConfig.setWeixin("wx6acb4c4141bd83a0", "5a540845a5a55a0740823ef4fe6616be");
         PlatformConfig.setSinaWeibo("1701976759", "c9f6b6d5015055964780e0c56c3e59a5", "http:www.sharesdk.cn");
         PlatformConfig.setQQZone("1106542171", "iLjGMwSEXLgyWWKG");
     }
