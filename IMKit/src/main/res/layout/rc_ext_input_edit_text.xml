@@ -33,7 +33,8 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="10dp"
-        android:src="@drawable/rc_emotion_toggle_selector"/>
+        android:src="@drawable/rc_emotion_toggle_selector"
+        android:visibility="gone"/>
 
     <FrameLayout
         android:id="@+id/rc_send_toggle"

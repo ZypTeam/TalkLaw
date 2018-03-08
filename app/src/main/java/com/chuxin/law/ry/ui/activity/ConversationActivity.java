@@ -331,6 +331,8 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void reconnect(String token) {
+
+        Log.e("tag","reconnectreconnect="+token);
         RongIM.connect(token, new RongIMClient.ConnectCallback() {
             @Override
             public void onTokenIncorrect() {

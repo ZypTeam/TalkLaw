@@ -195,8 +195,8 @@ public class LoginActivity extends BaseTalkLawActivity {
                         if (userInfoModel != null&&userInfoModel.getData()!=null && userInfoModel.getCode() == 10000) {
                             //TODO :登录成功直接登录 hide loading 新用户 融云登录注册调试后去掉
                             hideLoadDialog();
-                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
-                            goActivity(null, HomeActivity.class);
+//                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
+//                            goActivity(null, HomeActivity.class);
                             loginHx(userInfoModel);
                         }else{
                             hideLoadDialog();
@@ -226,9 +226,11 @@ public class LoginActivity extends BaseTalkLawActivity {
                     public void call(UserInfoModel userInfoModel) {
                         hideLoadDialog();
                         if (userInfoModel != null && userInfoModel.getCode() == 10000) {
-                            Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
-                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
-                            goActivity(null, HomeActivity.class);
+//                            Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
+//                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
+//                            goActivity(null, HomeActivity.class);
+
+                            loginHx(userInfoModel);
                         } else {
                             Toast.makeText(mContext, userInfoModel.getMsg(), Toast.LENGTH_SHORT).show();
                         }
@@ -328,6 +330,7 @@ public class LoginActivity extends BaseTalkLawActivity {
                 editor.commit();
                 SealUserInfoManager.getInstance().openDB();
 
+                Log.e("tag","loginToken="+userInfoModel.getData().rToken);
                 editor.putString("loginToken", userInfoModel.getData().rToken);
 //                editor.putString(SealConst.SEALTALK_LOGING_PHONE, phoneString);
 //                editor.putString(SealConst.SEALTALK_LOGING_PASSWORD, passwordString);

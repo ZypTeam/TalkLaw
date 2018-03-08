@@ -21,6 +21,7 @@ import com.chuxin.law.ry.db.Friend;
 import com.chuxin.law.ry.db.GroupMember;
 import com.chuxin.law.ry.db.Groups;
 import com.chuxin.law.ry.message.module.SealExtensionModule;
+import com.chuxin.law.ry.my.MyExtensionModule;
 import com.chuxin.law.ry.server.broadcast.BroadcastManager;
 import com.chuxin.law.ry.server.network.http.HttpException;
 import com.chuxin.law.ry.server.pinyin.CharacterParser;
@@ -169,7 +170,8 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
             }
             if (defaultModule != null) {
                 RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
-                RongExtensionManager.getInstance().registerExtensionModule(new SealExtensionModule());
+//                RongExtensionManager.getInstance().registerExtensionModule(new SealExtensionModule());
+                RongExtensionManager.getInstance().registerExtensionModule(new MyExtensionModule());
             }
         }
     }
