@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.chuxin.law.R;
+import com.chuxin.law.ui.activity.GuaranteeRequestActivity;
 import com.google.gson.Gson;
 
 import io.rong.imkit.RongExtension;
@@ -43,31 +44,14 @@ public class PayPlugin  implements IPluginModule {
     public void onClick(Fragment fragment, RongExtension rongExtension) {
 
         context = fragment.getActivity();
-        conversationType = rongExtension.getConversationType();
+//        conversationType = rongExtension.getConversationType();
         targetId = rongExtension.getTargetId();
 
-        PayMessage payMessage =  PayMessage.obtain("1000元");
 
-        Log.e("tag","conversationType="+conversationType+" "+targetId);
 
-        RongIM.getInstance().sendMessage(Message.obtain("65", Conversation.ConversationType.PRIVATE, payMessage),
-                "11111", "11111", new IRongCallback.ISendMessageCallback() {
-                    @Override
-                    public void onAttached(Message message) {
-                        Log.e("tag","RongIM-onAttached");
-                    }
-
-                    @Override
-                    public void onSuccess(Message message) {
-
-                        Log.e("tag","RongIM-onSuccess");
-                    }
-
-                    @Override
-                    public void onError(Message message, RongIMClient.ErrorCode errorCode) {
-                        Log.e("tag","RongIM-onError="+new Gson().toJson(message)+" "+errorCode);
-                    }
-                });
+        Intent intent = new Intent(context, GuaranteeRequestActivity.class);
+        intent.putExtra("targetId",targetId);
+        context.startActivity(intent);
 
     }
 

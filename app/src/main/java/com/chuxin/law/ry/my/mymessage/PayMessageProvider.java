@@ -38,7 +38,7 @@ public class PayMessageProvider  extends IContainerItemProvider.MessageProvider<
             holder.iconImg.setImageResource(R.drawable.img_chat_left_baozheng);
         }
 
-        holder.message.setText(payMessage.getContent()); // 设置消息内容
+        holder.message.setText("￥"+payMessage.getContent()); // 设置消息内容
     }
 
     @Override
