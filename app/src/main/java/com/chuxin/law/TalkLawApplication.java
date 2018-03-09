@@ -2,30 +2,27 @@ package com.chuxin.law;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
-import android.view.View;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
+import com.chuxin.law.common.DaoInstance;
 import com.chuxin.law.common.HeaderTalkInterceptor;
+import com.chuxin.law.common.SharePrefenceConstant;
 import com.chuxin.law.common.UserInfoDelegate;
-import com.chuxin.law.ry.App;
+import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ry.SealAppContext;
 import com.chuxin.law.ry.SealUserInfoManager;
-import com.chuxin.law.ry.db.Friend;
 import com.chuxin.law.ry.message.TestMessage;
 import com.chuxin.law.ry.message.provider.ContactNotificationMessageProvider;
 import com.chuxin.law.ry.message.provider.TestMessageProvider;
-import com.chuxin.law.ry.server.pinyin.CharacterParser;
+import com.chuxin.law.ry.my.mymessage.PayMessage;
+import com.chuxin.law.ry.my.mymessage.PayMessageProvider;
 import com.chuxin.law.ry.server.utils.NLog;
-import com.chuxin.law.ry.server.utils.RongGenerate;
 import com.chuxin.law.ry.stetho.RongDatabaseDriver;
 import com.chuxin.law.ry.stetho.RongDatabaseFilesProvider;
 import com.chuxin.law.ry.stetho.RongDbFilesDumperPlugin;
-import com.chuxin.law.ry.ui.activity.UserDetailActivity;
 import com.chuxin.law.ry.utils.SharedPreferencesContext;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.dumpapp.DumperPlugin;
@@ -39,28 +36,12 @@ import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
-
-import com.chuxin.law.common.DaoInstance;
-import com.chuxin.law.common.SharePrefenceConstant;
-import com.chuxin.law.model.UserModel;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import cn.rongcloud.contactcard.ContactCardExtensionModule;
-import cn.rongcloud.contactcard.IContactCardClickListener;
-import cn.rongcloud.contactcard.IContactCardInfoProvider;
-import cn.rongcloud.contactcard.message.ContactMessage;
 import io.rong.imageloader.core.DisplayImageOptions;
 import io.rong.imageloader.core.display.FadeInBitmapDisplayer;
-import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.widget.provider.RealTimeLocationMessageProvider;
 import io.rong.imlib.ipc.RongExceptionHandler;
-import io.rong.imlib.model.UserInfo;
 import io.rong.push.RongPushClient;
-import io.rong.push.common.RongException;
-import io.rong.recognizer.RecognizeExtensionModule;
 
 /**
  * @author wangcc
@@ -180,7 +161,10 @@ public class TalkLawApplication extends BaseApplication {
                 RongIM.registerMessageTemplate(new ContactNotificationMessageProvider());
                 RongIM.registerMessageTemplate(new RealTimeLocationMessageProvider());
                 RongIM.registerMessageType(TestMessage.class);
+
                 RongIM.registerMessageTemplate(new TestMessageProvider());
+                RongIM.registerMessageType(PayMessage.class);
+                RongIM.registerMessageTemplate(new PayMessageProvider());
 
 
             } catch (Exception e) {
@@ -247,6 +231,7 @@ public class TalkLawApplication extends BaseApplication {
 //                }
 //            }));
 //            RongExtensionManager.getInstance().registerExtensionModule(new RecognizeExtensionModule());
+
         }
     }
 

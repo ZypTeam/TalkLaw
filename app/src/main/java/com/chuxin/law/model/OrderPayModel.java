@@ -64,10 +64,10 @@ public class OrderPayModel {
 
         private String return_code;
         private String return_msg;
-        private String mch_id;
-        private String nonce_str;
+        private String partnerid;
+        private String noncestr;
         private String result_code;
-        private String prepay_id;
+        private String prepayid;
         private String trade_type;
 
 
@@ -107,8 +107,8 @@ public class OrderPayModel {
         @Override
         public String toString() {
             return "appid"+appid
-                    +"\nprepayId=="+ prepay_id
-                    +"\nnoncestr=="+nonce_str
+                    +"\nprepayId=="+ prepayid
+                    +"\nnoncestr=="+noncestr
                     +"\ntimestamp=="+timestamp
                     +"\npackagestr=="+packagestr
                     +"\nsign=="+sign
@@ -132,19 +132,19 @@ public class OrderPayModel {
         }
 
         public String getMch_id() {
-            return mch_id;
+            return partnerid;
         }
 
         public void setMch_id(String mch_id) {
-            this.mch_id = mch_id;
+            this.partnerid = mch_id;
         }
 
         public String getNonce_str() {
-            return nonce_str;
+            return noncestr;
         }
 
         public void setNonce_str(String nonce_str) {
-            this.nonce_str = nonce_str;
+            this.noncestr = nonce_str;
         }
 
         public String getResult_code() {
@@ -156,11 +156,11 @@ public class OrderPayModel {
         }
 
         public String getPrepay_id() {
-            return prepay_id;
+            return prepayid;
         }
 
         public void setPrepay_id(String prepay_id) {
-            this.prepay_id = prepay_id;
+            this.prepayid = prepay_id;
         }
 
         public String getTrade_type() {
