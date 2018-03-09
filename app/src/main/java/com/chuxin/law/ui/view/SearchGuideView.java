@@ -126,9 +126,17 @@ public class SearchGuideView extends LinearLayout {
 
         for (int i = 0; i < list.size(); i++) {
             View itemview = LayoutInflater.from(mContext).inflate(R.layout.item_option_item, null);
-            TextView optionName = (TextView) itemview.findViewById(R.id.item_option_name);
+            final TextView optionName = (TextView) itemview.findViewById(R.id.item_option_name);
             optionName.setText(list.get(i).getKeyword());
             optionName.setBackgroundResource(R.drawable.option_unselected);
+            optionName.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (callBack!=null){
+                        callBack.search(optionName.getText().toString());
+                    }
+                }
+            });
             mHistory.addView(itemview);
         }
     }
@@ -147,9 +155,17 @@ public class SearchGuideView extends LinearLayout {
         mHot.removeAllViews();
         for (int i = 0; i < list.size(); i++) {
             View itemview = LayoutInflater.from(mContext).inflate(R.layout.item_option_item, null);
-            TextView optionName = (TextView) itemview.findViewById(R.id.item_option_name);
+            final TextView optionName = (TextView) itemview.findViewById(R.id.item_option_name);
             optionName.setText(list.get(i).getKeyword());
             optionName.setBackgroundResource(R.drawable.option_unselected);
+            optionName.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (callBack!=null){
+                        callBack.search(optionName.getText().toString());
+                    }
+                }
+            });
             mHot.addView(itemview);
         }
     }
