@@ -161,8 +161,9 @@ public class TalkLawApplication extends BaseApplication {
                 RongIM.registerMessageTemplate(new ContactNotificationMessageProvider());
                 RongIM.registerMessageTemplate(new RealTimeLocationMessageProvider());
                 RongIM.registerMessageType(TestMessage.class);
-
                 RongIM.registerMessageTemplate(new TestMessageProvider());
+
+
                 RongIM.registerMessageType(PayMessage.class);
                 RongIM.registerMessageTemplate(new PayMessageProvider());
 

@@ -48,8 +48,10 @@ public class PayPlugin  implements IPluginModule {
 
         PayMessage payMessage =  PayMessage.obtain("1000元");
 
-        RongIM.getInstance().sendMessage(Message.obtain(targetId, conversationType, payMessage),
-                "11111", null, new IRongCallback.ISendMessageCallback() {
+        Log.e("tag","conversationType="+conversationType+" "+targetId);
+
+        RongIM.getInstance().sendMessage(Message.obtain("65", Conversation.ConversationType.PRIVATE, payMessage),
+                "11111", "11111", new IRongCallback.ISendMessageCallback() {
                     @Override
                     public void onAttached(Message message) {
                         Log.e("tag","RongIM-onAttached");

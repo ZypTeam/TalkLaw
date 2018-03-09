@@ -1,6 +1,7 @@
 package com.chuxin.law.ry.my.mymessage;
 
 import android.os.Parcel;
+import android.util.Log;
 
 import com.chuxin.law.ry.message.TestMessage;
 
@@ -8,8 +9,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.rong.common.ParcelUtils;
+import io.rong.common.RLog;
 import io.rong.imlib.MessageTag;
 import io.rong.imlib.model.MessageContent;
 
@@ -19,7 +23,10 @@ import io.rong.imlib.model.MessageContent;
  * @Email zyp@jusfoun.com
  * @Description ${TODO}
  */
-@MessageTag(value = "app:pay", flag = MessageTag.ISCOUNTED | MessageTag.ISPERSISTED)
+@MessageTag(
+        value = "APP:MyPay",
+        flag = 3
+)
 public class PayMessage extends MessageContent {
     private String content;
 
@@ -28,45 +35,45 @@ public class PayMessage extends MessageContent {
     public PayMessage(){
 
     }
+    public PayMessage(byte[] data) {
+        String jsonStr = null;
+
+        try {
+            jsonStr = new String(data, "UTF-8");
+        } catch (UnsupportedEncodingException e1) {
+
+        }
+
+        try {
+            JSONObject jsonObj = new JSONObject(jsonStr);
+
+            if (jsonObj.has("content"))
+                content = jsonObj.optString("content");
+
+        } catch (JSONException e) {
+        }
+
+    }
     @Override
     public byte[] encode() {
 
         JSONObject jsonObj = new JSONObject();
-        try {
 
-            jsonObj.putOpt("message",content);
+        try {
+            jsonObj.put("content", content);
         } catch (JSONException e) {
-//            Log.e(TAG, "JSONException " + e.getMessage());
+            Log.e("JSONException", e.getMessage());
         }
 
         try {
             return jsonObj.toString().getBytes("UTF-8");
         } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
         return null;
     }
 
-
-    /**
-     * 将类的数据写入外部提供的 Parcel 中。
-     *
-     * @param dest  对象被写入的 Parcel。
-     * @param flags 对象如何被写入的附加标志。
-     */
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        ParcelUtils.writeToParcel(dest, content);//该类为工具类，对消息中属性进行序列化
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 
 
     public static PayMessage obtain(String text) {
@@ -78,8 +85,7 @@ public class PayMessage extends MessageContent {
 
     //给消息赋值。
     public PayMessage(Parcel in) {
-        content= ParcelUtils.readFromParcel(in);//该类为工具类，消息属性
-        //这里可继续增加你消息的属性
+        setContent(ParcelUtils.readFromParcel(in));
     }
 
     /**
@@ -108,5 +114,30 @@ public class PayMessage extends MessageContent {
     }
 
 
+    /**
+     * 将类的数据写入外部提供的 Parcel 中。
+     *
+     * @param dest  对象被写入的 Parcel。
+     * @param flags 对象如何被写入的附加标志。
+     */
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        ParcelUtils.writeToParcel(dest, content);
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public List<String> getSearchableWord() {
+        List<String> words = new ArrayList<>();
+        words.add(content);
+        return words;
+    }
 
 }

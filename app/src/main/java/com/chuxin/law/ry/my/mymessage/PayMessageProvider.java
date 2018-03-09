@@ -2,9 +2,12 @@ package com.chuxin.law.ry.my.mymessage;
 
 import android.content.Context;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chuxin.law.R;
@@ -28,9 +31,11 @@ public class PayMessageProvider  extends IContainerItemProvider.MessageProvider<
         ViewHolder holder = (ViewHolder) view.getTag();
 
         if (uiMessage.getMessageDirection() == Message.MessageDirection.SEND) {
-            holder.message.setBackgroundResource(io.rong.imkit.R.drawable.rc_ic_bubble_right);
+            holder.layout_bg.setBackgroundResource(io.rong.imkit.R.drawable.rc_ic_bubble_right);
+            holder.iconImg.setImageResource(R.drawable.img_baozhengjin_send);
         } else {
-            holder.message.setBackgroundResource(io.rong.imkit.R.drawable.rc_ic_bubble_left);
+            holder.layout_bg.setBackgroundResource(io.rong.imkit.R.drawable.rc_ic_bubble_left);
+            holder.iconImg.setImageResource(R.drawable.img_chat_left_baozheng);
         }
 
         holder.message.setText(payMessage.getContent()); // 设置消息内容
@@ -38,7 +43,7 @@ public class PayMessageProvider  extends IContainerItemProvider.MessageProvider<
 
     @Override
     public Spannable getContentSummary(PayMessage payMessage) {
-        return null;
+        return new SpannableString("支付");
     }
 
     @Override
@@ -51,12 +56,16 @@ public class PayMessageProvider  extends IContainerItemProvider.MessageProvider<
         View view = LayoutInflater.from(context).inflate(R.layout.layout_item_mesg_pay, null);
 
         ViewHolder holder = new ViewHolder();
-        holder.message = (TextView) view.findViewById(R.id.text_pay);
+        holder.message = (TextView) view.findViewById(R.id.text_content);
+        holder.iconImg = (ImageView)view.findViewById(R.id.img_icon);
+        holder.layout_bg = (RelativeLayout) view.findViewById(R.id.layout_bg);
         view.setTag(holder);
         return view;
     }
 
     private static class ViewHolder {
         TextView message;
+        RelativeLayout layout_bg;
+        ImageView iconImg;
     }
 }
