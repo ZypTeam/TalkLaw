@@ -72,11 +72,12 @@ public class PayUitl {
         req.partnerId = item.getMch_id();
         req.prepayId = item.getPrepay_id();
         req.nonceStr = item.getNonce_str();
-        req.timeStamp = System.currentTimeMillis()/1000+"";
-        Log.e("aaaa",req.timeStamp);
+        req.timeStamp =item.getTimestamp();
         req.packageValue = item.getPackagestr();
         req.sign = item.getSign();
 //        req.extData="app data";
+
+
         iwxapi.sendReq(req);
 
     }

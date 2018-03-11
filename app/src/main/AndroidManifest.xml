@@ -47,7 +47,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name="com.chuxin.law.ui.activity.SplashActivity"
+        <activity
+            android:name="com.chuxin.law.ui.activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -59,73 +60,110 @@
         <!--登录-->
         <activity
             android:name="com.chuxin.law.ui.activity.LoginActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
 
         <!--首页-->
-        <activity android:name="com.chuxin.law.ui.activity.HomeActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.HomeActivity"
+            android:screenOrientation="portrait" />
         <!--音频详情-->
-        <activity android:name="com.chuxin.law.ui.activity.AudioDetailsActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.AudioDetailsActivity"
+            android:screenOrientation="portrait" />
         <!--免费专区-->
-        <activity android:name="com.chuxin.law.ui.activity.ArrondiActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.ArrondiActivity"
+            android:screenOrientation="portrait" />
         <!--注释-->
-        <activity android:name="com.chuxin.law.ui.activity.ProductiListActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.ProductiListActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 积分首页 -->
-        <activity android:name="com.chuxin.law.ui.activity.IntegralActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.IntegralActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 兑换记录 -->
-        <activity android:name="com.chuxin.law.ui.activity.ExchangeRecordsActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.ExchangeRecordsActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 兑换详情 -->
-        <activity android:name="com.chuxin.law.ui.activity.RedeemDetailsActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.RedeemDetailsActivity"
+            android:screenOrientation="portrait" />
 
         <!--个人信息-->
-        <activity android:name="com.chuxin.law.ui.activity.MyInfoActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.MyInfoActivity"
+            android:screenOrientation="portrait" />
 
         <!--消息列表-->
-        <activity android:name="com.chuxin.law.ui.activity.MyMsgListActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.MyMsgListActivity"
+            android:screenOrientation="portrait" />
 
         <!--积分详情-->
-        <activity android:name="com.chuxin.law.ui.activity.IntegralDetailActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.IntegralDetailActivity"
+            android:screenOrientation="portrait" />
 
         <!--已购产品-->
-        <activity android:name="com.chuxin.law.ui.activity.AlreadyPurchaseActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.AlreadyPurchaseActivity"
+            android:screenOrientation="portrait" />
 
         <!--我的关注-->
-        <activity android:name="com.chuxin.law.ui.activity.MyAttentionActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.MyAttentionActivity"
+            android:screenOrientation="portrait" />
 
         <!--设置-->
-        <activity android:name="com.chuxin.law.ui.activity.SettingActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.SettingActivity"
+            android:screenOrientation="portrait" />
 
         <!--关于我们-->
-        <activity android:name=".ui.activity.AboutUsActivity"  android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.AboutUsActivity"
+            android:screenOrientation="portrait" />
 
         <!--我的咨询-->
-        <activity android:name="com.chuxin.law.ui.activity.MyConsultActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.MyConsultActivity"
+            android:screenOrientation="portrait" />
 
         <!--推荐有礼-->
-        <activity android:name="com.chuxin.law.ui.activity.RecommendCourtesyActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.RecommendCourtesyActivity"
+            android:screenOrientation="portrait" />
 
         <!--日期计算器-->
-        <activity android:name="com.chuxin.law.ui.activity.DateCalculatorActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.DateCalculatorActivity"
+            android:screenOrientation="portrait" />
         <!--律师详情-->
-        <activity android:name="com.chuxin.law.ui.activity.LawyerDefautActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.LawyerDefautActivity"
+            android:screenOrientation="portrait" />
 
 
         <!--诉讼计算器-->
-        <activity android:name="com.chuxin.law.ui.activity.LitigationCalculatorActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.LitigationCalculatorActivity"
+            android:screenOrientation="portrait" />
 
         <!--律师计算器-->
-        <activity android:name="com.chuxin.law.ui.activity.LawyerCalculatorActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.LawyerCalculatorActivity"
+            android:screenOrientation="portrait" />
 
         <!--个税计算器-->
-        <activity android:name="com.chuxin.law.ui.activity.AtaxCalculatorActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.AtaxCalculatorActivity"
+            android:screenOrientation="portrait" />
 
         <!--&lt;!&ndash;搜索页面&ndash;&gt;-->
         <!--<activity android:name="com.chuxin.law.ui.activity.SearchActivity" />-->
@@ -134,36 +172,53 @@
             android:name="com.chuxin.law.ui.activity.SearchActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustPan"
-            />
+            android:windowSoftInputMode="stateVisible|adjustPan" />
 
         <!--添加地址-->
-        <activity android:name="com.chuxin.law.ui.activity.SelectAreaActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.SelectAreaActivity"
+            android:screenOrientation="portrait" />
 
         <!--添加地址-->
-        <activity android:name="com.chuxin.law.ui.activity.AreaListActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.AreaListActivity"
+            android:screenOrientation="portrait" />
 
         <!--添加地址-->
-        <activity android:name="com.chuxin.law.ui.activity.SelectCountryActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.SelectCountryActivity"
+            android:screenOrientation="portrait" />
 
         <!--律师介绍-->
-        <activity android:name="com.chuxin.law.ui.activity.LawyerIntroductionActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.LawyerIntroductionActivity"
+            android:screenOrientation="portrait" />
 
         <!--购买-->
-        <activity android:name="com.chuxin.law.ui.activity.BuyProductActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.BuyProductActivity"
+            android:screenOrientation="portrait" />
 
         <!--打赏-->
-        <activity android:name="com.chuxin.law.ui.activity.GratuityActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.chuxin.law.ui.activity.GratuityActivity"
+            android:screenOrientation="portrait" />
 
         <!--打赏支付-->
-        <activity android:name="com.chuxin.law.ui.activity.GratuityPayActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.GratuityPayActivity"
+            android:screenOrientation="portrait" />
 
         <!--webview页面-->
-        <activity android:name="com.chuxin.law.ui.activity.WebViewActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.WebViewActivity"
+            android:screenOrientation="portrait" />
 
 
         <!--热门企业-->
-        <activity android:name="com.chuxin.law.ui.activity.HotAllProductActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name="com.chuxin.law.ui.activity.HotAllProductActivity"
+            android:screenOrientation="portrait" />
 
         <!--编辑个人信息-->
         <activity
@@ -174,40 +229,67 @@
 
 
         <!--积分商城 所有商品页面-->
-        <activity android:name="cn.com.talklaw.ui.activity.AllGoodsActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name="cn.com.talklaw.ui.activity.AllGoodsActivity"
+            android:screenOrientation="portrait" />
 
 
         <!--积分产品详情-->
-        <activity android:name=".ui.activity.IntegralWebViewActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.IntegralWebViewActivity"
+            android:screenOrientation="portrait" />
 
         <!--评论列表-->
         <activity
             android:name=".ui.activity.CommentListActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize"   android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
 
         <!--收货地址-->
-        <activity android:name=".ui.activity.ShippingAddressActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.ShippingAddressActivity"
+            android:screenOrientation="portrait" />
 
         <!--律师认证-->
-        <activity android:name=".ui.activity.LawyerAuthActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.LawyerAuthActivity"
+            android:screenOrientation="portrait" />
 
         <!--提交认证-->
-        <activity android:name=".ui.activity.SubmitAuthActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SubmitAuthActivity"
+            android:screenOrientation="portrait" />
 
         <!--申请提现页面-->
-        <activity android:name=".ui.activity.ApplyForWithdrawalsActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ApplyForWithdrawalsActivity"
+            android:screenOrientation="portrait" />
 
         <!--新增银行卡信息-->
-        <activity android:name=".ui.activity.NewAddYinHangActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.NewAddYinHangActivity"
+            android:screenOrientation="portrait" />
         <!--账户明细-->
-        <activity android:name=".ui.activity.AccountDetailsActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AccountDetailsActivity"
+            android:screenOrientation="portrait" />
 
         <!--咨询支付-->
-        <activity android:name=".ui.activity.BuyLawyerActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.BuyLawyerActivity"
+            android:screenOrientation="portrait" />
 
         <!--咨询支付成功-->
-        <activity android:name=".ui.activity.PaySucActivity"   android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.PaySucActivity"
+            android:screenOrientation="portrait" />
+
+        <!--保证金申请页面-->
+        <activity
+            android:name=".ui.activity.GuaranteeRequestActivity"
+            android:screenOrientation="portrait" />
+
 
 
         <!--新浪分享-->
@@ -271,7 +353,7 @@
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
 
         <!--支付宝支付-->
         <activity
@@ -286,8 +368,6 @@
             android:exported="false"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden"></activity>
-
-
 
 
         <activity
@@ -330,21 +410,20 @@
 
         <!--&lt;!&ndash; 百度地图所需的service &ndash;&gt;-->
         <!--<service-->
-            <!--android:name="com.baidu.location.f"-->
-            <!--android:enabled="true"-->
-            <!--android:process=":remote" />-->
+        <!--android:name="com.baidu.location.f"-->
+        <!--android:enabled="true"-->
+        <!--android:process=":remote" />-->
 
 
         <!--<meta-data-->
-            <!--android:name="com.baidu.lbsapi.API_KEY"-->
-            <!--android:value="3ecea51f560650b1ed8a4b99808f52e8" />-->
+        <!--android:name="com.baidu.lbsapi.API_KEY"-->
+        <!--android:value="3ecea51f560650b1ed8a4b99808f52e8" />-->
 
         <!-- fabric start -->
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="6b54bd4edc63eba3ef59d69f8e0a5070bea384e2" />
         <!-- fabric end -->
-
 
 
         <receiver
@@ -442,7 +521,7 @@
 
 
         <!-- 第三方相关 :接收Push消息（注册、Push消息、Push连接状态）广播 -->
-        <receiver android:name="io.rong.push.platform.HMSReceiver" >
+        <receiver android:name="io.rong.push.platform.HMSReceiver">
             <intent-filter>
 
                 <!-- 必须,用于接收token -->
@@ -455,7 +534,7 @@
                 <action android:name="com.huawei.intent.action.PUSH_STATE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.huawei.hms.support.api.push.PushEventReceiver" >
+        <receiver android:name="com.huawei.hms.support.api.push.PushEventReceiver">
             <intent-filter>
 
                 <!-- 接收通道发来的通知栏消息，兼容老版本Push -->
@@ -497,7 +576,7 @@
             android:name="io.rong.push.platform.RongFirebaseMessagingService"
             android:stopWithTask="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <!-- [END firebase_service] -->
@@ -506,7 +585,7 @@
             android:name="io.rong.push.platform.RongFirebaseInstanceIDService"
             android:stopWithTask="false">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <!-- [END firebase_iid_service] -->

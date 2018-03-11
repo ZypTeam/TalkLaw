@@ -67,7 +67,7 @@ public class WXPayEntryActivity extends BaseTalkLawActivity implements IWXAPIEve
 
     @Override
     public void onResp(BaseResp baseResp) {
-        Log.e("aaaaa","baseResp=="+baseResp.errCode);
+        Log.e("aaaaa","baseResp=="+baseResp.errCode+" "+baseResp.errStr+" "+baseResp.openId+" "+baseResp.transaction);
         switch (baseResp.errCode){
             case 0:
                 rxManage.post(PayUitl.WECHATPAY,"");

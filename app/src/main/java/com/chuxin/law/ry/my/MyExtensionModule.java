@@ -1,5 +1,7 @@
 package com.chuxin.law.ry.my;
 
+import com.chuxin.law.ry.my.mymessage.PayPlugin;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class MyExtensionModule extends DefaultExtensionModule {
         IPluginModule locationPlugin = new DefaultLocationPlugin();
         pluginModules.add(image);
         pluginModules.add(locationPlugin);
+        pluginModules.add(new PayPlugin());
         return pluginModules;
     }
 }
