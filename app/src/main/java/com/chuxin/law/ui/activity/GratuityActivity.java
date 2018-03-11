@@ -14,6 +14,7 @@ import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.LawyerProductModel;
+import com.chuxin.law.model.OrderResultModel;
 import com.chuxin.law.ui.dialog.GratuityDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.Util.StringUtil;
@@ -127,7 +128,11 @@ public class GratuityActivity extends BaseTalkLawActivity implements View.OnClic
     }
 
     public void gratuity(){
-        if (StringUtil.isEmpty(price)){
+        Intent intent=new Intent();
+        intent.putExtra(GratuityPayActivity.PRICE,price);
+        intent.putExtra(GratuityPayActivity.DATA,data);
+        goActivityForResult(null,GratuityPayActivity.class, CommonConstant.REQUEST_LAWYER_GRATUITY);
+        /*if (StringUtil.isEmpty(price)){
             showToast("打赏金额不能为空");
             return;
         }
@@ -140,15 +145,12 @@ public class GratuityActivity extends BaseTalkLawActivity implements View.OnClic
         params.put("artid",data.getArticle().getId());
         params.put("money",price);
         addNetwork(Api.getInstance().getService(ApiService.class).gratuityOrder(params)
-                , new Action1<NoDataModel>() {
+                , new Action1<OrderResultModel>() {
                     @Override
-                    public void call(NoDataModel noDataModel) {
+                    public void call(OrderResultModel noDataModel) {
                         hideLoadDialog();
                         if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE){
-                            Intent intent=new Intent();
-                            intent.putExtra(GratuityPayActivity.PRICE,price);
-                            intent.putExtra(GratuityPayActivity.DATA,data);
-                            goActivityForResult(null,GratuityPayActivity.class, CommonConstant.REQUEST_LAWYER_GRATUITY);
+
                         }else {
                             showToast(noDataModel.getMsg());
                         }
@@ -159,7 +161,7 @@ public class GratuityActivity extends BaseTalkLawActivity implements View.OnClic
                         hideLoadDialog();
                         showToast("连接服务器失败，请重新确认");
                     }
-                });
+                });*/
     }
 
     @Override

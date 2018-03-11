@@ -322,8 +322,18 @@ public interface ApiService {
      * @param params
      * @return
      */
-    @GET("/reward/set")
-    Observable<NoDataModel> gratuityOrder(@QueryMap Map<String,String> params);
+    @FormUrlEncoded
+    @POST("/reward/set")
+    Observable<OrderResultModel> gratuityOrder(@QueryMap Map<String,String> params);
+
+    /**
+     * 打赏 购买成功
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/reward/order")
+    Observable<PayValidateModel> rewardOrder(@QueryMap Map<String,String> params);
 
     /**
      * 产品详情 购买

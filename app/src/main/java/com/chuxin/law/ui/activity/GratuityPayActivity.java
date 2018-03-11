@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,9 +16,11 @@ import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.util.PayUitl;
 import com.jusfoun.baselibrary.Util.StringUtil;
+import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import rx.functions.Action1;
 
@@ -69,14 +72,14 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
         zhifubao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buy("1");
+                gratuity("1");
             }
         });
 
         wechat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buy("2");
+                gratuity("2");
             }
         });
 
@@ -104,47 +107,12 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
         });
     }
 
-    private void buy(final String method){
-        HashMap<String,String> params=new HashMap<>();
-        params.put("id",data.getArticle().getId());
-        params.put("type","1");
-        params.put("method",method);
-        addNetwork(Api.getInstance().getService(ApiService.class).buyProduct(params)
-                , new Action1<OrderResultModel>() {
-                    @Override
-                    public void call(OrderResultModel noDataModel) {
-                        hideLoadDialog();
-                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE
-                                &&noDataModel.getData()!=null){
-                            if (StringUtil.equals("1",method)
-                                    &&noDataModel.getData().getOrder()!=null){
-                                PayUitl.AliPay(GratuityPayActivity.this,noDataModel.getData().getOrder().getPartnerid());
-                                return;
-                            }
-
-                            if (StringUtil.equals("2",method)
-                                    &&noDataModel.getData().getWxorder()!=null){
-                                PayUitl.WechatPay(noDataModel.getData().getWxorder());
-                                return;
-                            }
-
-                        }
-                        showToast(noDataModel.getMsg());
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        hideLoadDialog();
-                    }
-                });
-    }
-
     private void payValidate(String type) {
         showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("order", order);
 //        params.put("payType", type);
-        addNetwork(Api.getInstance().getService(ApiService.class).payValidate(params)
+        addNetwork(Api.getInstance().getService(ApiService.class).rewardOrder(params)
                 , new Action1<PayValidateModel>() {
                     @Override
                     public void call(PayValidateModel model) {
@@ -166,6 +134,53 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(Throwable throwable) {
                         hideLoadDialog();
+                    }
+                });
+    }
+
+    public void gratuity(final String method){
+        if (StringUtil.isEmpty(gratuityPrice)){
+            showToast("打赏金额不能为空");
+            return;
+        }
+        if (data==null||data.getArticle()==null){
+            showToast("连接服务器失败");
+            return;
+        }
+        showLoadDialog();
+        Map<String,String> params=new HashMap<>();
+        params.put("artid",data.getArticle().getId());
+        params.put("money",gratuityPrice);
+        params.put("method",method);
+        addNetwork(Api.getInstance().getService(ApiService.class).gratuityOrder(params)
+                , new Action1<OrderResultModel>() {
+                    @Override
+                    public void call(OrderResultModel noDataModel) {
+                        hideLoadDialog();
+                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE
+                                &&noDataModel.getData()!=null){
+                            if (StringUtil.equals("1",method)
+                                    &&noDataModel.getData().getOrder()!=null){
+                                order=noDataModel.getData().getOrder().getPartnerid();
+                                PayUitl.AliPay(GratuityPayActivity.this,noDataModel.getData().getOrder().getPartnerid());
+                                return;
+                            }
+
+                            if (StringUtil.equals("2",method)
+                                    &&noDataModel.getData().getWxorder()!=null){
+                                order=noDataModel.getData().getWxorder().getPrepay_id();
+                                PayUitl.WechatPay(noDataModel.getData().getWxorder());
+                                return;
+                            }
+
+                        }
+                        showToast(noDataModel.getMsg());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                        showToast("连接服务器失败，请重新确认");
                     }
                 });
     }
