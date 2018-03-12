@@ -342,9 +342,8 @@ public interface ApiService {
     Observable<OrderResultModel> buyProduct(@FieldMap Map<String,String> params);
 
     //支付成功
-    @FormUrlEncoded
     @POST("/article-buy/order")
-    Observable<PayValidateModel> payValidate(@FieldMap Map<String,String> params);
+    Observable<PayValidateModel> payValidate(@QueryMap Map<String,String> params);
 
     /**
      * 咨询 购买
