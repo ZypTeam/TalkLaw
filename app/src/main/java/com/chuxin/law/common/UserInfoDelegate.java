@@ -5,6 +5,9 @@ import com.chuxin.law.model.UserModel;
 import com.google.gson.Gson;
 import com.jusfoun.baselibrary.Util.SharePrefenceUtils;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.UserInfo;
+
 /**
  * @author wangcc
  * @date 2018/2/7
@@ -38,6 +41,8 @@ public class UserInfoDelegate {
         this.userModel=userModel;
         String string = new Gson().toJson(userModel);
         SharePrefenceUtils.getInstance().setString(SharePrefenceConstant.USER_MODEL, string);
+
+
     }
 
     public String getUserId() {

@@ -2,6 +2,7 @@ package com.chuxin.law.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +21,9 @@ import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.model.UserModel;
+import com.chuxin.law.ry.db.Friend;
 import com.chuxin.law.ry.ui.activity.ConversationActivity;
+import com.chuxin.law.sharedpreferences.FriendsSp;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
 import com.chuxin.law.ui.view.PresentInstructionsDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
@@ -32,6 +35,7 @@ import com.jusfoun.baselibrary.net.Api;
 import java.util.HashMap;
 
 import io.rong.imkit.RongIM;
+import io.rong.imlib.model.UserInfo;
 import rx.functions.Action1;
 
 /**
@@ -139,7 +143,12 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
 //                    intent.putExtra("title",data.getLaw().getName());
 //                    mContext.startActivity(intent);
 //                    data.getLaw().getUserid()
-                    RongIM.getInstance().startPrivateChat(mContext, "65", data.getLaw().getName());
+
+                    FriendsSp.saveFriedns(mContext,new UserInfo(data.getLaw().getUserid(),data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
+                    RongIM.getInstance().startPrivateChat(mContext, "64", data.getLaw().getName());
+
+//                    RongIM.getInstance().startPrivateChat(mContext, , data.getLaw().getName());
+
                 }
             }
         });
