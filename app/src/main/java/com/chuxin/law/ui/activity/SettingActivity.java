@@ -10,6 +10,7 @@ import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.R;
 
 import com.chuxin.law.base.BaseTalkLawActivity;
+import com.chuxin.law.sharedpreferences.FriendsSp;
 import com.chuxin.law.ui.dialog.GratuityDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.Util.CacheUtil;
@@ -112,5 +113,6 @@ public class SettingActivity extends BaseTalkLawActivity {
         CacheUtil.clearAllCache(mContext);
         setCacheCount();
         dialog.dismiss();
+        FriendsSp.clear(this);
     }
 }

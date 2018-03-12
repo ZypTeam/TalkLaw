@@ -183,9 +183,10 @@ public class SealUserInfoManager implements OnDataListener {
      * 3.读群组成员数据库
      * 4.网络获取
      */
-    public void getUserInfo(final String userId) {
+    UserInfo userInfo;
+    public UserInfo getUserInfo(final String userId) {
         if (TextUtils.isEmpty(userId)) {
-            return;
+            return null;
         }
         if (mUserInfoCache != null) {
             UserInfo userInfo = mUserInfoCache.get(userId);
@@ -193,13 +194,14 @@ public class SealUserInfoManager implements OnDataListener {
                 RongIM.getInstance().refreshUserInfoCache(userInfo);
                 NLog.d(TAG, "SealUserInfoManager getUserInfo from cache " + userId + " "
                         + userInfo.getName() + " " + userInfo.getPortraitUri());
-                return;
+                return userInfo;
             }
         }
+
         mWorkHandler.post(new Runnable() {
             @Override
             public void run() {
-                UserInfo userInfo;
+
                 Friend friend = getFriendByID(userId);
                 if (friend != null) {
                     String name = friend.getName();
@@ -210,7 +212,7 @@ public class SealUserInfoManager implements OnDataListener {
                     NLog.d(TAG, "SealUserInfoManager getUserInfo from Friend db " + userId + " "
                             + userInfo.getName() + " " + userInfo.getPortraitUri());
                     RongIM.getInstance().refreshUserInfoCache(userInfo);
-                    return;
+
                 }
                 List<GroupMember> groupMemberList = getGroupMembersWithUserId(userId);
                 if (groupMemberList != null && groupMemberList.size() > 0) {
@@ -220,11 +222,11 @@ public class SealUserInfoManager implements OnDataListener {
                     NLog.d(TAG, "SealUserInfoManager getUserInfo from GroupMember db " + userId + " "
                             + userInfo.getName() + " " + userInfo.getPortraitUri());
                     RongIM.getInstance().refreshUserInfoCache(userInfo);
-                    return;
                 }
                 UserInfoEngine.getInstance(mContext).startEngine(userId);
             }
         });
+        return userInfo;
     }
 
     public void getGroupInfo(final String groupsId) {

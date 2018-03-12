@@ -32,6 +32,8 @@ import com.chuxin.law.ry.ui.activity.LoginActivity;
 import com.chuxin.law.ry.ui.activity.MainActivity;
 import com.chuxin.law.ry.ui.activity.NewFriendListActivity;
 import com.chuxin.law.ry.ui.activity.UserDetailActivity;
+import com.chuxin.law.sharedpreferences.FriendsSp;
+
 import io.rong.calllib.RongCallClient;
 import io.rong.calllib.RongCallSession;
 import io.rong.imkit.DefaultExtensionModule;
@@ -384,8 +386,11 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
     @Override
     public UserInfo getUserInfo(String s) {
         //UserInfoEngine.getInstance(mContext).startEngine(s);
-        SealUserInfoManager.getInstance().getUserInfo(s);
-        return null;
+//        SealUserInfoManager.getInstance().getUserInfo(s);
+
+
+        Log.e("tag","getUserInfogetUserInfo1="+FriendsSp.getFriendsInfo(mContext));
+        return FriendsSp.getFriendsInfo(mContext);
     }
 
     @Override

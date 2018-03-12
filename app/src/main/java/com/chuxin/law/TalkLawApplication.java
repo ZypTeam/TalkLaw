@@ -233,6 +233,8 @@ public class TalkLawApplication extends BaseApplication {
 //            }));
 //            RongExtensionManager.getInstance().registerExtensionModule(new RecognizeExtensionModule());
 
+
+            RongIM.getInstance().setMessageAttachedUserInfo(true);
         }
     }
 
