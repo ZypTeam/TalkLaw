@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
@@ -7,6 +8,17 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.chuxin.law.R;
+import com.chuxin.law.audioplayer.db.DownloadThreadDB;
+import com.chuxin.law.audioplayer.download.AudioInfoDB;
+import com.chuxin.law.audioplayer.download.DownloadInfoDB;
+import com.chuxin.law.audioplayer.download.DownloadMessage;
+import com.chuxin.law.audioplayer.manage.AudioPlayerManager;
+import com.chuxin.law.audioplayer.manage.OnLineAudioManager;
+import com.chuxin.law.audioplayer.model.AudioInfo;
+import com.chuxin.law.audioplayer.model.AudioMessage;
+import com.chuxin.law.audioplayer.receiver.AudioBroadcastReceiver;
+import com.chuxin.law.audioplayer.receiver.OnLineAudioReceiver;
+import com.chuxin.law.audioplayer.util.AudioPlayUtils;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
@@ -14,15 +26,18 @@ import com.chuxin.law.common.CommonLogic;
 import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.model.ShareModel;
 import com.chuxin.law.ui.dialog.ShareDialog;
+import com.chuxin.law.util.DateUtil;
 import com.chuxin.law.util.ImageLoderUtil;
 import com.chuxin.law.util.UIUtils;
 import com.chuxin.law.util.voice.VoiceHelper;
+import com.jrmf360.rylib.common.util.ToastUtil;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.task.WeakHandler;
 
 import java.util.HashMap;
+import java.util.List;
 
 import rx.functions.Action1;
 
@@ -56,6 +71,135 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
     private String url;
     private String imageUrl;
     private ShareDialog shareDialog;
+
+    /**
+     * 音频广播
+     */
+    private AudioBroadcastReceiver mAudioBroadcastReceiver;
+
+    /**
+     * 广播监听
+     */
+    private AudioBroadcastReceiver.AudioReceiverListener mAudioReceiverListener = new AudioBroadcastReceiver.AudioReceiverListener() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            doAudioReceive(context, intent);
+        }
+    };
+
+    /**
+     * 在线音乐广播
+     */
+    private OnLineAudioReceiver mOnLineAudioReceiver;
+    private OnLineAudioReceiver.OnlineAudioReceiverListener mOnlineAudioReceiverListener = new OnLineAudioReceiver.OnlineAudioReceiverListener() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            doNetMusicReceive(context, intent);
+        }
+    };
+
+    /**
+     * 处理网络歌曲广播
+     *
+     * @param context
+     * @param intent
+     */
+    private void doNetMusicReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        if (action.equals(OnLineAudioReceiver.ACTION_ONLINEMUSICDOWNLOADING)) {
+            DownloadMessage downloadMessage = (DownloadMessage) intent.getSerializableExtra(DownloadMessage.KEY);
+            if (AudioPlayUtils.getInstance().getmCurrentAudio().getHash().equals(downloadMessage.getTaskId())) {
+                int downloadedSize = DownloadThreadDB.getDownloadThreadDB(getApplicationContext()).getDownloadedSize(downloadMessage.getTaskId(), OnLineAudioManager.threadNum);
+                double pre = downloadedSize * 1.0 / AudioPlayUtils.getInstance().getmCurrentAudio().getFileSize();
+                int downloadProgress = (int) (seek.getMax() * pre);
+                seek.setSecondaryProgress(downloadProgress);
+            }
+        } else if (action.equals(OnLineAudioReceiver.ACTION_ONLINEMUSICERROR)) {
+            DownloadMessage downloadMessage = (DownloadMessage) intent.getSerializableExtra(DownloadMessage.KEY);
+            if (AudioPlayUtils.getInstance().getmCurrentAudio().getHash().equals(downloadMessage.getTaskId())) {
+                ToastUtil.showToast(getApplicationContext(), downloadMessage.getErrorMsg());
+            }
+        }
+
+    }
+
+
+    /**
+     * 处理音频广播事件
+     *
+     * @param context
+     * @param intent
+     */
+    private void doAudioReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        if (action.equals(AudioBroadcastReceiver.ACTION_NULLMUSIC)) {
+
+        } else if (action.equals(AudioBroadcastReceiver.ACTION_INITMUSIC)) {
+            //初始化
+            AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();//(AudioMessage) intent.getSerializableExtra(AudioMessage.KEY);
+            AudioInfo audioInfo = AudioPlayUtils.getInstance().getmCurrentAudio();
+
+            if (AudioPlayUtils.getInstance().getPlayStatus() == AudioPlayerManager.PLAYING) {
+                play.setImageResource(R.mipmap.icon_audio_pause);
+            } else {
+                play.setImageResource(R.mipmap.icon_audio_player);
+            }
+
+
+            //
+            time.setText(DateUtil.parseTimeToString((int) audioMessage.getPlayProgress()));
+            timeAll.setText(DateUtil.parseTimeToString((int) audioInfo.getDuration()));
+            //
+            seek.setEnabled(true);
+            seek.setMax((int) audioInfo.getDuration());
+            seek.setProgress((int) audioMessage.getPlayProgress());
+            seek.setSecondaryProgress(0);
+
+            if (audioInfo.getType() == AudioInfo.NET || audioInfo.getType() == AudioInfo.DOWNLOAD) {
+
+                //下载
+                if (DownloadInfoDB.getAudioInfoDB(getApplicationContext()).isExists(audioInfo.getHash()) || AudioInfoDB.getAudioInfoDB(getApplicationContext()).isNetAudioExists(audioInfo.getHash())) {
+
+
+                } else {
+
+                }
+
+            } else {
+
+            }
+
+        } else if (action.equals(AudioBroadcastReceiver.ACTION_SERVICE_PLAYMUSIC)) {
+            //播放
+
+            AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();//(AudioMessage) intent.getSerializableExtra(AudioMessage.KEY);
+
+            play.setImageResource(R.mipmap.icon_audio_pause);
+
+            //
+            time.setText(DateUtil.parseTimeToString((int) audioMessage.getPlayProgress()));
+            //
+            seek.setProgress((int) audioMessage.getPlayProgress());
+
+        } else if (action.equals(AudioBroadcastReceiver.ACTION_SERVICE_PAUSEMUSIC)) {
+            //暂停完成
+            play.setImageResource(R.mipmap.icon_audio_player);
+
+        } else if (action.equals(AudioBroadcastReceiver.ACTION_SERVICE_RESUMEMUSIC)) {
+            //唤醒完成
+            play.setImageResource(R.mipmap.icon_audio_player);
+
+        } else if (action.equals(AudioBroadcastReceiver.ACTION_SERVICE_PLAYINGMUSIC)) {
+            //播放中
+            AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();//(AudioMessage) intent.getSerializableExtra(AudioMessage.KEY);
+            if (audioMessage != null) {
+                time.setText(DateUtil.parseTimeToString((int) audioMessage.getPlayProgress()));
+                seek.setProgress((int) audioMessage.getPlayProgress());
+            }
+
+        }
+    }
+
 
     private WeakHandler handler = new WeakHandler();
 
@@ -119,6 +263,33 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*int playStatus = AudioPlayUtils.getInstance().getPlayStatus();
+                if (playStatus == AudioPlayerManager.PAUSE) {
+
+                    AudioInfo audioInfo = AudioPlayUtils.getInstance().getmCurrentAudio();
+                    if (audioInfo != null) {
+
+                        AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();
+                        Intent resumeIntent = new Intent(AudioBroadcastReceiver.ACTION_RESUMEMUSIC);
+                        resumeIntent.putExtra(AudioMessage.KEY, audioMessage);
+                        resumeIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+                        sendBroadcast(resumeIntent);
+
+                    }
+
+                } else {
+                    if (AudioPlayUtils.getInstance().getCurAudioMessage() != null) {
+                        AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();
+                        AudioInfo audioInfo = AudioPlayUtils.getInstance().getmCurrentAudio();
+                        if (audioInfo != null) {
+                            audioMessage.setAudioInfo(audioInfo);
+                            Intent resumeIntent = new Intent(AudioBroadcastReceiver.ACTION_PLAYMUSIC);
+                            resumeIntent.putExtra(AudioMessage.KEY, audioMessage);
+                            resumeIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+                            sendBroadcast(resumeIntent);
+                        }
+                    }
+                }*/
                 if (voiceHelper.isPlay() &&StringUtil.equals(url,voiceHelper.getPlayingVoicePath())) {
                     handler.removeCallbacks(task);
                     voiceHelper.pauseVoice();

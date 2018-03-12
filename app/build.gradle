@@ -100,5 +100,6 @@ dependencies {
     compile(name: 'HMS-SDK-2.4.0.300', ext: 'aar')
     compile 'com.squareup.picasso:picasso:2.4.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+    compile 'com.belerweb:pinyin4j:2.5.0'
 }
 
