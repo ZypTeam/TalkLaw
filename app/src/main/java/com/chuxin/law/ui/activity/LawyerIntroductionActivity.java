@@ -140,7 +140,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
 //                    intent.putExtra("title",data.getLaw().getName());
 //                    mContext.startActivity(intent);
 //                    data.getLaw().getUserid()
-                    RongIM.getInstance().startPrivateChat(mContext, "65", data.getLaw().getName());
+                    RongIM.getInstance().startPrivateChat(mContext, "64", data.getLaw().getName());
                 }
             }
         });

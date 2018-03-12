@@ -32,12 +32,12 @@ public class PayPlugin  implements IPluginModule {
 
     @Override
     public Drawable obtainDrawable(Context context) {
-        return context.getResources().getDrawable(R.mipmap.logo);
+        return context.getResources().getDrawable(R.drawable.img_chat_left_baozheng);
     }
 
     @Override
     public String obtainTitle(Context context) {
-        return "支付";
+        return "保证金";
     }
 
     @Override
