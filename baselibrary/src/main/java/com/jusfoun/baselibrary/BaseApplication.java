@@ -3,6 +3,7 @@ package com.jusfoun.baselibrary;
 import android.app.Activity;
 import android.app.Application;
 
+import com.jusfoun.baselibrary.Util.SharePrefenceUtils;
 import com.jusfoun.baselibrary.db.DataBaseManager;
 
 import java.lang.ref.WeakReference;
@@ -15,6 +16,11 @@ import java.util.Stack;
 
 public class BaseApplication extends Application {
 
+    /**
+     * 播放服务是否被强迫回收
+     */
+    private boolean playServiceForceDestroy = false;
+
     private static BaseApplication mApp;
 
     @Override
@@ -26,6 +32,8 @@ public class BaseApplication extends Application {
     public static BaseApplication getBaseApplication(){
         return mApp;
     }
+
+
 
     /***
      * 寄存整个应用Activity

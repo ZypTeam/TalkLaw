@@ -26,7 +26,6 @@ public class WXPayEntryActivity extends BaseTalkLawActivity implements IWXAPIEve
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.e("aaaaa","create");
         super.onCreate(savedInstanceState);
         iwxapi= WXAPIFactory.createWXAPI(this, null);
         iwxapi.registerApp(getString(R.string.key_wechat));
@@ -67,7 +66,7 @@ public class WXPayEntryActivity extends BaseTalkLawActivity implements IWXAPIEve
 
     @Override
     public void onResp(BaseResp baseResp) {
-        Log.e("aaaaa","baseResp=="+baseResp.errCode+" "+baseResp.errStr+" "+baseResp.openId+" "+baseResp.transaction);
+        Log.e("aaaaa","baseResp=="+baseResp.errCode);
         switch (baseResp.errCode){
             case 0:
                 rxManage.post(PayUitl.WECHATPAY,"");
@@ -79,6 +78,6 @@ public class WXPayEntryActivity extends BaseTalkLawActivity implements IWXAPIEve
                 rxManage.post(PayUitl.PAY_FIALD,"");
                 break;
         }
-//        finish();
+        onBackPressed();
     }
 }
