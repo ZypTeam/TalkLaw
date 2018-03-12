@@ -322,7 +322,6 @@ public interface ApiService {
      * @param params
      * @return
      */
-    @FormUrlEncoded
     @POST("/reward/set")
     Observable<OrderResultModel> gratuityOrder(@QueryMap Map<String,String> params);
 

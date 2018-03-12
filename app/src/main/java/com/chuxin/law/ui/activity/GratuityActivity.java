@@ -17,6 +17,7 @@ import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.model.OrderResultModel;
 import com.chuxin.law.ui.dialog.GratuityDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
+import com.jrmf360.rylib.wallet.ui.GetPwdActivity;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
@@ -128,10 +129,14 @@ public class GratuityActivity extends BaseTalkLawActivity implements View.OnClic
     }
 
     public void gratuity(){
-        Intent intent=new Intent();
+        if (StringUtil.isEmpty(price)){
+            showToast("打赏金额不能为空");
+            return;
+        }
+        Intent intent=new Intent(mContext, GratuityPayActivity.class);
         intent.putExtra(GratuityPayActivity.PRICE,price);
         intent.putExtra(GratuityPayActivity.DATA,data);
-        goActivityForResult(null,GratuityPayActivity.class, CommonConstant.REQUEST_LAWYER_GRATUITY);
+        startActivityForResult(intent,CommonConstant.REQUEST_LAWYER_GRATUITY);
         /*if (StringUtil.isEmpty(price)){
             showToast("打赏金额不能为空");
             return;

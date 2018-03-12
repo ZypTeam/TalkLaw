@@ -151,6 +151,7 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
         Map<String,String> params=new HashMap<>();
         params.put("artid",data.getArticle().getId());
         params.put("money",gratuityPrice);
+        params.put("type","1");
         params.put("method",method);
         addNetwork(Api.getInstance().getService(ApiService.class).gratuityOrder(params)
                 , new Action1<OrderResultModel>() {

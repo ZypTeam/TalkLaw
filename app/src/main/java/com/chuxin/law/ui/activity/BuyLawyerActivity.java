@@ -201,6 +201,7 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
                         hideLoadDialog();
                         if (model.getCode() == CommonConstant.NET_SUC_CODE&&model.getData()!=null) {
                             if (model.getData().getState()==1) {
+                                data.getArticle().setIs_buy(1);
                                 pay();
                             }else {
                                 showToast(model.getMsg());
