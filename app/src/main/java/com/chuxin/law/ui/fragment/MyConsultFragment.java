@@ -4,8 +4,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
+import com.chuxin.law.common.UserInfoDelegate;
+import com.chuxin.law.model.MyConsultListModel;
 import com.chuxin.law.model.MyConsultModel;
+import com.chuxin.law.model.MyMsgListModel;
+import com.chuxin.law.model.UserInfoModel;
+import com.chuxin.law.model.UserModel;
 import com.chuxin.law.util.MyConsultPagerUtils;
 import com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView;
 
@@ -17,6 +23,9 @@ import java.util.Map;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawFragment;
 import com.chuxin.law.ui.adapter.MyConsultListAdapter;
+import com.jusfoun.baselibrary.net.Api;
+
+import rx.functions.Action1;
 
 /**
  * @author wangcc
@@ -48,7 +57,6 @@ public class MyConsultFragment extends BaseTalkLawFragment {
         if (getArguments()!=null) {
             type = getArguments().getInt(MyConsultPagerUtils.TYPE);
         }
-
         adapter=new MyConsultListAdapter(mContext);
     }
 
@@ -83,19 +91,42 @@ public class MyConsultFragment extends BaseTalkLawFragment {
         getDate(true,true);
     }
 
-    private void getDate(boolean isRefresh,boolean isShowLoading){
-        /*if (isShowLoading){
+    private void getDate(final boolean isRefresh, boolean isShowLoading){
+        if (isShowLoading){
             showLoadDialog();
-        }*/
-        Map<String,String> params=new HashMap<>();
-        params.put("size",size);
-        params.put("page",(isRefresh?"1":page+1)+"");
-
-        List<MyConsultModel> list=new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(new MyConsultModel());
         }
-        adapter.refreshList(list);
+        Map<String,String> params=new HashMap<>();
+        params.put("type",type+"");
+        params.put("size",size);
+        params.put("page",(isRefresh?1:page+1)+"");
+        addNetwork(Api.getInstance().getService(ApiService.class).consultList(params)
+                , new Action1<MyConsultListModel>() {
+                    @Override
+                    public void call(MyConsultListModel myConsultListModel) {
+                        loadingComplete();
+                        if (myConsultListModel!=null&&myConsultListModel.getCode()==10000){
+                            adapter.refreshList(myConsultListModel.getData());
+                            if (isRefresh){
+                                page=1;
+                            }else {
+                                page+=1;
+                            }
+                            return;
+                        }
+                        showToast(myConsultListModel.getMsg());
 
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        loadingComplete();
+                    }
+                });
+    }
+
+    private void loadingComplete(){
+        hideLoadDialog();
+        list.loadMoreComplete();
+        list.refreshComplete();
     }
 }

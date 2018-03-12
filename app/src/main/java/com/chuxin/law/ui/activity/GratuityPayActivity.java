@@ -31,8 +31,8 @@ import rx.functions.Action1;
  */
 
 public class GratuityPayActivity extends BaseTalkLawActivity {
-    public static final String DATA="data";
-    public static final String PRICE="price";
+    public static final String DATA = "data";
+    public static final String PRICE = "price";
     protected BackTitleView titleBar;
     protected ImageView iconGratuity;
     protected TextView price;
@@ -50,8 +50,8 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-        data= (LawyerProductModel.LawyerProductData) getIntent().getSerializableExtra(DATA);
-        gratuityPrice=getIntent().getStringExtra(PRICE);
+        data = (LawyerProductModel.LawyerProductData) getIntent().getSerializableExtra(DATA);
+        gratuityPrice = getIntent().getStringExtra(PRICE);
     }
 
     @Override
@@ -68,6 +68,8 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
     @Override
     public void initAction() {
         titleBar.setTitle("打赏");
+
+        price.setText(gratuityPrice + "");
 
         zhifubao.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,21 +113,18 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
         showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("order", order);
-//        params.put("payType", type);
+        params.put("payType", type);
         addNetwork(Api.getInstance().getService(ApiService.class).rewardOrder(params)
                 , new Action1<PayValidateModel>() {
                     @Override
                     public void call(PayValidateModel model) {
                         hideLoadDialog();
-                        if (model.getCode() == CommonConstant.NET_SUC_CODE&&model.getData()!=null) {
-                            if (model.getData().getState()==1) {
+                        if (model.getCode() == CommonConstant.NET_SUC_CODE && model.getData() != null) {
 //                                pay();
-                                showToast("打赏成功");
-                                setResult(RESULT_OK);
-                                onBackPressed();
-                            }else {
-                                showToast(model.getMsg());
-                            }
+                            showToast("打赏成功");
+                            setResult(RESULT_OK);
+                            onBackPressed();
+                            return;
                         } else {
                             showToast(model.getMsg());
                         }
@@ -138,38 +137,38 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
                 });
     }
 
-    public void gratuity(final String method){
-        if (StringUtil.isEmpty(gratuityPrice)){
+    public void gratuity(final String method) {
+        if (StringUtil.isEmpty(gratuityPrice)) {
             showToast("打赏金额不能为空");
             return;
         }
-        if (data==null||data.getArticle()==null){
+        if (data == null || data.getArticle() == null) {
             showToast("连接服务器失败");
             return;
         }
         showLoadDialog();
-        Map<String,String> params=new HashMap<>();
-        params.put("artid",data.getArticle().getId());
-        params.put("money",gratuityPrice);
-        params.put("type","1");
-        params.put("method",method);
+        Map<String, String> params = new HashMap<>();
+        params.put("artid", data.getArticle().getId());
+        params.put("money", gratuityPrice);
+        params.put("type", "1");
+        params.put("method", method);
         addNetwork(Api.getInstance().getService(ApiService.class).gratuityOrder(params)
                 , new Action1<OrderResultModel>() {
                     @Override
                     public void call(OrderResultModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE
-                                &&noDataModel.getData()!=null){
-                            if (StringUtil.equals("1",method)
-                                    &&noDataModel.getData().getOrder()!=null){
-                                order=noDataModel.getData().getOrder().getPartnerid();
-                                PayUitl.AliPay(GratuityPayActivity.this,noDataModel.getData().getOrder().getPartnerid());
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE
+                                && noDataModel.getData() != null) {
+                            if (StringUtil.equals("1", method)
+                                    && noDataModel.getData().getOrder() != null) {
+                                order = noDataModel.getData().getOrder().getPartnerid();
+                                PayUitl.AliPay(GratuityPayActivity.this, noDataModel.getData().getOrder().getPartnerid());
                                 return;
                             }
 
-                            if (StringUtil.equals("2",method)
-                                    &&noDataModel.getData().getWxorder()!=null){
-                                order=noDataModel.getData().getWxorder().getPrepay_id();
+                            if (StringUtil.equals("2", method)
+                                    && noDataModel.getData().getWxorder() != null) {
+                                order = noDataModel.getData().getWxorder().getPrepay_id();
                                 PayUitl.WechatPay(noDataModel.getData().getWxorder());
                                 return;
                             }

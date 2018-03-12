@@ -13,6 +13,7 @@ import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.model.MoveModel;
 import com.chuxin.law.model.MyAttentionListModel;
+import com.chuxin.law.model.MyConsultListModel;
 import com.chuxin.law.model.MyMsgListModel;
 import com.chuxin.law.model.OrderResultModel;
 import com.chuxin.law.model.PayValidateModel;
@@ -330,7 +331,6 @@ public interface ApiService {
      * @param params
      * @return
      */
-    @FormUrlEncoded
     @POST("/reward/order")
     Observable<PayValidateModel> rewardOrder(@QueryMap Map<String,String> params);
 
@@ -345,6 +345,16 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/article-buy/order")
     Observable<PayValidateModel> payValidate(@FieldMap Map<String,String> params);
+
+    /**
+     * 咨询 购买
+     */
+    @POST("/consult/set")
+    Observable<OrderResultModel> consultSet(@QueryMap Map<String,String> params);
+
+    //支付成功
+    @POST("/consult/order")
+    Observable<PayValidateModel> consultOrder(@QueryMap Map<String,String> params);
 
     /**
      * 我的购买
@@ -374,6 +384,12 @@ public interface ApiService {
      */
     @GET("/article/hot-keyword")
     Observable<HotKeyListModel> hotKeyword(@QueryMap Map<String,String> params);
+
+    /**
+     * 我的咨询列表
+     */
+    @GET("/consult/list")
+    Observable<MyConsultListModel> consultList(@QueryMap Map<String,String> params);
 
 }
 

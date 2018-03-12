@@ -1,7 +1,6 @@
 package com.chuxin.law.ui.activity;
 
 import android.graphics.Color;
-import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -10,33 +9,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
-import com.chuxin.law.model.LawyerProductModel;
+import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.model.OrderResultModel;
 import com.chuxin.law.model.PayValidateModel;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.chuxin.law.util.PayUitl;
-import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 
 import java.util.HashMap;
 
 import rx.functions.Action1;
 
-import static com.chuxin.law.common.CommonConstant.EVENT_BUY_LAWYER;
-
 /**
  * @author wangcc
- * @date 2018/2/8
+ * @date 2018/3/12
  * @describe
  */
 
-public class BuyLawyerActivity extends BaseTalkLawActivity {
+public class BuyIntroductionActivity extends BaseTalkLawActivity {
     public static final String TYPE = "type";
     public static final String PRICE = "price";
     public static final String DATA = "data";
@@ -48,9 +43,8 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
     protected CheckBox agree;
     protected Button login;
 
-    private int type;
     private String mPrice;
-    private LawyerProductModel.LawyerProductData data;
+    private LawyerIntroModel.LawyerIntroData data;
     private String order;
 
     @Override
@@ -60,9 +54,8 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-        type = getIntent().getExtras().getInt(TYPE, 0);
-        mPrice = getIntent().getExtras().getString(PRICE);
-        data = (LawyerProductModel.LawyerProductData) getIntent().getExtras().getSerializable(DATA);
+        data = (LawyerIntroModel.LawyerIntroData) getIntent().getExtras().getSerializable(DATA);
+        mPrice=data.getLaw().getPrice();
     }
 
     @Override
@@ -79,13 +72,9 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
 
     @Override
     public void initAction() {
-        if (type == 0) {
-            titleView.setTitle("律师介绍");
-            produte.setText("图文咨询");
-        } else if (type == 1) {
-            produte.setText("购买价格");
-            titleView.setTitle("购买");
-        }
+        titleView.setTitle("律师介绍");
+        produte.setText("图文咨询");
+
         price.setText("¥" + mPrice);
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -147,11 +136,10 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
 
     private void buy() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("id", data.getArticle().getId());
-        params.put("type", "1");
+        params.put("touserid", data.getLaw().getUserid());
         params.put("method", zhifubao.isSelected() ? "1" : "2");
         Log.e("tag", "params" + params);
-        addNetwork(Api.getInstance().getService(ApiService.class).buyProduct(params)
+        addNetwork(Api.getInstance().getService(ApiService.class).consultSet(params)
                 , new Action1<OrderResultModel>() {
                     @Override
                     public void call(OrderResultModel noDataModel) {
@@ -160,7 +148,8 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
                                 && noDataModel.getData() != null) {
                             if (zhifubao.isSelected()
                                     && noDataModel.getData().getOrder() != null) {
-                                PayUitl.AliPay(BuyLawyerActivity.this, noDataModel.getData().getOrder().getPartnerid());
+                                order=noDataModel.getData().getOrder().getPartnerid();
+                                PayUitl.AliPay(BuyIntroductionActivity.this, noDataModel.getData().getOrder().getPartnerid());
                                 return;
                             }
 
@@ -197,14 +186,14 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
         HashMap<String, String> params = new HashMap<>();
         params.put("order", order);
         params.put("payType", type);
-        addNetwork(Api.getInstance().getService(ApiService.class).payValidate(params)
+        addNetwork(Api.getInstance().getService(ApiService.class).consultOrder(params)
                 , new Action1<PayValidateModel>() {
                     @Override
                     public void call(PayValidateModel model) {
                         hideLoadDialog();
                         if (model.getCode() == CommonConstant.NET_SUC_CODE && model.getData() != null) {
-                            data.getArticle().setIs_buy(1);
-                            pay();
+                            goActivity(null, PaySucActivity.class);
+                            onBackPressed();
                         } else {
                             showToast(model.getMsg());
                         }
@@ -215,16 +204,5 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
                         hideLoadDialog();
                     }
                 });
-    }
-
-    private void pay() {
-        if (type == 0) {
-            goActivity(null, PaySucActivity.class);
-        } else if (type == 1) {
-            rxManage.post(EVENT_BUY_LAWYER);
-            showToast("购买成功");
-            setResult(RESULT_OK);
-            onBackPressed();
-        }
     }
 }
