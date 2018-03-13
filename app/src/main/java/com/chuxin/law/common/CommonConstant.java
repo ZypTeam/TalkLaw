@@ -53,4 +53,7 @@ public class CommonConstant {
     //my fragment 修改头像
     public static final int REQUEST_HEAD_CHANGE=111;
 
+    //购买产品成功
+    public static final String EVENT_BUY_LAWYER="event_buy_lawyer";
+
 }

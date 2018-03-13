@@ -2,6 +2,7 @@ package com.chuxin.law.model;
 
 import com.jusfoun.baselibrary.base.BaseModel;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class LawyerIntroModel extends BaseModel {
         this.data = data;
     }
 
-    public class LawyerIntroData{
+    public class LawyerIntroData implements Serializable{
         private UserModel law;
         private String effect;
         private int is_follow;

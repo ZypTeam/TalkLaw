@@ -108,14 +108,13 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Bundle bundle = new Bundle();
-                bundle.putInt(BuyLawyerActivity.TYPE, 0);
-                if (data == null || data.getLaw() == null) {
-                    bundle.putString(BuyLawyerActivity.PRICE, "200");
-                } else {
-                    bundle.putString(BuyLawyerActivity.PRICE, data.getLaw().getPrice());
+                if (data==null||data.getLaw()==null){
+                    return;
                 }
-                goActivityForResult(bundle, BuyLawyerActivity.class, CommonConstant.REQUEST_PAY_SUCCUSE);
+                Bundle bundle = new Bundle();
+                bundle.putInt(BuyIntroductionActivity.TYPE, 0);
+                bundle.putSerializable(BuyIntroductionActivity.DATA, data);
+                goActivityForResult(bundle, BuyIntroductionActivity.class, CommonConstant.REQUEST_PAY_SUCCUSE);
             }
         });
 
@@ -185,10 +184,10 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                 , new Action1<LawyerIntroModel>() {
                     @Override
                     public void call(LawyerIntroModel model) {
-                        Log.e("tag","updateView="+model.getCode()+ " "+CommonConstant.NET_SUC_CODE+" "+(model.getCode()==CommonConstant.NET_SUC_CODE) );
+                        Log.e("tag", "updateView=" + model.getCode() + " " + CommonConstant.NET_SUC_CODE + " " + (model.getCode() == CommonConstant.NET_SUC_CODE));
                         hideLoadDialog();
                         if (model.getCode() == CommonConstant.NET_SUC_CODE) {
-                            Log.e("tag","updateView1");
+                            Log.e("tag", "updateView1");
                             updateView(model.getData());
                         }
                     }
@@ -201,11 +200,11 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     }
 
     private void updateView(LawyerIntroModel.LawyerIntroData data) {
-        Log.e("tag","updateView2="+data);
+        Log.e("tag", "updateView2=" + data);
         if (data == null) {
             return;
         }
-        Log.e("tag","updateView3=");
+        Log.e("tag", "updateView3=");
         this.data = data;
         UserModel userModel = data.getLaw();
         if (data.getIs_follow() == 0) {
@@ -226,7 +225,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
             level.setText(UIUtils.getText("专业级", "等级"));
             haoping.setText(UIUtils.getText(userModel.getPraise() + "%", "好评"));
             suc.setText(UIUtils.getText(userModel.getWin() + "%", "胜率"));
-            ImageLoderUtil.loadCircleImage(mContext, iconHead, "http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg", R.mipmap.icon_head_def_cir);
+            ImageLoderUtil.loadCircleImage(mContext, iconHead, data.getLaw().getHeadimg(), R.mipmap.icon_head_def_cir);
         }
         adapter.refreshList(data.getList());
     }

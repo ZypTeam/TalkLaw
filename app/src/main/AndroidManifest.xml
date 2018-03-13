@@ -275,9 +275,14 @@
             android:name=".ui.activity.AccountDetailsActivity"
             android:screenOrientation="portrait" />
 
-        <!--咨询支付-->
+        <!--购买支付-->
         <activity
             android:name=".ui.activity.BuyLawyerActivity"
+            android:screenOrientation="portrait" />
+
+        <!--咨询支付-->
+        <activity
+            android:name=".ui.activity.BuyIntroductionActivity"
             android:screenOrientation="portrait" />
 
         <!--咨询支付成功-->
