@@ -75,7 +75,7 @@
 
     <TextView
         android:id="@+id/del"
-        android:background="#cd3540"
+        android:background="@color/app_red_color"
         android:gravity="center"
         android:text="删除"
         android:textColor="#fff"

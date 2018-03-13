@@ -2,6 +2,7 @@ package com.chuxin.law.common;
 
 import com.chuxin.law.model.ArrondiModel;
 import com.chuxin.law.model.BackCardModel;
+import com.chuxin.law.model.CheckConsultModel;
 import com.chuxin.law.model.CommentListModel;
 import com.chuxin.law.model.ExchangeRecordsDataModel;
 import com.chuxin.law.model.HotKeyListModel;
@@ -396,7 +397,7 @@ public interface ApiService {
      * @return
      */
     @GET("/consult/show")
-    Observable<NoDataModel> checkConsult(@QueryMap Map<String,String> params);
+    Observable<CheckConsultModel> checkConsult(@QueryMap Map<String,String> params);
 
 }
 

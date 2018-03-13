@@ -193,7 +193,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(PayValidateModel model) {
                         hideLoadDialog();
-                        if (model.getCode() == CommonConstant.NET_SUC_CODE && model.getData() != null) {
+                        if (model.getCode() == CommonConstant.NET_SUC_CODE ) {
                             Intent intent=new Intent();
                             intent.setClass(mContext,PaySucActivity.class);
                             intent.putExtra(PaySucActivity.DATA,data);

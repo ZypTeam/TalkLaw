@@ -20,6 +20,7 @@ import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
+import com.chuxin.law.model.CheckConsultModel;
 import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ry.db.Friend;
@@ -295,9 +296,9 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         HashMap<String,String> params=new HashMap<>();
         params.put("touserid",data.getLaw().getUserid());
         addNetwork(Api.getInstance().getService(ApiService.class).checkConsult(params)
-                , new Action1<NoDataModel>() {
+                , new Action1<CheckConsultModel>() {
                     @Override
-                    public void call(NoDataModel noDataModel) {
+                    public void call(CheckConsultModel noDataModel) {
                         hideLoadDialog();
                         if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE){
                             dialog.show();
