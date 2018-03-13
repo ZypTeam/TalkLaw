@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/write"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,6 +32,7 @@
 
 
                 <TextView
+                    android:id="@+id/text_start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -76,6 +76,7 @@
 
 
                 <TextView
+                    android:id="@+id/text_end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -108,6 +109,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_reset_btn"
@@ -116,6 +118,7 @@
             android:textSize="18sp" />
 
         <Button
+            android:id="@+id/btn_jisuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
@@ -135,13 +138,20 @@
         android:textColor="#000000"
         android:textSize="17sp" />
 
-    <TextView
-        android:id="@+id/text_result"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="20dp"
-        android:textColor="#999999"
-        android:textSize="16sp" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#999999"
+            android:textSize="16sp" />
+    </LinearLayout>
 </LinearLayout>

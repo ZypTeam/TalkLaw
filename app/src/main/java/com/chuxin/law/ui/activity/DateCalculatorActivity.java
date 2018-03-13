@@ -8,7 +8,6 @@ import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.ui.adapter.CalculatorAdapter;
 import com.chuxin.law.ui.widget.BackTitleView;
-import com.chuxin.law.ui.widget.NumberPickerPopupwinow;
 
 /**
  * @author zhaoyapeng
@@ -21,6 +20,8 @@ public class DateCalculatorActivity extends BaseTalkLawActivity {
     protected ViewPager viewpager;
     protected RelativeLayout layoutDay;
     protected RelativeLayout layoutDate;
+    protected View viewDay;
+    protected View viewDate;
     private CalculatorAdapter calculatorAdapter;
 
 
@@ -40,6 +41,8 @@ public class DateCalculatorActivity extends BaseTalkLawActivity {
         viewpager = (ViewPager) findViewById(R.id.viewpager);
         layoutDay = (RelativeLayout) findViewById(R.id.layout_day);
         layoutDate = (RelativeLayout) findViewById(R.id.layout_date);
+        viewDay = (View) findViewById(R.id.view_day);
+        viewDate = (View) findViewById(R.id.view_date);
 
     }
 
@@ -52,12 +55,16 @@ public class DateCalculatorActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View view) {
                 viewpager.setCurrentItem(0);
+                viewDay.setVisibility(View.VISIBLE);
+                viewDate.setVisibility(View.GONE);
             }
         });
         layoutDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 viewpager.setCurrentItem(1);
+                viewDay.setVisibility(View.GONE);
+                viewDate.setVisibility(View.VISIBLE);
             }
         });
 

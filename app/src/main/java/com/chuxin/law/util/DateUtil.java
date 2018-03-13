@@ -102,4 +102,38 @@ public class DateUtil {
             return null;
         }
     }
+
+
+    public static int compareDate(String startDay,String endDay,int stype){
+        int n = 0;
+        String[] u = {"天","月","年"};
+        String formatStyle = stype==1?"yyyy-MM":"yyyy-MM-dd";
+
+        DateFormat df = new SimpleDateFormat(formatStyle);
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        try {
+            c1.setTime(df.parse(startDay));
+            c2.setTime(df.parse(endDay));
+        } catch (Exception e3) {
+            System.out.println("wrong occured");
+        }
+        //List list = new ArrayList();
+        while (!c1.after(c2)) {                   // 循环对比，直到相等，n 就是所要的结果
+            //list.add(df.format(c1.getTime()));    // 这里可以把间隔的日期存到数组中 打印出来
+            n++;
+            if(stype==1){
+                c1.add(Calendar.MONTH, 1);          // 比较月份，月份+1
+            }
+            else{
+                c1.add(Calendar.DATE, 1);           // 比较天数，日期+1
+            }
+        }
+        n = n-1;
+        if(stype==2){
+            n = (int)n/365;
+        }
+        System.out.println(startDay+" -- "+endDay+" 相差多少"+u[stype]+":"+n);
+        return n;
+    }
 }
