@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.fragment;
 
 import android.os.Build;
+import android.util.TimeUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +44,6 @@ public class DateCalculatorFragment extends BaseTalkLawFragment {
 
     @Override
     public void initDatas() {
-
     }
 
     @Override
