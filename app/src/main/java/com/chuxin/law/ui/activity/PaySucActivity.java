@@ -1,17 +1,28 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
+import com.chuxin.law.model.LawyerIntroModel;
+import com.chuxin.law.sharedpreferences.FriendsSp;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.jusfoun.baselibrary.task.WeakHandler;
+
+import java.util.Locale;
+
+import io.rong.imkit.RongContext;
+import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.UserInfo;
 
 
 /**
@@ -21,11 +32,13 @@ import com.jusfoun.baselibrary.task.WeakHandler;
  */
 
 public class PaySucActivity extends BaseTalkLawActivity {
+    public static final String DATA = "data";
     protected BackTitleView titleView;
     protected TextView suc;
     protected TextView timer;
     protected TextView click;
     private int second=5;
+    private LawyerIntroModel.LawyerIntroData data;
 
     private WeakHandler handler=new WeakHandler();
     private Runnable task=new Runnable() {
@@ -49,7 +62,7 @@ public class PaySucActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-
+        data = (LawyerIntroModel.LawyerIntroData) getIntent().getExtras().getSerializable(DATA);
     }
 
     @Override
@@ -78,11 +91,24 @@ public class PaySucActivity extends BaseTalkLawActivity {
     }
 
     private void goNext(){
-//        Intent intent  = new Intent(mContext, ChatActivity.class);
-//        intent.putExtra("userId", "20");
-//        intent.putExtra("userName", "王律师");
-//        startActivity(intent);
+        FriendsSp.saveFriedns(mContext,new UserInfo(data.getLaw().getUserid(),data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
+        startChatRoomChat(mContext,"1497704102201803131347231",data.getLaw().getName(),true);
         onBackPressed();
+    }
+
+    public void startChatRoomChat(Context context, String chatRoomId, String title, boolean createIfNotExist) {
+        if(context != null && !TextUtils.isEmpty(chatRoomId)) {
+            if(RongContext.getInstance() == null) {
+                throw new ExceptionInInitializerError("RongCloud SDK not init");
+            } else {
+                Uri uri = Uri.parse("rong://" + context.getApplicationInfo().packageName).buildUpon().appendPath("conversation").appendPath(Conversation.ConversationType.CHATROOM.getName().toLowerCase(Locale.US)).appendQueryParameter("targetId", chatRoomId).appendQueryParameter("title", title).build();
+                Intent intent = new Intent("android.intent.action.VIEW", uri);
+                intent.putExtra("createIfNotExist", createIfNotExist);
+                context.startActivity(intent);
+            }
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     private SpannableStringBuilder getTimerTxt(int second){

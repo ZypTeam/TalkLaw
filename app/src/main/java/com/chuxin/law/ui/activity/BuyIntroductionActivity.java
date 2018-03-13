@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -138,6 +139,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
         HashMap<String, String> params = new HashMap<>();
         params.put("touserid", data.getLaw().getUserid());
         params.put("method", zhifubao.isSelected() ? "2" : "1");
+        params.put("type","1");
         Log.e("tag", "params" + params);
         addNetwork(Api.getInstance().getService(ApiService.class).consultSet(params)
                 , new Action1<OrderResultModel>() {
@@ -192,7 +194,10 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
                     public void call(PayValidateModel model) {
                         hideLoadDialog();
                         if (model.getCode() == CommonConstant.NET_SUC_CODE && model.getData() != null) {
-                            goActivity(null, PaySucActivity.class);
+                            Intent intent=new Intent();
+                            intent.setClass(mContext,PaySucActivity.class);
+                            intent.putExtra(PaySucActivity.DATA,data);
+                            mContext.startActivity(intent);
                             onBackPressed();
                         } else {
                             showToast(model.getMsg());
