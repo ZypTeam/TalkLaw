@@ -86,8 +86,10 @@ public class GuaranteeRequestActivity extends BaseTalkLawActivity {
                 }
 
                 showLoadDialog();
-                PayMessage payMessage =  PayMessage.obtain(editMoney.getText().toString());
-                RongIM.getInstance().sendMessage(Message.obtain(targetId, Conversation.ConversationType.PRIVATE, payMessage),
+
+                Log.e("tag","setOnClickListener="+editMoney.getText().toString()+" "+TalkLawApplication.getUserId());
+                PayMessage payMessage =  PayMessage.obtain(editMoney.getText().toString(),TalkLawApplication.getUserId(),"0");
+                RongIM.getInstance().sendMessage(Message.obtain(targetId, Conversation.ConversationType.CHATROOM, payMessage),
                         "保证金", "保证金", new IRongCallback.ISendMessageCallback() {
                             @Override
                             public void onAttached(Message message) {
