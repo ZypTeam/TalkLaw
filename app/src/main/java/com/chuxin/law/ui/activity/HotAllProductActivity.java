@@ -91,6 +91,12 @@ public class HotAllProductActivity extends BaseTalkLawActivity {
                                 }
                             }
                         }
+
+                        if(adapter.getItemCount()<model.total){
+                            recyclerView.setLoadingMoreEnabled(true);
+                        }else{
+                            recyclerView.setLoadingMoreEnabled(false);
+                        }
                     }
                 }, new Action1<Throwable>() {
                     @Override

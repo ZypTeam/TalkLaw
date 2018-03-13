@@ -8,11 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawFragment;
-import com.chuxin.law.ui.activity.MyInfoActivity;
 import com.chuxin.law.ui.widget.NumberPickerPopupwinow;
 import com.chuxin.law.util.DateUtil;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
@@ -36,10 +34,12 @@ public class DayCalculatorFragment extends BaseTalkLawFragment {
     protected TextView textResult;
     protected TextView textSelectDate;
     protected LinearLayout layoutRoot;
+    protected LinearLayout layoutWorkDay;
     private NumberPickerPopupwinow numPickPop;
     private LinearLayout houQianLayout;
 
     private boolean isQian = false;
+    private boolean onlyWorkingDay = false;
 
     public static DayCalculatorFragment getInstance() {
         return new DayCalculatorFragment();
@@ -75,7 +75,8 @@ public class DayCalculatorFragment extends BaseTalkLawFragment {
         textResult = (TextView) rootView.findViewById(R.id.text_result);
         textSelectDate = (TextView) rootView.findViewById(R.id.text_select_date);
         layoutRoot = (LinearLayout) rootView.findViewById(R.id.layout_root);
-        houQianLayout = (LinearLayout)rootView.findViewById(R.id.layout_qian_hou);
+        houQianLayout = (LinearLayout) rootView.findViewById(R.id.layout_qian_hou);
+        layoutWorkDay = (LinearLayout) rootView.findViewById(R.id.layout_work_day);
 
     }
 
@@ -97,18 +98,24 @@ public class DayCalculatorFragment extends BaseTalkLawFragment {
         btnJisuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(textSelectDate.getText().equals("请选择日期")){
+                if (textSelectDate.getText().equals("请选择日期")) {
                     showToast("请选择开始日期");
                     return;
                 }
-                if(TextUtils.isEmpty(editInputDay.getText())){
+                if (TextUtils.isEmpty(editInputDay.getText())) {
                     showToast("请输入间隔天数");
                     return;
                 }
-                if(isQian) {
-                    textResult.setText(DateUtil.getDateBefore(numPickPop.getData2(), Integer.parseInt(editInputDay.getText().toString())));
-                }else {
-                    textResult.setText(DateUtil.getDateBefore(numPickPop.getData2(),-Integer.parseInt(editInputDay.getText().toString())));
+
+
+                if(!onlyWorkingDay) {
+                    if (isQian) {
+                        textResult.setText(DateUtil.getDateBefore(numPickPop.getData2(), Integer.parseInt(editInputDay.getText().toString())));
+                    } else {
+                        textResult.setText(DateUtil.getDateBefore(numPickPop.getData2(), -Integer.parseInt(editInputDay.getText().toString())));
+                    }
+                }else{
+                    textResult.setText(DateUtil.getDateWorkAfter(numPickPop.getData2(), Integer.parseInt(editInputDay.getText().toString()),isQian));
                 }
             }
         });
@@ -130,6 +137,46 @@ public class DayCalculatorFragment extends BaseTalkLawFragment {
                 houQianLayout.setBackgroundResource(R.drawable.bg_no_yes);
                 textHou.setTextColor(mContext.getResources().getColor(R.color.write));
                 textQian.setTextColor(0xffcb1e28);
+            }
+        });
+
+        textFou.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onlyWorkingDay = false;
+                layoutWorkDay.setBackgroundResource(R.drawable.bg_yes_no);
+                textFou.setTextColor(mContext.getResources().getColor(R.color.write));
+                textShi.setTextColor(0xffcb1e28);
+            }
+        });
+
+        textShi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onlyWorkingDay = true;
+                layoutWorkDay.setBackgroundResource(R.drawable.bg_no_yes);
+                textShi.setTextColor(mContext.getResources().getColor(R.color.write));
+                textFou.setTextColor(0xffcb1e28);
+            }
+        });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textSelectDate.setText("请选择日期");
+                editInputDay.setText("");
+
+                isQian = false;
+                houQianLayout.setBackgroundResource(R.drawable.bg_no_yes);
+                textHou.setTextColor(mContext.getResources().getColor(R.color.write));
+                textQian.setTextColor(0xffcb1e28);
+
+                onlyWorkingDay = false;
+                layoutWorkDay.setBackgroundResource(R.drawable.bg_yes_no);
+                textFou.setTextColor(mContext.getResources().getColor(R.color.write));
+                textShi.setTextColor(0xffcb1e28);
+
+                textResult.setText("");
             }
         });
     }

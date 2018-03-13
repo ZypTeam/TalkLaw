@@ -29,7 +29,11 @@ import io.rong.imlib.model.MessageContent;
 )
 public class PayMessage extends MessageContent {
     private String content;
+    private String userId;
+    private String state; // 0.未支付 1.已支付
 
+    public static String TYPE_PAY_YES = "1";
+    public static String TYPE_PAY_NO = "0";
 
 
     public PayMessage(){
@@ -50,6 +54,12 @@ public class PayMessage extends MessageContent {
             if (jsonObj.has("content"))
                 content = jsonObj.optString("content");
 
+            if (jsonObj.has("userId"))
+                userId = jsonObj.optString("userId");
+
+            if (jsonObj.has("state"))
+                state = jsonObj.optString("state");
+
         } catch (JSONException e) {
         }
 
@@ -61,6 +71,8 @@ public class PayMessage extends MessageContent {
 
         try {
             jsonObj.put("content", content);
+            jsonObj.put("userId", userId);
+            jsonObj.put("state", state);
         } catch (JSONException e) {
             Log.e("JSONException", e.getMessage());
         }
@@ -76,16 +88,21 @@ public class PayMessage extends MessageContent {
 
 
 
-    public static PayMessage obtain(String text) {
+    public static PayMessage obtain(String text,String userId,String state) {
         PayMessage model = new PayMessage();
         model.setContent(text);
+        model.setUserId(userId);
+        model.setState(state);
         return model;
     }
 
 
     //给消息赋值。
     public PayMessage(Parcel in) {
-        setContent(ParcelUtils.readFromParcel(in));
+//        setContent(ParcelUtils.readFromParcel(in));
+        this.content = ParcelUtils.readFromParcel(in);
+        this.state = ParcelUtils.readFromParcel(in);
+        this.userId = ParcelUtils.readFromParcel(in);
     }
 
     /**
@@ -123,6 +140,18 @@ public class PayMessage extends MessageContent {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         ParcelUtils.writeToParcel(dest, content);
+        ParcelUtils.writeToParcel(dest, state);
+        ParcelUtils.writeToParcel(dest, userId);
+    }
+
+
+    @Override
+    public List<String> getSearchableWord() {
+        List<String> words = new ArrayList<>();
+        words.add(content);
+        words.add(state);
+        words.add(userId);
+        return words;
     }
 
     public String getContent() {
@@ -133,11 +162,20 @@ public class PayMessage extends MessageContent {
         this.content = content;
     }
 
-    @Override
-    public List<String> getSearchableWord() {
-        List<String> words = new ArrayList<>();
-        words.add(content);
-        return words;
+
+    public String getUserId() {
+        return userId;
     }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 }

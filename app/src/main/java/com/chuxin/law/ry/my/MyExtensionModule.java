@@ -23,9 +23,9 @@ public class MyExtensionModule extends DefaultExtensionModule {
     public List<IPluginModule> getPluginModules(Conversation.ConversationType conversationType) {
         List<IPluginModule> pluginModules =  new ArrayList<>();
         IPluginModule image = new ImagePlugin();
-        IPluginModule locationPlugin = new DefaultLocationPlugin();
+//        IPluginModule locationPlugin = new DefaultLocationPlugin();
         pluginModules.add(image);
-        pluginModules.add(locationPlugin);
+//        pluginModules.add(locationPlugin);
         pluginModules.add(new PayPlugin());
         return pluginModules;
     }

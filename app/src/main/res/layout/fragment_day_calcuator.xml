@@ -155,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="是否计算工作日"
+                android:text="是否仅计算工作日"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
@@ -167,9 +167,10 @@
 
 
                 <LinearLayout
+                    android:id="@+id/layout_work_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_no_yes">
+                    android:background="@drawable/bg_yes_no">
 
                     <TextView
                         android:id="@+id/text_fou"
@@ -178,7 +179,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="否"
-                        android:textColor="#cb1e28"
+                        android:textColor="@color/white"
                         android:textSize="12sp" />
 
                     <TextView
@@ -188,7 +189,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="是"
-                        android:textColor="@color/write"
+                        android:textColor="#cb1e28"
                         android:textSize="12sp" />
 
                 </LinearLayout>

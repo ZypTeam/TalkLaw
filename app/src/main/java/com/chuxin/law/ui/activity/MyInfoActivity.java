@@ -462,7 +462,7 @@ public class MyInfoActivity extends BaseTalkLawActivity {
             updateUserInfo();
         }
 
-        if (requestCode == REQUEST_IMAGE) {
+        if (requestCode == REQUEST_IMAGE&&data!=null) {
             final List<String> pathList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
             if (pathList != null && pathList.size() > 0) {
                 userModel.setHeadimg(pathList.get(0));

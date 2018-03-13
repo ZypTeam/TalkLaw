@@ -28,6 +28,7 @@
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/text_title_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -36,6 +37,7 @@
                 android:textSize="16sp" />
 
             <View
+                android:id="@+id/view_day"
                 android:layout_width="49dp"
                 android:layout_height="2dp"
                 android:layout_alignParentBottom="true"
@@ -50,6 +52,7 @@
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/text_title_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -58,11 +61,12 @@
                 android:textSize="16sp" />
 
             <View
+                android:id="@+id/view_date"
                 android:layout_width="49dp"
                 android:layout_height="2dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:background="#f0eff5"
+                android:background="#cb1e28"
                 android:visibility="gone" />
         </RelativeLayout>
     </LinearLayout>

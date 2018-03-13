@@ -3,12 +3,12 @@ package com.chuxin.law.ui.activity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.ui.adapter.CalculatorAdapter;
 import com.chuxin.law.ui.widget.BackTitleView;
-import com.chuxin.law.ui.widget.NumberPickerPopupwinow;
 
 /**
  * @author zhaoyapeng
@@ -21,6 +21,10 @@ public class DateCalculatorActivity extends BaseTalkLawActivity {
     protected ViewPager viewpager;
     protected RelativeLayout layoutDay;
     protected RelativeLayout layoutDate;
+    protected View viewDay;
+    protected View viewDate;
+    protected TextView textTitleDay;
+    protected TextView textTitleDate;
     private CalculatorAdapter calculatorAdapter;
 
 
@@ -40,6 +44,10 @@ public class DateCalculatorActivity extends BaseTalkLawActivity {
         viewpager = (ViewPager) findViewById(R.id.viewpager);
         layoutDay = (RelativeLayout) findViewById(R.id.layout_day);
         layoutDate = (RelativeLayout) findViewById(R.id.layout_date);
+        viewDay = (View) findViewById(R.id.view_day);
+        viewDate = (View) findViewById(R.id.view_date);
+        textTitleDay = (TextView) findViewById(R.id.text_title_day);
+        textTitleDate = (TextView) findViewById(R.id.text_title_date);
 
     }
 
@@ -52,12 +60,22 @@ public class DateCalculatorActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View view) {
                 viewpager.setCurrentItem(0);
+                textTitleDay.setTextColor(0xffcb1e28);
+                textTitleDate.setTextColor(0xff999999);
+                viewDay.setVisibility(View.VISIBLE);
+                viewDate.setVisibility(View.GONE);
+
             }
         });
         layoutDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                textTitleDate.setTextColor(0xffcb1e28);
+                textTitleDay.setTextColor(0xff999999);
                 viewpager.setCurrentItem(1);
+                viewDay.setVisibility(View.GONE);
+                viewDate.setVisibility(View.VISIBLE);
             }
         });
 

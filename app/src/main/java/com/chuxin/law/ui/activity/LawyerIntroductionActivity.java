@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -33,8 +34,11 @@ import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 
 import java.util.HashMap;
+import java.util.Locale;
 
+import io.rong.imkit.RongContext;
 import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.UserInfo;
 import rx.functions.Action1;
 
@@ -145,13 +149,21 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
 //                    data.getLaw().getUserid()
 
                     FriendsSp.saveFriedns(mContext,new UserInfo(data.getLaw().getUserid(),data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
-                    RongIM.getInstance().startPrivateChat(mContext, "64", data.getLaw().getName());
 
+//                    RongIM.getInstance().startPrivateChat(mContext, "64", data.getLaw().getName());
+//                    RongIM.getInstance().startChatRoomChat(mContext,"1497704102201803131347231",true);
+
+                    startChatRoomChat(mContext,"1497704102201803131347231",data.getLaw().getName(),true);
+
+//                    public void joinChatRoom(final String chatroomId, final int defMessageCount, final RongIMClient.OperationCallback callback)
 //                    RongIM.getInstance().startPrivateChat(mContext, , data.getLaw().getName());
 
                 }
             }
         });
+
+
+
 
 
         attention.setOnClickListener(new View.OnClickListener() {
@@ -306,5 +318,20 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 0, txt.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#cb1e28")), txt.length(), txt.length() + txt2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textBushnegsu.setText(builder);
+    }
+
+    public void startChatRoomChat(Context context, String chatRoomId,String title, boolean createIfNotExist) {
+        if(context != null && !TextUtils.isEmpty(chatRoomId)) {
+            if(RongContext.getInstance() == null) {
+                throw new ExceptionInInitializerError("RongCloud SDK not init");
+            } else {
+                Uri uri = Uri.parse("rong://" + context.getApplicationInfo().packageName).buildUpon().appendPath("conversation").appendPath(Conversation.ConversationType.CHATROOM.getName().toLowerCase(Locale.US)).appendQueryParameter("targetId", chatRoomId).appendQueryParameter("title", title).build();
+                Intent intent = new Intent("android.intent.action.VIEW", uri);
+                intent.putExtra("createIfNotExist", createIfNotExist);
+                context.startActivity(intent);
+            }
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 }

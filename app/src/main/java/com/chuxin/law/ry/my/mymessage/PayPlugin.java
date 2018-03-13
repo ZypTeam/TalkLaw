@@ -32,7 +32,7 @@ public class PayPlugin  implements IPluginModule {
 
     @Override
     public Drawable obtainDrawable(Context context) {
-        return context.getResources().getDrawable(R.drawable.img_chat_left_baozheng);
+        return context.getResources().getDrawable(R.drawable.img_chat_bail);
     }
 
     @Override
@@ -44,9 +44,11 @@ public class PayPlugin  implements IPluginModule {
     public void onClick(Fragment fragment, RongExtension rongExtension) {
 
         context = fragment.getActivity();
-//        conversationType = rongExtension.getConversationType();
-        targetId = rongExtension.getTargetId();
+        conversationType = rongExtension.getConversationType();
 
+        Log.e("tag","targetId=="+targetId);
+
+        targetId = rongExtension.getTargetId();
 
 
         Intent intent = new Intent(context, GuaranteeRequestActivity.class);
