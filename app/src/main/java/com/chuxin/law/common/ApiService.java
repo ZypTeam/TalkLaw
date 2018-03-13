@@ -390,5 +390,13 @@ public interface ApiService {
     @GET("/consult/list")
     Observable<MyConsultListModel> consultList(@QueryMap Map<String,String> params);
 
+    /**
+     * 是否需要购买咨询
+     * @param params
+     * @return
+     */
+    @GET("/consult/show")
+    Observable<NoDataModel> checkConsult(@QueryMap Map<String,String> params);
+
 }
 

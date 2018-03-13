@@ -64,7 +64,7 @@ public class AudioInfo implements Serializable {
     /**
      * 时长
      */
-    private long duration;
+    private long duration=1111111111;
     private String durationText;
 
     /**

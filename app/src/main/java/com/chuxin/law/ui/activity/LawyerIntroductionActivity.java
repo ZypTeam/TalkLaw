@@ -124,7 +124,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         zixun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.show();
+                checkConsult();
             }
         });
 
@@ -269,6 +269,27 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                         attention.setText("关注");
                         attention.setTextColor(Color.parseColor("#ff8400"));
                         showToast(noDataModel.getMsg());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
+    }
+
+    private void checkConsult(){
+        showLoadDialog();
+        HashMap<String,String> params=new HashMap<>();
+        params.put("touserid",data.getLaw().getUserid());
+        addNetwork(Api.getInstance().getService(ApiService.class).checkConsult(params)
+                , new Action1<NoDataModel>() {
+                    @Override
+                    public void call(NoDataModel noDataModel) {
+                        hideLoadDialog();
+                        if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE){
+                            dialog.show();
+                        }
                     }
                 }, new Action1<Throwable>() {
                     @Override

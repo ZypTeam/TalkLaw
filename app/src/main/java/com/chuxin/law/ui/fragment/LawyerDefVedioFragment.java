@@ -15,8 +15,11 @@ import com.chuxin.law.util.LawyerDefViewPagerUtils;
 import com.chuxin.law.util.UIUtils;
 import com.jusfoun.baselibrary.Util.LogUtil;
 
+import rx.functions.Action1;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import witmob.com.videolibrary.media.VideoPlayView;
+
+import static com.chuxin.law.common.CommonConstant.EVENT_BUY_LAWYER;
 
 /**
  * @author wangcc
@@ -110,6 +113,15 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
                     return;
                 }
                 videoPlayView.start(url);
+            }
+        });
+
+        rxManage.on(EVENT_BUY_LAWYER, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                if (data!=null&&data.getArticle()!=null){
+                    data.getArticle().setIs_buy(1);
+                }
             }
         });
     }

@@ -64,11 +64,14 @@ public class TalkLawApplication extends BaseApplication {
      */
     public static String currentUserNick = "";
 
+    public TalkLawApplication(){
+        instance=this;
+    }
+
     @Override
     public void onCreate() {
         MultiDex.install(this);
         super.onCreate();
-        instance = this;
         SharePrefenceUtils.getInstance().register(this, getPackageName());
         Api.getInstance().register(this, getString(R.string.url))
                 .addInterceptro(new HeaderTalkInterceptor())

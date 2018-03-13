@@ -29,6 +29,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import com.chuxin.law.R;
+import com.chuxin.law.TalkLawApplication;
+
 import io.rong.common.RLog;
 
 
@@ -221,7 +223,7 @@ public class UpdateService extends Service {
         PackageManager packageManager = null;
         ApplicationInfo applicationInfo = null;
         try {
-            packageManager = getApplicationContext().getPackageManager();
+            packageManager = TalkLawApplication.getInstance().getPackageManager();
             applicationInfo = packageManager.getApplicationInfo(getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
             applicationInfo = null;

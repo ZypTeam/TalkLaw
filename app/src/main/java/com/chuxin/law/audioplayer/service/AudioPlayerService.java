@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.chuxin.law.audioplayer.ResourceConstants;
@@ -72,22 +73,6 @@ public class AudioPlayerService extends Service {
      */
     private boolean isSeekTo = false;
 
-    ///////////////////////////////通知栏//////////////////////////////
-    private int mNotificationPlayBarId = 19900420;
-    /**
-     * 状态栏播放器视图
-     */
-    private RemoteViews mNotifyPlayBarRemoteViews;
-    /**
-     *
-     */
-    private Notification mPlayBarNotification;
-
-    /**
-     *
-     */
-    private NotificationReceiver mNotificationReceiver;
-
 
     @Override
     public void onCreate() {
@@ -115,7 +100,6 @@ public class AudioPlayerService extends Service {
     @Override
     public void onDestroy() {
         mAudioBroadcastReceiver.unregisterReceiver(getApplicationContext());
-        mNotificationReceiver.unregisterReceiver(getApplicationContext());
 
         //关闭通知栏
         stopForeground(true);
@@ -172,10 +156,10 @@ public class AudioPlayerService extends Service {
      */
     private void resumeMusic(AudioMessage audioMessage) {
 
-        /*//如果是网络歌曲，先进行下载，再进行播放
-        if (mHPApplication.getCurAudioInfo() != null && mHPApplication.getCurAudioInfo().getType() == AudioInfo.NET) {
+        //如果是网络歌曲，先进行下载，再进行播放
+        if (audioPlayUtils.getmCurrentAudio() != null && audioPlayUtils.getmCurrentAudio().getType() == AudioInfo.NET) {
             //如果进度为0，表示上一次下载直接错误。
-            int downloadedSize = DownloadThreadDB.getDownloadThreadDB(getApplicationContext()).getDownloadedSize(mHPApplication.getPlayIndexHashID(), OnLineAudioManager.threadNum);
+            int downloadedSize = DownloadThreadDB.getDownloadThreadDB(getApplicationContext()).getDownloadedSize(audioPlayUtils.getmCurrentAudio().getHash(), OnLineAudioManager.threadNum);
             if (downloadedSize == 0) {
                 //发送init的广播
                 Intent initIntent = new Intent(AudioBroadcastReceiver.ACTION_INITMUSIC);
@@ -189,12 +173,9 @@ public class AudioPlayerService extends Service {
                 isSeekTo = true;
                 mMediaPlayer.seekTo(audioMessage.getPlayProgress());
             }
-            mHPApplication.setPlayStatus(AudioPlayerManager.PLAYING);
-        }*/
+            audioPlayUtils.setPlayStatus(AudioPlayerManager.PLAYING);
+        }
 
-        Intent nextIntent = new Intent(AudioBroadcastReceiver.ACTION_SERVICE_RESUMEMUSIC);
-        nextIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-        sendBroadcast(nextIntent);
     }
 
     /**
@@ -222,6 +203,8 @@ public class AudioPlayerService extends Service {
         // resetPlayData();
 
         AudioInfo audioInfo = audioMessage.getAudioInfo();
+        audioPlayUtils.setmCurrentAudio(audioInfo);
+        audioPlayUtils.setCurAudioMessage(audioMessage);
         //发送init的广播
         Intent initIntent = new Intent(AudioBroadcastReceiver.ACTION_INITMUSIC);
         //initIntent.putExtra(AudioMessage.KEY, audioMessage);
@@ -302,12 +285,12 @@ public class AudioPlayerService extends Service {
                     @Override
                     public void onCompletion(IMediaPlayer mp) {
 
-                        if (mMediaPlayer.getCurrentPosition() < (audioPlayUtils.getmCurrentAudio().getDuration() - 2 * 1000)) {
+                        /*if (mMediaPlayer.getCurrentPosition() < (audioPlayUtils.getmCurrentAudio().getDuration() - 2 * 1000)) {
                             playNetMusic();
                         } else {
                             //播放完成，执行下一首操作
 //                            nextMusic();
-                        }
+                        }*/
 
                     }
                 });
@@ -345,7 +328,7 @@ public class AudioPlayerService extends Service {
 
                         if (audioPlayUtils.getCurAudioMessage() != null) {
                             AudioMessage audioMessage = audioPlayUtils.getCurAudioMessage();
-
+                            audioMessage.setPlayDuration(mMediaPlayer.getDuration());
                             if (audioMessage.getPlayProgress() > 0) {
                                 isSeekTo = true;
                                 mMediaPlayer.seekTo(audioMessage.getPlayProgress());
@@ -492,6 +475,7 @@ public class AudioPlayerService extends Service {
 
                     if (audioPlayUtils.getCurAudioMessage() != null) {
                         AudioMessage audioMessage = audioPlayUtils.getCurAudioMessage();
+                        audioMessage.setPlayDuration(mMediaPlayer.getDuration());
 
                         if (audioMessage.getPlayProgress() > 0) {
                             isSeekTo = true;
@@ -600,5 +584,6 @@ public class AudioPlayerService extends Service {
     private void resetPlayData() {
         //设置当前播放的状态
         audioPlayUtils.setmCurrentAudio(null);
+        audioPlayUtils.setCurAudioMessage(null);
     }
 }

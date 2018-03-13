@@ -18,6 +18,11 @@ public class AudioMessage implements Serializable {
      * 播放进度
      */
     private long playProgress;
+
+    /**
+     * 总时长
+     */
+    private long playDuration;
     /**
      * 音频信息
      */
@@ -41,6 +46,14 @@ public class AudioMessage implements Serializable {
 
     public long getPlayProgress() {
         return playProgress;
+    }
+
+    public long getPlayDuration() {
+        return playDuration;
+    }
+
+    public void setPlayDuration(long playDuration) {
+        this.playDuration = playDuration;
     }
 
     public void setPlayProgress(long playProgress) {

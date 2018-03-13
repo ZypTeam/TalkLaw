@@ -1,5 +1,7 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Intent;
+import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
@@ -12,6 +14,9 @@ import com.chuxin.law.TalkLawApplication;
 
 import com.chuxin.law.R;
 
+import com.chuxin.law.audioplayer.manage.AudioPlayerManager;
+import com.chuxin.law.audioplayer.service.AudioPlayerService;
+import com.chuxin.law.audioplayer.util.AudioPlayUtils;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.ui.adapter.HomeAdapter;
 import com.chuxin.law.util.voice.VoiceHelper;
@@ -31,7 +36,6 @@ public class HomeActivity extends BaseTalkLawActivity {
     private LinearLayout opinionLayout, statementLayout, myLayout;
     private ImageView opinionImg, statementImg, myImg;
     private TextView opinionText, statementText, myText;
-    private VoiceHelper helper;
 
     @Override
     public int getLayoutResId() {
@@ -41,7 +45,6 @@ public class HomeActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
         adapter = new HomeAdapter(getSupportFragmentManager());
-        helper=new VoiceHelper();
     }
 
     @Override
@@ -91,8 +94,20 @@ public class HomeActivity extends BaseTalkLawActivity {
 
         viewPager.setOffscreenPageLimit(3);
 
+        initService();
+
     }
 
+    private void initService(){
+        Intent playerServiceIntent = new Intent(this, AudioPlayerService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            TalkLawApplication.getBaseApplication().startForegroundService(playerServiceIntent);
+        } else {
+            TalkLawApplication.getBaseApplication().startService(playerServiceIntent);
+        }
+
+        AudioPlayUtils.getInstance().setPlayStatus(AudioPlayerManager.STOP);
+    }
 
     public void setBtnState(int index) {
         opinionImg.setImageResource(R.mipmap.img_opinion);
@@ -139,9 +154,12 @@ public class HomeActivity extends BaseTalkLawActivity {
 
     @Override
     protected void onDestroy() {
-        if (helper.isPlay()||helper.isPause()){
-            helper.stopVoice();
-        }
         super.onDestroy();
+        Intent playerServiceIntent = new Intent(this, AudioPlayerService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            TalkLawApplication.getBaseApplication().stopService(playerServiceIntent);
+        } else {
+            TalkLawApplication.getBaseApplication().stopService(playerServiceIntent);
+        }
     }
 }
