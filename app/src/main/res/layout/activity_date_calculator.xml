@@ -64,7 +64,7 @@
                 android:layout_height="2dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:background="#f0eff5"
+                android:background="#cb1e28"
                 android:visibility="gone" />
         </RelativeLayout>
     </LinearLayout>
