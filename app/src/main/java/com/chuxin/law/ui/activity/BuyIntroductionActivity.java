@@ -137,7 +137,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
     private void buy() {
         HashMap<String, String> params = new HashMap<>();
         params.put("touserid", data.getLaw().getUserid());
-        params.put("method", zhifubao.isSelected() ? "1" : "2");
+        params.put("method", zhifubao.isSelected() ? "2" : "1");
         Log.e("tag", "params" + params);
         addNetwork(Api.getInstance().getService(ApiService.class).consultSet(params)
                 , new Action1<OrderResultModel>() {
