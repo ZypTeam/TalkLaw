@@ -40,6 +40,10 @@ public class MyConsultViewHolder extends BaseViewHolder<MyConsultModel> {
     public MyConsultViewHolder(View itemView, Context mContext) {
         super(itemView, mContext);
         iconHead=itemView.findViewById(R.id.icon_head);
+        name=itemView.findViewById(R.id.name);
+        time=itemView.findViewById(R.id.time);
+        content=itemView.findViewById(R.id.content);
+        result=itemView.findViewById(R.id.result);
     }
 
     @Override
