@@ -221,7 +221,7 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
         if (type == 0) {
             goActivity(null, PaySucActivity.class);
         } else if (type == 1) {
-            rxManage.post(EVENT_BUY_LAWYER);
+            rxManage.post(EVENT_BUY_LAWYER,"");
             showToast("购买成功");
             setResult(RESULT_OK);
             onBackPressed();

@@ -230,6 +230,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         rxManage.on(EVENT_BUY_LAWYER, new Action1<Object>() {
             @Override
             public void call(Object o) {
+
                 if (data!=null&&data.getArticle()!=null){
                     data.getArticle().setIs_buy(1);
                 }

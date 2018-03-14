@@ -77,6 +77,8 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
 
     private AudioInfo audioInfo;
 
+    private VoiceHelper voiceHelper;
+
     /**
      * 音频广播
      */
@@ -210,6 +212,9 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
         audioInfo.setFileExt("mp3");
         audioInfo.setType(AudioInfo.NET);
         initService();
+
+        voiceHelper=new VoiceHelper();
+        voiceHelper.initVoice(VoiceHelper.MUSIC_INDEX,url);
     }
 
     @Override
@@ -236,6 +241,24 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
     @Override
     public void initAction() {
         time.setText("00:00");
+
+        voiceHelper.setListener(new VoiceHelper.OnPlayListener() {
+            @Override
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void prepared() {
+                timeAll.setText(DateUtil.parseTimeToString((int) voiceHelper.getLength()));
+            }
+        });
+        voiceHelper.initAudio();
 
         download.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -553,9 +576,21 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onResume() {
+        super.onResume();
+        initService();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
         mAudioBroadcastReceiver.unregisterReceiver(getApplicationContext());
         mOnLineAudioReceiver.unregisterReceiver(getApplicationContext());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 }

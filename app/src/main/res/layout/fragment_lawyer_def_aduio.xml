@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="18dp"
-                android:text="02:02"
+                android:text="00:00"
                 android:textColor="#cb1f28"
                 android:textSize="12dp" />
 
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="24dp"
-                android:text="02:02"
+                android:text="00:00"
                 android:textColor="#cb1f28"
                 android:textSize="12dp" />
 

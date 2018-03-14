@@ -63,6 +63,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
     private LawyerProductModel.LawyerProductData data;
 
     private AudioInfo audioInfo;
+    private VoiceHelper voiceHelper;
 
     /**
      * 音频广播
@@ -208,6 +209,8 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
         audioInfo.setSingerName(data.getArticle().getId());
         audioInfo.setFileExt("mp3");
         audioInfo.setType(AudioInfo.NET);
+        voiceHelper=new VoiceHelper();
+        voiceHelper.initVoice(VoiceHelper.MUSIC_INDEX,url);
     }
 
     @Override
@@ -416,11 +419,23 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
             }
         });
 
-        if (CommonLogic.getInstance().getLawyerProductData() == null
-                || CommonLogic.getInstance().getLawyerProductData().getArticle() == null
-                || StringUtil.equals(CommonLogic.getInstance().getLawyerProductData().getArticle().getUrl(), url)) {
-            initService();
-        }
+        voiceHelper.setListener(new VoiceHelper.OnPlayListener() {
+            @Override
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void prepared() {
+                timeAll.setText(DateUtil.parseTimeToString((int) voiceHelper.getLength()));
+            }
+        });
+        voiceHelper.initAudio();
     }
 
     /**
@@ -440,9 +455,24 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        initService();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAudioBroadcastReceiver!=null) {
+            mAudioBroadcastReceiver.unregisterReceiver(mContext);
+        }
+        if (mOnLineAudioReceiver!=null) {
+            mOnLineAudioReceiver.unregisterReceiver(mContext);
+        }
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mAudioBroadcastReceiver.unregisterReceiver(mContext);
-        mOnLineAudioReceiver.unregisterReceiver(mContext);
     }
 }
