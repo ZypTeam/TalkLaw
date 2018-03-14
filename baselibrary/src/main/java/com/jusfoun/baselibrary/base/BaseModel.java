@@ -17,6 +17,8 @@ public abstract class BaseModel implements Serializable {
 
     protected String error;
 
+    public int total;
+
     public int getCode() {
         return code;
     }
@@ -56,4 +58,5 @@ public abstract class BaseModel implements Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }

@@ -13,6 +13,8 @@ import java.util.List;
 public class CommentListModel extends BaseModel{
     private List<CommentModel> data;
 
+
+
     public List<CommentModel> getData() {
         return data;
     }
