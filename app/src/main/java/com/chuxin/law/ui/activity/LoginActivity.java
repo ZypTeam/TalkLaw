@@ -195,6 +195,10 @@ public class LoginActivity extends BaseTalkLawActivity {
                         if (userInfoModel != null && userInfoModel.getData() != null && userInfoModel.getCode() == 10000) {
                             //TODO :登录成功直接登录 hide loading 新用户 融云登录注册调试后去掉
                             hideLoadDialog();
+                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
+
+                            goActivity(null, HomeActivity.class);
+                            finish();
 
                             if (userInfoModel.getData() != null) {
                                 RongIM.getInstance().refreshUserInfoCache(new UserInfo("userId", userInfoModel.getData().getUserid(), Uri.parse(userInfoModel.getData().getHeadimg())));

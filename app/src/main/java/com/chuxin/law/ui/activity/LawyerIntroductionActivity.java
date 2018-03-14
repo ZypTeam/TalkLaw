@@ -31,6 +31,7 @@ import com.chuxin.law.ui.view.PresentInstructionsDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.chuxin.law.util.ImageLoderUtil;
 import com.chuxin.law.util.UIUtils;
+import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 
@@ -113,7 +114,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                if (data==null||data.getLaw()==null){
+                if (data == null || data.getLaw() == null) {
                     return;
                 }
                 Bundle bundle = new Bundle();
@@ -149,12 +150,12 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
 //                    mContext.startActivity(intent);
 //                    data.getLaw().getUserid()
 
-                    FriendsSp.saveFriedns(mContext,new UserInfo(data.getLaw().getUserid(),data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
+                    FriendsSp.saveFriedns(mContext, new UserInfo(data.getLaw().getUserid(), data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
 
 //                    RongIM.getInstance().startPrivateChat(mContext, "64", data.getLaw().getName());
 //                    RongIM.getInstance().startChatRoomChat(mContext,"1497704102201803131347231",true);
 
-                    startChatRoomChat(mContext,"1497704102201803131347231",data.getLaw().getName(),true);
+                    startChatRoomChat(mContext, "1497704102201803131347231", data.getLaw().getName(), true);
 
 //                    public void joinChatRoom(final String chatroomId, final int defMessageCount, final RongIMClient.OperationCallback callback)
 //                    RongIM.getInstance().startPrivateChat(mContext, , data.getLaw().getName());
@@ -162,9 +163,6 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                 }
             }
         });
-
-
-
 
 
         attention.setOnClickListener(new View.OnClickListener() {
@@ -291,17 +289,21 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                 });
     }
 
-    private void checkConsult(){
+    private void checkConsult() {
         showLoadDialog();
-        HashMap<String,String> params=new HashMap<>();
-        params.put("touserid",data.getLaw().getUserid());
+        HashMap<String, String> params = new HashMap<>();
+        params.put("touserid", data.getLaw().getUserid());
         addNetwork(Api.getInstance().getService(ApiService.class).checkConsult(params)
                 , new Action1<CheckConsultModel>() {
                     @Override
                     public void call(CheckConsultModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE){
-                            dialog.show();
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
+                            if (noDataModel.getData() == null || StringUtil.isEmpty(noDataModel.getData().getOrder())) {
+                                dialog.show();
+                            } else {
+                                goRongIM(noDataModel.getData().getOrder());
+                            }
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -321,9 +323,9 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         textBushnegsu.setText(builder);
     }
 
-    public void startChatRoomChat(Context context, String chatRoomId,String title, boolean createIfNotExist) {
-        if(context != null && !TextUtils.isEmpty(chatRoomId)) {
-            if(RongContext.getInstance() == null) {
+    public void startChatRoomChat(Context context, String chatRoomId, String title, boolean createIfNotExist) {
+        if (context != null && !TextUtils.isEmpty(chatRoomId)) {
+            if (RongContext.getInstance() == null) {
                 throw new ExceptionInInitializerError("RongCloud SDK not init");
             } else {
                 Uri uri = Uri.parse("rong://" + context.getApplicationInfo().packageName).buildUpon().appendPath("conversation").appendPath(Conversation.ConversationType.CHATROOM.getName().toLowerCase(Locale.US)).appendQueryParameter("targetId", chatRoomId).appendQueryParameter("title", title).build();
@@ -334,5 +336,10 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         } else {
             throw new IllegalArgumentException();
         }
+    }
+
+    private void goRongIM(String id) {
+        FriendsSp.saveFriedns(mContext, new UserInfo(data.getLaw().getUserid(), data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
+        startChatRoomChat(mContext, id, data.getLaw().getName(), true);
     }
 }

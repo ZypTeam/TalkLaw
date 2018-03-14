@@ -33,12 +33,14 @@ import io.rong.imlib.model.UserInfo;
 
 public class PaySucActivity extends BaseTalkLawActivity {
     public static final String DATA = "data";
+    public static final String RONGID="rongid";
     protected BackTitleView titleView;
     protected TextView suc;
     protected TextView timer;
     protected TextView click;
     private int second=5;
     private LawyerIntroModel.LawyerIntroData data;
+    private String rongId;
 
     private WeakHandler handler=new WeakHandler();
     private Runnable task=new Runnable() {
@@ -62,7 +64,8 @@ public class PaySucActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-        data = (LawyerIntroModel.LawyerIntroData) getIntent().getExtras().getSerializable(DATA);
+        data = (LawyerIntroModel.LawyerIntroData) getIntent().getSerializableExtra(DATA);
+        rongId=getIntent().getStringExtra(RONGID);
     }
 
     @Override
@@ -92,7 +95,7 @@ public class PaySucActivity extends BaseTalkLawActivity {
 
     private void goNext(){
         FriendsSp.saveFriedns(mContext,new UserInfo(data.getLaw().getUserid(),data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
-        startChatRoomChat(mContext,"1497704102201803131347231",data.getLaw().getName(),true);
+        startChatRoomChat(mContext,rongId,data.getLaw().getName(),true);
         onBackPressed();
     }
 

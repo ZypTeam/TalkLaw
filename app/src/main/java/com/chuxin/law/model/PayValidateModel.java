@@ -25,6 +25,7 @@ public class PayValidateModel extends BaseModel {
     public final class Data implements Serializable{
         private int state;
         private String partnerid;
+        private String order;
 
         public int getState() {
             return state;
@@ -40,6 +41,14 @@ public class PayValidateModel extends BaseModel {
 
         public void setPartnerid(String partnerid) {
             this.partnerid = partnerid;
+        }
+
+        public String getOrder() {
+            return order;
+        }
+
+        public void setOrder(String order) {
+            this.order = order;
         }
     }
 }
