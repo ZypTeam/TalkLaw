@@ -191,7 +191,7 @@ public class CommentListActivity extends BaseTalkLawActivity {
         HashMap<String,String> params=new HashMap<>();
         params.put("id",id);
         params.put("size", CommonConstant.LIST_PAGE_SIZE);
-        params.put("page",(isRefresh?1:page+1)+"");
+        params.put("page",(isRefresh?1:page)+"");
         addNetwork(Api.getInstance().getService(ApiService.class).getCommentList(params)
                 , new Action1<CommentListModel>() {
                     @Override
@@ -204,6 +204,12 @@ public class CommentListActivity extends BaseTalkLawActivity {
                                 adapter.refreshList(commentListModel.getData());
                             }else {
                                 adapter.addList(commentListModel.getData());
+                            }
+
+                            if(adapter.getItemCount()<commentListModel.total){
+                                list.setLoadingMoreEnabled(true);
+                            }else{
+                                list.setLoadingMoreEnabled(false);
                             }
                             page++;
                         }
