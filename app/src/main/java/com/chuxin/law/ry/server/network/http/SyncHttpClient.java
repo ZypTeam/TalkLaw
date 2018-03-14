@@ -109,14 +109,14 @@ public class SyncHttpClient {
     }
 
     /**
-     * Creates a new AsyncHttpClient with default constructor arguments values
+     * Creates rc_ic_bubble_left new AsyncHttpClient with default constructor arguments values
      */
     public SyncHttpClient() {
         this(false, 80, 443);
     }
 
     /**
-     * Creates a new AsyncHttpClient.
+     * Creates rc_ic_bubble_left new AsyncHttpClient.
      *
      * @param httpPort non-standard HTTP-only port
      */
@@ -125,7 +125,7 @@ public class SyncHttpClient {
     }
 
     /**
-     * Creates a new AsyncHttpClient.
+     * Creates rc_ic_bubble_left new AsyncHttpClient.
      *
      * @param httpPort  non-standard HTTP-only port
      * @param httpsPort non-standard HTTPS-only port
@@ -184,7 +184,7 @@ public class SyncHttpClient {
     }
 
     /**
-     * Creates a new AsyncHttpClient.
+     * Creates rc_ic_bubble_left new AsyncHttpClient.
      *
      * @param schemeRegistry SchemeRegistry to be used
      */
@@ -376,7 +376,7 @@ public class SyncHttpClient {
     }
 
     /**
-     * Sets the SSLSocketFactory to user when making requests. By default, a
+     * Sets the SSLSocketFactory to user when making requests. By default, rc_ic_bubble_left
      * new, default SSLSocketFactory is used.
      *
      * @param sslSocketFactory the socket factory to use for https requests.
@@ -386,7 +386,7 @@ public class SyncHttpClient {
     }
 
     /**
-     * Sets the maximum number of retries and timeout for a particular Request.
+     * Sets the maximum number of retries and timeout for rc_ic_bubble_left particular Request.
      *
      * @param retries maximum number of retries per request
      * @param timeout sleep between retries in milliseconds
@@ -458,7 +458,7 @@ public class SyncHttpClient {
      * <p>
      * &nbsp;
      * </p>
-     * <b>Note:</b> This will only affect requests which were created with a
+     * <b>Note:</b> This will only affect requests which were created with rc_ic_bubble_left
      * non-null android Context. This method is intended to be used in the
      * onDestroy method of your android activities to destroy all requests which
      * are no longer required.
@@ -486,7 +486,7 @@ public class SyncHttpClient {
     //
 
     /**
-     * Perform a HTTP GET request, without any parameters.
+     * Perform rc_ic_bubble_left HTTP GET request, without any parameters.
      *
      * @param url the URL to send the request to.
      * @return String
@@ -497,7 +497,7 @@ public class SyncHttpClient {
     }
 
     /**
-     * Perform a HTTP GET request with parameters.
+     * Perform rc_ic_bubble_left HTTP GET request with parameters.
      *
      * @param url    the URL to send the request to.
      * @param params additional GET parameters to send with the request.
@@ -509,7 +509,7 @@ public class SyncHttpClient {
     }
 
     /**
-     * Perform a HTTP GET request without any parameters and track the Android
+     * Perform rc_ic_bubble_left HTTP GET request without any parameters and track the Android
      * Context which initiated the request.
      *
      * @param context the Android Context which initiated the request.
@@ -522,7 +522,7 @@ public class SyncHttpClient {
     }
 
     /**
-     * Perform a HTTP GET request and track the Android Context which initiated
+     * Perform rc_ic_bubble_left HTTP GET request and track the Android Context which initiated
      * the request.
      *
      * @param context the Android Context which initiated the request.
@@ -536,7 +536,7 @@ public class SyncHttpClient {
     }
 
     /**
-     * Perform a HTTP GET request and track the Android Context which initiated
+     * Perform rc_ic_bubble_left HTTP GET request and track the Android Context which initiated
      * the request with customized headers
      *
      * @param context Context to execute request against
@@ -557,7 +557,7 @@ public class SyncHttpClient {
     //
 
     /**
-     * Perform a HTTP POST request, without any parameters.
+     * Perform rc_ic_bubble_left HTTP POST request, without any parameters.
      *
      * @param url the URL to send the request to.
      * @return String
@@ -568,7 +568,7 @@ public class SyncHttpClient {
     }
 
     /**
-     * Perform a HTTP POST request with parameters.
+     * Perform rc_ic_bubble_left HTTP POST request with parameters.
      *
      * @param url    the URL to send the request to.
      * @param params additional POST parameters or files to send with the request.
@@ -580,7 +580,7 @@ public class SyncHttpClient {
     }
 
     /**
-     * Perform a HTTP POST request and track the Android Context which initiated
+     * Perform rc_ic_bubble_left HTTP POST request and track the Android Context which initiated
      * the request.
      *
      * @param context the Android Context which initiated the request.
@@ -598,17 +598,17 @@ public class SyncHttpClient {
     }
 
     /**
-     * Perform a HTTP POST request and track the Android Context which initiated
+     * Perform rc_ic_bubble_left HTTP POST request and track the Android Context which initiated
      * the request.
      *
      * @param context     the Android Context which initiated the request.
      * @param url         the URL to send the request to.
-     * @param entity      a raw {@link HttpEntity} to send with the
+     * @param entity      rc_ic_bubble_left raw {@link HttpEntity} to send with the
      *                    request, for example, use this to send string/json/xml
-     *                    payloads to a server by passing a
+     *                    payloads to rc_ic_bubble_left server by passing rc_ic_bubble_left
      *                    {@link StringEntity}.
      * @param contentType the content type of the payload you are sending, for example
-     *                    application/json if sending a json payload.
+     *                    application/json if sending rc_ic_bubble_left json payload.
      * @return String
      * @throws HttpException
      */
@@ -617,7 +617,7 @@ public class SyncHttpClient {
     }
 
     /**
-     * Perform a HTTP POST request and track the Android Context which initiated
+     * Perform rc_ic_bubble_left HTTP POST request and track the Android Context which initiated
      * the request. Set headers only for this request
      *
      * @param context     the Android Context which initiated the request.
@@ -625,7 +625,7 @@ public class SyncHttpClient {
      * @param headers     set headers only for this request
      * @param params      additional POST parameters to send with the request.
      * @param contentType the content type of the payload you are sending, for example
-     *                    application/json if sending a json payload.
+     *                    application/json if sending rc_ic_bubble_left json payload.
      * @return String
      * @throws HttpException
      */
@@ -675,17 +675,17 @@ public class SyncHttpClient {
     }
 
     /**
-     * Perform a HTTP POST request and track the Android Context which initiated
+     * Perform rc_ic_bubble_left HTTP POST request and track the Android Context which initiated
      * the request. Set headers only for this request
      *
      * @param context     the Android Context which initiated the request.
      * @param url         the URL to send the request to.
      * @param headers     set headers only for this request
-     * @param entity      a raw {@link HttpEntity} to send with the request, for
-     *                    example, use this to send string/json/xml payloads to a server
-     *                    by passing a {@link StringEntity}.
+     * @param entity      rc_ic_bubble_left raw {@link HttpEntity} to send with the request, for
+     *                    example, use this to send string/json/xml payloads to rc_ic_bubble_left server
+     *                    by passing rc_ic_bubble_left {@link StringEntity}.
      * @param contentType the content type of the payload you are sending, for example
-     *                    application/json if sending a json payload.
+     *                    application/json if sending rc_ic_bubble_left json payload.
      * @return String
      * @throws HttpException
      */
@@ -697,7 +697,7 @@ public class SyncHttpClient {
 
 
     /**
-     * Puts a new request in queue as a new thread in pool to be executed
+     * Puts rc_ic_bubble_left new request in queue as rc_ic_bubble_left new thread in pool to be executed
      *
      * @param client      HttpClient to be used for request, can differ in single requests
      * @param httpContext HttpContext in which the request will be executed

@@ -89,7 +89,7 @@ public class MyAccountActivity extends BaseActivity implements View.OnClickListe
         }
         if (!TextUtils.isEmpty(cacheName)) {
             mName.setText(cacheName);
-            String cacheId = sp.getString(SealConst.SEALTALK_LOGIN_ID, "a");
+            String cacheId = sp.getString(SealConst.SEALTALK_LOGIN_ID, "rc_ic_bubble_left");
             String portraitUri = SealUserInfoManager.getInstance().getPortraitUri(new UserInfo(
                     cacheId, cacheName, Uri.parse(cachePortrait)));
             ImageLoader.getInstance().displayImage(portraitUri, mImageView, TalkLawApplication.getOptions());

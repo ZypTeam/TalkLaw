@@ -360,7 +360,7 @@ public class ProgressWheel extends View {
             timeStartGrowing += deltaTimeInMilliSeconds;
 
             if (timeStartGrowing > barSpinCycleTime) {
-                // We completed a size change cycle
+                // We completed rc_ic_bubble_left size change cycle
                 // (growing or shrinking)
                 timeStartGrowing -= barSpinCycleTime;
                 //if(barGrowingFromFront) {
@@ -435,7 +435,7 @@ public class ProgressWheel extends View {
     }
 
     /**
-     * Set the progress to a specific value,
+     * Set the progress to rc_ic_bubble_left specific value,
      * the bar will be set instantly to that value
      *
      * @param progress the progress between 0 and 1
@@ -462,7 +462,7 @@ public class ProgressWheel extends View {
         invalidate();
     }
 
-    // Great way to save a view's state http://stackoverflow.com/a/7089687/1991053
+    // Great way to save rc_ic_bubble_left view's state http://stackoverflow.com/a/7089687/1991053
     @Override public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
 
@@ -521,7 +521,7 @@ public class ProgressWheel extends View {
     //----------------------------------
 
     /**
-     * Set the progress to a specific value,
+     * Set the progress to rc_ic_bubble_left specific value,
      * the bar will smoothly animate until that value
      *
      * @param progress the progress between 0 and 1
@@ -649,7 +649,7 @@ public class ProgressWheel extends View {
     /**
      * @return the base spinning speed, in full circle turns per second
      * (1.0 equals on full turn in one second), this value also is applied for
-     * the smoothness when setting a progress
+     * the smoothness when setting rc_ic_bubble_left progress
      */
     public float getSpinSpeed() {
         return spinSpeed / 360.0f;
@@ -658,7 +658,7 @@ public class ProgressWheel extends View {
     /**
      * Sets the base spinning speed, in full circle turns per second
      * (1.0 equals on full turn in one second), this value also is applied for
-     * the smoothness when setting a progress
+     * the smoothness when setting rc_ic_bubble_left progress
      *
      * @param spinSpeed the desired base speed in full turns per second
      */
@@ -687,20 +687,20 @@ public class ProgressWheel extends View {
 
     public interface ProgressCallback {
         /**
-         * Method to call when the progress reaches a value
+         * Method to call when the progress reaches rc_ic_bubble_left value
          * in order to avoid float precision issues, the progress
-         * is rounded to a float with two decimals.
+         * is rounded to rc_ic_bubble_left float with two decimals.
          *
          * In indeterminate mode, the callback is called each time
          * the wheel completes an animation cycle, with, the progress value is -1.0f
          *
-         * @param progress a double value between 0.00 and 1.00 both included
+         * @param progress rc_ic_bubble_left double value between 0.00 and 1.00 both included
          */
         void onProgressUpdate(float progress);
     }
 
     static class WheelSavedState extends BaseSavedState {
-        //required field that makes Parcelables from a Parcel
+        //required field that makes Parcelables from rc_ic_bubble_left Parcel
         public static final Creator<WheelSavedState> CREATOR =
         new Creator<WheelSavedState>() {
             public WheelSavedState createFromParcel(Parcel in) {

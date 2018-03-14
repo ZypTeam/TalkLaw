@@ -61,7 +61,7 @@
         <attr name="android:scaleType" />
     </declare-styleable>
 
-    <!-- Defines the custom XML attributes supported for a HorizontalListView -->
+    <!-- Defines the custom XML attributes supported rc_ic_bubble_leftor a HorizontalListView -->
     <declare-styleable name="HorizontalListView">
         <attr name="dividerWidth" format="dimension" />
         <attr name="android:divider" />

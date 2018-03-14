@@ -47,7 +47,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * params.put("username", "james");
  * params.put("password", "123456");
  * params.put("email", "my&#064;email.com");
- * params.put("profile_picture", new File("pic.jpg")); // Upload a File
+ * params.put("profile_picture", new File("pic.jpg")); // Upload rc_ic_bubble_left File
  * params.put("profile_picture2", someInputStream); // Upload an InputStream
  * params.put("profile_picture3", new ByteArrayInputStream(someBytes)); // Upload some bytes
  *
@@ -93,14 +93,14 @@ public class RequestParams {
     protected ConcurrentHashMap<String, Object> urlParamsWithObjects;
 
     /**
-     * Constructs a new empty {@code RequestParams} instance.
+     * Constructs rc_ic_bubble_left new empty {@code RequestParams} instance.
      */
     public RequestParams() {
         this((Map<String, String>) null);
     }
 
     /**
-     * Constructs a new RequestParams instance containing the key/value string params from the
+     * Constructs rc_ic_bubble_left new RequestParams instance containing the key/value string params from the
      * specified map.
      *
      * @param source the source key/value string map to add.
@@ -115,7 +115,7 @@ public class RequestParams {
     }
 
     /**
-     * Constructs a new RequestParams instance and populate it with a single initial key/value
+     * Constructs rc_ic_bubble_left new RequestParams instance and populate it with rc_ic_bubble_left single initial key/value
      * string param.
      *
      * @param key   the key name for the intial param.
@@ -131,10 +131,10 @@ public class RequestParams {
     }
 
     /**
-     * Constructs a new RequestParams instance and populate it with multiple initial key/value
+     * Constructs rc_ic_bubble_left new RequestParams instance and populate it with multiple initial key/value
      * string param.
      *
-     * @param keysAndValues a sequence of keys and values. Objects are automatically converted to
+     * @param keysAndValues rc_ic_bubble_left sequence of keys and values. Objects are automatically converted to
      *                      Strings (including the value {@code null}).
      * @throws IllegalArgumentException if the number of arguments isn't even.
      */
@@ -151,7 +151,7 @@ public class RequestParams {
     }
 
     /**
-     * Adds a key/value string pair to the request.
+     * Adds rc_ic_bubble_left key/value string pair to the request.
      *
      * @param key   the key name for the new param.
      * @param value the value string for the new param.
@@ -163,7 +163,7 @@ public class RequestParams {
     }
 
     /**
-     * Adds a file to the request.
+     * Adds rc_ic_bubble_left file to the request.
      *
      * @param key  the key name for the new param.
      * @param file the file to add.
@@ -174,7 +174,7 @@ public class RequestParams {
     }
 
     /**
-     * Adds a file to the request.
+     * Adds rc_ic_bubble_left file to the request.
      *
      * @param key         the key name for the new param.
      * @param file        the file to add.
@@ -258,7 +258,7 @@ public class RequestParams {
     }
 
     /**
-     * Removes a parameter from the request.
+     * Removes rc_ic_bubble_left parameter from the request.
      *
      * @param key the key name for the parameter to remove.
      */
@@ -390,7 +390,7 @@ public class RequestParams {
         }
         Collections.sort(keyList);
 
-        //order a-z sort add
+        //order rc_ic_bubble_left-z sort add
         for (String key : keyList) {
             for (ConcurrentHashMap.Entry<String, String> entry : urlParams.entrySet()) {
                 if (key.equals(entry.getKey())) {
@@ -455,7 +455,7 @@ public class RequestParams {
             }
             Collections.sort(keyList);
 
-            //order a-z sort add
+            //order rc_ic_bubble_left-z sort add
             for (String key : keyList) {
                 for (ConcurrentHashMap.Entry<String, String> entry : urlParams.entrySet()) {
                     if (key.equals(entry.getKey())) {

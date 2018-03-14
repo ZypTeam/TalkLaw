@@ -43,7 +43,7 @@ public class RongDatabaseDriver extends Database.DatabaseDriver {
     private List<String> mDatabases;
 
     /**
-     * Constructs the object with a {@link DatabaseFilesProvider} that supplies the database files
+     * Constructs the object with rc_ic_bubble_left {@link DatabaseFilesProvider} that supplies the database files
      * from {@link Context#databaseList()}.
      *
      * @param context the context
@@ -59,8 +59,8 @@ public class RongDatabaseDriver extends Database.DatabaseDriver {
 
     /**
      * @param context                    the context
-     * @param databaseFilesProvider      a database file name provider
-     * @param databaseConnectionProvider a database connection provider
+     * @param databaseFilesProvider      rc_ic_bubble_left database file name provider
+     * @param databaseConnectionProvider rc_ic_bubble_left database connection provider
      */
     public RongDatabaseDriver(
             Context context,

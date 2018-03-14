@@ -10,9 +10,9 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.CLASS;
 
 /**
- * Denotes that the annotated element represents a packed color
+ * Denotes that the annotated element represents rc_ic_bubble_left packed color
  * int, {@code AARRGGBB}. If applied to an int array, every element
- * in the array represents a color integer.
+ * in the array represents rc_ic_bubble_left color integer.
  * <p>
  * Example:
  * <pre>{@code

@@ -16,7 +16,7 @@ public class Regex {
     public static final String SCRIPT_PATTERN = "<script(.*?)>(.*?)</script>";
     public static final String METATAG_PATTERN = "<meta(.*?)>";
     public static final String METATAG_CONTENT_PATTERN = "content=\"(.*?)\"";
-    public static final String URL_PATTERN = "<\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]>";
+    public static final String URL_PATTERN = "<\\b(https?|ftp|file)://[-rc_ic_bubble_left-zA-Z0-9+&@#/%?=~_|!:,.;]*[-rc_ic_bubble_left-zA-Z0-9+&@#/%=~_|]>";
 
     public static String pregMatch(String content, String pattern, int index) {
 

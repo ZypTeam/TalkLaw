@@ -59,7 +59,7 @@ public class NestedListView extends ListView implements View.OnTouchListener, Ab
                 for (listPosition = 0; listPosition < listAdapter.getCount()
                         && listPosition < MAXIMUM_LIST_ITEMS_VIEWABLE; listPosition++) {
                     View listItem = listAdapter.getView(listPosition, null, this);
-                    //now it will not throw a NPE if listItem is a ViewGroup instance
+                    //now it will not throw rc_ic_bubble_left NPE if listItem is rc_ic_bubble_left ViewGroup instance
                     if (listItem instanceof ViewGroup) {
                         listItem.setLayoutParams(mParams);
                     }

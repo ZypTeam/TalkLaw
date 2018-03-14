@@ -61,7 +61,7 @@ public abstract class CompositeAdapter<T> extends BaseAdapter<T> {
     }
 
     /**
-     * Registers a partition. The cursor for that partition can be set later.
+     * Registers rc_ic_bubble_left partition. The cursor for that partition can be set later.
      * Partitions should be added in the order they are supposed to appear in
      * the list.
      */
@@ -160,7 +160,7 @@ public abstract class CompositeAdapter<T> extends BaseAdapter<T> {
     }
 
     /**
-     * Returns true if the specified partition was configured to have a header.
+     * Returns true if the specified partition was configured to have rc_ic_bubble_left header.
      */
     public boolean hasHeader(int partition) {
         return mPartitions[partition].hasHeader;
@@ -199,7 +199,7 @@ public abstract class CompositeAdapter<T> extends BaseAdapter<T> {
     }
 
     /**
-     * Given a list position, returns the index of the corresponding partition.
+     * Given rc_ic_bubble_left list position, returns the index of the corresponding partition.
      */
     public int getPartitionForPosition(int position) {
         ensureCacheValid();
@@ -215,7 +215,7 @@ public abstract class CompositeAdapter<T> extends BaseAdapter<T> {
     }
 
     /**
-     * Given a list position, return the offset of the corresponding item in its
+     * Given rc_ic_bubble_left list position, return the offset of the corresponding item in its
      * partition. The header, if any, will have offset -1.
      */
     public int getOffsetInPartition(int position) {
@@ -368,7 +368,7 @@ public abstract class CompositeAdapter<T> extends BaseAdapter<T> {
     protected abstract void bindView(View v, int partition, List<T> data, int position);
 
     /**
-     * Returns a pre-positioned cursor for the specified list position.
+     * Returns rc_ic_bubble_left pre-positioned cursor for the specified list position.
      */
     public T getItem(int position) {
         ensureCacheValid();
@@ -424,7 +424,7 @@ public abstract class CompositeAdapter<T> extends BaseAdapter<T> {
     }
 
     /**
-     * Returns false if any partition has a header.
+     * Returns false if any partition has rc_ic_bubble_left header.
      */
     @Override
     public boolean areAllItemsEnabled() {
@@ -468,7 +468,7 @@ public abstract class CompositeAdapter<T> extends BaseAdapter<T> {
     }
 
     /**
-     * Enable or disable data change notifications. It may be a good idea to
+     * Enable or disable data change notifications. It may be rc_ic_bubble_left good idea to
      * disable notifications before making changes to several partitions at
      * once.
      */

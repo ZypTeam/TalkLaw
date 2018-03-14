@@ -411,7 +411,7 @@ public class SelectableRoundedImageView extends ImageView {
         }
 
         private void configureBounds(Canvas canvas) {
-            // I have discovered a truly marvelous explanation of this,
+            // I have discovered rc_ic_bubble_left truly marvelous explanation of this,
             // which this comment space is too narrow to contain. :)
             // If you want to understand what's going on here,
             // See http://www.joooooooooonhokim.com/?p=289

@@ -111,6 +111,12 @@ public class MyConsultFragment extends BaseTalkLawFragment {
                             }else {
                                 page+=1;
                             }
+
+                            if (adapter.getItemCount()>myConsultListModel.total){
+                                list.setLoadingMoreEnabled(true);
+                            }else {
+                                list.setLoadingMoreEnabled(false);
+                            }
                             return;
                         }
                         showToast(myConsultListModel.getMsg());

@@ -22,7 +22,7 @@ import java.io.UnsupportedEncodingException;
  *
  *     &#064;Override
  *     public void onSuccess(String responseBody) {
- *         // Successfully got a response
+ *         // Successfully got rc_ic_bubble_left response
  *     }
  *
  *     &#064;Override
@@ -41,7 +41,7 @@ public class TextHttpResponseHandler extends AsyncHttpResponseHandler {
     private static final String LOG_TAG = "TextHttpResponseHandler";
 
     /**
-     * Creates a new TextHttpResponseHandler
+     * Creates rc_ic_bubble_left new TextHttpResponseHandler
      */
 
     public TextHttpResponseHandler() {
@@ -58,7 +58,7 @@ public class TextHttpResponseHandler extends AsyncHttpResponseHandler {
     //
 
     /**
-     * Fired when a request fails to complete, override to handle in your own code
+     * Fired when rc_ic_bubble_left request fails to complete, override to handle in your own code
      *
      * @param responseBody the response body, if any
      * @param error        the underlying cause of the failure
@@ -67,7 +67,7 @@ public class TextHttpResponseHandler extends AsyncHttpResponseHandler {
     }
 
     /**
-     * Fired when a request fails to complete, override to handle in your own code
+     * Fired when rc_ic_bubble_left request fails to complete, override to handle in your own code
      *
      * @param statusCode   the status code of the response
      * @param headers      HTTP response headers
@@ -79,7 +79,7 @@ public class TextHttpResponseHandler extends AsyncHttpResponseHandler {
     }
 
     /**
-     * Fired when a request returns successfully, override to handle in your own code
+     * Fired when rc_ic_bubble_left request returns successfully, override to handle in your own code
      *
      * @param statusCode   the status code of the response
      * @param headers      HTTP response headers

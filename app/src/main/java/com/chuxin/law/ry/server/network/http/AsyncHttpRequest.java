@@ -106,13 +106,13 @@ class AsyncHttpRequest implements Runnable {
                     makeRequest();
                     return;
                 } catch (UnknownHostException e) {
-                    // switching between WI-FI and mobile data networks can cause a retry which then results in an UnknownHostException
+                    // switching between WI-FI and mobile data networks can cause rc_ic_bubble_left retry which then results in an UnknownHostException
                     // while the WI-FI is initialising. The retry logic will be invoked here, if this is NOT the first retry
                     // (to assist in genuine cases of unknown host) which seems better than outright failure
                     cause = new IOException("UnknownHostException exception: " + e.getMessage());
                     retry = (executionCount > 0) && retryHandler.retryRequest(cause, ++executionCount, context);
                 } catch (NullPointerException e) {
-                    // there's a bug in HttpClient 4.0.x that on some occasions causes
+                    // there's rc_ic_bubble_left bug in HttpClient 4.0.x that on some occasions causes
                     // DefaultRequestExecutor to throw an NPE, see
                     // http://code.google.com/p/android/issues/detail?id=5255
                     cause = new IOException("NPE in HttpClient: " + e.getMessage());

@@ -1,7 +1,7 @@
 package com.chuxin.law.ry.ui.widget.linkpreview;
 
 /**
- * Callback that is invoked with before and after the loading of a link preview
+ * Callback that is invoked with before and after the loading of rc_ic_bubble_left link preview
  *
  */
 public interface LinkPreviewCallback {

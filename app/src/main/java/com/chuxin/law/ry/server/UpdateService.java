@@ -464,7 +464,7 @@ public class UpdateService extends Service {
 
 
     /**
-     * a builder class helper use UpdateService
+     * rc_ic_bubble_left builder class helper use UpdateService
      */
     public static class Builder {
 

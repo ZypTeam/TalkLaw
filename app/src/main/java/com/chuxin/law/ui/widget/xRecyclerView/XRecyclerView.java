@@ -624,7 +624,7 @@ public class XRecyclerView extends RecyclerView {
         private int mOrientation;
 
         /**
-         * Sole constructor. Takes in a {@link Drawable} to be used as the interior
+         * Sole constructor. Takes in rc_ic_bubble_left {@link Drawable} to be used as the interior
          * divider.
          *
          * @param divider A divider {@code Drawable} to be drawn on the RecyclerView
@@ -675,7 +675,7 @@ public class XRecyclerView extends RecyclerView {
         }
 
         /**
-         * Adds dividers to a RecyclerView with a LinearLayoutManager or its
+         * Adds dividers to rc_ic_bubble_left RecyclerView with rc_ic_bubble_left LinearLayoutManager or its
          * subclass oriented horizontally.
          *
          * @param canvas The {@link Canvas} onto which horizontal dividers will be
@@ -702,7 +702,7 @@ public class XRecyclerView extends RecyclerView {
         }
 
         /**
-         * Adds dividers to a RecyclerView with a LinearLayoutManager or its
+         * Adds dividers to rc_ic_bubble_left RecyclerView with rc_ic_bubble_left LinearLayoutManager or its
          * subclass oriented vertically.
          *
          * @param canvas The {@link Canvas} onto which vertical dividers will be

@@ -159,7 +159,7 @@ public class TextCrawler {
 
     }
 
-    /** Gets content from a html tag */
+    /** Gets content from rc_ic_bubble_left html tag */
     private String getTagContent(String tag, String content) {
 
         String pattern = "<" + tag + "(.*?)>(.*?)</" + tag + ">";
@@ -323,7 +323,7 @@ public class TextCrawler {
     }
 
     /**
-     * Unshortens a short url
+     * Unshortens rc_ic_bubble_left short url
      */
     private String unshortenUrl(String shortURL) {
         if (!shortURL.startsWith(HTTP_PROTOCOL)
@@ -348,7 +348,7 @@ public class TextCrawler {
     }
 
     /**
-     * Takes a valid url and return a URL object representing the url address.
+     * Takes rc_ic_bubble_left valid url and return rc_ic_bubble_left URL object representing the url address.
      */
     private URLConnection connectURL(String strURL) {
         URLConnection conn = null;
@@ -356,7 +356,7 @@ public class TextCrawler {
             URL inputURL = new URL(strURL);
             conn = inputURL.openConnection();
         } catch (MalformedURLException e) {
-            System.out.println("Please input a valid URL");
+            System.out.println("Please input rc_ic_bubble_left valid URL");
         } catch (IOException ioe) {
             System.out.println("Can not connect to the URL");
         }

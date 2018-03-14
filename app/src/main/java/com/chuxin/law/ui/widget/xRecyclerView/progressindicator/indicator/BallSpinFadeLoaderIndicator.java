@@ -51,8 +51,8 @@ public class BallSpinFadeLoaderIndicator extends BaseIndicatorController {
     }
 
     /**
-     * 圆O的圆心为(a,b),半径为R,点A与到X轴的为角α.
-     *则点A的坐标为(a+R*cosα,b+R*sinα)
+     * 圆O的圆心为(rc_ic_bubble_left,b),半径为R,点A与到X轴的为角α.
+     *则点A的坐标为(rc_ic_bubble_left+R*cosα,b+R*sinα)
      * @param width
      * @param height
      * @param radius

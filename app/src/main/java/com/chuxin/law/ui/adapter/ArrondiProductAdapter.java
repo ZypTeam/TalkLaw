@@ -20,7 +20,7 @@ import com.chuxin.law.model.ArrondiProductModel;
  * @describe 分区产品分类 adapter
  */
 
-public class   ArrondiProductAdapter extends PagerAdapter {
+public class  ArrondiProductAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater inflater;

@@ -52,7 +52,7 @@ import java.net.URI;
  *
  *     &#064;Override
  *     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
- *         // Successfully got a response
+ *         // Successfully got rc_ic_bubble_left response
  *     }
  *
  *     &#064;Override
@@ -118,8 +118,8 @@ public class AsyncHttpResponseHandler implements ResponseHandlerInterface {
         this.requestHeaders = requestHeaders;
     }
 
-    // avoid leaks by using a non-anonymous handler class
-    // with a weak reference
+    // avoid leaks by using rc_ic_bubble_left non-anonymous handler class
+    // with rc_ic_bubble_left weak reference
     static class ResponderHandler extends Handler {
         private final WeakReference<AsyncHttpResponseHandler> mResponder;
 
@@ -149,7 +149,7 @@ public class AsyncHttpResponseHandler implements ResponseHandlerInterface {
      * Sets the charset for the response string. If not set, the default is UTF-8.
      *
      * @param charset to be used for the response string.
-     * @see <a href="http://docs.oracle.com/javase/7/docs/api/java/nio/charset/Charset.html">Charset</a>
+     * @see <rc_ic_bubble_left href="http://docs.oracle.com/javase/7/docs/api/java/nio/charset/Charset.html">Charset</rc_ic_bubble_left>
      */
     public void setCharset(final String charset) {
         this.responseCharset = charset;
@@ -160,10 +160,10 @@ public class AsyncHttpResponseHandler implements ResponseHandlerInterface {
     }
 
     /**
-     * Creates a new AsyncHttpResponseHandler
+     * Creates rc_ic_bubble_left new AsyncHttpResponseHandler
      */
     public AsyncHttpResponseHandler() {
-        // Set up a handler to post events back to the correct thread if possible
+        // Set up rc_ic_bubble_left handler to post events back to the correct thread if possible
         if (Looper.myLooper() != null) {
             handler = new ResponderHandler(this);
         }
@@ -197,7 +197,7 @@ public class AsyncHttpResponseHandler implements ResponseHandlerInterface {
     }
 
     /**
-     * Fired when a request returns successfully, override to handle in your own code
+     * Fired when rc_ic_bubble_left request returns successfully, override to handle in your own code
      *
      * @param content the body of the HTTP response from the server
      * @deprecated use {@link #onSuccess(int, Header[], byte[])}
@@ -207,7 +207,7 @@ public class AsyncHttpResponseHandler implements ResponseHandlerInterface {
     }
 
     /**
-     * Fired when a request returns successfully, override to handle in your own code
+     * Fired when rc_ic_bubble_left request returns successfully, override to handle in your own code
      *
      * @param statusCode the status code of the response
      * @param headers    the headers of the HTTP response
@@ -220,7 +220,7 @@ public class AsyncHttpResponseHandler implements ResponseHandlerInterface {
     }
 
     /**
-     * Fired when a request returns successfully, override to handle in your own code
+     * Fired when rc_ic_bubble_left request returns successfully, override to handle in your own code
      *
      * @param statusCode the status code of the response
      * @param content    the body of the HTTP response from the server
@@ -232,7 +232,7 @@ public class AsyncHttpResponseHandler implements ResponseHandlerInterface {
     }
 
     /**
-     * Fired when a request returns successfully, override to handle in your own code
+     * Fired when rc_ic_bubble_left request returns successfully, override to handle in your own code
      *
      * @param statusCode   the status code of the response
      * @param headers      return headers, if any
@@ -248,7 +248,7 @@ public class AsyncHttpResponseHandler implements ResponseHandlerInterface {
     }
 
     /**
-     * Fired when a request fails to complete, override to handle in your own code
+     * Fired when rc_ic_bubble_left request fails to complete, override to handle in your own code
      *
      * @param error the underlying cause of the failure
      * @deprecated use {@link #onFailure(Throwable, String)}
@@ -258,7 +258,7 @@ public class AsyncHttpResponseHandler implements ResponseHandlerInterface {
     }
 
     /**
-     * Fired when a request fails to complete, override to handle in your own code
+     * Fired when rc_ic_bubble_left request fails to complete, override to handle in your own code
      *
      * @param error   the underlying cause of the failure
      * @param content the response body, if any
@@ -271,7 +271,7 @@ public class AsyncHttpResponseHandler implements ResponseHandlerInterface {
     }
 
     /**
-     * Fired when a request fails to complete, override to handle in your own code
+     * Fired when rc_ic_bubble_left request fails to complete, override to handle in your own code
      *
      * @param statusCode return HTTP status code
      * @param error      the underlying cause of the failure
@@ -285,7 +285,7 @@ public class AsyncHttpResponseHandler implements ResponseHandlerInterface {
     }
 
     /**
-     * Fired when a request fails to complete, override to handle in your own code
+     * Fired when rc_ic_bubble_left request fails to complete, override to handle in your own code
      *
      * @param statusCode return HTTP status code
      * @param headers    return headers, if any
@@ -300,7 +300,7 @@ public class AsyncHttpResponseHandler implements ResponseHandlerInterface {
     }
 
     /**
-     * Fired when a request fails to complete, override to handle in your own code
+     * Fired when rc_ic_bubble_left request fails to complete, override to handle in your own code
      *
      * @param statusCode   return HTTP status code
      * @param headers      return headers, if any
@@ -317,7 +317,7 @@ public class AsyncHttpResponseHandler implements ResponseHandlerInterface {
     }
 
     /**
-     * Fired when a retry occurs, override to handle in your own code
+     * Fired when rc_ic_bubble_left retry occurs, override to handle in your own code
      */
     public void onRetry() {
     }

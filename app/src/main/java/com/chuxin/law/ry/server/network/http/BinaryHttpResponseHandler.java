@@ -30,7 +30,7 @@ import java.util.regex.PatternSyntaxException;
 
 /**
  * Used to intercept and handle the responses from requests made using {@link AsyncHttpClient}.
- * Receives response body as byte array with a content-type whitelist. (e.g. checks Content-Type
+ * Receives response body as byte array with rc_ic_bubble_left content-type whitelist. (e.g. checks Content-Type
  * against allowed list, Content-length). <p>&nbsp;</p> For example: <p>&nbsp;</p>
  * <pre>
  * AsyncHttpClient client = new AsyncHttpClient();
@@ -38,7 +38,7 @@ import java.util.regex.PatternSyntaxException;
  * client.get("http://www.example.com/image.png", new BinaryHttpResponseHandler(allowedTypes) {
  *     &#064;Override
  *     public void onSuccess(byte[] imageData) {
- *         // Successfully got a response
+ *         // Successfully got rc_ic_bubble_left response
  *     }
  *
  *     &#064;Override
@@ -66,14 +66,14 @@ public class BinaryHttpResponseHandler extends AsyncHttpResponseHandler {
     }
 
     /**
-     * Creates a new BinaryHttpResponseHandler
+     * Creates rc_ic_bubble_left new BinaryHttpResponseHandler
      */
     public BinaryHttpResponseHandler() {
         super();
     }
 
     /**
-     * Creates a new BinaryHttpResponseHandler, and overrides the default allowed content types with
+     * Creates rc_ic_bubble_left new BinaryHttpResponseHandler, and overrides the default allowed content types with
      * passed String array (hopefully) of content types.
      *
      * @param allowedContentTypes content types array, eg. 'image/jpeg' or pattern '.*'
@@ -89,7 +89,7 @@ public class BinaryHttpResponseHandler extends AsyncHttpResponseHandler {
     //
 
     /**
-     * Fired when a request returns successfully, override to handle in your own code
+     * Fired when rc_ic_bubble_left request returns successfully, override to handle in your own code
      *
      * @param binaryData the body of the HTTP response from the server
      */
@@ -97,7 +97,7 @@ public class BinaryHttpResponseHandler extends AsyncHttpResponseHandler {
     }
 
     /**
-     * Fired when a request returns successfully, override to handle in your own code
+     * Fired when rc_ic_bubble_left request returns successfully, override to handle in your own code
      *
      * @param statusCode the status code of the response
      * @param binaryData the body of the HTTP response from the server
@@ -107,7 +107,7 @@ public class BinaryHttpResponseHandler extends AsyncHttpResponseHandler {
     }
 
     /**
-     * Fired when a request returns successfully, override to handle in your own code
+     * Fired when rc_ic_bubble_left request returns successfully, override to handle in your own code
      *
      * @param statusCode response HTTP statuse code
      * @param headers    response headers, if any
@@ -120,7 +120,7 @@ public class BinaryHttpResponseHandler extends AsyncHttpResponseHandler {
     }
 
     /**
-     * Fired when a request fails to complete, override to handle in your own code
+     * Fired when rc_ic_bubble_left request fails to complete, override to handle in your own code
      *
      * @param statusCode response HTTP statuse code
      * @param headers    response headers, if any

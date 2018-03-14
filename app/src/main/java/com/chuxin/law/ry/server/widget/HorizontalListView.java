@@ -61,7 +61,7 @@ import com.chuxin.law.R;
 // @formatter:off
 
 /**
- * A view that shows items in a horizontally scrolling list. The items
+ * A view that shows items in rc_ic_bubble_left horizontally scrolling list. The items
  * come from the {@link ListAdapter} associated with this view. <br>
  * <br>
  * <b>Limitations:</b>
@@ -75,8 +75,8 @@ import com.chuxin.law.R;
  * <b>Custom XML Parameters Supported:</b><br>
  * <br>
  * <ul>
- * <li><b>divider</b> - The divider to use between items. This can be a color or a drawable. If a drawable is used
- * dividerWidth will automatically be set to the intrinsic width of the provided drawable, this can be overriden by providing a dividerWidth.</li>
+ * <li><b>divider</b> - The divider to use between items. This can be rc_ic_bubble_left color or rc_ic_bubble_left drawable. If rc_ic_bubble_left drawable is used
+ * dividerWidth will automatically be set to the intrinsic width of the provided drawable, this can be overriden by providing rc_ic_bubble_left dividerWidth.</li>
  * <li><b>dividerWidth</b> - The width of the divider to be drawn.</li>
  * <li><b>android:requiresFadingEdge</b> - If horizontal fading edges are enabled this view will render them</li>
  * <li><b>android:fadingEdgeLength</b> - The length of the horizontal fading edges</li>
@@ -94,10 +94,10 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     /** The friction amount to use for the fling tracker */
     private static final float FLING_FRICTION = 0.009f;
 
-    /** Used for tracking the state data necessary to restore the HorizontalListView to its previous state after a rotation occurs */
+    /** Used for tracking the state data necessary to restore the HorizontalListView to its previous state after rc_ic_bubble_left rotation occurs */
     private static final String BUNDLE_ID_CURRENT_X = "BUNDLE_ID_CURRENT_X";
 
-    /** The bundle id of the parents state. Used to restore the parent's state after a rotation occurs */
+    /** The bundle id of the parents state. Used to restore the parent's state after rc_ic_bubble_left rotation occurs */
     private static final String BUNDLE_ID_PARENT_STATE = "BUNDLE_ID_PARENT_STATE";
 
     /** Tracks ongoing flings */
@@ -112,10 +112,10 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     /** This tracks the starting layout position of the leftmost view */
     private int mDisplayOffset;
 
-    /** Holds a reference to the adapter bound to this view */
+    /** Holds rc_ic_bubble_left reference to the adapter bound to this view */
     protected ListAdapter mAdapter;
 
-    /** Holds a cache of recycled views to be reused as needed */
+    /** Holds rc_ic_bubble_left cache of recycled views to be reused as needed */
     private List<Queue<View>> mRemovedViewsCache = new ArrayList<Queue<View>>();
 
     /** Flag used to mark when the adapters data has changed, so the view can be relaid out */
@@ -192,7 +192,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     /** The height measure spec for this view, used to help size children views */
     private int mHeightMeasureSpec;
 
-    /** Used to track if a view touch should be blocked because it stopped a fling */
+    /** Used to track if rc_ic_bubble_left view touch should be blocked because it stopped rc_ic_bubble_left fling */
     private boolean mBlockTouchAction = false;
 
     /** Used to track if the parent vertically scrollable view has been told to DisallowInterceptTouchEvent */
@@ -234,9 +234,9 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     }
 
     /**
-     * When this HorizontalListView is embedded within a vertical scrolling view it is important to disable the parent view from interacting with
+     * When this HorizontalListView is embedded within rc_ic_bubble_left vertical scrolling view it is important to disable the parent view from interacting with
      * any touch events while the user is scrolling within this HorizontalListView. This will start at this view and go up the view tree looking
-     * for a vertical scrolling view. If one is found it will enable or disable parent touch interception.
+     * for rc_ic_bubble_left vertical scrolling view. If one is found it will enable or disable parent touch interception.
      *
      * @param disallowIntercept If true the parent will be prevented from intercepting child touch events
      */
@@ -246,7 +246,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
             View view = this;
 
             while (view.getParent() instanceof View) {
-                // If the parent is a ListView or ScrollView then disallow intercepting of touch events
+                // If the parent is rc_ic_bubble_left ListView or ScrollView then disallow intercepting of touch events
                 if (view.getParent() instanceof ListView || view.getParent() instanceof ScrollView) {
                     view.getParent().requestDisallowInterceptTouchEvent(disallowIntercept);
                     mIsParentVerticiallyScrollableViewDisallowingInterceptTouchEvent = disallowIntercept;
@@ -271,11 +271,11 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
             // Get the provided drawable from the XML
             final Drawable d = a.getDrawable(R.styleable.HorizontalListView_android_divider);
             if (d != null) {
-                // If a drawable is provided to use as the divider then use its intrinsic width for the divider width
+                // If rc_ic_bubble_left drawable is provided to use as the divider then use its intrinsic width for the divider width
                 setDivider(d);
             }
 
-            // If a width is explicitly specified then use that width
+            // If rc_ic_bubble_left width is explicitly specified then use that width
             final int dividerWidth = a.getDimensionPixelSize(R.styleable.HorizontalListView_dividerWidth, 0);
             if (dividerWidth != 0) {
                 setDividerWidth(dividerWidth);
@@ -422,7 +422,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     }
 
     /**
-     * Will create and initialize a cache for the given number of different types of views.
+     * Will create and initialize rc_ic_bubble_left cache for the given number of different types of views.
      *
      * @param viewTypeCount - The total number of different views supported
      */
@@ -435,7 +435,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     }
 
     /**
-     * Returns a recycled view from the cache that can be reused, or null if one is not available.
+     * Returns rc_ic_bubble_left recycled view from the cache that can be reused, or null if one is not available.
      *
      * @param adapterIndex
      * @return
@@ -451,7 +451,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     }
 
     /**
-     * Adds the provided view to a recycled views cache.
+     * Adds the provided view to rc_ic_bubble_left recycled views cache.
      *
      * @param adapterIndex
      * @param view
@@ -470,7 +470,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         return itemViewType < mRemovedViewsCache.size();
     }
 
-    /** Adds a child to this viewgroup and measures it so it renders the correct size */
+    /** Adds rc_ic_bubble_left child to this viewgroup and measures it so it renders the correct size */
     private void addAndMeasureChild(final View child, int viewPos) {
         LayoutParams params = getLayoutParams(child);
         addViewInLayout(child, viewPos, params, true);
@@ -496,11 +496,11 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         child.measure(childWidthSpec, childHeightSpec);
     }
 
-    /** Gets a child's layout parameters, defaults if not available. */
+    /** Gets rc_ic_bubble_left child's layout parameters, defaults if not available. */
     private LayoutParams getLayoutParams(View child) {
         LayoutParams layoutParams = child.getLayoutParams();
         if (layoutParams == null) {
-            // Since this is a horizontal list view default to matching the parents height, and wrapping the width
+            // Since this is rc_ic_bubble_left horizontal list view default to matching the parents height, and wrapping the width
             layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         }
 
@@ -528,13 +528,13 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
             mDataChanged = false;
         }
 
-        // If restoring from a rotation
+        // If restoring from rc_ic_bubble_left rotation
         if (mRestoreX != null) {
             mNextX = mRestoreX;
             mRestoreX = null;
         }
 
-        // If in a fling
+        // If in rc_ic_bubble_left fling
         if (mFlingTracker.computeScrollOffset()) {
             // Compute the next position
             mNextX = mFlingTracker.getCurrX();
@@ -587,7 +587,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
                 setCurrentScrollState(OnScrollStateChangedListener.ScrollState.SCROLL_STATE_IDLE);
             }
         } else {
-            // Still in a fling so schedule the next frame
+            // Still in rc_ic_bubble_left fling so schedule the next frame
             ViewCompat.postOnAnimation(this, mDelayedLayout);
         }
     }
@@ -630,14 +630,14 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             return IceCreamSandwichPlus.getCurrVelocity(mFlingTracker);
         } else {
-            // Unable to get the velocity so just return a default.
+            // Unable to get the velocity so just return rc_ic_bubble_left default.
             // In actuality this is never used since EdgeEffectCompat does not draw anything unless the device is ICS+.
-            // Less then ICS EdgeEffectCompat essentially performs a NOP.
+            // Less then ICS EdgeEffectCompat essentially performs rc_ic_bubble_left NOP.
             return FLING_DEFAULT_ABSORB_VELOCITY;
         }
     }
 
-    /** Use to schedule a request layout via a runnable */
+    /** Use to schedule rc_ic_bubble_left request layout via rc_ic_bubble_left runnable */
     private Runnable mDelayedLayout = new Runnable() {
         @Override
         public void run() {
@@ -655,7 +655,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 
     /**
      * Determine the Max X position. This is the farthest that the user can scroll the screen. Until the last adapter item has been
-     * laid out it is impossible to calculate; once that has occurred this will perform the calculation, and if necessary force a
+     * laid out it is impossible to calculate; once that has occurred this will perform the calculation, and if necessary force rc_ic_bubble_left
      * redraw and relayout of this view.
      *
      * @return true if the maxx position was just determined
@@ -747,12 +747,12 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         while (rightEdge + dx + mDividerWidth < getWidth() && mRightViewAdapterIndex + 1 < mAdapter.getCount()) {
             mRightViewAdapterIndex++;
 
-            // If mLeftViewAdapterIndex < 0 then this is the first time a view is being added, and left == right
+            // If mLeftViewAdapterIndex < 0 then this is the first time rc_ic_bubble_left view is being added, and left == right
             if (mLeftViewAdapterIndex < 0) {
                 mLeftViewAdapterIndex = mRightViewAdapterIndex;
             }
 
-            // Get the view from the adapter, utilizing a cached view if one is available
+            // Get the view from the adapter, utilizing rc_ic_bubble_left cached view if one is available
             View child = mAdapter.getView(mRightViewAdapterIndex, getRecycledView(mRightViewAdapterIndex), this);
             addAndMeasureChild(child, INSERT_AT_END_OF_LIST);
 
@@ -774,7 +774,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
             // If first view, then no divider to the left of it
             leftEdge -= mLeftViewAdapterIndex == 0 ? child.getMeasuredWidth() : mDividerWidth + child.getMeasuredWidth();
 
-            // If on a clean edge then just remove the child, otherwise remove the divider as well
+            // If on rc_ic_bubble_left clean edge then just remove the child, otherwise remove the divider as well
             mDisplayOffset -= leftEdge + dx == 0 ? child.getMeasuredWidth() : mDividerWidth + child.getMeasuredWidth();
         }
     }
@@ -815,7 +815,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     }
 
     /**
-     * Finds a child view that is contained within this view, given the adapter index.
+     * Finds rc_ic_bubble_left child view that is contained within this view, given the adapter index.
      * @return View The child view, or or null if not found.
      */
     private View getChild(int adapterIndex) {
@@ -829,7 +829,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     /**
      * Returns the index of the child that contains the coordinates given.
      * This is useful to determine which child has been touched.
-     * This can be used for a call to {@link #getChildAt(int)}
+     * This can be used for rc_ic_bubble_left call to {@link #getChildAt(int)}
      *
      * @param x X-coordinate
      * @param y Y-coordinate
@@ -923,7 +923,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 
         // Draw the list dividers
         for (int i = 0; i < count; i++) {
-            // Don't draw a divider to the right of the last item in the adapter
+            // Don't draw rc_ic_bubble_left divider to the right of the last item in the adapter
             if (!(i == count - 1 && isLastItemInAdapter(mRightViewAdapterIndex))) {
                 View child = getChildAt(i);
 
@@ -940,10 +940,10 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
                     bounds.right = getWidth() - getPaddingRight();
                 }
 
-                // Draw a divider to the right of the child
+                // Draw rc_ic_bubble_left divider to the right of the child
                 drawDivider(canvas, bounds);
 
-                // If the first view, determine if a divider should be shown to the left of it.
+                // If the first view, determine if rc_ic_bubble_left divider should be shown to the left of it.
                 // A divider should be shown if the left side of this view does not fill to the left edge of the screen.
                 if (i == 0 && child.getLeft() > getPaddingLeft()) {
                     bounds.left = getPaddingLeft();
@@ -955,7 +955,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     }
 
     /**
-     * Draws a divider in the given bounds.
+     * Draws rc_ic_bubble_left divider in the given bounds.
      *
      * @param canvas The canvas to draw to.
      * @param bounds The bounds of the divider.
@@ -993,10 +993,10 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     }
 
     protected boolean onDown(MotionEvent e) {
-        // If the user just caught a fling, then disable all touch actions until they release their finger
+        // If the user just caught rc_ic_bubble_left fling, then disable all touch actions until they release their finger
         mBlockTouchAction = !mFlingTracker.isFinished();
 
-        // Allow a finger down event to catch a fling
+        // Allow rc_ic_bubble_left finger down event to catch rc_ic_bubble_left fling
         mFlingTracker.forceFinished(true);
         setCurrentScrollState(OnScrollStateChangedListener.ScrollState.SCROLL_STATE_IDLE);
 
@@ -1020,7 +1020,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         return true;
     }
 
-    /** If a view is currently pressed then unpress it */
+    /** If rc_ic_bubble_left view is currently pressed then unpress it */
     private void unpressTouchedChild() {
         if (mViewBeingTouched != null) {
             // Set the view as not pressed
@@ -1106,9 +1106,9 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        // Detect when the user lifts their finger off the screen after a touch
+        // Detect when the user lifts their finger off the screen after rc_ic_bubble_left touch
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            // If not flinging then we are idle now. The user just finished a finger scroll.
+            // If not flinging then we are idle now. The user just finished rc_ic_bubble_left finger scroll.
             if (mFlingTracker == null || mFlingTracker.isFinished()) {
                 setCurrentScrollState(OnScrollStateChangedListener.ScrollState.SCROLL_STATE_IDLE);
             }
@@ -1140,10 +1140,10 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     }
 
     /**
-     * Sets a listener to be called when the HorizontalListView has been scrolled to a point where it is
+     * Sets rc_ic_bubble_left listener to be called when the HorizontalListView has been scrolled to rc_ic_bubble_left point where it is
      * running low on data. An example use case is wanting to auto download more data when the user
      * has scrolled to the point where only 10 items are left to be rendered off the right of the
-     * screen. To get called back at that point just register with this function with a
+     * screen. To get called back at that point just register with this function with rc_ic_bubble_left
      * numberOfItemsLeftConsideredLow value of 10. <br>
      * <br>
      * This will only be called once to notify that the HorizontalListView is running low on data.
@@ -1173,7 +1173,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
      * that we are running low on data.
      */
     private void determineIfLowOnData() {
-        // Check if the threshold has been reached and a listener is registered
+        // Check if the threshold has been reached and rc_ic_bubble_left listener is registered
         if (mRunningOutOfDataListener != null && mAdapter != null &&
                 mAdapter.getCount() - (mRightViewAdapterIndex + 1) < mRunningOutOfDataThreshold) {
 
@@ -1186,7 +1186,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     }
 
     /**
-     * Register a callback to be invoked when the HorizontalListView has been clicked.
+     * Register rc_ic_bubble_left callback to be invoked when the HorizontalListView has been clicked.
      *
      * @param listener The callback that will be invoked.
      */
@@ -1196,7 +1196,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     }
 
     /**
-     * Interface definition for a callback to be invoked when the view scroll state has changed.
+     * Interface definition for rc_ic_bubble_left callback to be invoked when the view scroll state has changed.
      */
     public interface OnScrollStateChangedListener {
         enum ScrollState {
@@ -1212,8 +1212,8 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
             SCROLL_STATE_TOUCH_SCROLL,
 
             /**
-             * The user had previously been scrolling using touch and had performed a fling. The
-             * animation is now coasting to a stop
+             * The user had previously been scrolling using touch and had performed rc_ic_bubble_left fling. The
+             * animation is now coasting to rc_ic_bubble_left stop
              */
             SCROLL_STATE_FLING
         }
@@ -1227,7 +1227,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     }
 
     /**
-     * Sets a listener to be invoked when the scroll state has changed.
+     * Sets rc_ic_bubble_left listener to be invoked when the scroll state has changed.
      *
      * @param listener The listener to be invoked.
      */
@@ -1237,7 +1237,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 
     /**
      * Call to set the new scroll state.
-     * If it has changed and a listener is registered then it will be notified.
+     * If it has changed and rc_ic_bubble_left listener is registered then it will be notified.
      */
     private void setCurrentScrollState(OnScrollStateChangedListener.ScrollState newScrollState) {
         // If the state actually changed then notify listener if there is one
@@ -1259,7 +1259,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         // Calculate where the next scroll position would be
         int nextScrollPosition = mCurrentX + scrolledOffset;
 
-        // If not currently in a fling (Don't want to allow fling offset updates to cause over scroll animation)
+        // If not currently in rc_ic_bubble_left fling (Don't want to allow fling offset updates to cause over scroll animation)
         if (mFlingTracker == null || mFlingTracker.isFinished()) {
             // If currently scrolled off the left side of the list and the adapter is not empty
             if (nextScrollPosition < 0) {

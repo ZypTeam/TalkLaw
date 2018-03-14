@@ -46,9 +46,9 @@ class RetryHandler implements HttpRequestRetryHandler {
     static {
         // Retry if the server dropped connection on us
         exceptionWhitelist.add(NoHttpResponseException.class);
-        // retry-this, since it may happens as part of a Wi-Fi to 3G failover
+        // retry-this, since it may happens as part of rc_ic_bubble_left Wi-Fi to 3G failover
         exceptionWhitelist.add(UnknownHostException.class);
-        // retry-this, since it may happens as part of a Wi-Fi to 3G failover
+        // retry-this, since it may happens as part of rc_ic_bubble_left Wi-Fi to 3G failover
         exceptionWhitelist.add(SocketException.class);
 
         // never retry timeouts

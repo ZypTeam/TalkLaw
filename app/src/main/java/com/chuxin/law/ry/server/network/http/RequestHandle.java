@@ -3,7 +3,7 @@ package com.chuxin.law.ry.server.network.http;
 import java.util.concurrent.Future;
 
 /**
- * A Handle to an AsyncRequest which can be used to cancel a running request.
+ * A Handle to an AsyncRequest which can be used to cancel rc_ic_bubble_left running request.
  */
 public class RequestHandle {
     private final Future<?> request;

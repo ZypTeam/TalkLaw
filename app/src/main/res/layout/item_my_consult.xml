@@ -26,7 +26,6 @@
         android:textColor="#000"
         android:padding="0dp"
         android:textSize="16dp"
-        android:text="王律师"
         android:layout_width="0dp"
         android:layout_height="wrap_content" />
 
@@ -38,17 +37,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/name"
         android:textSize="12sp"
         android:textColor="#999"
-        android:text="2017/11/19"
         android:gravity="center_vertical"
         android:layout_marginRight="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
+        android:id="@+id/content"
         android:layout_width="0dp"
-        android:layout_height="20dp"
+        android:layout_height="22dp"
         android:layout_marginRight="16dp"
-        android:text="你这个案件.."
         android:textColorHighlight="#999"
         android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="@+id/name"
@@ -71,7 +69,6 @@
         app:layout_constraintTop_toBottomOf="@+id/line"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="胜诉：已结束"
         android:gravity="center"
         android:textSize="16sp"
         android:textColor="#fea621"

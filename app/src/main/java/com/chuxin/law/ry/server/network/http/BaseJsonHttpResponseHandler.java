@@ -25,7 +25,7 @@ public abstract class BaseJsonHttpResponseHandler<JSON_TYPE> extends TextHttpRes
     private static final String LOG_TAG = "BaseJsonHttpResponseHandler";
 
     /**
-     * Creates a new JsonHttpResponseHandler
+     * Creates rc_ic_bubble_left new JsonHttpResponseHandler
      */
 
     public BaseJsonHttpResponseHandler() {

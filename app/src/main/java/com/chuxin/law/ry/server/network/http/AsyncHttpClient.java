@@ -77,7 +77,7 @@ import java.util.zip.GZIPInputStream;
 
 /**
  * The AsyncHttpClient can be used to make asynchronous GET, POST, PUT and DELETE HTTP requests in
- * your Android applications. Requests can be made with additional parameters by passing a {@link
+ * your Android applications. Requests can be made with additional parameters by passing rc_ic_bubble_left {@link
  * RequestParams} instance, and responses can be handled by passing an anonymously overridden {@link
  * ResponseHandlerInterface} instance. <p>&nbsp;</p> For example: <p>&nbsp;</p>
  * <pre>
@@ -141,14 +141,14 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Creates a new AsyncHttpClient with default constructor arguments values
+     * Creates rc_ic_bubble_left new AsyncHttpClient with default constructor arguments values
      */
     public AsyncHttpClient() {
         this(false, 80, 443);
     }
 
     /**
-     * Creates a new AsyncHttpClient.
+     * Creates rc_ic_bubble_left new AsyncHttpClient.
      *
      * @param httpPort non-standard HTTP-only port
      */
@@ -157,7 +157,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Creates a new AsyncHttpClient.
+     * Creates rc_ic_bubble_left new AsyncHttpClient.
      *
      * @param httpPort  non-standard HTTP-only port
      * @param httpsPort non-standard HTTPS-only port
@@ -215,7 +215,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Creates a new AsyncHttpClient.
+     * Creates rc_ic_bubble_left new AsyncHttpClient.
      *
      * @param schemeRegistry SchemeRegistry to be used
      */
@@ -422,7 +422,7 @@ public class AsyncHttpClient {
 
 
     /**
-     * Sets the SSLSocketFactory to user when making requests. By default, a new, default
+     * Sets the SSLSocketFactory to user when making requests. By default, rc_ic_bubble_left new, default
      * SSLSocketFactory is used.
      *
      * @param sslSocketFactory the socket factory to use for https requests.
@@ -432,7 +432,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Sets the maximum number of retries and timeout for a particular Request.
+     * Sets the maximum number of retries and timeout for rc_ic_bubble_left particular Request.
      *
      * @param retries maximum number of retries per request
      * @param timeout sleep between retries in milliseconds
@@ -494,7 +494,7 @@ public class AsyncHttpClient {
 
     /**
      * Cancels any pending (or potentially active) requests associated with the passed Context.
-     * <p>&nbsp;</p> <b>Note:</b> This will only affect requests which were created with a non-null
+     * <p>&nbsp;</p> <b>Note:</b> This will only affect requests which were created with rc_ic_bubble_left non-null
      * android Context. This method is intended to be used in the onDestroy method of your android
      * activities to destroy all requests which are no longer required.
      *
@@ -520,7 +520,7 @@ public class AsyncHttpClient {
     //
 
     /**
-     * Perform a HTTP HEAD request, without any parameters.
+     * Perform rc_ic_bubble_left HTTP HEAD request, without any parameters.
      *
      * @param url             the URL to send the request to.
      * @param responseHandler the response handler instance that should handle the response.
@@ -531,7 +531,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP HEAD request with parameters.
+     * Perform rc_ic_bubble_left HTTP HEAD request with parameters.
      *
      * @param url             the URL to send the request to.
      * @param params          additional HEAD parameters to send with the request.
@@ -543,7 +543,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP HEAD request without any parameters and track the Android Context which
+     * Perform rc_ic_bubble_left HTTP HEAD request without any parameters and track the Android Context which
      * initiated the request.
      *
      * @param context         the Android Context which initiated the request.
@@ -556,7 +556,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP HEAD request and track the Android Context which initiated the request.
+     * Perform rc_ic_bubble_left HTTP HEAD request and track the Android Context which initiated the request.
      *
      * @param context         the Android Context which initiated the request.
      * @param url             the URL to send the request to.
@@ -569,7 +569,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP HEAD request and track the Android Context which initiated the request with
+     * Perform rc_ic_bubble_left HTTP HEAD request and track the Android Context which initiated the request with
      * customized headers
      *
      * @param context         Context to execute request against
@@ -592,7 +592,7 @@ public class AsyncHttpClient {
     //
 
     /**
-     * Perform a HTTP GET request, without any parameters.
+     * Perform rc_ic_bubble_left HTTP GET request, without any parameters.
      *
      * @param url             the URL to send the request to.
      * @param responseHandler the response handler instance that should handle the response.
@@ -603,7 +603,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP GET request with parameters.
+     * Perform rc_ic_bubble_left HTTP GET request with parameters.
      *
      * @param url             the URL to send the request to.
      * @param params          additional GET parameters to send with the request.
@@ -615,7 +615,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP GET request without any parameters and track the Android Context which
+     * Perform rc_ic_bubble_left HTTP GET request without any parameters and track the Android Context which
      * initiated the request.
      *
      * @param context         the Android Context which initiated the request.
@@ -628,7 +628,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP GET request and track the Android Context which initiated the request.
+     * Perform rc_ic_bubble_left HTTP GET request and track the Android Context which initiated the request.
      *
      * @param context         the Android Context which initiated the request.
      * @param url             the URL to send the request to.
@@ -641,7 +641,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP GET request and track the Android Context which initiated the request with
+     * Perform rc_ic_bubble_left HTTP GET request and track the Android Context which initiated the request with
      * customized headers
      *
      * @param context         Context to execute request against
@@ -664,7 +664,7 @@ public class AsyncHttpClient {
     //
 
     /**
-     * Perform a HTTP POST request, without any parameters.
+     * Perform rc_ic_bubble_left HTTP POST request, without any parameters.
      *
      * @param url             the URL to send the request to.
      * @param responseHandler the response handler instance that should handle the response.
@@ -675,7 +675,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP POST request with parameters.
+     * Perform rc_ic_bubble_left HTTP POST request with parameters.
      *
      * @param url             the URL to send the request to.
      * @param params          additional POST parameters or files to send with the request.
@@ -687,7 +687,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP POST request and track the Android Context which initiated the request.
+     * Perform rc_ic_bubble_left HTTP POST request and track the Android Context which initiated the request.
      *
      * @param context         the Android Context which initiated the request.
      * @param url             the URL to send the request to.
@@ -700,15 +700,15 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP POST request and track the Android Context which initiated the request.
+     * Perform rc_ic_bubble_left HTTP POST request and track the Android Context which initiated the request.
      *
      * @param context         the Android Context which initiated the request.
      * @param url             the URL to send the request to.
-     * @param entity          a raw {@link HttpEntity} to send with the request, for
-     *                        example, use this to send string/json/xml payloads to a server by
-     *                        passing a {@link org.apache.http.entity.StringEntity}.
+     * @param entity          rc_ic_bubble_left raw {@link HttpEntity} to send with the request, for
+     *                        example, use this to send string/json/xml payloads to rc_ic_bubble_left server by
+     *                        passing rc_ic_bubble_left {@link org.apache.http.entity.StringEntity}.
      * @param contentType     the content type of the payload you are sending, for example
-     *                        application/json if sending a json payload.
+     *                        application/json if sending rc_ic_bubble_left json payload.
      * @param responseHandler the response ha   ndler instance that should handle the response.
      * @return RequestHandle of future request process
      */
@@ -717,7 +717,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP POST request and track the Android Context which initiated the request. Set
+     * Perform rc_ic_bubble_left HTTP POST request and track the Android Context which initiated the request. Set
      * headers only for this request
      *
      * @param context         the Android Context which initiated the request.
@@ -725,7 +725,7 @@ public class AsyncHttpClient {
      * @param headers         set headers only for this request
      * @param params          additional POST parameters to send with the request.
      * @param contentType     the content type of the payload you are sending, for example
-     *                        application/json if sending a json payload.
+     *                        application/json if sending rc_ic_bubble_left json payload.
      * @param responseHandler the response handler instance that should handle the response.
      * @return RequestHandle of future request process
      */
@@ -739,17 +739,17 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP POST request and track the Android Context which initiated the request. Set
+     * Perform rc_ic_bubble_left HTTP POST request and track the Android Context which initiated the request. Set
      * headers only for this request
      *
      * @param context         the Android Context which initiated the request.
      * @param url             the URL to send the request to.
      * @param headers         set headers only for this request
-     * @param entity          a raw {@link HttpEntity} to send with the request, for example, use
-     *                        this to send string/json/xml payloads to a server by passing a {@link
+     * @param entity          rc_ic_bubble_left raw {@link HttpEntity} to send with the request, for example, use
+     *                        this to send string/json/xml payloads to rc_ic_bubble_left server by passing rc_ic_bubble_left {@link
      *                        org.apache.http.entity.StringEntity}.
      * @param contentType     the content type of the payload you are sending, for example
-     *                        application/json if sending a json payload.
+     *                        application/json if sending rc_ic_bubble_left json payload.
      * @param responseHandler the response handler instance that should handle the response.
      * @return RequestHandle of future request process
      */
@@ -765,7 +765,7 @@ public class AsyncHttpClient {
     //
 
     /**
-     * Perform a HTTP PUT request, without any parameters.
+     * Perform rc_ic_bubble_left HTTP PUT request, without any parameters.
      *
      * @param url             the URL to send the request to.
      * @param responseHandler the response handler instance that should handle the response.
@@ -776,7 +776,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP PUT request with parameters.
+     * Perform rc_ic_bubble_left HTTP PUT request with parameters.
      *
      * @param url             the URL to send the request to.
      * @param params          additional PUT parameters or files to send with the request.
@@ -788,7 +788,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP PUT request and track the Android Context which initiated the request.
+     * Perform rc_ic_bubble_left HTTP PUT request and track the Android Context which initiated the request.
      *
      * @param context         the Android Context which initiated the request.
      * @param url             the URL to send the request to.
@@ -801,16 +801,16 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP PUT request and track the Android Context which initiated the request. And set
+     * Perform rc_ic_bubble_left HTTP PUT request and track the Android Context which initiated the request. And set
      * one-time headers for the request
      *
      * @param context         the Android Context which initiated the request.
      * @param url             the URL to send the request to.
-     * @param entity          a raw {@link HttpEntity} to send with the request, for example, use
-     *                        this to send string/json/xml payloads to a server by passing a {@link
+     * @param entity          rc_ic_bubble_left raw {@link HttpEntity} to send with the request, for example, use
+     *                        this to send string/json/xml payloads to rc_ic_bubble_left server by passing rc_ic_bubble_left {@link
      *                        org.apache.http.entity.StringEntity}.
      * @param contentType     the content type of the payload you are sending, for example
-     *                        application/json if sending a json payload.
+     *                        application/json if sending rc_ic_bubble_left json payload.
      * @param responseHandler the response handler instance that should handle the response.
      * @return RequestHandle of future request process
      */
@@ -819,17 +819,17 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP PUT request and track the Android Context which initiated the request. And set
+     * Perform rc_ic_bubble_left HTTP PUT request and track the Android Context which initiated the request. And set
      * one-time headers for the request
      *
      * @param context         the Android Context which initiated the request.
      * @param url             the URL to send the request to.
      * @param headers         set one-time headers for this request
-     * @param entity          a raw {@link HttpEntity} to send with the request, for example, use
-     *                        this to send string/json/xml payloads to a server by passing a {@link
+     * @param entity          rc_ic_bubble_left raw {@link HttpEntity} to send with the request, for example, use
+     *                        this to send string/json/xml payloads to rc_ic_bubble_left server by passing rc_ic_bubble_left {@link
      *                        org.apache.http.entity.StringEntity}.
      * @param contentType     the content type of the payload you are sending, for example
-     *                        application/json if sending a json payload.
+     *                        application/json if sending rc_ic_bubble_left json payload.
      * @param responseHandler the response handler instance that should handle the response.
      * @return RequestHandle of future request process
      */
@@ -844,7 +844,7 @@ public class AsyncHttpClient {
     //
 
     /**
-     * Perform a HTTP DELETE request.
+     * Perform rc_ic_bubble_left HTTP DELETE request.
      *
      * @param url             the URL to send the request to.
      * @param responseHandler the response handler instance that should handle the response.
@@ -855,7 +855,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP DELETE request.
+     * Perform rc_ic_bubble_left HTTP DELETE request.
      *
      * @param context         the Android Context which initiated the request.
      * @param url             the URL to send the request to.
@@ -868,7 +868,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP DELETE request.
+     * Perform rc_ic_bubble_left HTTP DELETE request.
      *
      * @param context         the Android Context which initiated the request.
      * @param url             the URL to send the request to.
@@ -883,7 +883,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Perform a HTTP DELETE request.
+     * Perform rc_ic_bubble_left HTTP DELETE request.
      *
      * @param context         the Android Context which initiated the request.
      * @param url             the URL to send the request to.
@@ -899,7 +899,7 @@ public class AsyncHttpClient {
     }
 
     /**
-     * Puts a new request in queue as a new thread in pool to be executed
+     * Puts rc_ic_bubble_left new request in queue as rc_ic_bubble_left new thread in pool to be executed
      *
      * @param client          HttpClient to be used for request, can differ in single requests
      * @param contentType     MIME body type, for POST and PUT requests, may be null
