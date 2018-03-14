@@ -13,5 +13,4 @@ import java.util.List;
  */
 public class HotListData extends BaseModel implements Serializable {
     public List<ProductItemModel> data;
-    public int total;
 }
