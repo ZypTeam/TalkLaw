@@ -83,11 +83,19 @@ public class AlreadyPurchaseActivity extends BaseTalkLawActivity {
                         if (productsModel.getCode()== CommonConstant.NET_SUC_CODE
                                 &&productsModel.getData()!=null){
                             if (isRefresh){
+                                page=1;
                                 adapter.refreshList(productsModel.getData());
                             }else {
                                 adapter.addList(productsModel.getData());
+                                page++;
                             }
-                            page++;
+
+
+                            if (adapter.getItemCount()>productsModel.total){
+                                list.setLoadingMoreEnabled(true);
+                            }else {
+                                list.setLoadingMoreEnabled(false);
+                            }
                         }
                     }
                 }, new Action1<Throwable>() {
