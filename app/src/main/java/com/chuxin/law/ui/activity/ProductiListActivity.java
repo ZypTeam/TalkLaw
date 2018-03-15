@@ -94,11 +94,19 @@ public class ProductiListActivity extends BaseTalkLawActivity {
                         list.loadMoreComplete();
                         if (productListModel.getCode()== CommonConstant.NET_SUC_CODE){
                             if (isRefresh){
+                                page=1;
                                 adapter.refreshList(productListModel.getData());
                             }else {
                                 adapter.addList(productListModel.getData());
+                                page++;
                             }
-                            page++;
+
+                            if (adapter.getItemCount()>productListModel.total){
+                                list.setLoadingMoreEnabled(true);
+                            }else {
+                                list.setLoadingMoreEnabled(false);
+                            }
+
                         }
 
                     }

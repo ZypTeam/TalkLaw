@@ -145,12 +145,19 @@ public class MyMsgListActivity extends BaseTalkLawActivity {
                     public void call(MyMsgListModel myMsgListModel) {
                         loadingComplete();
                         if (myMsgListModel!=null&&myMsgListModel.getCode()==10000){
-                            adapter.refreshList(myMsgListModel.getData());
 
                             if (isRefresh){
                                 page=1;
+                                adapter.refreshList(myMsgListModel.getData());
                             }else {
                                 page+=1;
+                                adapter.addList(myMsgListModel.getData());
+                            }
+
+                            if (adapter.getItemCount()>myMsgListModel.total){
+                                list.setLoadingMoreEnabled(true);
+                            }else {
+                                list.setLoadingMoreEnabled(false);
                             }
                         }
 

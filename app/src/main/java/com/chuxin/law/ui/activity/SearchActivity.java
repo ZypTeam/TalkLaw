@@ -152,10 +152,17 @@ public class SearchActivity extends BaseTalkLawActivity {
                         if (productsModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             if (isRefrsh) {
                                 page = 1;
+                                adapter.refreshList(productsModel.getData());
                             } else {
                                 page++;
+                                adapter.addList(productsModel.getData());
                             }
-                            adapter.refreshList(productsModel.getData());
+
+                            if (adapter.getItemCount()>productsModel.total){
+                                result.setLoadingMoreEnabled(true);
+                            }else {
+                                result.setLoadingMoreEnabled(false);
+                            }
                             return;
                         }
                         showToast(productsModel.getMsg());

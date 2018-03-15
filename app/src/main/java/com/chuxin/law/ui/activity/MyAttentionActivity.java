@@ -142,11 +142,17 @@ public class MyAttentionActivity extends BaseTalkLawActivity {
                        if (myAttentionListModel.getCode()== CommonConstant.NET_SUC_CODE
                                &&myAttentionListModel.getData()!=null){
                            if (isRefresh){
+                               page=1;
                                adapter.refreshList(myAttentionListModel.getData());
                            }else {
                                adapter.addList(myAttentionListModel.getData());
+                               page++;
                            }
-                           page++;
+                           if (adapter.getItemCount()>myAttentionListModel.total){
+                               attentionList.setLoadingMoreEnabled(true);
+                           }else {
+                               attentionList.setLoadingMoreEnabled(false);
+                           }
                        }
                     }
                 }, new Action1<Throwable>() {
