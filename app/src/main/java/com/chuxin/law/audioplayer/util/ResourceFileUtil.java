@@ -1,8 +1,10 @@
 package com.chuxin.law.audioplayer.util;
 
 import android.content.Context;
+import android.os.Environment;
 
 import com.chuxin.law.audioplayer.model.StorageInfo;
+import com.jusfoun.baselibrary.Util.StringUtil;
 
 import java.io.File;
 import java.util.List;
@@ -42,6 +44,10 @@ public class ResourceFileUtil {
         //
         if (fileName == null) {
             fileName = "";
+        }
+
+        if (StringUtil.isEmpty(baseFilePath)){
+            baseFilePath= Environment.getExternalStorageDirectory().toString();
         }
 
         //

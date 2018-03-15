@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -38,6 +39,9 @@ import com.jusfoun.baselibrary.Util.MD5Util;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
+import com.jusfoun.baselibrary.permissiongen.PermissionFail;
+import com.jusfoun.baselibrary.permissiongen.PermissionGen;
+import com.jusfoun.baselibrary.permissiongen.PermissionSuccess;
 import com.jusfoun.baselibrary.task.WeakHandler;
 
 import java.util.HashMap;
@@ -78,6 +82,8 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
     private AudioInfo audioInfo;
 
     private VoiceHelper voiceHelper;
+
+    private boolean hasPer=false;
 
     /**
      * 音频广播
@@ -263,12 +269,20 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!checkPer()){
+                    applyPer();
+                    return;
+                }
                 DownloadAudioManager.getDownloadAudioManager( mContext).addTask(audioInfo);
             }
         });
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!checkPer()){
+                    applyPer();
+                    return;
+                }
                 int status=AudioPlayUtils.getInstance().getPlayStatus();
                 if (status== AudioPlayerManager.PAUSE){
                     AudioInfo audioInfo = AudioPlayUtils.getInstance().getmCurrentAudio();
@@ -469,6 +483,11 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
         if (data.getLawyer()!=null){
             lawyerName.setText(data.getLawyer().getName());
         }
+
+        if (!checkPer()){
+            applyPer();
+            return;
+        }
     }
 
     @Override
@@ -592,5 +611,28 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
     protected void onDestroy() {
         super.onDestroy();
 
+    }
+
+    /**
+     * 检查权限
+     */
+    private void applyPer(){
+        PermissionGen.with(this).addRequestCode(100)
+                .permissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE})
+                .request();
+    }
+
+    private boolean checkPer(){
+        return PermissionGen.checkPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE});
+    }
+
+    @PermissionFail(requestCode = 100)
+    private void perFail() {
+        showToast("无法获取权限,请设置权限");
+    }
+
+    @PermissionSuccess(requestCode = 100)
+    private void perSuc() {
+        hasPer=true;
     }
 }

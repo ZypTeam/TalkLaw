@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
@@ -20,6 +21,9 @@ import com.chuxin.law.audioplayer.util.AudioPlayUtils;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.ui.adapter.HomeAdapter;
 import com.chuxin.law.util.voice.VoiceHelper;
+import com.jusfoun.baselibrary.permissiongen.PermissionFail;
+import com.jusfoun.baselibrary.permissiongen.PermissionGen;
+import com.jusfoun.baselibrary.permissiongen.PermissionSuccess;
 import com.jusfoun.baselibrary.view.HomeViewPager;
 
 /**
@@ -29,7 +33,6 @@ import com.jusfoun.baselibrary.view.HomeViewPager;
  * @Description ${TODO}
  */
 public class HomeActivity extends BaseTalkLawActivity {
-
 
     private HomeViewPager viewPager;
     private HomeAdapter adapter;
@@ -95,6 +98,19 @@ public class HomeActivity extends BaseTalkLawActivity {
         viewPager.setOffscreenPageLimit(3);
 
         initService();
+
+        PermissionGen.with(this).addRequestCode(100)
+                .permissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE})
+                .request();
+    }
+
+    @PermissionFail(requestCode = 100)
+    private void perFail() {
+
+    }
+
+    @PermissionSuccess(requestCode = 100)
+    private void perSuc() {
 
     }
 

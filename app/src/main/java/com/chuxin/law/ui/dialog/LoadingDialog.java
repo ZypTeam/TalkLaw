@@ -80,8 +80,12 @@ public class LoadingDialog extends Dialog {
 
     @Override
     public void show() {
-        super.show();
-        myProgressBar.show();
+        try {
+            super.show();
+            myProgressBar.show();
+        }catch (Exception e){
+
+        }
     }
 
     public AsyncTask<?, ?, ?> getAsyncTask() {

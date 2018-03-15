@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.fragment;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +33,10 @@ import com.jrmf360.rylib.common.util.ToastUtil;
 import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.MD5Util;
 import com.jusfoun.baselibrary.Util.StringUtil;
+import com.jusfoun.baselibrary.Util.TouchUtil;
+import com.jusfoun.baselibrary.permissiongen.PermissionFail;
+import com.jusfoun.baselibrary.permissiongen.PermissionGen;
+import com.jusfoun.baselibrary.permissiongen.PermissionSuccess;
 import com.jusfoun.baselibrary.task.WeakHandler;
 
 import rx.functions.Action1;
@@ -185,6 +190,10 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
     @Override
     protected void refreshData() {
         ImageLoderUtil.loadCircleImage(mContext, imgAudio, imgUrl, R.mipmap.icon_head_def_cir);
+        if (!checkPer()){
+            applyPer();
+            return;
+        }
     }
 
     @Override
@@ -247,9 +256,21 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
                     showToast("请先购买");
                     return;
                 }
+                if (!checkPer()){
+                    applyPer();
+                    return;
+                }
+
+                if (StringUtil.isEmpty(url)
+                        ||!url.startsWith("http://")){
+                    ToastUtil.showToast(mContext,"音乐格式错误");
+                    return;
+                }
+
                 if (CommonLogic.getInstance().getLawyerProductData() != null
                         && CommonLogic.getInstance().getLawyerProductData().getArticle() != null
-                        && !StringUtil.equals(CommonLogic.getInstance().getLawyerProductData().getArticle().getUrl(), url)) {
+                        && !StringUtil.equals(CommonLogic.getInstance().getLawyerProductData().getArticle().getId(), data.getArticle().getId())) {
+                    initService();
                     CommonLogic.getInstance().setLawyerProductData(data);
                     Intent playIntent = new Intent(AudioBroadcastReceiver.ACTION_PLAYMUSIC);
                     AudioMessage audioMessage = new AudioMessage();
@@ -457,7 +478,11 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
     @Override
     public void onResume() {
         super.onResume();
-        initService();
+        if (CommonLogic.getInstance().getLawyerProductData() == null
+                || CommonLogic.getInstance().getLawyerProductData().getArticle() == null
+                || StringUtil.equals(CommonLogic.getInstance().getLawyerProductData().getArticle().getId(), data.getArticle().getId())) {
+            initService();
+        }
     }
 
     @Override
@@ -474,5 +499,28 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    /**
+     * 检查权限
+     */
+    private void applyPer(){
+        PermissionGen.with(this).addRequestCode(100)
+                .permissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE})
+                .request();
+    }
+
+    private boolean checkPer(){
+        return PermissionGen.checkPermissions(getContext(),new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE});
+    }
+
+    @PermissionFail(requestCode = 100)
+    private void perFail() {
+        showToast("无法获取权限,请设置权限");
+    }
+
+    @PermissionSuccess(requestCode = 100)
+    private void perSuc() {
+
     }
 }
