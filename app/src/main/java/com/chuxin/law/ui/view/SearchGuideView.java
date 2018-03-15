@@ -19,7 +19,11 @@ import com.chuxin.law.model.ProductModel;
 import com.chuxin.law.model.ProductsModel;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * SearchGuideView
@@ -115,19 +119,20 @@ public class SearchGuideView extends LinearLayout {
     /**
      * 设置 历史搜索显示
      *
-     * @param list 本地数据库中的历史搜索记录
+     * @param set 本地数据库中的历史搜索记录
      */
-    public void setHistoryData(List<HotKeyListModel.HotKeyModel> list) {
-        if (list==null){
+    public void setHistoryData(HashSet<String> set) {
+        if (set==null||set.size()==0){
             return;
         }
         mHistoryLayout.setVisibility(VISIBLE);
         mHistory.removeAllViews();
 
-        for (int i = 0; i < list.size(); i++) {
+        for(Iterator<String> iter = set.iterator(); iter.hasNext(); ) {
+            String string=  iter.next();
             View itemview = LayoutInflater.from(mContext).inflate(R.layout.item_option_item, null);
             final TextView optionName = (TextView) itemview.findViewById(R.id.item_option_name);
-            optionName.setText(list.get(i).getKeyword());
+            optionName.setText(string);
             optionName.setBackgroundResource(R.drawable.option_unselected);
             optionName.setOnClickListener(new OnClickListener() {
                 @Override

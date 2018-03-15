@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,10 +19,16 @@ import com.chuxin.law.model.ProductsModel;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
 import com.chuxin.law.ui.view.SearchGuideView;
 import com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView;
+import com.chuxin.law.util.ShareUtils;
+import com.jusfoun.baselibrary.Util.SharePrefenceUtils;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.net.Api;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 import rx.functions.Action1;
 
@@ -32,6 +39,7 @@ import rx.functions.Action1;
  * @Description ${搜索页面}
  */
 public class SearchActivity extends BaseTalkLawActivity {
+    private static final String HISTORY="history_list";
     protected SearchGuideView viewSearchGuide;
     protected ImageView back;
     protected TextView textCancle;
@@ -40,6 +48,7 @@ public class SearchActivity extends BaseTalkLawActivity {
     private int page;
     private String keyword;
     private EditText editSearch;
+    private HashSet<String> historySearch;
 
     @Override
     public int getLayoutResId() {
@@ -63,7 +72,8 @@ public class SearchActivity extends BaseTalkLawActivity {
 
     @Override
     public void initAction() {
-        viewSearchGuide.setHistoryData(null);
+        historySearch= (HashSet<String>) SharePrefenceUtils.getInstance().getSet(HISTORY);
+        viewSearchGuide.setHistoryData(historySearch);
 
         viewSearchGuide.setCallBack(new SearchGuideView.CallBack() {
             @Override
@@ -143,6 +153,20 @@ public class SearchActivity extends BaseTalkLawActivity {
         params.put("page", isRefrsh ? "1" : (page + 1) + "");
         params.put("size", CommonConstant.LIST_PAGE_SIZE);
         showLoadDialog();
+        if (!historySearch.contains(keyword)) {
+            if (historySearch.size() < 20) {
+                historySearch.add(keyword);
+            } else {
+                for (Iterator<String> iter = historySearch.iterator(); iter.hasNext(); ) {
+                    //移除第一个
+                    iter.remove();
+                    break;
+                }
+                historySearch.add(keyword);
+            }
+            SharePrefenceUtils.getInstance().setSet(HISTORY,historySearch);
+            viewSearchGuide.setHistoryData(historySearch);
+        }
         addNetwork(Api.getInstance().getService(ApiService.class).search(params)
                 , new Action1<ProductsModel>() {
                     @Override

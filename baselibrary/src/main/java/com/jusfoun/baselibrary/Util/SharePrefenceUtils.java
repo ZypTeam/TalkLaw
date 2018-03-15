@@ -5,6 +5,10 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.widget.TextView;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
 /**
  * @author wangcc
  * @date 2018/1/17
@@ -61,6 +65,18 @@ public class SharePrefenceUtils {
         checkShare();
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putString(key,value);
+        editor.commit();
+    }
+
+    public Set<String> getSet(String key){
+        checkShare();
+        return sharedPreferences.getStringSet(key,new HashSet<String>());
+    }
+
+    public void setSet(String key,Set<String> value){
+        checkShare();
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putStringSet(key,value);
         editor.commit();
     }
 
