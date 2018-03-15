@@ -9,6 +9,10 @@ android {
         targetSdkVersion 23
         versionCode 2018022610
         versionName "2.8.28 Dev"
+        ndk {
+            abiFilters "armeabi"
+//            , "armeabi-v7a", "x86"
+        }
     }
 
     sourceSets {

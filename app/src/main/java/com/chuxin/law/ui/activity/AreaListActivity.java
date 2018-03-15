@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -285,7 +286,7 @@ public class AreaListActivity extends BaseTalkLawActivity {
                     UserModel userModel = TalkLawApplication.getUserInfo();
                     userModel.setCity(selectCity.getName());
                     userModel.setProvince(selectProvince.getName());
-                    showToast("修改地址陈宫");
+                    showToast("修改成功");
 
                     UserInfoDelegate.getInstance().saveUserInfo(userModel);
 

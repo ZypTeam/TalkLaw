@@ -18,11 +18,13 @@ import com.chuxin.law.R;
 import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.HeaderTalkInterceptor;
 import com.chuxin.law.common.UserInfoDelegate;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.ry.SealConst;
 import com.chuxin.law.ry.SealUserInfoManager;
 import com.chuxin.law.sharedpreferences.FriendsSp;
+import com.google.gson.Gson;
 import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
@@ -195,17 +197,21 @@ public class LoginActivity extends BaseTalkLawActivity {
                         if (userInfoModel != null && userInfoModel.getData() != null && userInfoModel.getCode() == 10000) {
                             //TODO :登录成功直接登录 hide loading 新用户 融云登录注册调试后去掉
                             hideLoadDialog();
-                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
+//                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
 
-                            goActivity(null, HomeActivity.class);
-                            finish();
+//                            goActivity(null, HomeActivity.class);
+//                            finish();
 
-                            if (userInfoModel.getData() != null) {
-                                RongIM.getInstance().refreshUserInfoCache(new UserInfo("userId", userInfoModel.getData().getUserid(), Uri.parse(userInfoModel.getData().getHeadimg())));
-                            }
+//                            if (userInfoModel.getData() != null) {
+//                                RongIM.getInstance().refreshUserInfoCache(new UserInfo("userId", userInfoModel.getData().getUserid(), Uri.parse(userInfoModel.getData().getHeadimg())));
+//                            }
 
 //                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
 //                            goActivity(null, HomeActivity.class);
+
+                            Api.getInstance().register(LoginActivity.this, getString(R.string.url))
+                                    .addInterceptro(new HeaderTalkInterceptor())
+                                    .build();
                             loginHx(userInfoModel);
                         } else {
                             hideLoadDialog();
@@ -242,6 +248,7 @@ public class LoginActivity extends BaseTalkLawActivity {
 
 //                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
 //                            goActivity(null, HomeActivity.class);
+
                             loginHx(userInfoModel);
                         } else {
                             Toast.makeText(mContext, userInfoModel.getMsg(), Toast.LENGTH_SHORT).show();
@@ -334,16 +341,19 @@ public class LoginActivity extends BaseTalkLawActivity {
 
             @Override
             public void onSuccess(String s) {
-
                 hideLoadDialog();
-
-
                 if (userInfoModel.getData() != null) {
                     FriendsSp.saveFriedns(mContext,new UserInfo(userInfoModel.getData().getUserid(), userInfoModel.getData().getName(), Uri.parse(userInfoModel.getData().getHeadimg())));
 //                    RongIM.getInstance().refreshUserInfoCache();
 //                    RongIM.getInstance().setCurrentUserInfo(new UserInfo("userId", userInfoModel.getData().getUserid(), Uri.parse(userInfoModel.getData().getHeadimg())));
                 }
 
+                UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
+                Api.getInstance().register(LoginActivity.this, getString(R.string.url))
+                        .addInterceptro(new HeaderTalkInterceptor())
+                        .build();
+
+                Log.e("tag","UserInfoDelegate="+new Gson().toJson(userInfoModel.getData()));
                 editor.putString(SealConst.SEALTALK_LOGIN_ID, s);
                 editor.commit();
                 SealUserInfoManager.getInstance().openDB();
@@ -353,7 +363,7 @@ public class LoginActivity extends BaseTalkLawActivity {
                 editor.commit();
 
                 Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
-                UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
+
 
 
                 goActivity(null, HomeActivity.class);

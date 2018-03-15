@@ -70,7 +70,7 @@ public class TalkLawApplication extends BaseApplication {
 
     @Override
     public void onCreate() {
-        MultiDex.install(this);
+//        MultiDex.install(this);
         super.onCreate();
         SharePrefenceUtils.getInstance().register(this, getPackageName());
         Api.getInstance().register(this, getString(R.string.url))
@@ -136,8 +136,8 @@ public class TalkLawApplication extends BaseApplication {
         if (getApplicationInfo().packageName.equals(getCurProcessName(getApplicationContext()))) {
 
 //            LeakCanary.install(this);//内存泄露检测
-            RongPushClient.registerHWPush(this);
-            RongPushClient.registerMiPush(this, "2882303761517473625", "5451747338625");
+//            RongPushClient.registerHWPush(this);
+//            RongPushClient.registerMiPush(this, "2882303761517473625", "5451747338625");
 //            try {
 //                RongPushClient.registerFCM(this);
 //            } catch (RongException e) {
