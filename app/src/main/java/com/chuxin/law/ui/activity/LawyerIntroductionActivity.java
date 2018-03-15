@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chuxin.law.R;
+import com.chuxin.law.audioplayer.util.StorageListUtil;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
@@ -154,8 +155,10 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
 
 //                    RongIM.getInstance().startPrivateChat(mContext, "64", data.getLaw().getName());
 //                    RongIM.getInstance().startChatRoomChat(mContext,"1497704102201803131347231",true);
+//                    1497704102201803131347231
 
-                    startChatRoomChat(mContext, "1497704102201803131347231", data.getLaw().getName(), true);
+
+                    startChatRoomChat(mContext, data.order.order, data.getLaw().getName(), true);
 
 //                    public void joinChatRoom(final String chatroomId, final int defMessageCount, final RongIMClient.OperationCallback callback)
 //                    RongIM.getInstance().startPrivateChat(mContext, , data.getLaw().getName());
@@ -185,6 +188,9 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         haoping.setText(UIUtils.getText("100%", "好评"));
         suc.setText(UIUtils.getText("100%", "胜率"));
         ImageLoderUtil.loadCircleImage(mContext, iconHead, "http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg", R.mipmap.icon_head_def_cir);
+
+
+        Log.e("tag","StorageListUtil="+ StorageListUtil.listAvaliableStorage(this));
     }
 
     private void getData() {
