@@ -138,7 +138,34 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Intent intent  = new Intent(LawyerIntroductionActivity.this, ChatActivity.class);
+//                intent.putExtra("userId", "20");
+//                intent.putExtra("userName", "王律师");
+//                startActivity(intent);
 
+                if (data != null && data.getLaw() != null) {
+
+//                    Intent intent = new Intent(mContext, ConversationActivity.class);
+//                    intent.putExtra("targetId",data.getLaw().getUserid());
+//                    intent.putExtra("title",data.getLaw().getName());
+//                    mContext.startActivity(intent);
+//                    data.getLaw().getUserid()
+
+                    FriendsSp.saveFriedns(mContext, new UserInfo(data.getLaw().getUserid(), data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
+
+//                    RongIM.getInstance().startPrivateChat(mContext, "64", data.getLaw().getName());
+//                    RongIM.getInstance().startChatRoomChat(mContext,"1497704102201803131347231",true);
+//                    1497704102201803131347231
+
+
+//                    startChatRoomChat(mContext, data.order.order, data.getLaw().getName(), true);
+
+                    startChatRoomChat(mContext, "1497704102201803131347231", data.getLaw().getName(), true);
+
+//                    public void joinChatRoom(final String chatroomId, final int defMessageCount, final RongIMClient.OperationCallback callback)
+//                    RongIM.getInstance().startPrivateChat(mContext, , data.getLaw().getName());
+
+                }
             }
         });
 
