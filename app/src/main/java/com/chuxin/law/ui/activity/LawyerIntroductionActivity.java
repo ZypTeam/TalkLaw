@@ -71,6 +71,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     private ProductListAdapter adapter;
     private LawyerIntroModel.LawyerIntroData data;
     private PresentInstructionsDialog dialog;
+    private String type;
 
     @Override
     public int getLayoutResId() {
@@ -119,7 +120,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                     return;
                 }
                 Bundle bundle = new Bundle();
-                bundle.putInt(BuyIntroductionActivity.TYPE, 0);
+                bundle.putString(BuyIntroductionActivity.TYPE, type);
                 bundle.putSerializable(BuyIntroductionActivity.DATA, data);
                 goActivityForResult(bundle, BuyIntroductionActivity.class, CommonConstant.REQUEST_PAY_SUCCUSE);
             }
@@ -131,6 +132,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         zixun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                type="1";
                 checkConsult();
             }
         });
@@ -138,7 +140,8 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                type="2";
+                checkConsult();
             }
         });
 
@@ -274,6 +277,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("touserid", data.getLaw().getUserid());
+        params.put("type",type);
         addNetwork(Api.getInstance().getService(ApiService.class).checkConsult(params)
                 , new Action1<CheckConsultModel>() {
                     @Override

@@ -43,6 +43,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
     protected TextView weixin;
     protected CheckBox agree;
     protected Button login;
+    private String type;
 
     private String mPrice;
     private LawyerIntroModel.LawyerIntroData data;
@@ -56,6 +57,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
         data = (LawyerIntroModel.LawyerIntroData) getIntent().getExtras().getSerializable(DATA);
+        type=getIntent().getExtras().getString(TYPE);
         mPrice=data.getLaw().getPrice();
     }
 
@@ -139,7 +141,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
         HashMap<String, String> params = new HashMap<>();
         params.put("touserid", data.getLaw().getUserid());
         params.put("method", zhifubao.isSelected() ? "2" : "1");
-        params.put("type","1");
+        params.put("type",type);
         Log.e("tag", "params" + params);
         addNetwork(Api.getInstance().getService(ApiService.class).consultSet(params)
                 , new Action1<OrderResultModel>() {
