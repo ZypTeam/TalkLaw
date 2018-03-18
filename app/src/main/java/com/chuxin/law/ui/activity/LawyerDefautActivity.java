@@ -468,7 +468,9 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                     public void call(OrderResultModel noDataModel) {
                         hideLoadDialog();
                         if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE){
-
+                            data.getArticle().setIs_buy(1);
+                            showToast("兑换成功");
+                            return;
                         }
                         showToast(noDataModel.getMsg());
                     }
@@ -476,6 +478,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(Throwable throwable) {
                         hideLoadDialog();
+                        showToast("兑换失败");
                     }
                 });
     }

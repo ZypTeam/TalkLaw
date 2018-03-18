@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.MD5Util;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.Util.TouchUtil;
+import com.jusfoun.baselibrary.dialog.MyProgressBar;
 import com.jusfoun.baselibrary.permissiongen.PermissionFail;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
 import com.jusfoun.baselibrary.permissiongen.PermissionSuccess;
@@ -69,6 +71,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
 
     private AudioInfo audioInfo;
     private VoiceHelper voiceHelper;
+    private MyProgressBar progressBar;
 
     /**
      * 音频广播
@@ -146,6 +149,9 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
             seek.setSecondaryProgress(0);
 
         } else if (action.equals(AudioBroadcastReceiver.ACTION_SERVICE_PLAYMUSIC)) {
+            if (progressBar.isShow()){
+                progressBar.hide();
+            }
             //播放
             AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();//(AudioMessage) intent.getSerializableExtra(AudioMessage.KEY);
 
@@ -166,6 +172,9 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
             play.setImageResource(R.mipmap.icon_audio_pause);
 
         } else if (action.equals(AudioBroadcastReceiver.ACTION_SERVICE_PLAYINGMUSIC)) {
+            if (progressBar.isShow()){
+                progressBar.hide();
+            }
             //播放中
             AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();//(AudioMessage) intent.getSerializableExtra(AudioMessage.KEY);
             if (audioMessage != null) {
@@ -236,6 +245,8 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
         content = (TextView) rootView.findViewById(R.id.content);
         dashang = (TextView) rootView.findViewById(R.id.dashang);
 
+        progressBar=rootView.findViewById(R.id.progress_bar);
+
     }
 
     @Override
@@ -279,6 +290,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
                     playIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
                     mContext.sendBroadcast(playIntent);
                     play.setImageResource(R.mipmap.icon_audio_pause);
+                    progressBar.show();
                     return;
                 }
                 int status = AudioPlayUtils.getInstance().getPlayStatus();
@@ -310,6 +322,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
                     playIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
                     mContext.sendBroadcast(playIntent);
                     play.setImageResource(R.mipmap.icon_audio_pause);
+                    progressBar.show();
                 }
             }
         });
@@ -319,6 +332,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
             public void onClick(View v) {
                 int playStatus = AudioPlayUtils.getInstance().getPlayStatus();
                 if (playStatus == AudioPlayerManager.PLAYING) {
+                    progressBar.show();
                     //正在播放
                     if (AudioPlayUtils.getInstance().getCurAudioMessage() != null) {
                         AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();
@@ -343,6 +357,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
             public void onClick(View v) {
                 //正在播放
                 if (AudioPlayUtils.getInstance().getCurAudioMessage() != null) {
+                    progressBar.show();
                     AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();
                     if (audioMessage != null) {
                         long progress = audioMessage.getPlayProgress() + 10000;
@@ -364,6 +379,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
             public void onClick(View v) {
                 //正在播放
                 if (AudioPlayUtils.getInstance().getCurAudioMessage() != null) {
+                    progressBar.show();
                     AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();
                     if (audioMessage != null) {
                         long progress = audioMessage.getPlayProgress() - 2000;
@@ -385,6 +401,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
             public void onClick(View v) {
                 //正在播放
                 if (AudioPlayUtils.getInstance().getCurAudioMessage() != null) {
+                    progressBar.show();
                     AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();
                     if (audioMessage != null) {
                         long progress = audioMessage.getPlayProgress() + 2000;
@@ -417,6 +434,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 //正在播放
                 if (AudioPlayUtils.getInstance().getCurAudioMessage() != null) {
+                    progressBar.show();
                     AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();
                     if (audioMessage != null) {
                         long progress = seekBar.getProgress();

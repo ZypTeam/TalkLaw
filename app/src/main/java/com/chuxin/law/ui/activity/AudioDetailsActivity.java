@@ -38,6 +38,7 @@ import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.MD5Util;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
+import com.jusfoun.baselibrary.dialog.MyProgressBar;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.permissiongen.PermissionFail;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
@@ -82,6 +83,8 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
     private AudioInfo audioInfo;
 
     private VoiceHelper voiceHelper;
+
+    private MyProgressBar myProgressBar;
 
     private boolean hasPer=false;
 
@@ -161,6 +164,9 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
             seek.setSecondaryProgress(0);
 
         } else if (action.equals(AudioBroadcastReceiver.ACTION_SERVICE_PLAYMUSIC)) {
+            if (myProgressBar.isShow()){
+                myProgressBar.hide();
+            }
             //播放
             AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();//(AudioMessage) intent.getSerializableExtra(AudioMessage.KEY);
 
@@ -181,6 +187,9 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
             play.setImageResource(R.mipmap.icon_audio_pause);
 
         } else if (action.equals(AudioBroadcastReceiver.ACTION_SERVICE_PLAYINGMUSIC)) {
+            if (myProgressBar.isShow()){
+                myProgressBar.hide();
+            }
             //播放中
             AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();//(AudioMessage) intent.getSerializableExtra(AudioMessage.KEY);
             if (audioMessage != null) {
@@ -218,6 +227,8 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
         audioInfo.setFileExt("mp3");
         audioInfo.setType(AudioInfo.NET);
         initService();
+
+        myProgressBar=findViewById(R.id.progress_bar);
 
         voiceHelper=new VoiceHelper();
         voiceHelper.initVoice(VoiceHelper.MUSIC_INDEX,url);
@@ -303,6 +314,7 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
                     sendBroadcast(resumeIntent);
                     play.setImageResource(R.mipmap.icon_audio_player);
                 }else {
+                    myProgressBar.show();
                     Intent playIntent = new Intent(AudioBroadcastReceiver.ACTION_PLAYMUSIC);
                     AudioMessage audioMessage = new AudioMessage();
                     audioMessage.setPlayProgress(0);
@@ -320,6 +332,7 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
             public void onClick(View v) {
                 int playStatus = AudioPlayUtils.getInstance().getPlayStatus();
                 if (playStatus == AudioPlayerManager.PLAYING) {
+                    myProgressBar.show();
                     //正在播放
                     if (AudioPlayUtils.getInstance().getCurAudioMessage() != null) {
                         AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();
@@ -344,6 +357,7 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
             public void onClick(View v) {
                 //正在播放
                 if (AudioPlayUtils.getInstance().getCurAudioMessage() != null) {
+                    myProgressBar.show();
                     AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();
                     if (audioMessage != null) {
                         long progress=audioMessage.getPlayProgress()+10000;
@@ -365,6 +379,7 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
             public void onClick(View v) {
                 //正在播放
                 if (AudioPlayUtils.getInstance().getCurAudioMessage() != null) {
+                    myProgressBar.show();
                     AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();
                     if (audioMessage != null) {
                         long progress=audioMessage.getPlayProgress()-2000;
@@ -386,6 +401,7 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
             public void onClick(View v) {
 //                //正在播放
                 if (AudioPlayUtils.getInstance().getCurAudioMessage() != null) {
+                    myProgressBar.show();
                     AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();
                     if (audioMessage != null) {
                         long progress=audioMessage.getPlayProgress()+2000;
@@ -417,6 +433,7 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 //正在播放
                 if (AudioPlayUtils.getInstance().getCurAudioMessage() != null) {
+                    myProgressBar.show();
                     AudioMessage audioMessage = AudioPlayUtils.getInstance().getCurAudioMessage();
                     if (audioMessage != null) {
                         long progress=seekBar.getProgress();
