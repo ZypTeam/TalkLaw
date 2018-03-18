@@ -26,6 +26,7 @@ public class MyProgressBar extends ImageView {
     private Drawable defaultDrawable = null;
     private int width = 0;
     private int height = 0;
+    private boolean show;
 
     public MyProgressBar(Context context) {
         super(context);
@@ -74,14 +75,21 @@ public class MyProgressBar extends ImageView {
         mRotateAnimation.setInterpolator(new LinearInterpolator());
         mRotateAnimation.setFillAfter(true);
         startAnimation(mRotateAnimation);
+        show=true;
     }
 
     public void stop() {
+        show=false;
         clearAnimation();
     }
 
     public void hide() {
+        show=false;
         clearAnimation();
         this.setVisibility(View.GONE);
+    }
+
+    public boolean isShow() {
+        return show;
     }
 }

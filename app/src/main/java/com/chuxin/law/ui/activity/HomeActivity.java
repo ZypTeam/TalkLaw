@@ -21,6 +21,7 @@ import com.chuxin.law.audioplayer.util.AudioPlayUtils;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.ui.adapter.HomeAdapter;
 import com.chuxin.law.util.voice.VoiceHelper;
+import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.permissiongen.PermissionFail;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
 import com.jusfoun.baselibrary.permissiongen.PermissionSuccess;
@@ -166,6 +167,11 @@ public class HomeActivity extends BaseTalkLawActivity {
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override
