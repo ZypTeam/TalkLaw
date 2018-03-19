@@ -15,7 +15,7 @@
         android:layout_height="250dp"
         android:orientation="horizontal">
 
-        <com.chuxin.law.ui.view.wheel.WheelView
+        <com.chuxin.law.ui.view.wheel.lvShiWheel
             android:id="@+id/wheel_week_wheel"
             android:layout_width="match_parent"
             android:layout_height="250dp" />

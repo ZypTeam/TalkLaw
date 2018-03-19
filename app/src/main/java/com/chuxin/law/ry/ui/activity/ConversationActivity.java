@@ -19,13 +19,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-
 import com.chuxin.law.R;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
+import com.chuxin.law.event.CheckOrderEvent;
+import com.chuxin.law.event.IEvent;
+import com.chuxin.law.model.GuaranteeRequestModel;
 import com.chuxin.law.ry.SealAppContext;
 import com.chuxin.law.ry.SealUserInfoManager;
 import com.chuxin.law.ry.db.GroupMember;
@@ -33,6 +32,15 @@ import com.chuxin.law.ry.server.utils.NLog;
 import com.chuxin.law.ry.server.utils.NToast;
 import com.chuxin.law.ry.ui.fragment.ConversationFragmentEx;
 import com.chuxin.law.ry.ui.widget.LoadingDialog;
+import com.jusfoun.baselibrary.net.Api;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+
 import io.rong.callkit.RongCallKit;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.RongKitIntent;
@@ -47,6 +55,7 @@ import io.rong.imlib.model.PublicServiceProfile;
 import io.rong.imlib.model.UserInfo;
 import io.rong.message.TextMessage;
 import io.rong.message.VoiceMessage;
+import rx.functions.Action1;
 
 //CallKit start 1
 //CallKit end 1
@@ -332,7 +341,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
 
     private void reconnect(String token) {
 
-        Log.e("tag","reconnectreconnect="+token);
+        Log.e("tag", "reconnectreconnect=" + token);
         RongIM.connect(token, new RongIMClient.ConnectCallback() {
             @Override
             public void onTokenIncorrect() {
@@ -672,5 +681,36 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                 SealAppContext.getInstance().popAllActivity();
             }
         }
+    }
+
+    public void onEvent(IEvent event) {
+        Log.e("tag", "eventevent1");
+        if (event instanceof CheckOrderEvent) {
+            Log.e("tag", "eventevent2");
+            checkOrder(((CheckOrderEvent) event).order);
+        }
+    }
+
+    private void checkOrder(String prepayid) {
+//        showLoadDialog();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("order", prepayid);
+
+        addNetwork(Api.getInstance().getService(ApiService.class).checkOrder(params)
+                , new Action1<GuaranteeRequestModel>() {
+                    @Override
+                    public void call(GuaranteeRequestModel noDataModel) {
+//                        hideLoadDialog();
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
+
+                            Log.e("tag", "checkOrder=" + noDataModel.data.state);
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+//                        hideLoadDialog();
+                    }
+                });
     }
 }

@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -12,17 +13,25 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.R;
 import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
+import com.chuxin.law.model.GuaranteeRequestModel;
 import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ry.my.mymessage.PayMessage;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.google.gson.Gson;
+import com.jusfoun.baselibrary.base.NoDataModel;
+import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
+
+import java.util.HashMap;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.IRongCallback;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;
+import rx.functions.Action1;
 
 /**
  * @author zhaoyapeng
@@ -88,32 +97,57 @@ public class GuaranteeRequestActivity extends BaseTalkLawActivity {
                 showLoadDialog();
 
                 Log.e("tag","setOnClickListener="+editMoney.getText().toString()+" "+TalkLawApplication.getUserId());
-                PayMessage payMessage =  PayMessage.obtain(editMoney.getText().toString(),TalkLawApplication.getUserId(),"0");
-                RongIM.getInstance().sendMessage(Message.obtain(targetId, Conversation.ConversationType.CHATROOM, payMessage),
-                        "保证金", "保证金", new IRongCallback.ISendMessageCallback() {
-                            @Override
-                            public void onAttached(Message message) {
-                                Log.e("tag","RongIM-onAttached");
-                            }
 
-                            @Override
-                            public void onSuccess(Message message) {
-                                hideLoadDialog();
-                                finish();
-                                Log.e("tag","RongIM-onSuccess");
-                            }
-
-                            @Override
-                            public void onError(Message message, RongIMClient.ErrorCode errorCode) {
-                                hideLoadDialog();
-                                showToast("申请失败，请重试");
-                                Log.e("tag","RongIM-onError="+new Gson().toJson(message)+" "+errorCode);
-                            }
-                        });
-
-
+                getOrderData();
 
             }
         });
+    }
+
+    private void getOrderData() {
+        showLoadDialog();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("touserid", TalkLawApplication.getUserId());
+        params.put("consult", targetId);
+        params.put("money", editMoney.getText().toString());
+
+        addNetwork(Api.getInstance().getService(ApiService.class).getOrderData(params)
+                , new Action1<GuaranteeRequestModel>() {
+                    @Override
+                    public void call(GuaranteeRequestModel noDataModel) {
+                        hideLoadDialog();
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
+
+                            PayMessage payMessage =  PayMessage.obtain(noDataModel.data.prepayid,TalkLawApplication.getUserId(),"0");
+                            RongIM.getInstance().sendMessage(Message.obtain(targetId, Conversation.ConversationType.CHATROOM, payMessage),
+                                    "保证金", "保证金", new IRongCallback.ISendMessageCallback() {
+                                        @Override
+                                        public void onAttached(Message message) {
+                                            Log.e("tag","RongIM-onAttached");
+                                        }
+
+                                        @Override
+                                        public void onSuccess(Message message) {
+                                            hideLoadDialog();
+                                            finish();
+                                            Log.e("tag","RongIM-onSuccess");
+                                        }
+
+                                        @Override
+                                        public void onError(Message message, RongIMClient.ErrorCode errorCode) {
+                                            hideLoadDialog();
+                                            showToast("申请失败，请重试");
+                                            Log.e("tag","RongIM-onError="+new Gson().toJson(message)+" "+errorCode);
+                                        }
+                                    });
+
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
     }
 }

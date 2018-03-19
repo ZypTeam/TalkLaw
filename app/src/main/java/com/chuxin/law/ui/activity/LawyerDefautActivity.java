@@ -2,13 +2,13 @@ package com.chuxin.law.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
@@ -24,10 +24,7 @@ import com.chuxin.law.util.UIUtils;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
-import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 import com.jusfoun.baselibrary.widget.TitleStatusBarView;
-
-import com.chuxin.law.R;
 import com.umeng.socialize.UMShareAPI;
 
 import java.util.HashMap;
@@ -45,7 +42,7 @@ import static com.chuxin.law.ui.activity.CommentListActivity.COMMENT_COUNT;
  */
 
 public class LawyerDefautActivity extends BaseTalkLawActivity {
-    public static final String ID="id";
+    public static final String ID = "id";
     protected TextView title;
     protected TitleStatusBarView titleBar;
     protected ImageView iconHead;
@@ -68,7 +65,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     protected TextView edit;
     protected TextView audio;
     protected TextView image;
-    protected TextView video,commentCount;
+    protected TextView video, commentCount;
     protected ViewPager viewpager;
 
     private String id;
@@ -78,6 +75,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     private LawyerDefPagerAdapter adapter;
     private UserModel userModel;
     private LawyerProductModel.LawyerProductData data;
+
     @Override
     public int getLayoutResId() {
         return R.layout.activity_lawyer_defaut;
@@ -86,8 +84,8 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
 
-        id=getIntent().getStringExtra(ID);
-        shareDialog=new ShareDialog(this);
+        id = getIntent().getStringExtra(ID);
+        shareDialog = new ShareDialog(this);
     }
 
     @Override
@@ -149,8 +147,10 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         iconHead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent();
-                intent.putExtra(LawyerIntroductionActivity.ID,userModel!=null?userModel.getId():"");
+                Intent intent = new Intent();
+                intent.putExtra(LawyerIntroductionActivity.ID, userModel != null ? userModel.getId() : "");
+
+                Bundle bundle = new Bundle();
                 intent.setClass(mContext, LawyerIntroductionActivity.class);
                 mContext.startActivity(intent);
             }
@@ -159,7 +159,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (data!=null) {
+                if (data != null) {
                     UIUtils.goBuyActivity(mContext, data);
                 }
             }
@@ -168,10 +168,10 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         collection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (audioModel!=null){
-                    if (audioModel.getIs_colle()==1){
+                if (audioModel != null) {
+                    if (audioModel.getIs_colle() == 1) {
                         uncollection();
-                    }else {
+                    } else {
                         collection();
                     }
                 }
@@ -181,10 +181,10 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         thumbsUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (audioModel!=null){
-                    if (audioModel.getIs_like()==1){
+                if (audioModel != null) {
+                    if (audioModel.getIs_like() == 1) {
                         unlike();
-                    }else {
+                    } else {
                         like();
                     }
                 }
@@ -215,10 +215,10 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (audioModel==null){
+                if (audioModel == null) {
                     return;
                 }
-                ShareModel shareModel=new ShareModel();
+                ShareModel shareModel = new ShareModel();
                 shareModel.setShareUrl(audioModel.getUrl());
                 shareModel.setShareTitle("说法");
                 shareModel.setShareContent("说法");
@@ -231,7 +231,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
             @Override
             public void call(Object o) {
 
-                if (data!=null&&data.getArticle()!=null){
+                if (data != null && data.getArticle() != null) {
                     data.getArticle().setIs_buy(1);
                 }
             }
@@ -269,32 +269,32 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        UMShareAPI.get(mContext).onActivityResult(requestCode,resultCode,data);
-        if (requestCode== CommonConstant.COMMENT_RESULT_CODE){
-            if (data!=null&&audioModel!=null){
-                String count=data.getStringExtra(COMMENT_COUNT);
+        UMShareAPI.get(mContext).onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CommonConstant.COMMENT_RESULT_CODE) {
+            if (data != null && audioModel != null) {
+                String count = data.getStringExtra(COMMENT_COUNT);
                 commentCount.setText(count);
                 audioModel.setCommment_num(count);
             }
         }
 
-        if (shareDialog!=null){
+        if (shareDialog != null) {
             shareDialog.onActivityResult(requestCode, resultCode, data);
         }
     }
 
-    private void getData(){
+    private void getData() {
         showLoadDialog();
-        HashMap<String,String> params=new HashMap<>();
-        params.put("id",id);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", id);
         addNetwork(Api.getInstance().getService(ApiService.class).getProductDetails(params)
                 , new Action1<LawyerProductModel>() {
                     @Override
                     public void call(LawyerProductModel lawyerProductModel) {
                         hideLoadDialog();
-                        if (lawyerProductModel.getCode()== CommonConstant.NET_SUC_CODE){
+                        if (lawyerProductModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             updateView(lawyerProductModel.getData());
-                        }else {
+                        } else {
                             showToast(lawyerProductModel.getMsg());
                         }
                     }
@@ -306,41 +306,41 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                 });
     }
 
-    private void updateView(LawyerProductModel.LawyerProductData data){
-        if (data==null){
+    private void updateView(LawyerProductModel.LawyerProductData data) {
+        if (data == null) {
             return;
         }
-        this.data=data;
-        userModel=data.getLawyer();
-        ImageLoderUtil.loadCircleImage(mContext,iconHead,userModel.getHeadimg(),R.mipmap.icon_head_def_cir);
-        if (StringUtil.isEmpty(userModel.getName())){
+        this.data = data;
+        userModel = data.getLawyer();
+        ImageLoderUtil.loadCircleImage(mContext, iconHead, userModel.getHeadimg(), R.mipmap.icon_head_def_cir);
+        if (StringUtil.isEmpty(userModel.getName())) {
             name.setText("王律师");
-        }else {
+        } else {
             name.setText(userModel.getName());
         }
-        yiban.setText(UIUtils.getText(userModel.getDonenum(),"已办"));
-        dengji.setText(UIUtils.getText("专业级","等级"));
-        haoping.setText(UIUtils.getText(userModel.getPraise()+"%","好评"));
-        shenglv.setText(UIUtils.getText(userModel.getWin()+"%","胜率"));
+        yiban.setText(UIUtils.getText(userModel.getDonenum(), "已办"));
+        dengji.setText(UIUtils.getText("专业级", "等级"));
+        haoping.setText(UIUtils.getText(userModel.getPraise() + "%", "好评"));
+        shenglv.setText(UIUtils.getText(userModel.getWin() + "%", "胜率"));
 
-        audioModel=data.getArticle();
+        audioModel = data.getArticle();
         price.setText(audioModel.getPrice());
-        if (audioModel.getIs_colle()==1){
+        if (audioModel.getIs_colle() == 1) {
             collection.setImageResource(R.mipmap.icon_lawyer_collection);
-        }else {
+        } else {
             collection.setImageResource(R.mipmap.icon_lawyer_collection_un);
         }
 
-        if (audioModel.getIs_like()==1){
+        if (audioModel.getIs_like() == 1) {
             thumbsUp.setImageResource(R.mipmap.icon_lawyer_like);
-        }else {
+        } else {
             thumbsUp.setImageResource(R.mipmap.icon_lawyer_like_un);
         }
-        buyCount.setText("已购："+audioModel.getBuynum());
+        buyCount.setText("已购：" + audioModel.getBuynum());
         title.setText(audioModel.getTitle());
-        jifenCount.setText("积分："+audioModel.getPoint());
+        jifenCount.setText("积分：" + audioModel.getPoint());
         commentCount.setText(audioModel.getCommment_num());
-        adapter=new LawyerDefPagerAdapter(getSupportFragmentManager(),data);
+        adapter = new LawyerDefPagerAdapter(getSupportFragmentManager(), data);
         viewpager.setAdapter(adapter);
 
         audio.setOnClickListener(new View.OnClickListener() {
@@ -366,16 +366,16 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         selectPosition(0);
     }
 
-    private void like(){
+    private void like() {
         showLoadDialog();
-        HashMap<String,String> params=new HashMap<>();
-        params.put("id",id);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", id);
         addNetwork(Api.getInstance().getService(ApiService.class).setLike(params)
                 , new Action1<NoDataModel>() {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE){
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             audioModel.setIs_like(1);
                             thumbsUp.setImageResource(R.mipmap.icon_lawyer_like);
                             showToast("已点赞");
@@ -392,16 +392,16 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                 });
     }
 
-    private void uncollection(){
+    private void uncollection() {
         showLoadDialog();
-        HashMap<String,String> params=new HashMap<>();
-        params.put("id",id);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", id);
         addNetwork(Api.getInstance().getService(ApiService.class).delCollection(params)
                 , new Action1<NoDataModel>() {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE){
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             audioModel.setIs_colle(0);
                             collection.setImageResource(R.mipmap.icon_lawyer_collection_un);
                             showToast("取消收藏");
@@ -418,16 +418,16 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                 });
     }
 
-    private void unlike(){
+    private void unlike() {
         showLoadDialog();
-        HashMap<String,String> params=new HashMap<>();
-        params.put("id",id);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", id);
         addNetwork(Api.getInstance().getService(ApiService.class).delLike(params)
                 , new Action1<NoDataModel>() {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE){
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             audioModel.setIs_like(0);
                             thumbsUp.setImageResource(R.mipmap.icon_lawyer_like_un);
                             showToast("取消点赞");
@@ -444,16 +444,16 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                 });
     }
 
-    private void collection(){
+    private void collection() {
         showLoadDialog();
-        HashMap<String,String> params=new HashMap<>();
-        params.put("id",id);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", id);
         addNetwork(Api.getInstance().getService(ApiService.class).setCollection(params)
                 , new Action1<NoDataModel>() {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE){
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             audioModel.setIs_colle(1);
                             collection.setImageResource(R.mipmap.icon_lawyer_collection);
                             showToast("收藏成功");
@@ -470,20 +470,20 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                 });
     }
 
-    private void buyForJifen(){
-        if (data==null||data.getArticle()==null){
+    private void buyForJifen() {
+        if (data == null || data.getArticle() == null) {
             return;
         }
         showLoadDialog();
-        Map<String,String> params=new HashMap<>();
-        params.put("id",data.getArticle().getId());
-        params.put("type","2");
+        Map<String, String> params = new HashMap<>();
+        params.put("id", data.getArticle().getId());
+        params.put("type", "2");
         addNetwork(Api.getInstance().getService(ApiService.class).buyProduct(params)
                 , new Action1<OrderResultModel>() {
                     @Override
                     public void call(OrderResultModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE){
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             data.getArticle().setIs_buy(1);
                             showToast("兑换成功");
                             return;

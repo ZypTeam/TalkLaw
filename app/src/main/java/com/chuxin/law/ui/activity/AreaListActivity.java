@@ -274,8 +274,8 @@ public class AreaListActivity extends BaseTalkLawActivity {
 
     private void submitInfo() {
         HashMap<String, String> map = new HashMap<>();
-        map.put("province", selectProvince.getName());
-        map.put("city", selectCity.getName());
+        map.put("province", selectProvince.getId());
+        map.put("city", selectCity.getId());
         showLoadDialog();
         Log.e("tag", "map===" + map);
         addNetwork(Api.getInstance().getService(ApiService.class).changeUserInfo(map), new Action1<NoDataModel>() {

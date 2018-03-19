@@ -4,6 +4,7 @@ package com.chuxin.law.ui.view.wheel.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -11,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.chuxin.law.ui.view.wheel.WheelView;
+import com.chuxin.law.ui.view.wheel.lvShiWheel;
 import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
 import com.chuxin.law.R;
@@ -24,7 +26,7 @@ public class SelectorByArrayDialog extends Dialog {
     private Context mContext;
 
     private TextView btn_cancel, btn_ok, tv_title;
-    private WheelView mWheelView;
+    private lvShiWheel mWheelView;
 
     private String mCurrentItem = "";
     private int mCurrentSelectIndex = 0;
@@ -55,14 +57,14 @@ public class SelectorByArrayDialog extends Dialog {
         btn_ok = findViewById(R.id.btn_ok);
         tv_title = findViewById(R.id.btn_title);
         mWheelView = findViewById(R.id.wheel_week_wheel);
-        mWheelView.setOnSelectListener(new WheelView.SelectListener() {
-            @Override
-            public void onSelect(int index, String text) {
-                LogUtil.e("select", "当前选中index："+index+",text:"+ text);
-                mCurrentItem = text;
-                mCurrentSelectIndex = index;
-            }
-        });
+//        mWheelView.setOnSelectListener(new WheelView.SelectListener() {
+//            @Override
+//            public void onSelect(int index, String text) {
+//                LogUtil.e("select", "当前选中index："+index+",text:"+ text);
+//                mCurrentItem = text;
+//                mCurrentSelectIndex = index;
+//            }
+//        });
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +80,19 @@ public class SelectorByArrayDialog extends Dialog {
                     listener.onOkClick(mCurrentItem);
                 }
                 dismiss();
+            }
+        });
+
+
+        mWheelView.setOffset(1);
+//        mWheelView.setItems(Arrays.asList(PLANETS));
+        mWheelView.setOnWheelViewListener(new lvShiWheel.OnWheelViewListener() {
+            @Override
+            public void onSelected(int selectedIndex, String item) {
+                Log.d("TAG", "selectedIndex: " + selectedIndex + ", item: " + item);
+
+                mCurrentItem = item;
+                mCurrentSelectIndex = selectedIndex;
             }
         });
     }
@@ -96,7 +111,7 @@ public class SelectorByArrayDialog extends Dialog {
      */
     public void setData(List<String> list){
         if(list != null){
-            mWheelView.setWheelItemList(list);
+            mWheelView.setItems(list);
             if(list.size() > 0){
                 mCurrentItem = list.get(0);
                 mCurrentSelectIndex = 0;

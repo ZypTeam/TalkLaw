@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @describe 律师详情
  */
 
-public class LawyerProductModel extends BaseModel {
+public class LawyerProductModel extends BaseModel implements Serializable{
     private LawyerProductData data;
 
     public LawyerProductData getData() {
