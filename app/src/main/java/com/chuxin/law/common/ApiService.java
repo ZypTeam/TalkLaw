@@ -5,6 +5,7 @@ import com.chuxin.law.model.BackCardModel;
 import com.chuxin.law.model.CheckConsultModel;
 import com.chuxin.law.model.CommentListModel;
 import com.chuxin.law.model.ExchangeRecordsDataModel;
+import com.chuxin.law.model.GuaranteeRequestModel;
 import com.chuxin.law.model.HotKeyListModel;
 import com.chuxin.law.model.HotListData;
 import com.chuxin.law.model.IntegralDetailDataModel;
@@ -398,6 +399,22 @@ public interface ApiService {
      */
     @GET("/consult/show")
     Observable<CheckConsultModel> checkConsult(@QueryMap Map<String,String> params);
+
+    /**
+     * 保证金获取普通订单
+     * @param params
+     * @return
+     */
+    @GET("/cash-deposit/set-order")
+    Observable<GuaranteeRequestModel> getOrderData(@QueryMap Map<String,String> params);
+
+    /**
+     *检查订单
+     * @param params
+     * @return
+     */
+    @GET("/cash-deposit/order")
+    Observable<GuaranteeRequestModel> checkOrder(@QueryMap Map<String,String> params);
 
 }
 

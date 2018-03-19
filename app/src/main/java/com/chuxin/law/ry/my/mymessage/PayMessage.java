@@ -28,12 +28,10 @@ import io.rong.imlib.model.MessageContent;
         flag = 3
 )
 public class PayMessage extends MessageContent {
-    private String content;
+    private String order;
     private String userId;
-    private String state; // 0.未支付 1.已支付
+    private String money;
 
-    public static String TYPE_PAY_YES = "1";
-    public static String TYPE_PAY_NO = "0";
 
 
     public PayMessage(){
@@ -51,14 +49,14 @@ public class PayMessage extends MessageContent {
         try {
             JSONObject jsonObj = new JSONObject(jsonStr);
 
-            if (jsonObj.has("content"))
-                content = jsonObj.optString("content");
+            if (jsonObj.has("order"))
+                order = jsonObj.optString("order");
 
             if (jsonObj.has("userId"))
                 userId = jsonObj.optString("userId");
 
-            if (jsonObj.has("state"))
-                state = jsonObj.optString("state");
+            if (jsonObj.has("money"))
+                money = jsonObj.optString("money");
 
         } catch (JSONException e) {
         }
@@ -70,9 +68,9 @@ public class PayMessage extends MessageContent {
         JSONObject jsonObj = new JSONObject();
 
         try {
-            jsonObj.put("content", content);
+            jsonObj.put("order", order);
             jsonObj.put("userId", userId);
-            jsonObj.put("state", state);
+            jsonObj.put("money", money);
         } catch (JSONException e) {
             Log.e("JSONException", e.getMessage());
         }
@@ -90,9 +88,9 @@ public class PayMessage extends MessageContent {
 
     public static PayMessage obtain(String text,String userId,String state) {
         PayMessage model = new PayMessage();
-        model.setContent(text);
+        model.setOrder(text);
         model.setUserId(userId);
-        model.setState(state);
+        model.setMoney(state);
         return model;
     }
 
@@ -100,8 +98,8 @@ public class PayMessage extends MessageContent {
     //给消息赋值。
     public PayMessage(Parcel in) {
 //        setContent(ParcelUtils.readFromParcel(in));
-        this.content = ParcelUtils.readFromParcel(in);
-        this.state = ParcelUtils.readFromParcel(in);
+        this.order = ParcelUtils.readFromParcel(in);
+        this.money = ParcelUtils.readFromParcel(in);
         this.userId = ParcelUtils.readFromParcel(in);
     }
 
@@ -139,8 +137,8 @@ public class PayMessage extends MessageContent {
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        ParcelUtils.writeToParcel(dest, content);
-        ParcelUtils.writeToParcel(dest, state);
+        ParcelUtils.writeToParcel(dest, order);
+        ParcelUtils.writeToParcel(dest, money);
         ParcelUtils.writeToParcel(dest, userId);
     }
 
@@ -148,19 +146,12 @@ public class PayMessage extends MessageContent {
     @Override
     public List<String> getSearchableWord() {
         List<String> words = new ArrayList<>();
-        words.add(content);
-        words.add(state);
+        words.add(order);
+        words.add(money);
         words.add(userId);
         return words;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 
 
     public String getUserId() {
@@ -171,11 +162,19 @@ public class PayMessage extends MessageContent {
         this.userId = userId;
     }
 
-    public String getState() {
-        return state;
+    public String getOrder() {
+        return order;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setOrder(String order) {
+        this.order = order;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
     }
 }

@@ -13,31 +13,29 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.chuxin.law.R;
 import com.chuxin.law.TalkLawApplication;
-import com.chuxin.law.common.UserInfoDelegate;
-import com.chuxin.law.sharedpreferences.ShippingAddressModel;
+import com.chuxin.law.base.BaseTalkLawFragment;
 import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
+import com.chuxin.law.common.UserInfoDelegate;
+import com.chuxin.law.model.ShippingAddressSp;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
+import com.chuxin.law.sharedpreferences.ShippingAddressModel;
+import com.chuxin.law.ui.activity.AlreadyPurchaseActivity;
 import com.chuxin.law.ui.activity.ApplyForWithdrawalsActivity;
 import com.chuxin.law.ui.activity.IntegralActivity;
+import com.chuxin.law.ui.activity.MyAttentionActivity;
+import com.chuxin.law.ui.activity.MyConsultActivity;
+import com.chuxin.law.ui.activity.MyInfoActivity;
 import com.chuxin.law.ui.activity.MyMsgListActivity;
 import com.chuxin.law.ui.activity.RecommendCourtesyActivity;
 import com.chuxin.law.ui.activity.SettingActivity;
 import com.chuxin.law.ui.activity.ShippingAddressActivity;
-import com.chuxin.law.model.ShippingAddressSp;
 import com.chuxin.law.util.UIUtils;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
-
-import com.chuxin.law.R;
-
-import com.chuxin.law.base.BaseTalkLawFragment;
-import com.chuxin.law.common.CommonConstant;
-import com.chuxin.law.ui.activity.AlreadyPurchaseActivity;
-import com.chuxin.law.ui.activity.MyAttentionActivity;
-import com.chuxin.law.ui.activity.MyConsultActivity;
-import com.chuxin.law.ui.activity.MyInfoActivity;
 
 import rx.functions.Action1;
 
@@ -268,7 +266,8 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
             auth.setCompoundDrawables(null, null, dAuthUn, null);
         } else {
             auth.setTextColor(getResources().getColor(R.color.app_red_color));
-            auth.setText(userModel.getLaw().getLevel());
+            if (userModel.getLaw() != null && userModel.getLaw().getLevel() != null)
+                auth.setText(userModel.getLaw().getLevel());
             auth.setCompoundDrawables(null, null, dAuth, null);
         }
 

@@ -2,6 +2,7 @@ package com.chuxin.law.ui.fragment;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawFragment;
@@ -15,6 +16,7 @@ import com.chuxin.law.ui.view.HomeListProductView;
 import com.chuxin.law.ui.view.HomeNeedView;
 import com.chuxin.law.ui.view.HomeScrollView;
 import com.chuxin.law.ui.widget.BackTitleView;
+import com.jusfoun.baselibrary.Util.AppUtil;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
 import com.jusfoun.baselibrary.net.Api;
 import com.youth.banner.Banner;
@@ -68,6 +70,8 @@ public class HomeFragment extends BaseTalkLawFragment {
         viewNeed = (HomeNeedView) rootView.findViewById(R.id.view_need);
         backTitleView = (BackTitleView) rootView.findViewById(R.id.back_title_view);
         scrollview = (HomeScrollView) rootView.findViewById(R.id.scrollview);
+
+        ((TextView)    rootView.findViewById(R.id.text_test)).setText("测试用--当前版本号为："+AppUtil.getVersionName(mContext));
 
     }
 

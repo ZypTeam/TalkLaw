@@ -302,6 +302,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     }
 
     private void checkConsult() {
+        if(data!=null&&data.getLaw()!=null)
         showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("touserid", data.getLaw().getUserid());

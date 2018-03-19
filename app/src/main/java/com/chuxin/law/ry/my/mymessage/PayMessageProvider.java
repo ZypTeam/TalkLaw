@@ -15,13 +15,24 @@ import android.widget.Toast;
 
 import com.chuxin.law.R;
 import com.chuxin.law.TalkLawApplication;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
+import com.chuxin.law.event.CheckOrderEvent;
+import com.chuxin.law.model.GuaranteeRequestModel;
 import com.chuxin.law.ry.message.TestMessage;
+import com.google.gson.Gson;
+import com.jusfoun.baselibrary.net.Api;
 
+import io.rong.eventbus.EventBus;
+import io.rong.imkit.RongIM;
 import io.rong.imkit.model.ProviderTag;
 import io.rong.imkit.model.UIMessage;
 import io.rong.imkit.widget.provider.IContainerItemProvider;
+import io.rong.imlib.IRongCallback;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;
+import rx.functions.Action1;
 
 /**
  * @author zhaoyapeng
@@ -56,7 +67,7 @@ public class PayMessageProvider  extends IContainerItemProvider.MessageProvider<
 
         }
 
-        holder.message.setText("￥"+payMessage.getContent()); // 设置消息内容
+        holder.message.setText("￥"+payMessage.getMoney()); // 设置消息内容
 
 
     }
@@ -73,12 +84,9 @@ public class PayMessageProvider  extends IContainerItemProvider.MessageProvider<
         }
 
         if(uiMessage.getMessageDirection() != Message.MessageDirection.SEND){
-//            Log.e("tag","执行到这里了");
-//            if(PayMessage.TYPE_PAY_NO.equals(payMessage.getState())){
-//                Log.e("tag","执行到这里了1");
-//                payMessage.setState(PayMessage.TYPE_PAY_YES);
-//            }
-
+            CheckOrderEvent checkOrderEvent = new CheckOrderEvent();
+            checkOrderEvent.order = payMessage.getOrder();
+            EventBus.getDefault().post(checkOrderEvent);
         }
 
 

@@ -22,6 +22,12 @@ import com.chuxin.law.ry.server.network.async.AsyncTaskManager;
 import com.chuxin.law.ry.server.network.async.OnDataListener;
 import com.chuxin.law.ry.server.network.http.HttpException;
 import com.chuxin.law.ry.server.utils.NToast;
+import com.jusfoun.baselibrary.Util.KeyBoardUtil;
+import com.jusfoun.baselibrary.base.BaseModel;
+import com.jusfoun.baselibrary.base.RxManage;
+
+import io.rong.eventbus.EventBus;
+import rx.functions.Action1;
 
 public abstract class BaseActivity extends FragmentActivity implements OnDataListener {
 
@@ -36,6 +42,7 @@ public abstract class BaseActivity extends FragmentActivity implements OnDataLis
     protected TextView mTitle;
     protected TextView mHeadRightText;
     private Drawable mBtnBackDrawable;
+    protected RxManage rxManage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +66,8 @@ public abstract class BaseActivity extends FragmentActivity implements OnDataLis
         mAsyncTaskManager = AsyncTaskManager.getInstance(getApplicationContext());
         // Activity管理
         action = new SealAction(mContext);
+
+        rxManage=new RxManage();
 
     }
 
@@ -275,4 +284,22 @@ public abstract class BaseActivity extends FragmentActivity implements OnDataLis
         }
         return super.onTouchEvent(event);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        rxManage.clear();//fragment销毁清除rxbus事件及网络请求，防止内存泄漏
+    }
+
+    /**
+     * 添加网络请求
+     * @param observable
+     * @param next
+     */
+    protected <T extends BaseModel> void addNetwork(rx.Observable<T> observable, Action1<T> next, Action1<Throwable> error){
+        rxManage.add(observable, next, error);
+    }
+
+
+
 }
