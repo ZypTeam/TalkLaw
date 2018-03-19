@@ -8,8 +8,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.chuxin.law.audioplayer.model.AudioMessage;
 import com.chuxin.law.audioplayer.manage.AudioPlayerManager;
+import com.chuxin.law.audioplayer.model.AudioMessage;
 import com.chuxin.law.audioplayer.util.AudioPlayUtils;
 
 import java.util.Date;
@@ -53,6 +53,8 @@ public class AudioBroadcastReceiver {
     public static final String ACTION_PREMUSIC = "com.zlm.hp.pre.music";
     //点击下一首
     public static final String ACTION_NEXTMUSIC = "com.zlm.hp.next.music";
+    //停止
+    public static final String ACTION_STOP="com.zhuxin";
 
     //播放器开始播放
     public static final String ACTION_SERVICE_PLAYMUSIC = "com.zlm.hp.service.play.music";
@@ -64,6 +66,9 @@ public class AudioBroadcastReceiver {
     public static final String ACTION_SERVICE_PLAYINGMUSIC = "com.zlm.hp.service.playing.music";
     //播放错误
     public static final String ACTION_SERVICE_PLAYERRORMUSIC = "com.zlm.hp.service.playerror.music";
+
+    //播放器停止
+    public static final String ACTION_SERVICE_STOP = "com.chuxin.law.service.stop.music";
 
     //歌词搜索中广播
     public static final String ACTION_LRCSEARCHING = "com.zlm.hp.lrc.searching";

@@ -177,11 +177,12 @@ public class HomeActivity extends BaseTalkLawActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        AudioPlayUtils.getInstance().setPlayStatus(AudioPlayerManager.STOP);
         Intent playerServiceIntent = new Intent(this, AudioPlayerService.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            TalkLawApplication.getBaseApplication().stopService(playerServiceIntent);
+            stopService(playerServiceIntent);
         } else {
-            TalkLawApplication.getBaseApplication().stopService(playerServiceIntent);
+            stopService(playerServiceIntent);
         }
     }
 }

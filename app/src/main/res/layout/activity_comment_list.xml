@@ -20,7 +20,6 @@
             android:layout_height="70dp"
             android:gravity="center|left"
             android:paddingLeft="16dp"
-            android:text="十九大精神基层宣讲十九大精神"
             android:textColor="#141414"
             android:textSize="19sp" />
 

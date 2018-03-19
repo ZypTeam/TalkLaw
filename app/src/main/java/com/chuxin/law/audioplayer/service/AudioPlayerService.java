@@ -14,6 +14,7 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.chuxin.law.audioplayer.AudioStopEvent;
 import com.chuxin.law.audioplayer.ResourceConstants;
 import com.chuxin.law.audioplayer.db.DownloadThreadDB;
 import com.chuxin.law.audioplayer.manage.AudioPlayerManager;
@@ -26,6 +27,10 @@ import com.chuxin.law.audioplayer.util.AudioPlayUtils;
 import com.chuxin.law.audioplayer.util.ResourceFileUtil;
 import com.jrmf360.rylib.common.util.ToastUtil;
 import com.jusfoun.baselibrary.Util.LogUtil;
+import com.jusfoun.baselibrary.Util.StringUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
 
@@ -77,6 +82,7 @@ public class AudioPlayerService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        EventBus.getDefault().register(this);
         audioPlayUtils=AudioPlayUtils.getInstance();
 
         //注册接收音频播放广播
@@ -99,6 +105,7 @@ public class AudioPlayerService extends Service {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onDestroy() {
+        EventBus.getDefault().unregister(this);
         mAudioBroadcastReceiver.unregisterReceiver(getApplicationContext());
 
         //关闭通知栏
@@ -134,6 +141,8 @@ public class AudioPlayerService extends Service {
         } else if (action.equals(AudioBroadcastReceiver.ACTION_SEEKTOMUSIC)) {
             //歌曲快进
             seekToMusic((AudioMessage) intent.getSerializableExtra(AudioMessage.KEY));
+        }else if (StringUtil.equals(action,AudioBroadcastReceiver.ACTION_STOP)){
+            stopMusic();
         }
     }
 
@@ -191,6 +200,19 @@ public class AudioPlayerService extends Service {
         Intent nextIntent = new Intent(AudioBroadcastReceiver.ACTION_SERVICE_PAUSEMUSIC);
         nextIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
         sendBroadcast(nextIntent);
+    }
+
+    private void stopMusic(){
+        if (mMediaPlayer!=null){
+            if (mMediaPlayer.isPlaying()){
+                mMediaPlayer.stop();
+                mMediaPlayer.release();
+            }
+        }
+        audioPlayUtils.setPlayStatus(AudioPlayerManager.STOP);
+       /* Intent nextIntent = new Intent(AudioBroadcastReceiver.ACTION_SERVICE_STOP);
+        nextIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        sendBroadcast(nextIntent);*/
     }
 
     /**
@@ -585,5 +607,10 @@ public class AudioPlayerService extends Service {
         //设置当前播放的状态
         audioPlayUtils.setmCurrentAudio(null);
         audioPlayUtils.setCurAudioMessage(null);
+    }
+
+    @Subscribe
+    public void onEvent(AudioStopEvent event){
+        stopMusic();
     }
 }

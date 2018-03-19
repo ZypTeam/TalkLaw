@@ -47,7 +47,7 @@ public class AboutUsActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext,WebViewActivity.class);
-                intent.putExtra("url","http://www.baidu.com");
+                intent.putExtra("url","http://api.law.wzgeek.com/html/about.html");
                 intent.putExtra("title","关于说法");
                 startActivity(intent);
             }

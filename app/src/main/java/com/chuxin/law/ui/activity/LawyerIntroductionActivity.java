@@ -127,7 +127,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         });
 
         dialog.setTextTitle("温馨提示");
-        dialog.setContent("尊敬的用户您好！\n1.本次咨询1小时\n2.可向律师咨询1小时");
+        dialog.setContent(getString(R.string.zixun));
 
         zixun.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,13 +239,16 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                             attention.setBackgroundResource(R.mipmap.icon_lawyer_follow_un);
                             attention.setTextColor(Color.parseColor("#d7d7d7"));
                             attention.setText("已关注");
-                            showToast(noDataModel.getMsg());
+                            showToast("关注成功");
+                        }else {
+                            showToast("关注失败");
                         }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         hideLoadDialog();
+                        showToast("关注失败");
                     }
                 });
     }
@@ -254,21 +257,26 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("touserid", touserid);
-        addNetwork(Api.getInstance().getService(ApiService.class).addFollow(params)
+        addNetwork(Api.getInstance().getService(ApiService.class).delFollow(params)
                 , new Action1<NoDataModel>() {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
-                        data.setIs_follow(0);
-                        attention.setBackgroundResource(R.mipmap.icon_lawyer_follow);
-                        attention.setText("关注");
-                        attention.setTextColor(Color.parseColor("#ff8400"));
-                        showToast(noDataModel.getMsg());
+                        if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE) {
+                            data.setIs_follow(0);
+                            attention.setBackgroundResource(R.mipmap.icon_lawyer_follow);
+                            attention.setText("关注");
+                            attention.setTextColor(Color.parseColor("#ff8400"));
+                            showToast("取消关注");
+                        }else {
+                            showToast("取消关注失败");
+                        }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         hideLoadDialog();
+                        showToast("取消关注失败");
                     }
                 });
     }

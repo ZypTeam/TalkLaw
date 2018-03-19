@@ -3,6 +3,7 @@ package com.chuxin.law.ui.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.autofill.AutofillManager;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.chuxin.law.R;
+import com.chuxin.law.audioplayer.AudioStopEvent;
 import com.chuxin.law.audioplayer.db.DownloadThreadDB;
 import com.chuxin.law.audioplayer.download.AudioInfoDB;
 import com.chuxin.law.audioplayer.download.DownloadAudioManager;
@@ -44,6 +46,9 @@ import com.jusfoun.baselibrary.permissiongen.PermissionFail;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
 import com.jusfoun.baselibrary.permissiongen.PermissionSuccess;
 import com.jusfoun.baselibrary.task.WeakHandler;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.HashMap;
 import java.util.List;
@@ -213,6 +218,7 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
         setStatusBarLight(false);
+        EventBus.getDefault().register(this);
         data = CommonLogic.getInstance().getLawyerProductData();
         if (data.getArticle()!=null) {
             url = data.getArticle().getMp3();
@@ -465,7 +471,7 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View v) {
                 if (data.getArticle()!=null){
-                    UIUtils.goCommentList(mContext,data.getArticle().getId());
+                    UIUtils.goCommentList(mContext,data.getArticle().getId(),data.getArticle().getTitle());
                 }
             }
         });
@@ -576,12 +582,16 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
                         if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE){
                             data.getArticle().setIs_colle(0);
                             like.setImageResource(R.mipmap.icon_audio_like);
+                            showToast("取消收藏");
+                        }else {
+                            showToast("取消失败");
                         }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         hideLoadDialog();
+                        showToast("取消失败");
                     }
                 });
     }
@@ -601,12 +611,16 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
                         if (noDataModel.getCode()== CommonConstant.NET_SUC_CODE){
                             data.getArticle().setIs_colle(1);
                             like.setImageResource(R.mipmap.icon_audio_liked);
+                            showToast("收藏成功");
+                        }else {
+                            showToast("收藏失败");
                         }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         hideLoadDialog();
+                        showToast("收藏失败");
                     }
                 });
     }
@@ -627,6 +641,7 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
 
     }
 
@@ -651,5 +666,12 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
     @PermissionSuccess(requestCode = 100)
     private void perSuc() {
         hasPer=true;
+    }
+
+    @Subscribe
+    public void onEvent(AudioStopEvent event){
+        seek.setProgress(0);
+        time.setText("00:00");
+        play.setImageResource(R.mipmap.icon_audio_player);
     }
 }

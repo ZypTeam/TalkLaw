@@ -38,6 +38,7 @@ import rx.functions.Action1;
 
 public class CommentListActivity extends BaseTalkLawActivity {
     public static final String COMMENT_COUNT="comment_count";
+    public static final String COMMENT_TITLE="comment_title";
     public static final String ID="id";
     protected TextView title;
     protected TitleStatusBarView titleBar;
@@ -51,6 +52,7 @@ public class CommentListActivity extends BaseTalkLawActivity {
     private KeyboardChangeView keyboardChangeView;
     private CommentListAdapter adapter;
     private String id;
+    private String commentTitle;
 
     private int page=1;
 
@@ -63,6 +65,7 @@ public class CommentListActivity extends BaseTalkLawActivity {
     public void initDatas() {
         adapter=new CommentListAdapter(mContext);
         id=getIntent().getStringExtra(ID);
+        commentTitle=getIntent().getStringExtra(COMMENT_TITLE);
     }
 
     @Override
@@ -82,6 +85,7 @@ public class CommentListActivity extends BaseTalkLawActivity {
 
     @Override
     public void initAction() {
+        title.setText(commentTitle);
         list.setLayoutManager(new LinearLayoutManager(mContext));
         list.setAdapter(adapter);
         list.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -103,8 +107,14 @@ public class CommentListActivity extends BaseTalkLawActivity {
                     params.bottomMargin=keyHeight- PhoneUtil.dip2px(mContext,21);
                     commentLayout.setLayoutParams(params);
                     commentLayout.setVisibility(View.VISIBLE);
+                    commentEdit.setCursorVisible(true);
+//                    commentEdit.setFocusableInTouchMode(true);
+                    commentEdit.requestFocus();
                 }else {
                     commentLayout.setVisibility(View.GONE);
+                    commentEdit.setCursorVisible(false);
+//                    commentEdit.setFocusableInTouchMode(false);
+                    commentEdit.clearFocus();
                 }
             }
         });
