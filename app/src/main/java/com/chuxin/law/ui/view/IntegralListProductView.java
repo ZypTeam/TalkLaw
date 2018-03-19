@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseView;
 import com.chuxin.law.model.IntegralModel;
+import com.chuxin.law.ui.activity.RecommendedProductActivity;
 import com.chuxin.law.ui.adapter.IntegralProductAdapter;
 
 import cn.com.talklaw.ui.activity.AllGoodsActivity;
@@ -79,7 +80,7 @@ public class IntegralListProductView extends BaseView {
                 if (integralModel != null) {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("integralModel", integralModel);
-                    Intent intent = new Intent(mContext, AllGoodsActivity.class);
+                    Intent intent = new Intent(mContext, RecommendedProductActivity.class);
                     intent.putExtras(bundle);
                     mContext.startActivity(intent);
                 }

@@ -191,6 +191,15 @@ public interface ApiService {
     Observable<GoodsDataModel> getAllGoods(@QueryMap Map<String,String> params);
 
     /**
+     * 精品推荐
+     * @return
+     */
+    @GET("/goods/t-list")
+    Observable<GoodsDataModel> getTJGoods(@QueryMap Map<String,String> params);
+
+
+
+    /**
      * 产品列表接口
      * @param params
      * @return

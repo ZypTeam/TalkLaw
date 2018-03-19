@@ -31,7 +31,8 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="收货人姓名"
-            android:textColor="#b2b2b2"
+
+            android:textColor="#333333"
             android:textSize="17sp" />
 
     </LinearLayout>
@@ -99,7 +100,7 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="收货联系电话"
-            android:textColor="#b2b2b2"
+            android:textColor="#333333"
             android:textSize="17sp" />
 
     </LinearLayout>
@@ -125,7 +126,7 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="请输入城市"
-            android:textColor="#b2b2b2"
+            android:textColor="#333333"
             android:textSize="17sp" />
 
     </LinearLayout>
@@ -151,7 +152,7 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="请请输入小区,大厦或地区"
-            android:textColor="#b2b2b2"
+            android:textColor="#333333"
             android:textSize="17sp" />
 
     </LinearLayout>
@@ -177,7 +178,7 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="请输入楼门号等详细地址信息"
-            android:textColor="#b2b2b2"
+            android:textColor="#333333"
             android:textSize="17sp" />
 
     </LinearLayout>

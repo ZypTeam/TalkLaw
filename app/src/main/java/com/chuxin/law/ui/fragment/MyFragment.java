@@ -284,4 +284,18 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
             myAddressContent.setText(model.city);
         }
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if(isVisibleToUser){
+            ShippingAddressModel.ShippingAddressItemModel model = ShippingAddressSp.getSelectShippingAddress(mContext);
+            if (model == null) {
+                myAddressContent.setText("暂无");
+            } else {
+                myAddressContent.setText(model.city);
+            }
+        }
+    }
 }

@@ -26,6 +26,7 @@ public class PayValidateModel extends BaseModel {
         private int state;
         private String partnerid;
         private String order;
+        public String id;
 
         public int getState() {
             return state;
