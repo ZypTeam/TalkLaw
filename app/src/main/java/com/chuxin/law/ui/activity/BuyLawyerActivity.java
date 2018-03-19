@@ -155,7 +155,7 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext,WebViewActivity.class);
-                intent.putExtra("url","http://www.baidu.com");
+                intent.putExtra("url","http://api.law.wzgeek.com/html/pay.html");
                 intent.putExtra("title","用户协议");
                 startActivity(intent);
             }

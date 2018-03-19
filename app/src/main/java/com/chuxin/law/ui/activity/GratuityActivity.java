@@ -51,7 +51,6 @@ public class GratuityActivity extends BaseTalkLawActivity implements View.OnClic
     private String price="5";
     private TextView submit;
     private LawyerProductModel.LawyerProductData data;
-    private GratuityDialog dialog;
 
     @Override
     public int getLayoutResId() {
@@ -64,8 +63,6 @@ public class GratuityActivity extends BaseTalkLawActivity implements View.OnClic
         if (data!=null&&data.getLawyer()!=null) {
             id = data.getLawyer().getUserid();
         }
-        dialog=new GratuityDialog(mContext);
-        dialog.setContent("使用帮助");
     }
 
     @Override
@@ -105,9 +102,10 @@ public class GratuityActivity extends BaseTalkLawActivity implements View.OnClic
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dialog!=null){
-                    dialog.show();
-                }
+                Intent intent = new Intent(mContext,WebViewActivity.class);
+                intent.putExtra("url","http://api.law.wzgeek.com/html/reward.html");
+                intent.putExtra("title","打赏帮助");
+                startActivity(intent);
             }
         });
     }

@@ -12,6 +12,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.chuxin.law.R;
+import com.chuxin.law.audioplayer.AudioStopEvent;
 import com.chuxin.law.audioplayer.db.DownloadThreadDB;
 import com.chuxin.law.audioplayer.download.DownloadMessage;
 import com.chuxin.law.audioplayer.manage.AudioPlayerManager;
@@ -40,6 +41,9 @@ import com.jusfoun.baselibrary.permissiongen.PermissionFail;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
 import com.jusfoun.baselibrary.permissiongen.PermissionSuccess;
 import com.jusfoun.baselibrary.task.WeakHandler;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import rx.functions.Action1;
 
@@ -159,17 +163,17 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
                 seek.setMax((int) audioMessage.getPlayDuration());
                 timeAll.setText(DateUtil.parseTimeToString((int) audioMessage.getPlayDuration()));
             }
-            play.setImageResource(R.mipmap.icon_audio_pause);
+            play.setImageResource(R.mipmap.icon_lawyer_player);
             time.setText(DateUtil.parseTimeToString((int) audioMessage.getPlayProgress()));
             seek.setProgress((int) audioMessage.getPlayProgress());
 
         } else if (action.equals(AudioBroadcastReceiver.ACTION_SERVICE_PAUSEMUSIC)) {
             //暂停完成
-            play.setImageResource(R.mipmap.icon_audio_player);
+            play.setImageResource(R.mipmap.icon_lawyer_pause);
 
         } else if (action.equals(AudioBroadcastReceiver.ACTION_SERVICE_RESUMEMUSIC)) {
             //唤醒完成
-            play.setImageResource(R.mipmap.icon_audio_pause);
+            play.setImageResource(R.mipmap.icon_lawyer_player);
 
         } else if (action.equals(AudioBroadcastReceiver.ACTION_SERVICE_PLAYINGMUSIC)) {
             if (progressBar.isShow()){
@@ -181,7 +185,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
                 if (audioMessage.getPlayDuration() != seek.getMax()) {
                     seek.setMax((int) audioMessage.getPlayDuration());
                     timeAll.setText(DateUtil.parseTimeToString((int) audioMessage.getPlayDuration()));
-                    play.setImageResource(R.mipmap.icon_audio_pause);
+                    play.setImageResource(R.mipmap.icon_lawyer_player);
                 }
                 time.setText(DateUtil.parseTimeToString((int) audioMessage.getPlayProgress()));
                 seek.setProgress((int) audioMessage.getPlayProgress());
@@ -216,6 +220,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
         if (data == null || data.getArticle() == null || data.getLawyer() == null) {
             return;
         }
+        EventBus.getDefault().register(this);
         mContent = data.getArticle().getContent();
         url = data.getArticle().getMp3();
         id = data.getLawyer().getUserid();
@@ -251,7 +256,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
 
     @Override
     public void initAction() {
-        play.setImageResource(R.mipmap.icon_audio_player);
+        play.setImageResource(R.mipmap.icon_lawyer_pause);
         content.setText(UIUtils.getHtmlTxt(mContent));
         dashang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -289,7 +294,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
                     playIntent.putExtra(AudioMessage.KEY, audioMessage);
                     playIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
                     mContext.sendBroadcast(playIntent);
-                    play.setImageResource(R.mipmap.icon_audio_pause);
+                    play.setImageResource(R.mipmap.icon_lawyer_player);
                     progressBar.show();
                     return;
                 }
@@ -305,13 +310,13 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
                         mContext.sendBroadcast(resumeIntent);
 
                     }
-                    play.setImageResource(R.mipmap.icon_audio_pause);
+                    play.setImageResource(R.mipmap.icon_lawyer_player);
                 } else if (status == AudioPlayerManager.PLAYING) {
 
                     Intent resumeIntent = new Intent(AudioBroadcastReceiver.ACTION_PAUSEMUSIC);
                     resumeIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
                     mContext.sendBroadcast(resumeIntent);
-                    play.setImageResource(R.mipmap.icon_audio_player);
+                    play.setImageResource(R.mipmap.icon_lawyer_pause);
                 } else {
                     CommonLogic.getInstance().setLawyerProductData(data);
                     Intent playIntent = new Intent(AudioBroadcastReceiver.ACTION_PLAYMUSIC);
@@ -321,7 +326,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
                     playIntent.putExtra(AudioMessage.KEY, audioMessage);
                     playIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
                     mContext.sendBroadcast(playIntent);
-                    play.setImageResource(R.mipmap.icon_audio_pause);
+                    play.setImageResource(R.mipmap.icon_lawyer_player);
                     progressBar.show();
                 }
             }
@@ -517,6 +522,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        EventBus.getDefault().unregister(this);
     }
 
     /**
@@ -540,5 +546,12 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
     @PermissionSuccess(requestCode = 100)
     private void perSuc() {
 
+    }
+
+    @Subscribe
+    public void onEvent(AudioStopEvent event){
+        seek.setProgress(0);
+        time.setText("00:00");
+        play.setImageResource(R.mipmap.icon_lawyer_pause);
     }
 }

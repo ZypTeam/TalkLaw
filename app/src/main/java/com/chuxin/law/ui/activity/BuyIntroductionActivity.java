@@ -37,7 +37,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
     public static final String PRICE = "price";
     public static final String DATA = "data";
     protected BackTitleView titleView;
-    protected TextView price;
+    protected TextView price,agree_btn;
     protected TextView produte;
     protected TextView zhifubao;
     protected TextView weixin;
@@ -69,6 +69,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
         zhifubao = (TextView) findViewById(R.id.zhifubao);
         weixin = (TextView) findViewById(R.id.weixin);
         agree = (CheckBox) findViewById(R.id.agree);
+        agree_btn = (TextView) findViewById(R.id.agree_btn);
         login = (Button) findViewById(R.id.login);
 
     }
@@ -106,6 +107,16 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
             public void onClick(View v) {
                 zhifubao.setSelected(false);
                 weixin.setSelected(true);
+            }
+        });
+
+        agree_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,WebViewActivity.class);
+                intent.putExtra("url","http://api.law.wzgeek.com/html/pay.html");
+                intent.putExtra("title","用户协议");
+                startActivity(intent);
             }
         });
 
@@ -179,10 +190,10 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
         String s = "我同意《用户使用协议》";
         SpannableStringBuilder builder = new SpannableStringBuilder(s);
         int len1 = "我同意".length();
-        int len2 = s.length() - len1;
+        int len2 = s.length();
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#9b9b9b")), 0, len1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#a26e71")), len1, len2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        agree.setText(builder);
+        agree_btn.setText(builder);
     }
 
     private void payValidate(String type) {

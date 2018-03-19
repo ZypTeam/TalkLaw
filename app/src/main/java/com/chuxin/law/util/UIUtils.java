@@ -81,9 +81,10 @@ public class UIUtils {
 
     }
 
-    public static void goCommentList(Object context,String id){
+    public static void goCommentList(Object context,String id,String title){
         Intent intent=new Intent();
         intent.putExtra(CommentListActivity.ID,id);
+        intent.putExtra(CommentListActivity.COMMENT_TITLE,title);
         if (context instanceof Activity){
             intent.setClass((Activity) context,CommentListActivity.class);
             ((Activity) context).startActivityForResult(intent,COMMENT_RESULT_CODE);

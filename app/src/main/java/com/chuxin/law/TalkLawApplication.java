@@ -2,11 +2,17 @@ package com.chuxin.law;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
+import com.chuxin.law.audioplayer.AudioStopEvent;
+import com.chuxin.law.audioplayer.receiver.AudioBroadcastReceiver;
+import com.chuxin.law.audioplayer.service.AudioPlayerService;
 import com.chuxin.law.common.DaoInstance;
 import com.chuxin.law.common.HeaderTalkInterceptor;
 import com.chuxin.law.common.SharePrefenceConstant;
@@ -35,6 +41,8 @@ import com.jusfoun.baselibrary.net.Api;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
+
+import org.greenrobot.eventbus.EventBus;
 
 import io.rong.imageloader.core.DisplayImageOptions;
 import io.rong.imageloader.core.display.FadeInBitmapDisplayer;
@@ -254,6 +262,14 @@ public class TalkLawApplication extends BaseApplication {
             if (mainProcessName.equals(current)) {
                 SealUserInfoManager.getInstance().openDB();
             }
+        }
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        if (level==TRIM_MEMORY_UI_HIDDEN){
+            EventBus.getDefault().post(new AudioStopEvent());
         }
     }
 

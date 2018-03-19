@@ -194,7 +194,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIUtils.goCommentList(mContext, id);
+                UIUtils.goCommentList(mContext,id,data.getArticle().getTitle());
             }
         });
 
@@ -208,7 +208,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIUtils.goCommentList(mContext, id);
+                UIUtils.goCommentList(mContext,id,data.getArticle().getTitle());
             }
         });
 
@@ -378,12 +378,16 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                         if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             audioModel.setIs_like(1);
                             thumbsUp.setImageResource(R.mipmap.icon_lawyer_like);
+                            showToast("已点赞");
+                        }else {
+                            showToast("点赞失败");
                         }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         hideLoadDialog();
+                        showToast("点赞失败");
                     }
                 });
     }
@@ -400,12 +404,16 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                         if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             audioModel.setIs_colle(0);
                             collection.setImageResource(R.mipmap.icon_lawyer_collection_un);
+                            showToast("取消收藏");
+                        }else {
+                            showToast("取消失败");
                         }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         hideLoadDialog();
+                        showToast("取消失败");
                     }
                 });
     }
@@ -422,12 +430,16 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                         if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             audioModel.setIs_like(0);
                             thumbsUp.setImageResource(R.mipmap.icon_lawyer_like_un);
+                            showToast("取消点赞");
+                        }else {
+                            showToast("取消失败");
                         }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         hideLoadDialog();
+                        showToast("取消失败");
                     }
                 });
     }
@@ -444,12 +456,16 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                         if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             audioModel.setIs_colle(1);
                             collection.setImageResource(R.mipmap.icon_lawyer_collection);
+                            showToast("收藏成功");
+                        }else {
+                            showToast("收藏失败");
                         }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         hideLoadDialog();
+                        showToast("收藏失败");
                     }
                 });
     }
