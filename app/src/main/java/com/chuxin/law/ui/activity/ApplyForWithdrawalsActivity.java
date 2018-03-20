@@ -59,7 +59,7 @@ public class ApplyForWithdrawalsActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
         selectBankCardDialog = new SelectBankCardDialog(mContext, R.style.my_dialog);
-        dialog = new PresentInstructionsDialog(mContext);
+        dialog = new PresentInstructionsDialog(mContext, R.style.my_dialog);
     }
 
     @Override
@@ -145,7 +145,20 @@ public class ApplyForWithdrawalsActivity extends BaseTalkLawActivity {
             }
         });
         TouchUtil.createTouchDelegate(img_wenhao,40);
-        delMsg();
+
+        dialog.setContent("（1）如何提现\n" +
+                "在iOS或者Android，在“我的-账户信息”里，申请提现即可。\n" +
+                "\n" +
+                "（2）提现多久可以到账\n" +
+                "提现是否到账，可以联系平台客服询问，一般3个“工作日”会到账，具体的以银行的到账信息为准。\n" +
+                "\n" +
+                "（3）提现需要填写哪些信息\n" +
+                "a、你提现的银行卡号。\n" +
+                "\n" +
+                "b、该账号对应的真实姓名。\n" +
+                "\n" +
+                "（4）遇到一切问题，联系平台客服，最终解释权归宁夏初心科技有限公司所有。");
+
     }
 
     private void delMsg() {
@@ -220,5 +233,11 @@ public class ApplyForWithdrawalsActivity extends BaseTalkLawActivity {
                         hideLoadDialog();
                     }
                 });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        delMsg();
     }
 }

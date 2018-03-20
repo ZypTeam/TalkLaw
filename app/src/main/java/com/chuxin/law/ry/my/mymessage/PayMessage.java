@@ -86,11 +86,11 @@ public class PayMessage extends MessageContent {
 
 
 
-    public static PayMessage obtain(String text,String userId,String state) {
+    public static PayMessage obtain(String order,String userId,String money) {
         PayMessage model = new PayMessage();
-        model.setOrder(text);
+        model.setOrder(order);
         model.setUserId(userId);
-        model.setMoney(state);
+        model.setMoney(money);
         return model;
     }
 

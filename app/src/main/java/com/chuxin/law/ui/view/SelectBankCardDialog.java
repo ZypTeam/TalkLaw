@@ -6,8 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.chuxin.law.R;
 import com.chuxin.law.model.BackCardModel;
@@ -28,6 +30,7 @@ public class SelectBankCardDialog extends Dialog {
     private Context mContext;
     private SelectBankCardAdapter adapter;
     private List<BackCardModel.BackCardItemModel> list;
+    private ImageView closeImg;
 
 
     public SelectBankCardDialog(@NonNull Context context) {
@@ -51,6 +54,7 @@ public class SelectBankCardDialog extends Dialog {
         window.setGravity(Gravity.BOTTOM);
         window.setAttributes(lp);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        closeImg = (ImageView)findViewById(R.id.img_close);
         adapter = new SelectBankCardAdapter(mContext);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(adapter);
@@ -68,6 +72,13 @@ public class SelectBankCardDialog extends Dialog {
 
                 if (callBack != null)
                     callBack.click(model);
+                dismiss();
+            }
+        });
+
+        closeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 dismiss();
             }
         });
