@@ -117,11 +117,12 @@ public class HomeActivity extends BaseTalkLawActivity {
 
     private void initService(){
         Intent playerServiceIntent = new Intent(this, AudioPlayerService.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        TalkLawApplication.getBaseApplication().startService(playerServiceIntent);
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             TalkLawApplication.getBaseApplication().startForegroundService(playerServiceIntent);
         } else {
             TalkLawApplication.getBaseApplication().startService(playerServiceIntent);
-        }
+        }*/
 
         AudioPlayUtils.getInstance().setPlayStatus(AudioPlayerManager.STOP);
     }

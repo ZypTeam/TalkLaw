@@ -2,6 +2,8 @@ package com.chuxin.law.audioplayer.service;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -57,6 +59,7 @@ public class AudioPlayerService extends Service {
 
 //    private HPApplication mHPApplication;
 
+    private int mNotificationPlayBarId = 19900420;
     private AudioPlayUtils audioPlayUtils;
 
     /**
@@ -82,6 +85,14 @@ public class AudioPlayerService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("talklaw", "talklaw", NotificationManager.IMPORTANCE_LOW);
+            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.createNotificationChannel(channel);
+            Notification notification = new Notification.Builder(getApplicationContext(), "talklaw").build();
+            startForeground(mNotificationPlayBarId, notification);
+        }*/
+
         EventBus.getDefault().register(this);
         audioPlayUtils=AudioPlayUtils.getInstance();
 
