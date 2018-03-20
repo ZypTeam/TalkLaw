@@ -141,6 +141,10 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         jifen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (data.getArticle().getIs_buy()==1){
+                    showToast("已经购买");
+                    return;
+                }
                 buyForJifen();
             }
         });
@@ -159,6 +163,10 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (data.getArticle().getIs_buy()==1){
+                    showToast("已经购买");
+                    return;
+                }
                 if (data != null) {
                     UIUtils.goBuyActivity(mContext, data);
                 }
