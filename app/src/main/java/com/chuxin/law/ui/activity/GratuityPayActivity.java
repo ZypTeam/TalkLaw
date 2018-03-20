@@ -161,8 +161,8 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
                                 && noDataModel.getData() != null) {
                             if (StringUtil.equals("1", method)
                                     && noDataModel.getData().getOrder() != null) {
-                                order = noDataModel.getData().getOrder().getPartnerid();
-                                PayUitl.AliPay(GratuityPayActivity.this, noDataModel.getData().getOrder().getPartnerid());
+                                order=noDataModel.getData().getOrder().getOrder();
+                                PayUitl.AliPay(GratuityPayActivity.this, noDataModel.getData().getOrder().getOrder());
                                 return;
                             }
 
