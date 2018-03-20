@@ -32,6 +32,7 @@ android {
 
     buildTypes {
         release {
+            multiDexEnabled true
             minifyEnabled false
             buildConfigField "boolean", "LOG_MODE", "false"
             signingConfig signingConfigs.talklaw
@@ -40,6 +41,7 @@ android {
         }
 
         debug {
+            multiDexEnabled true
             minifyEnabled false
             buildConfigField "boolean", "LOG_MODE", "true"
             signingConfig signingConfigs.talklaw
