@@ -49,6 +49,8 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
     private LawyerIntroModel.LawyerIntroData data;
     private String order;
 
+    private boolean isMargin = false;
+
     @Override
     public int getLayoutResId() {
         return R.layout.activity_buy_lawyer;

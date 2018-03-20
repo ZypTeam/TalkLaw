@@ -324,7 +324,10 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                             if (noDataModel.getData() == null || StringUtil.isEmpty(noDataModel.getData().getOrder())) {
                                 dialog.show();
                             } else {
-                                goRongIM(noDataModel.getData().getId()+"");
+
+
+//                                goRongIM(noDataModel.getData().getId()+"");
+                                goRongIM("86");
                             }
                         }
                     }

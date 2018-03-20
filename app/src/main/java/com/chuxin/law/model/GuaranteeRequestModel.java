@@ -17,7 +17,7 @@ public class GuaranteeRequestModel extends BaseModel implements Serializable {
 
     public class GuaranteeRequestItemModel {
         public String state;
-        public String prepayid;
+        public String order;
 
     }
 }

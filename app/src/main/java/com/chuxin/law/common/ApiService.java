@@ -435,5 +435,15 @@ public interface ApiService {
     Observable<AccountDetailModel> getAccountDetailList(@QueryMap Map<String,String> params);
 
 
+    /**
+     * 账户明细
+     * @param params
+     * @return
+     */
+    @POST("/cash-deposit/order")
+    Observable<CheckConsultModel> getBaoZhengState(@QueryMap Map<String,String> params);
+
+
+
 }
 

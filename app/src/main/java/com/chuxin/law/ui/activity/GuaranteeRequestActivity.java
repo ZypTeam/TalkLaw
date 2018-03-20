@@ -118,7 +118,7 @@ public class GuaranteeRequestActivity extends BaseTalkLawActivity {
                         hideLoadDialog();
                         if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
 
-                            PayMessage payMessage =  PayMessage.obtain(noDataModel.data.prepayid,TalkLawApplication.getUserId(),editMoney.getText().toString());
+                            PayMessage payMessage =  PayMessage.obtain(noDataModel.data.order,TalkLawApplication.getUserId(),editMoney.getText().toString());
                             RongIM.getInstance().sendMessage(Message.obtain(targetId, Conversation.ConversationType.CHATROOM, payMessage),
                                     "保证金", "保证金", new IRongCallback.ISendMessageCallback() {
                                         @Override
