@@ -166,7 +166,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
                             if (zhifubao.isSelected()
                                     && noDataModel.getData().getOrder() != null) {
                                 order=noDataModel.getData().getOrder().getOrder();
-                                PayUitl.AliPay(BuyIntroductionActivity.this, noDataModel.getData().getOrder().getOrder());
+                                PayUitl.AliPay(BuyIntroductionActivity.this, noDataModel.getData().getAporder());
                                 return;
                             }
 

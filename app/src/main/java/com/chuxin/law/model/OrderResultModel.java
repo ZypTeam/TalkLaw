@@ -22,6 +22,7 @@ public class OrderResultModel extends BaseModel {
 
     public final class Item{
         private Order order;
+        private String aporder;
         private OrderPayModel.WxPayOrderDic wxorder;
 
         public Order getOrder() {
@@ -30,6 +31,14 @@ public class OrderResultModel extends BaseModel {
 
         public void setOrder(Order order) {
             this.order = order;
+        }
+
+        public String getAporder() {
+            return aporder;
+        }
+
+        public void setAporder(String aporder) {
+            this.aporder = aporder;
         }
 
         public OrderPayModel.WxPayOrderDic getWxorder() {
