@@ -62,6 +62,15 @@ public class GoodsListAdapter extends BaseAdapter<IntegralModel.GoodsItemModel> 
                     mContext.startActivity(intent);
                 }
             });
+
+            textDuihuan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, IntegralWebViewActivity.class);
+                    intent.putExtra("id",model.id);
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
         private void initView(View rootView) {

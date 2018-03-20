@@ -289,6 +289,10 @@
             android:name=".ui.activity.GuaranteeRequestActivity"
             android:screenOrientation="portrait" />
 
+        <!--精选推荐页面-->
+        <activity
+            android:name=".ui.activity.RecommendedProductActivity"
+            android:screenOrientation="portrait" />
 
 
         <!--新浪分享-->

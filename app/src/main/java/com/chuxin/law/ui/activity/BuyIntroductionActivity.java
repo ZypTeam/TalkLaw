@@ -209,7 +209,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
                         if (model.getCode() == CommonConstant.NET_SUC_CODE ) {
                             Intent intent=new Intent();
                             intent.setClass(mContext,PaySucActivity.class);
-                            intent.putExtra(PaySucActivity.RONGID,model.getData().getOrder());
+                            intent.putExtra(PaySucActivity.RONGID,model.getData().id);
                             intent.putExtra(PaySucActivity.DATA,data);
                             mContext.startActivity(intent);
                             onBackPressed();

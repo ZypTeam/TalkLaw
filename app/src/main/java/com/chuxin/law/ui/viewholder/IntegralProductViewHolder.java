@@ -46,6 +46,15 @@ public class IntegralProductViewHolder extends BaseViewHolder<IntegralModel.Good
                 mContext.startActivity(intent);
             }
         });
+
+        btnExchange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, IntegralWebViewActivity.class);
+                intent.putExtra("id",model.id);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     private void initView(View rootView) {

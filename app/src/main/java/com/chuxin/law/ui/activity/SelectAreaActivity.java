@@ -1,7 +1,5 @@
 package com.chuxin.law.ui.activity;
 
-import android.text.Selection;
-import android.text.Spannable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -113,23 +111,30 @@ public class SelectAreaActivity extends BaseTalkLawActivity {
                 shippingAddressItemModel.city = textSelectCity.getText().toString();
                 shippingAddressItemModel.area = editArea.getText().toString();
                 shippingAddressItemModel.address = editDetailAddress.getText().toString();
+
                 if (mModel != null) {
                     shippingAddressItemModel.id = mModel.id;
+                    shippingAddressItemModel.isSelect = mModel.isSelect;
                     model.list.set(mModel.id - 1, shippingAddressItemModel);
                 } else {
+                    if (ShippingAddressSp.getShippingAddress(mContext) == null) {
+                        shippingAddressItemModel.isSelect = true;
+                    }
+
                     shippingAddressItemModel.id = model.list.size() + 1;
                     model.list.add(shippingAddressItemModel);
 
                 }
 
-                ShippingAddressSp.saveShippingAddress(mContext, model);
 
                 if (mModel != null) {
                     Toast.makeText(mContext, "修改成功", Toast.LENGTH_SHORT).show();
                 } else {
+
+
                     Toast.makeText(mContext, "添加成功", Toast.LENGTH_SHORT).show();
                 }
-
+                ShippingAddressSp.saveShippingAddress(mContext, model);
                 finish();
             }
         });
