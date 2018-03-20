@@ -50,7 +50,7 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="持卡人姓名"
-                android:textColor="#b2b2b2"
+                android:textColor="#000000"
                 android:textSize="17sp" />
         </LinearLayout>
 
@@ -79,7 +79,7 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="银行卡号码"
-                android:textColor="#b2b2b2"
+                android:textColor="#000000"
                 android:textSize="17sp"
                 android:inputType="number"/>
         </LinearLayout>
@@ -109,7 +109,7 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="预留手机号"
-                android:textColor="#b2b2b2"
+                android:textColor="#000000"
                 android:textSize="17sp"
                 android:inputType="number"/>
         </LinearLayout>

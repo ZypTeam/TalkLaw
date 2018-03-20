@@ -8,9 +8,9 @@
     <com.chuxin.law.ui.widget.BackTitleView
         android:id="@+id/back_title_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.RecyclerView
+    <com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

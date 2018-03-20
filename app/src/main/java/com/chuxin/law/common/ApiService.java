@@ -24,6 +24,7 @@ import com.chuxin.law.model.ProductsModel;
 import com.chuxin.law.model.StatementListModel;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
+import com.chuxin.law.ui.viewholder.AccountDetailModel;
 import com.jusfoun.baselibrary.base.NoDataModel;
 
 import java.util.Map;
@@ -424,6 +425,15 @@ public interface ApiService {
      */
     @GET("/cash-deposit/order")
     Observable<GuaranteeRequestModel> checkOrder(@QueryMap Map<String,String> params);
+
+    /**
+     * 账户明细
+     * @param params
+     * @return
+     */
+    @GET("/withdrawals/list")
+    Observable<AccountDetailModel> getAccountDetailList(@QueryMap Map<String,String> params);
+
 
 }
 
