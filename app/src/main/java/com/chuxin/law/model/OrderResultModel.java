@@ -51,6 +51,28 @@ public class OrderResultModel extends BaseModel {
         private String nonce_str;
         private String prepay_id;
         private String trade_type;
+        /**
+         * method : 1
+         * money : 0.01
+         * userid : 4
+         * artid : 10
+         * type : 1
+         * prepayid : wx20180320204727dd592fde800445042453
+         * order : 1497704102201803202047271
+         * createtime : 1521550047
+         * id : 140
+         */
+
+        private String method;
+        private String money;
+        private int userid;
+        private String artid;
+        private String type;
+        private String prepayid;
+        private String order;
+        private int createtime;
+        private int id;
+
 
         public int getState() {
             return state;
@@ -122,6 +144,78 @@ public class OrderResultModel extends BaseModel {
 
         public void setTrade_type(String trade_type) {
             this.trade_type = trade_type;
+        }
+
+        public String getMethod() {
+            return method;
+        }
+
+        public void setMethod(String method) {
+            this.method = method;
+        }
+
+        public String getMoney() {
+            return money;
+        }
+
+        public void setMoney(String money) {
+            this.money = money;
+        }
+
+        public int getUserid() {
+            return userid;
+        }
+
+        public void setUserid(int userid) {
+            this.userid = userid;
+        }
+
+        public String getArtid() {
+            return artid;
+        }
+
+        public void setArtid(String artid) {
+            this.artid = artid;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getPrepayid() {
+            return prepayid;
+        }
+
+        public void setPrepayid(String prepayid) {
+            this.prepayid = prepayid;
+        }
+
+        public String getOrder() {
+            return order;
+        }
+
+        public void setOrder(String order) {
+            this.order = order;
+        }
+
+        public int getCreatetime() {
+            return createtime;
+        }
+
+        public void setCreatetime(int createtime) {
+            this.createtime = createtime;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
         }
     }
 }

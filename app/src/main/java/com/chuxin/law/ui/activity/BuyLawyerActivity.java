@@ -177,7 +177,8 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
                                 && noDataModel.getData() != null) {
                             if (zhifubao.isSelected()
                                     && noDataModel.getData().getOrder() != null) {
-                                PayUitl.AliPay(BuyLawyerActivity.this, noDataModel.getData().getOrder().getPartnerid());
+                                order=noDataModel.getData().getOrder().getOrder();
+                                PayUitl.AliPay(BuyLawyerActivity.this, noDataModel.getData().getOrder().getOrder());
                                 return;
                             }
 
