@@ -326,8 +326,8 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                             } else {
 
 
-//                                goRongIM(noDataModel.getData().getId()+"");
-                                goRongIM("86");
+                                goRongIM(noDataModel.getData().getId()+"");
+//                                goRongIM("86");
                             }
                         }
                     }
