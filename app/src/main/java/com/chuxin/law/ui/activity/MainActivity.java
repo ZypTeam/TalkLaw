@@ -29,7 +29,6 @@ public class MainActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-
     }
 
     @Override

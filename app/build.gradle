@@ -11,9 +11,12 @@ android {
         versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+//        ndk {
+//            abiFilters "armeabi", "armeabi-v7a", "x86", "arm64-v8a"
+//        }
+
         ndk {
-            abiFilters "armeabi"
-//            , "armeabi-v7a", "x86"
+            abiFilters "armeabi-v7a", "x86"
         }
     }
 
@@ -106,5 +109,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.4.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
     compile 'com.belerweb:pinyin4j:2.5.0'
+
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }
 

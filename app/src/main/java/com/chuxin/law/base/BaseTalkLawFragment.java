@@ -11,6 +11,7 @@ import com.jusfoun.baselibrary.base.BaseViewPagerFragment;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
 
 import com.chuxin.law.R;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @author wangcc
@@ -68,5 +69,17 @@ public abstract class BaseTalkLawFragment extends BaseViewPagerFragment{
         if (bundle!=null)
             intent.putExtras(bundle);
        startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 }

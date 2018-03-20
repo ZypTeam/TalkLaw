@@ -177,4 +177,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract void initDatas();
     public abstract void initView();
     public abstract void initAction();
+
+
 }

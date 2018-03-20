@@ -1,1 +1,1 @@
-include ':app', ':baselibrary', ':dblibrary', ':zxing', ':videolibrary', ':IMKit', ':IMLib', ':recognizer', ':contactcard', ':sticker', ':CallKit', ':CallLib', ':RedPacket'
+include ':app', ':baselibrary', ':dblibrary', ':zxing', ':videolibrary', ':IMKit', ':IMLib', ':CallKit', ':CallLib', ':RedPacket'
