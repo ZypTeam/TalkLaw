@@ -99,6 +99,10 @@
             android:name="com.chuxin.law.ui.activity.MyMsgListActivity"
             android:screenOrientation="portrait" />
 
+        <!--消息详情-->
+        <activity android:name=".ui.activity.MsgDefActivity"
+            android:screenOrientation="portrait" />
+
         <!--积分详情-->
         <activity
             android:name="com.chuxin.law.ui.activity.IntegralDetailActivity"

@@ -133,7 +133,7 @@ public interface ApiService {
      * @param params
      * @return
      */
-    @GET("/follow/callback")
+    @GET("/follow/del")
     Observable<NoDataModel> delFollow(@QueryMap Map<String,String> params);
 
     /**

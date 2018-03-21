@@ -12,13 +12,13 @@ import java.util.List;
 
 public class MyAttentionListModel extends BaseModel {
 
-    private List<MyAttentionModel> data;
+    private List<UserModel> data;
 
-    public List<MyAttentionModel> getData() {
+    public List<UserModel> getData() {
         return data;
     }
 
-    public void setData(List<MyAttentionModel> data) {
+    public void setData(List<UserModel> data) {
         this.data = data;
     }
 }

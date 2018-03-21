@@ -9,6 +9,7 @@ import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.MyAttentionListModel;
+import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView;
 
@@ -85,7 +86,7 @@ public class MyAttentionActivity extends BaseTalkLawActivity {
         adapter.setCallback(new AdapterCallback() {
             @Override
             public void callback(Object model, int position) {
-                delFollow((MyAttentionModel) model);
+                delFollow((UserModel) model);
             }
         });
     }
@@ -106,7 +107,7 @@ public class MyAttentionActivity extends BaseTalkLawActivity {
         setResult(RESULT_OK,intent);
     }
 
-    private void delFollow(final MyAttentionModel model){
+    private void delFollow(final UserModel model){
         showLoadDialog();
         HashMap<String,String> params=new HashMap<>();
         params.put("touserid",model.getId());
@@ -115,7 +116,11 @@ public class MyAttentionActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
-                        adapter.remove(model);
+                        if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE) {
+                            adapter.remove(model);
+                        }else {
+                            showToast(noDataModel.getMessage());
+                        }
                     }
                 }, new Action1<Throwable>() {
                     @Override

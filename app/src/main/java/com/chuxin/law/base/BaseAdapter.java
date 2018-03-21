@@ -150,7 +150,7 @@ public abstract class BaseAdapter<T extends Serializable> extends RecyclerView.A
             index++;
         }
         if (result){
-            notifyItemRemoved(index);
+            notifyDataSetChanged();
         }
         return result;
     }
@@ -171,7 +171,7 @@ public abstract class BaseAdapter<T extends Serializable> extends RecyclerView.A
                 T temp= iterator.next();
                 if (temp.equals(item)){
                     iterator.remove();
-                    notifyItemRemoved(i);
+                    notifyDataSetChanged();
                     break;
                 }
             }
