@@ -82,9 +82,11 @@ public class PayMessageProvider extends IContainerItemProvider.MessageProvider<P
         }
 
         if (uiMessage.getMessageDirection() != Message.MessageDirection.SEND) {
-//            CheckOrderEvent checkOrderEvent = new CheckOrderEvent();
-//            checkOrderEvent.order = payMessage.getOrder();
-//            EventBus.getDefault().post(checkOrderEvent);
+            CheckOrderEvent checkOrderEvent = new CheckOrderEvent();
+            checkOrderEvent.order = payMessage.getOrder();
+            checkOrderEvent.price = payMessage.getMoney();
+            checkOrderEvent.userid = payMessage.getUserId();
+            EventBus.getDefault().post(checkOrderEvent);
         }
 //        CheckOrderEvent checkOrderEvent = new CheckOrderEvent();
 //        checkOrderEvent.order = payMessage.getOrder();

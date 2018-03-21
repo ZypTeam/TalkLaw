@@ -15,11 +15,13 @@ import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
+import com.chuxin.law.model.GuaranteeRequestModel;
 import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.model.OrderResultModel;
 import com.chuxin.law.model.PayValidateModel;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.chuxin.law.util.PayUitl;
+import com.google.gson.Gson;
 import com.jusfoun.baselibrary.net.Api;
 
 import java.util.HashMap;
@@ -36,6 +38,10 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
     public static final String TYPE = "type";
     public static final String PRICE = "price";
     public static final String DATA = "data";
+    public static final String MARGIN = "isMargin";
+    public static final String MARGIN_PRICE = "MARGIN_PRICE";
+    public static final String MARGIN_ORDER = "MARGIN_ORDER";
+    public static final String MARGIN_LAWYERID = "MARGIN_LAWYERID";
     protected BackTitleView titleView;
     protected TextView price,agree_btn;
     protected TextView produte;
@@ -50,6 +56,8 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
     private String order;
 
     private boolean isMargin = false;
+    private String marginOrder = "";
+    private String marginLawyerId = "";
 
     @Override
     public int getLayoutResId() {
@@ -60,7 +68,15 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
     public void initDatas() {
         data = (LawyerIntroModel.LawyerIntroData) getIntent().getExtras().getSerializable(DATA);
         type=getIntent().getExtras().getString(TYPE);
-        mPrice=data.getLaw().getPrice();
+        isMargin = getIntent().getExtras().getBoolean(MARGIN,false);
+        marginOrder = getIntent().getExtras().getString(MARGIN_ORDER);
+        if(isMargin){
+            mPrice = getIntent().getExtras().getString(MARGIN_PRICE);
+            marginLawyerId = getIntent().getExtras().getString(MARGIN_LAWYERID);
+        }else{
+            mPrice=data.getLaw().getPrice();
+        }
+
     }
 
     @Override
@@ -81,6 +97,11 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
         titleView.setTitle("律师介绍");
         produte.setText("图文咨询");
 
+        if(isMargin){
+            titleView.setTitle("支付保证金");
+            produte.setText("保证金");
+        }
+
         price.setText("¥" + mPrice);
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +111,11 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
                     showToast("请同意用户协议");
                     return;
                 }
-
-                buy();
+                if(isMargin){
+                    payMargin();
+                }else {
+                    buy();
+                }
 
             }
         });
@@ -129,7 +153,11 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
         rxManage.on(PayUitl.WECHATPAY, new Action1<Object>() {
             @Override
             public void call(Object o) {
-                payValidate("2");
+                if(isMargin){
+                    payMarginValidate("");
+                }else {
+                    payValidate("2","");
+                }
             }
         });
 
@@ -143,8 +171,13 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
         rxManage.on(PayUitl.ALIPAY, new Action1<Object>() {
             @Override
             public void call(Object o) {
-//                Map<String,String> map= (Map<String, String>) o;
-                payValidate("1");
+                Log.e("tag","支付宝-===="+new Gson().toJson(o));
+                if(isMargin){
+                    payMarginValidate(new Gson().toJson(o));
+                }else {
+                    payValidate("1",new Gson().toJson(o));
+
+                }
 
             }
         });
@@ -188,6 +221,44 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
                 });
     }
 
+    private void payMargin() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("orderid", marginOrder);
+        params.put("touserid", marginLawyerId);
+        params.put("method", zhifubao.isSelected() ? "2" : "1");
+        Log.e("tag", "params" + params);
+        addNetwork(Api.getInstance().getService(ApiService.class).marginPayOrder(params)
+                , new Action1<OrderResultModel>() {
+                    @Override
+                    public void call(OrderResultModel noDataModel) {
+                        hideLoadDialog();
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE
+                                && noDataModel.getData() != null) {
+                            if (zhifubao.isSelected()
+                                    && noDataModel.getData().getOrder() != null) {
+                                order=noDataModel.getData().getOrder().getOrder();
+                                PayUitl.AliPay(BuyIntroductionActivity.this, noDataModel.getData().getAporder());
+                                return;
+                            }
+
+                            if (weixin.isSelected()
+                                    && noDataModel.getData().getWxorder() != null) {
+                                order = noDataModel.getData().getWxorder().getPrepay_id();
+                                PayUitl.WechatPay(noDataModel.getData().getWxorder());
+                                return;
+                            }
+
+                        }
+                        showToast(noDataModel.getMsg());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
+    }
+
     private void setAgreeTxt() {
         String s = "我同意《用户使用协议》";
         SpannableStringBuilder builder = new SpannableStringBuilder(s);
@@ -198,11 +269,13 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
         agree_btn.setText(builder);
     }
 
-    private void payValidate(String type) {
+    private void payValidate(String type,String alipay) {
         showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("order", order);
         params.put("payType", type);
+        params.put("alipay", alipay);
+
         addNetwork(Api.getInstance().getService(ApiService.class).consultOrder(params)
                 , new Action1<PayValidateModel>() {
                     @Override
@@ -217,6 +290,41 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
                             onBackPressed();
                         } else {
                             showToast(model.getMsg());
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
+    }
+
+
+    /**
+     *  保证金回调
+     * */
+    private void payMarginValidate(String alipay ) {
+        showLoadDialog();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("order", order);
+        params.put("alipay", alipay);
+
+        addNetwork(Api.getInstance().getService(ApiService.class).checkOrder(params)
+                , new Action1<GuaranteeRequestModel>() {
+                    @Override
+                    public void call(GuaranteeRequestModel noDataModel) {
+                        hideLoadDialog();
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
+                            Log.e("tag", "checkOrder=" + noDataModel.data.state);
+                            if(noDataModel.data!=null&&noDataModel.data.state>0){
+                                showToast("支付成功");
+                                finish();
+                            }else{
+                                showToast(noDataModel.getMsg());
+                            }
+                        }else{
+                            showToast(noDataModel.getMsg());
                         }
                     }
                 }, new Action1<Throwable>() {

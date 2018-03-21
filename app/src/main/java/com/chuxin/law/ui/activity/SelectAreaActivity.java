@@ -1,7 +1,10 @@
 package com.chuxin.law.ui.activity;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +31,14 @@ public class SelectAreaActivity extends BaseTalkLawActivity {
     protected TextView textSexMan;
     protected TextView textSexWoman;
     protected EditText editPhone;
+    protected LinearLayout layoutMan;
+    protected LinearLayout layoutWoman;
+    protected ImageView imgMan;
+    protected ImageView imgWoman;
 
     private ShippingAddressModel.ShippingAddressItemModel mModel;
+
+    private String sex = "男";
 
     @Override
     public int getLayoutResId() {
@@ -52,6 +61,10 @@ public class SelectAreaActivity extends BaseTalkLawActivity {
         textSexMan = (TextView) findViewById(R.id.text_sex_man);
         textSexWoman = (TextView) findViewById(R.id.text_sex_woman);
         editPhone = (EditText) findViewById(R.id.edit_phone);
+        layoutMan = (LinearLayout) findViewById(R.id.layout_man);
+        layoutWoman = (LinearLayout) findViewById(R.id.layout_woman);
+        imgMan = (ImageView) findViewById(R.id.img_man);
+        imgWoman = (ImageView) findViewById(R.id.img_woman);
 
     }
 
@@ -71,9 +84,35 @@ public class SelectAreaActivity extends BaseTalkLawActivity {
             editArea.setText(mModel.area);
             textUsername.setText(mModel.name);
             editDetailAddress.setText(mModel.address);
+
+            if ( TextUtils.isEmpty(mModel.sex)||"男".equals(mModel.sex)) {
+                imgMan.setImageResource(R.drawable.img_sex_afirm);
+                imgWoman.setImageResource(R.drawable.img_sex_no_select);
+            }else{
+                imgMan.setImageResource(R.drawable.img_sex_no_select);
+                imgWoman.setImageResource(R.drawable.img_sex_afirm);
+            }
         }
 
 
+        layoutMan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sex = "男";
+                imgMan.setImageResource(R.drawable.img_sex_afirm);
+                imgWoman.setImageResource(R.drawable.img_sex_no_select);
+            }
+        });
+
+
+        layoutWoman.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sex = "女";
+                imgMan.setImageResource(R.drawable.img_sex_no_select);
+                imgWoman.setImageResource(R.drawable.img_sex_afirm);
+            }
+        });
         viewTitleBar.setRightText("确定", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,6 +150,7 @@ public class SelectAreaActivity extends BaseTalkLawActivity {
                 shippingAddressItemModel.city = textSelectCity.getText().toString();
                 shippingAddressItemModel.area = editArea.getText().toString();
                 shippingAddressItemModel.address = editDetailAddress.getText().toString();
+                shippingAddressItemModel.sex = sex;
 
                 if (mModel != null) {
                     shippingAddressItemModel.id = mModel.id;
@@ -130,8 +170,6 @@ public class SelectAreaActivity extends BaseTalkLawActivity {
                 if (mModel != null) {
                     Toast.makeText(mContext, "修改成功", Toast.LENGTH_SHORT).show();
                 } else {
-
-
                     Toast.makeText(mContext, "添加成功", Toast.LENGTH_SHORT).show();
                 }
                 ShippingAddressSp.saveShippingAddress(mContext, model);

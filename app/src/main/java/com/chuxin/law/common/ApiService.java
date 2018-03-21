@@ -427,6 +427,14 @@ public interface ApiService {
     Observable<GuaranteeRequestModel> checkOrder(@QueryMap Map<String,String> params);
 
     /**
+     *检查订单
+     * @param params
+     * @return
+     */
+    @GET("/cash-deposit/get-order")
+    Observable<GuaranteeRequestModel> checkOrdinaryOrder(@QueryMap Map<String,String> params);
+
+    /**
      * 账户明细
      * @param params
      * @return
@@ -443,7 +451,11 @@ public interface ApiService {
     @POST("/cash-deposit/order")
     Observable<CheckConsultModel> getBaoZhengState(@QueryMap Map<String,String> params);
 
-
+    /**
+     * 保证金下单
+     */
+    @POST("/consult/set")
+    Observable<OrderResultModel> marginPayOrder(@QueryMap Map<String,String> params);
 
 }
 

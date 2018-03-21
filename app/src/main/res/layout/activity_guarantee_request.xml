@@ -73,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:paddingLeft="5dp"
+                android:inputType="number|numberDecimal"
                 android:textColor="#cb1e28"
                 android:textSize="30sp" />
         </LinearLayout>

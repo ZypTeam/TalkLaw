@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.activity;
 
 import android.graphics.Color;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -102,6 +103,8 @@ public class GuaranteeRequestActivity extends BaseTalkLawActivity {
 
             }
         });
+
+
     }
 
     private void getOrderData() {
@@ -141,6 +144,8 @@ public class GuaranteeRequestActivity extends BaseTalkLawActivity {
                                         }
                                     });
 
+                        }else{
+                            showToast(noDataModel.getMsg());
                         }
                     }
                 }, new Action1<Throwable>() {

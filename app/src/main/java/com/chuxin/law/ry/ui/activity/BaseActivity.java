@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -36,13 +37,14 @@ public abstract class BaseActivity extends FragmentActivity implements OnDataLis
     protected SealAction action;
 
     private ViewFlipper mContentView;
-    protected LinearLayout mHeadLayout;
+    protected RelativeLayout mHeadLayout;
     protected Button mBtnLeft;
     protected Button mBtnRight;
     protected TextView mTitle;
     protected TextView mHeadRightText;
     private Drawable mBtnBackDrawable;
     protected RxManage rxManage;
+    private LinearLayout backLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +55,13 @@ public abstract class BaseActivity extends FragmentActivity implements OnDataLis
 
         // 初始化公共头部
         mContentView = (ViewFlipper) super.findViewById(R.id.layout_container);
-        mHeadLayout = (LinearLayout) super.findViewById(R.id.layout_head);
+        mHeadLayout = (RelativeLayout) super.findViewById(R.id.layout_head);
         mHeadRightText = (TextView) findViewById(R.id.text_right);
         mBtnLeft = (Button) super.findViewById(R.id.btn_left);
         mBtnRight = (Button) super.findViewById(R.id.btn_right);
         mTitle = (TextView) super.findViewById(R.id.tv_title);
+
+        backLayout = (LinearLayout)super.findViewById(R.id.layout_back);
         mBtnBackDrawable = getResources().getDrawable(R.drawable.ac_back_icon);
         mBtnBackDrawable.setBounds(0, 0, mBtnBackDrawable.getMinimumWidth(),
                                    mBtnBackDrawable.getMinimumHeight());
@@ -141,11 +145,11 @@ public abstract class BaseActivity extends FragmentActivity implements OnDataLis
      */
     public void setTitle(String title, boolean flag) {
         mTitle.setText(title);
-        if (flag) {
-            mBtnLeft.setCompoundDrawables(null, null, null, null);
-        } else {
-            mBtnLeft.setCompoundDrawables(mBtnBackDrawable, null, null, null);
-        }
+//        if (flag) {
+//            mBtnLeft.setCompoundDrawables(null, null, null, null);
+//        } else {
+//            mBtnLeft.setCompoundDrawables(mBtnBackDrawable, null, null, null);
+//        }
     }
 
     /**

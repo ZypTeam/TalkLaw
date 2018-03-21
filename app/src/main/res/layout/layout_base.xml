@@ -3,45 +3,64 @@
     android:id="@+id/base_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/seal_bg"
+    android:background="@color/white"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/layout_head"
         android:layout_width="match_parent"
         android:layout_height="48dip"
-        android:background="@color/de_title_bg"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
 
-        <Button
-            android:id="@+id/btn_left"
-            android:layout_width="48dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/selector_btn_back"
-            android:drawableLeft="@drawable/ac_back_icon"
-            android:gravity="center_vertical"
-            android:onClick="onHeadLeftButtonClick"
-            android:textColor="@drawable/selector_btn_top" />
+
+        <LinearLayout
+            android:id="@+id/layout_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:onClick="onHeadLeftButtonClick">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/img_back_black" />
+
+            <Button
+                android:id="@+id/btn_left"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/selector_btn_back"
+                android:gravity="center_vertical"
+                android:text="返回"
+                android:textColor="#141414"
+                android:textSize="15sp"
+                android:layout_marginLeft="3dp"/>
+
+        </LinearLayout>
 
         <View
             android:layout_width="1dp"
             android:layout_height="24dp"
             android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            android:background="#0083e0" />
+            android:layout_marginTop="12dp" />
 
 
         <TextView
             android:id="@+id/tv_title"
-            android:gravity="center_vertical|left"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:maxLength="20"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:maxLength="20"
             android:maxLines="1"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textColor="#141414"
+            android:textSize="19sp" />
 
         <Button
             android:id="@+id/btn_right"
@@ -51,8 +70,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:background="@null"
-            android:onClick="onHeadRightButtonClick"
             android:maxLines="1"
+            android:onClick="onHeadRightButtonClick"
             android:textColor="@drawable/selector_btn_top" />
 
         <TextView
@@ -67,7 +86,7 @@
             android:textColor="#fff"
             android:textSize="18sp"
             android:visibility="gone" />
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <ViewFlipper

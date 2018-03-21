@@ -2,6 +2,7 @@ package com.chuxin.law.ui.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
@@ -62,6 +63,8 @@ public class ExchangeRecordsActivity extends BaseTalkLawActivity {
                     public void call(ExchangeRecordsDataModel model) {
                         hideLoadDialog();
                         if (model != null && model.getCode() == NET_SUC_CODE) {
+                            Log.e("tag","ExchangeRecordsDataModel"+model.data.size());
+
                             adapter.refreshList(model.data);
                         }
                     }

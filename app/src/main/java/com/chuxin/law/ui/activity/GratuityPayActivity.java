@@ -15,6 +15,7 @@ import com.chuxin.law.ui.widget.BackTitleView;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.util.PayUitl;
+import com.google.gson.Gson;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
@@ -88,7 +89,7 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
         rxManage.on(PayUitl.WECHATPAY, new Action1<Object>() {
             @Override
             public void call(Object o) {
-                payValidate("2");
+                payValidate("2","");
             }
         });
 
@@ -103,17 +104,18 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
             @Override
             public void call(Object o) {
 //                Map<String,String> map= (Map<String, String>) o;
-                payValidate("1");
+                payValidate("1",new Gson().toJson(o));
 
             }
         });
     }
 
-    private void payValidate(String type) {
+    private void payValidate(String type,String alipay) {
         showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("order", order);
         params.put("payType", type);
+        params.put("alipay", alipay);
         addNetwork(Api.getInstance().getService(ApiService.class).rewardOrder(params)
                 , new Action1<PayValidateModel>() {
                     @Override

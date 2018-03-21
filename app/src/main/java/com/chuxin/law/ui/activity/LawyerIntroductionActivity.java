@@ -135,7 +135,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         zixun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                type="1";
+                type = "1";
                 checkConsult();
             }
         });
@@ -236,7 +236,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                             attention.setTextColor(Color.parseColor("#d7d7d7"));
                             attention.setText("已关注");
                             showToast("关注成功");
-                        }else {
+                        } else {
                             showToast("关注失败");
                         }
                     }
@@ -258,13 +258,13 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE) {
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             data.setIs_follow(0);
                             attention.setBackgroundResource(R.mipmap.icon_lawyer_follow);
                             attention.setText("关注");
                             attention.setTextColor(Color.parseColor("#ff8400"));
                             showToast("取消关注");
-                        }else {
+                        } else {
                             showToast("取消关注失败");
                         }
                     }
@@ -278,11 +278,11 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     }
 
     private void checkConsult() {
-        if(data!=null&&data.getLaw()!=null)
-        showLoadDialog();
+        if (data != null && data.getLaw() != null)
+            showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("touserid", data.getLaw().getUserid());
-        params.put("type",type);
+        params.put("type", type);
         addNetwork(Api.getInstance().getService(ApiService.class).checkConsult(params)
                 , new Action1<CheckConsultModel>() {
                     @Override
@@ -294,8 +294,8 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                             } else {
 
 
-//                                goRongIM(noDataModel.getData().getId()+"");
-                                goRongIM("86");
+                                goRongIM(noDataModel.getData().getId() + "");
+//                                goRongIM("86");
                             }
                         }
                     }
@@ -332,7 +332,8 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     }
 
     private void goRongIM(String id) {
-        FriendsSp.saveFriedns(mContext, new UserInfo(data.getLaw().getUserid(), data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
+        if (data != null && data.getLaw() != null)
+            FriendsSp.saveFriedns(mContext, new UserInfo(data.getLaw().getUserid(), data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
         startChatRoomChat(mContext, id, data.getLaw().getName(), true);
     }
 }
