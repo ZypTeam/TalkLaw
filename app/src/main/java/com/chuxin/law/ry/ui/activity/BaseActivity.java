@@ -44,6 +44,7 @@ public abstract class BaseActivity extends FragmentActivity implements OnDataLis
     protected TextView mHeadRightText;
     private Drawable mBtnBackDrawable;
     protected RxManage rxManage;
+    private LinearLayout backLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,8 @@ public abstract class BaseActivity extends FragmentActivity implements OnDataLis
         mBtnLeft = (Button) super.findViewById(R.id.btn_left);
         mBtnRight = (Button) super.findViewById(R.id.btn_right);
         mTitle = (TextView) super.findViewById(R.id.tv_title);
+
+        backLayout = (LinearLayout)super.findViewById(R.id.layout_back);
         mBtnBackDrawable = getResources().getDrawable(R.drawable.ac_back_icon);
         mBtnBackDrawable.setBounds(0, 0, mBtnBackDrawable.getMinimumWidth(),
                                    mBtnBackDrawable.getMinimumHeight());

@@ -694,11 +694,11 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
         Log.e("tag", "eventevent1");
         if (event instanceof CheckOrderEvent) {
             Log.e("tag", "eventevent2");
-            checkOrder(((CheckOrderEvent) event).order,((CheckOrderEvent) event).price);
+            checkOrder(((CheckOrderEvent) event).order,((CheckOrderEvent) event).price,((CheckOrderEvent) event).userid);
         }
     }
 
-    private void checkOrder(final String prepayid,final String price) {
+    private void checkOrder(final String prepayid,final String price,final String userId) {
 //        showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("order", prepayid);
@@ -715,7 +715,8 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                                 Bundle bundle = new Bundle();
                                 bundle.putBoolean(BuyIntroductionActivity.MARGIN, true);
                                 bundle.putString(BuyIntroductionActivity.MARGIN_ORDER,prepayid);
-                                bundle.putSerializable(BuyIntroductionActivity.MARGIN_PRICE, price);
+                                bundle.putString(BuyIntroductionActivity.MARGIN_PRICE, price);
+                                bundle.putString(BuyIntroductionActivity.MARGIN_LAWYERID, userId);
                                 Intent intent = new Intent(mContext,BuyIntroductionActivity.class);
                                 intent.putExtras(bundle);
                                 startActivity(intent);

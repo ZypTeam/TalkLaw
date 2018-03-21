@@ -40,6 +40,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
     public static final String MARGIN = "isMargin";
     public static final String MARGIN_PRICE = "MARGIN_PRICE";
     public static final String MARGIN_ORDER = "MARGIN_ORDER";
+    public static final String MARGIN_LAWYERID = "MARGIN_LAWYERID";
     protected BackTitleView titleView;
     protected TextView price,agree_btn;
     protected TextView produte;
@@ -55,6 +56,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
 
     private boolean isMargin = false;
     private String marginOrder = "";
+    private String marginLawyerId = "";
 
     @Override
     public int getLayoutResId() {
@@ -69,6 +71,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
         marginOrder = getIntent().getExtras().getString(MARGIN_ORDER);
         if(isMargin){
             mPrice = getIntent().getExtras().getString(MARGIN_PRICE);
+            marginLawyerId = getIntent().getExtras().getString(MARGIN_LAWYERID);
         }else{
             mPrice=data.getLaw().getPrice();
         }
@@ -219,6 +222,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
     private void payMargin() {
         HashMap<String, String> params = new HashMap<>();
         params.put("orderid", marginOrder);
+        params.put("touserid", marginLawyerId);
         params.put("method", zhifubao.isSelected() ? "2" : "1");
         Log.e("tag", "params" + params);
         addNetwork(Api.getInstance().getService(ApiService.class).marginPayOrder(params)

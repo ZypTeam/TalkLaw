@@ -85,6 +85,7 @@ public class PayMessageProvider extends IContainerItemProvider.MessageProvider<P
             CheckOrderEvent checkOrderEvent = new CheckOrderEvent();
             checkOrderEvent.order = payMessage.getOrder();
             checkOrderEvent.price = payMessage.getMoney();
+            checkOrderEvent.userid = payMessage.getUserId();
             EventBus.getDefault().post(checkOrderEvent);
         }
 //        CheckOrderEvent checkOrderEvent = new CheckOrderEvent();
