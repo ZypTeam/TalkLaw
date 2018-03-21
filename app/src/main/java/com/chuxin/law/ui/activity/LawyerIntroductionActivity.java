@@ -24,8 +24,6 @@ import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.CheckConsultModel;
 import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.model.UserModel;
-import com.chuxin.law.ry.db.Friend;
-import com.chuxin.law.ry.ui.activity.ConversationActivity;
 import com.chuxin.law.sharedpreferences.FriendsSp;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
 import com.chuxin.law.ui.view.PresentInstructionsDialog;
@@ -40,7 +38,6 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import io.rong.imkit.RongContext;
-import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.UserInfo;
 import rx.functions.Action1;
@@ -132,7 +129,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         zixun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                type="1";
+                type = "1";
                 checkConsult();
             }
         });
@@ -168,7 +165,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
 ////                    RongIM.getInstance().startPrivateChat(mContext, , data.getLaw().getName());
 
 //                }
-                type="2";
+                type = "2";
                 checkConsult();
             }
         });
@@ -196,7 +193,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         ImageLoderUtil.loadCircleImage(mContext, iconHead, "http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg", R.mipmap.icon_head_def_cir);
 
 
-        Log.e("tag","StorageListUtil="+ StorageListUtil.listAvaliableStorage(this));
+        Log.e("tag", "StorageListUtil=" + StorageListUtil.listAvaliableStorage(this));
     }
 
     private void getData() {
@@ -268,7 +265,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                             attention.setTextColor(Color.parseColor("#d7d7d7"));
                             attention.setText("已关注");
                             showToast("关注成功");
-                        }else {
+                        } else {
                             showToast("关注失败");
                         }
                     }
@@ -290,13 +287,13 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(NoDataModel noDataModel) {
                         hideLoadDialog();
-                        if (noDataModel.getCode()==CommonConstant.NET_SUC_CODE) {
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             data.setIs_follow(0);
                             attention.setBackgroundResource(R.mipmap.icon_lawyer_follow);
                             attention.setText("关注");
                             attention.setTextColor(Color.parseColor("#ff8400"));
                             showToast("取消关注");
-                        }else {
+                        } else {
                             showToast("取消关注失败");
                         }
                     }
@@ -310,11 +307,11 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     }
 
     private void checkConsult() {
-        if(data!=null&&data.getLaw()!=null)
-        showLoadDialog();
+        if (data != null && data.getLaw() != null)
+            showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("touserid", data.getLaw().getUserid());
-        params.put("type",type);
+        params.put("type", type);
         addNetwork(Api.getInstance().getService(ApiService.class).checkConsult(params)
                 , new Action1<CheckConsultModel>() {
                     @Override
@@ -326,7 +323,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
                             } else {
 
 
-                                goRongIM(noDataModel.getData().getId()+"");
+                                goRongIM(noDataModel.getData().getId() + "");
 //                                goRongIM("86");
                             }
                         }
@@ -364,7 +361,8 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     }
 
     private void goRongIM(String id) {
-        FriendsSp.saveFriedns(mContext, new UserInfo(data.getLaw().getUserid(), data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
+        if (data != null && data.getLaw() != null)
+            FriendsSp.saveFriedns(mContext, new UserInfo(data.getLaw().getUserid(), data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
         startChatRoomChat(mContext, id, data.getLaw().getName(), true);
     }
 }

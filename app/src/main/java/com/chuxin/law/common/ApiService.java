@@ -443,7 +443,11 @@ public interface ApiService {
     @POST("/cash-deposit/order")
     Observable<CheckConsultModel> getBaoZhengState(@QueryMap Map<String,String> params);
 
-
+    /**
+     * 保证金下单
+     */
+    @POST("/consult/set")
+    Observable<OrderResultModel> marginPayOrder(@QueryMap Map<String,String> params);
 
 }
 

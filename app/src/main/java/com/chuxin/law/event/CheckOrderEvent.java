@@ -9,5 +9,6 @@ package com.chuxin.law.event;
 public class CheckOrderEvent implements IEvent{
 
     public String order;
+    public String price;
 
 }

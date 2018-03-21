@@ -64,7 +64,8 @@ public class MyConsultViewHolder extends BaseViewHolder<MyConsultModel> {
             @Override
             public void onClick(View v) {
                 if (model!=null&&model.getUser()!=null){
-                    goNext(model.getUser(),model.getOrder());
+//                    goNext(model.getUser(),model.getSession());
+                    goNext(model.getUser(),"148");
                 }
             }
         });

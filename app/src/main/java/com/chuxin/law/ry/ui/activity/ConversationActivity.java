@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chuxin.law.R;
 import com.chuxin.law.common.ApiService;
@@ -32,6 +33,7 @@ import com.chuxin.law.ry.server.utils.NLog;
 import com.chuxin.law.ry.server.utils.NToast;
 import com.chuxin.law.ry.ui.fragment.ConversationFragmentEx;
 import com.chuxin.law.ry.ui.widget.LoadingDialog;
+import com.chuxin.law.ui.activity.BuyIntroductionActivity;
 import com.jusfoun.baselibrary.net.Api;
 
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ import java.util.List;
 import java.util.Locale;
 
 import io.rong.callkit.RongCallKit;
+import io.rong.eventbus.EventBus;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.RongKitIntent;
 import io.rong.imkit.fragment.UriFragment;
@@ -216,6 +219,8 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
 
 
         //CallKit end 2
+
+        EventBus.getDefault().register(this);
     }
 
     /**
@@ -594,7 +599,9 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
 
         RongIMClient.setTypingStatusListener(null);
         SealAppContext.getInstance().popActivity(this);
+
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -687,11 +694,11 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
         Log.e("tag", "eventevent1");
         if (event instanceof CheckOrderEvent) {
             Log.e("tag", "eventevent2");
-            checkOrder(((CheckOrderEvent) event).order);
+            checkOrder(((CheckOrderEvent) event).order,((CheckOrderEvent) event).price);
         }
     }
 
-    private void checkOrder(String prepayid) {
+    private void checkOrder(final String prepayid,final String price) {
 //        showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("order", prepayid);
@@ -702,8 +709,19 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                     public void call(GuaranteeRequestModel noDataModel) {
 //                        hideLoadDialog();
                         if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
-
+                            if(noDataModel.data!=null&&noDataModel.data.state>0){
+                                Toast.makeText(ConversationActivity.this,"您已支付",Toast.LENGTH_SHORT).show();
+                            }else{
+                                Bundle bundle = new Bundle();
+                                bundle.putBoolean(BuyIntroductionActivity.MARGIN, true);
+                                bundle.putString(BuyIntroductionActivity.MARGIN_ORDER,prepayid);
+                                bundle.putSerializable(BuyIntroductionActivity.MARGIN_PRICE, price);
+                                Intent intent = new Intent(mContext,BuyIntroductionActivity.class);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
                             Log.e("tag", "checkOrder=" + noDataModel.data.state);
+
                         }
                     }
                 }, new Action1<Throwable>() {
