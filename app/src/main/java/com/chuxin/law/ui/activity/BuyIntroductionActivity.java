@@ -21,6 +21,7 @@ import com.chuxin.law.model.OrderResultModel;
 import com.chuxin.law.model.PayValidateModel;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.chuxin.law.util.PayUitl;
+import com.google.gson.Gson;
 import com.jusfoun.baselibrary.net.Api;
 
 import java.util.HashMap;
@@ -153,9 +154,9 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
             @Override
             public void call(Object o) {
                 if(isMargin){
-                    payMarginValidate();
+                    payMarginValidate("");
                 }else {
-                    payValidate("2");
+                    payValidate("2","");
                 }
             }
         });
@@ -170,10 +171,11 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
         rxManage.on(PayUitl.ALIPAY, new Action1<Object>() {
             @Override
             public void call(Object o) {
+                Log.e("tag","支付宝-===="+new Gson().toJson(o));
                 if(isMargin){
-                    payMarginValidate();
+                    payMarginValidate(new Gson().toJson(o));
                 }else {
-                    payValidate("1");
+                    payValidate("1",new Gson().toJson(o));
 
                 }
 
@@ -267,11 +269,13 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
         agree_btn.setText(builder);
     }
 
-    private void payValidate(String type) {
+    private void payValidate(String type,String alipay) {
         showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("order", order);
         params.put("payType", type);
+        params.put("alipay", alipay);
+
         addNetwork(Api.getInstance().getService(ApiService.class).consultOrder(params)
                 , new Action1<PayValidateModel>() {
                     @Override
@@ -300,10 +304,11 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
     /**
      *  保证金回调
      * */
-    private void payMarginValidate() {
+    private void payMarginValidate(String alipay ) {
         showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("order", order);
+        params.put("alipay", alipay);
 
         addNetwork(Api.getInstance().getService(ApiService.class).checkOrder(params)
                 , new Action1<GuaranteeRequestModel>() {

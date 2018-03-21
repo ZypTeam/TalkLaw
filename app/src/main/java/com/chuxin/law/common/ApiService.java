@@ -427,6 +427,14 @@ public interface ApiService {
     Observable<GuaranteeRequestModel> checkOrder(@QueryMap Map<String,String> params);
 
     /**
+     *检查订单
+     * @param params
+     * @return
+     */
+    @GET("/cash-deposit/get-order")
+    Observable<GuaranteeRequestModel> checkOrdinaryOrder(@QueryMap Map<String,String> params);
+
+    /**
      * 账户明细
      * @param params
      * @return

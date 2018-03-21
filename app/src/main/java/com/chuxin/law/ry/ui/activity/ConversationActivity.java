@@ -703,7 +703,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
         HashMap<String, String> params = new HashMap<>();
         params.put("order", prepayid);
 
-        addNetwork(Api.getInstance().getService(ApiService.class).checkOrder(params)
+        addNetwork(Api.getInstance().getService(ApiService.class).checkOrdinaryOrder(params)
                 , new Action1<GuaranteeRequestModel>() {
                     @Override
                     public void call(GuaranteeRequestModel noDataModel) {
