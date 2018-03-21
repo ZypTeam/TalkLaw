@@ -16,6 +16,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.base.BaseViewHolder;
 import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.model.MyAttentionModel;
+import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.activity.LawyerIntroductionActivity;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 
@@ -27,7 +28,7 @@ import com.chuxin.law.R;
  * @describe
  */
 
-public class MyAttentionViewHolder extends BaseViewHolder<MyAttentionModel> {
+public class MyAttentionViewHolder extends BaseViewHolder<UserModel> {
     private TextView level,haoping,yiban,suc,attention,name;
     private ImageView icon_head;
     public MyAttentionViewHolder(View itemView, Context mContext) {
@@ -42,7 +43,7 @@ public class MyAttentionViewHolder extends BaseViewHolder<MyAttentionModel> {
     }
 
     @Override
-    public void update(final MyAttentionModel model) {
+    public void update(final UserModel model) {
         level.setText(getText(model.getLevel(),"等级"));
         haoping.setText(getText(model.getPraise()+"%","好评"));
         yiban.setText(getText(model.getDonenum()+"","已办"));
@@ -62,7 +63,9 @@ public class MyAttentionViewHolder extends BaseViewHolder<MyAttentionModel> {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
-                intent.setClass(mContext, LawyerIntroductionActivity.class);
+                intent.setClass(mContext,LawyerIntroductionActivity.class);
+                intent.putExtra(LawyerIntroductionActivity.ID, model.getId());
+                intent.putExtra(LawyerIntroductionActivity.LAW_USER_MODEL,model);
                 mContext.startActivity(intent);
             }
         });
@@ -70,7 +73,7 @@ public class MyAttentionViewHolder extends BaseViewHolder<MyAttentionModel> {
 
 
         Glide.with(mContext)
-                .load("http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg")
+                .load(model.getHeadimg())
                 .placeholder(R.mipmap.icon_head_def_cir)
                 .error(R.mipmap.icon_head_def_cir)
                 .transform(new CenterCrop(mContext),new GlideCircleTransform(mContext))

@@ -24,6 +24,8 @@ import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.CheckConsultModel;
 import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.model.UserModel;
+import com.chuxin.law.ry.db.Friend;
+import com.chuxin.law.ry.ui.activity.ConversationActivity;
 import com.chuxin.law.sharedpreferences.FriendsSp;
 import com.chuxin.law.ui.adapter.ProductListAdapter;
 import com.chuxin.law.ui.view.PresentInstructionsDialog;
@@ -38,6 +40,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import io.rong.imkit.RongContext;
+import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.UserInfo;
 import rx.functions.Action1;
@@ -50,6 +53,7 @@ import rx.functions.Action1;
 
 public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     public static final String ID = "id";
+    public static final String LAW_USER_MODEL="law_user_model";
     protected BackTitleView titleView;
     protected ImageView iconHead;
     protected TextView name;
@@ -67,6 +71,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
 
     private ProductListAdapter adapter;
     private LawyerIntroModel.LawyerIntroData data;
+    private UserModel userModel;
     private PresentInstructionsDialog dialog;
     private String type;
 
@@ -80,6 +85,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         dialog = new PresentInstructionsDialog(mContext);
         adapter = new ProductListAdapter(mContext);
         id = getIntent().getStringExtra(ID);
+        userModel= (UserModel) getIntent().getSerializableExtra(LAW_USER_MODEL);
         if (TextUtils.isEmpty(id)) {
             id = "5";
         }
@@ -137,35 +143,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent  = new Intent(LawyerIntroductionActivity.this, ChatActivity.class);
-//                intent.putExtra("userId", "20");
-//                intent.putExtra("userName", "王律师");
-//                startActivity(intent);
-
-//                if (data != null && data.getLaw() != null) {
-//
-////                    Intent intent = new Intent(mContext, ConversationActivity.class);
-////                    intent.putExtra("targetId",data.getLaw().getUserid());
-////                    intent.putExtra("title",data.getLaw().getName());
-////                    mContext.startActivity(intent);
-////                    data.getLaw().getUserid()
-//
-//                    FriendsSp.saveFriedns(mContext, new UserInfo(data.getLaw().getUserid(), data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
-//
-////                    RongIM.getInstance().startPrivateChat(mContext, "64", data.getLaw().getName());
-////                    RongIM.getInstance().startChatRoomChat(mContext,"1497704102201803131347231",true);
-////                    1497704102201803131347231
-//
-//
-////                    startChatRoomChat(mContext, data.order.order, data.getLaw().getName(), true);
-//
-//                    startChatRoomChat(mContext, "1497704102201803131347231", data.getLaw().getName(), true);
-//
-////                    public void joinChatRoom(final String chatroomId, final int defMessageCount, final RongIMClient.OperationCallback callback)
-////                    RongIM.getInstance().startPrivateChat(mContext, , data.getLaw().getName());
-
-//                }
-                type = "2";
+                type="2";
                 checkConsult();
             }
         });
@@ -186,14 +164,12 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
 
         getData();
 
-        yiban.setText(UIUtils.getText("100", "已办"));
-        level.setText(UIUtils.getText("专业级", "等级"));
-        haoping.setText(UIUtils.getText("100%", "好评"));
-        suc.setText(UIUtils.getText("100%", "胜率"));
-        ImageLoderUtil.loadCircleImage(mContext, iconHead, "http://img10.3lian.com/sc6/show/s11/19/20110711104956189.jpg", R.mipmap.icon_head_def_cir);
+        if (userModel!=null){
+            ImageLoderUtil.loadCircleImage(mContext, iconHead, userModel.getHeadimg(), R.mipmap.icon_head_def_cir);
+            name.setText(userModel.getName());
 
-
-        Log.e("tag", "StorageListUtil=" + StorageListUtil.listAvaliableStorage(this));
+        }
+        Log.e("tag","StorageListUtil="+ StorageListUtil.listAvaliableStorage(this));
     }
 
     private void getData() {
@@ -220,11 +196,9 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     }
 
     private void updateView(LawyerIntroModel.LawyerIntroData data) {
-        Log.e("tag", "updateView2=" + data);
         if (data == null) {
             return;
         }
-        Log.e("tag", "updateView3=");
         this.data = data;
         UserModel userModel = data.getLaw();
         if (data.getIs_follow() == 0) {
@@ -239,13 +213,10 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
         if (userModel != null) {
             setNoTxt(userModel.getPrice());
             jianjieContent.setText(data.getLaw().getIntro());
-
-            name.setText(data.getLaw().getName());
             yiban.setText(UIUtils.getText(userModel.getDonenum(), "已办"));
-            level.setText(UIUtils.getText("专业级", "等级"));
+            level.setText(UIUtils.getText(userModel.getLevel(), "等级"));
             haoping.setText(UIUtils.getText(userModel.getPraise() + "%", "好评"));
             suc.setText(UIUtils.getText(userModel.getWin() + "%", "胜率"));
-            ImageLoderUtil.loadCircleImage(mContext, iconHead, data.getLaw().getHeadimg(), R.mipmap.icon_head_def_cir);
         }
         adapter.refreshList(data.getList());
     }

@@ -153,6 +153,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.putExtra(LawyerIntroductionActivity.ID, userModel != null ? userModel.getId() : "");
+                intent.putExtra(LawyerIntroductionActivity.LAW_USER_MODEL,userModel);
 
                 Bundle bundle = new Bundle();
                 intent.setClass(mContext, LawyerIntroductionActivity.class);

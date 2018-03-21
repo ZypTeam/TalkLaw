@@ -57,7 +57,8 @@ public class UIUtils {
      * @return
      */
     public static SpannableStringBuilder getText(String txt1, String txt2){
-        SpannableStringBuilder builder=new SpannableStringBuilder(txt1+"\n"+txt2);
+        txt1+="\n";
+        SpannableStringBuilder builder=new SpannableStringBuilder(txt1+txt2);
 
         builder.setSpan(new AbsoluteSizeSpan(15,true),0,txt1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.setSpan(new AbsoluteSizeSpan(12,true),txt1.length(),txt1.length()+txt2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

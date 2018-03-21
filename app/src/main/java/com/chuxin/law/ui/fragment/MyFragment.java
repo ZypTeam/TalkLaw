@@ -199,7 +199,9 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         switch (requestCode) {
             case CommonConstant.FOLLOW_RESULT_CODE:
                 if (data != null) {
-                    userModel.setFollow(data.getStringExtra(MyAttentionActivity.FOLLOW_COUNT));
+                    String follow=data.getStringExtra(MyAttentionActivity.FOLLOW_COUNT);
+                    userModel.setFollow(follow);
+                    followCount.setText(follow);
                     UserInfoDelegate.getInstance().saveUserInfo(userModel);
                 }
                 break;
@@ -208,13 +210,15 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
             case CommonConstant.REQUEST_HEAD_CHANGE:
                 updateUserInfo();
                 break;
+            default:
+                break;
         }
     }
 
     @Override
     protected void refreshData() {
-//        getUserInfo();
-        updateUserInfo();
+        getUserInfo();
+//        updateUserInfo();
     }
 
     private void getUserInfo() {
@@ -276,7 +280,6 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
-        updateUserInfo();
         ShippingAddressModel.ShippingAddressItemModel model = ShippingAddressSp.getSelectShippingAddress(mContext);
         if (model == null) {
             myAddressContent.setText("暂无");
@@ -289,7 +292,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-        if(isVisibleToUser){
+        if (isVisibleToUser) {
             ShippingAddressModel.ShippingAddressItemModel model = ShippingAddressSp.getSelectShippingAddress(mContext);
             if (model == null) {
                 myAddressContent.setText("暂无");

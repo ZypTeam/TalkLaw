@@ -10,6 +10,7 @@ import com.chuxin.law.R;
 import com.chuxin.law.base.BaseViewHolder;
 import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.model.MyAttentionModel;
+import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.viewholder.MyAttentionViewHolder;
 
 /**
@@ -18,7 +19,7 @@ import com.chuxin.law.ui.viewholder.MyAttentionViewHolder;
  * @describe
  */
 
-public class MyAttentionAdapter extends BaseAdapter<MyAttentionModel> {
+public class MyAttentionAdapter extends BaseAdapter<UserModel> {
     public MyAttentionAdapter(Context context) {
         super(context);
     }
