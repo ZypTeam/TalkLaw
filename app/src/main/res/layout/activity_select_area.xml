@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/write">
+    android:background="@color/write"
+    android:orientation="vertical">
 
     <com.chuxin.law.ui.widget.BackTitleView
         android:id="@+id/view_title_bar"
@@ -40,42 +40,59 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="107dp">
+        android:paddingLeft="107dp"
+        android:paddingRight="16dp">
 
 
-        <ImageView
+        <LinearLayout
+            android:id="@+id/layout_man"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/img_sex_afirm" />
+            android:layout_gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/text_sex_man"
+
+            <ImageView
+                android:id="@+id/img_man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/img_sex_afirm" />
+
+            <TextView
+                android:id="@+id/text_sex_man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="13dp"
+                android:text="先生"
+                android:textColor="#333333"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_woman"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="13dp"
-            android:text="先生"
-            android:textColor="#333333"
-            android:textSize="17sp" />
+            android:layout_gravity="center_vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="54dp"
-            android:src="@drawable/img_sex_no_select" />
+            <ImageView
+                android:id="@+id/img_woman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="54dp"
+                android:src="@drawable/img_sex_no_select" />
 
-        <TextView
-            android:id="@+id/text_sex_woman"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="女士"
-            android:textColor="#333333"
-            android:textSize="17sp"
-            android:layout_marginLeft="13dp"/>
+            <TextView
+                android:id="@+id/text_sex_woman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="13dp"
+                android:text="女士"
+                android:textColor="#333333"
+                android:textSize="17sp" />
+        </LinearLayout>
     </LinearLayout>
 
 

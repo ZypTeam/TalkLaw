@@ -65,7 +65,7 @@ public class NewAddYinHangActivity extends BaseTalkLawActivity {
 
 
     private void delMsg() {
-        showLoadDialog();
+
         HashMap<String, String> map = new HashMap<>();
         if (editName.getText().length() == 0) {
             Toast.makeText(mContext, "请输入持卡人姓名", Toast.LENGTH_SHORT).show();
@@ -77,6 +77,7 @@ public class NewAddYinHangActivity extends BaseTalkLawActivity {
             Toast.makeText(mContext, "请输入手机号", Toast.LENGTH_SHORT).show();
             return;
         }
+        showLoadDialog();
         map.put("card", editNum.getText().toString());
         map.put("name", editName.getText().toString());
         map.put("phone", editPhone.getText().toString());
@@ -88,6 +89,8 @@ public class NewAddYinHangActivity extends BaseTalkLawActivity {
                         if (model != null && model.getCode() == NET_SUC_CODE) {
                             showToast("新增成功");
                             finish();
+                        }else{
+                            showToast(model.getMsg());
                         }
                     }
                 }, new Action1<Throwable>() {

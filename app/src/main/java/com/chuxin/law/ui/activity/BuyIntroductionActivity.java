@@ -323,6 +323,8 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
                             }else{
                                 showToast(noDataModel.getMsg());
                             }
+                        }else{
+                            showToast(noDataModel.getMsg());
                         }
                     }
                 }, new Action1<Throwable>() {
