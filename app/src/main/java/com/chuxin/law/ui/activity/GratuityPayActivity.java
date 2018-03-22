@@ -75,21 +75,21 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
         zhifubao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gratuity("1");
+                gratuity("2");
             }
         });
 
         wechat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gratuity("2");
+                gratuity("1");
             }
         });
 
         rxManage.on(PayUitl.WECHATPAY, new Action1<Object>() {
             @Override
             public void call(Object o) {
-                payValidate("2","");
+                payValidate("1","");
             }
         });
 
@@ -104,7 +104,7 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
             @Override
             public void call(Object o) {
 //                Map<String,String> map= (Map<String, String>) o;
-                payValidate("1",new Gson().toJson(o));
+                payValidate("2",new Gson().toJson(o));
 
             }
         });
@@ -161,14 +161,14 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
                         hideLoadDialog();
                         if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE
                                 && noDataModel.getData() != null) {
-                            if (StringUtil.equals("1", method)
+                            if (StringUtil.equals("2", method)
                                     && noDataModel.getData().getOrder() != null) {
                                 order=noDataModel.getData().getOrder().getOrder();
                                 PayUitl.AliPay(GratuityPayActivity.this, noDataModel.getData().getAporder());
                                 return;
                             }
 
-                            if (StringUtil.equals("2", method)
+                            if (StringUtil.equals("1", method)
                                     && noDataModel.getData().getWxorder() != null) {
                                 order = noDataModel.getData().getWxorder().getPrepay_id();
                                 PayUitl.WechatPay(noDataModel.getData().getWxorder());

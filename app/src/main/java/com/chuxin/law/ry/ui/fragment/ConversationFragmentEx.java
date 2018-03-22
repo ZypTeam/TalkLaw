@@ -39,6 +39,7 @@ public class ConversationFragmentEx extends ConversationFragment {
     private RongExtension rongExtension;
     private ListView listView;
 
+    private String touserid="";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +67,7 @@ public class ConversationFragmentEx extends ConversationFragment {
         super.initFragment(uri);
         if (uri != null) {
             mTargetId = uri.getQueryParameter("targetId");
+            touserid = uri.getQueryParameter("touserid");
         }
     }
 
@@ -178,5 +180,9 @@ public class ConversationFragmentEx extends ConversationFragment {
     @Override
     public MessageListAdapter onResolveAdapter(Context context) {
         return super.onResolveAdapter(context);
+    }
+
+    public String getTouserid(){
+        return touserid;
     }
 }

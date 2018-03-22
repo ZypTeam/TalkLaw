@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.chuxin.law.R;
+import com.chuxin.law.ry.ui.fragment.ConversationFragmentEx;
 import com.chuxin.law.ui.activity.GuaranteeRequestActivity;
 import com.google.gson.Gson;
 
@@ -29,6 +30,7 @@ public class PayPlugin  implements IPluginModule {
     private Context context;
     private Conversation.ConversationType conversationType;
     private String targetId;
+    private String toUserId;
 
     @Override
     public Drawable obtainDrawable(Context context) {
@@ -46,13 +48,23 @@ public class PayPlugin  implements IPluginModule {
         context = fragment.getActivity();
         conversationType = rongExtension.getConversationType();
 
-        Log.e("tag","targetId=="+targetId);
+        if(fragment instanceof ConversationFragmentEx){
+
+            toUserId= ((ConversationFragmentEx) fragment).getTouserid();
+            Log.e("tag","toUserId1=="+toUserId);
+        }
+        Log.e("tag","toUserId2=="+toUserId);
 
         targetId = rongExtension.getTargetId();
+        Log.e("tag","targetId=="+targetId);
+
+
+
 
 
         Intent intent = new Intent(context, GuaranteeRequestActivity.class);
         intent.putExtra("targetId",targetId);
+        intent.putExtra("toUserId",toUserId);
         context.startActivity(intent);
 
     }

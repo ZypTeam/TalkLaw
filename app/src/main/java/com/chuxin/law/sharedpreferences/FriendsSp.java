@@ -2,8 +2,11 @@ package com.chuxin.law.sharedpreferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.chuxin.law.model.UserModel;
 import com.google.gson.Gson;
 import com.jusfoun.baselibrary.Util.AppUtil;
 
@@ -18,21 +21,24 @@ import io.rong.imlib.model.UserInfo;
 public class FriendsSp {
 
     private static final String NAME = "friends";
-    private static final String INFO = "info";
 
-    public static void saveFriedns(Context context, UserInfo userInfo) {
+    public static void saveFriedns(Context context, UserModel userInfo) {
         SharedPreferences preferences = context.getSharedPreferences(AppUtil.getPackageName(context)
                 + NAME, Context.MODE_PRIVATE);
-        preferences.edit().putString(userInfo.getUserId(), new Gson().toJson(userInfo)).commit();
+        preferences.edit().putString(userInfo.getUserid() ,new Gson().toJson(userInfo)).commit();
     }
 
-    public static UserInfo getFriendsInfo(Context context) {
+    public static UserInfo getFriendsInfo(Context context,String userId) {
         SharedPreferences preferences = context.getSharedPreferences(AppUtil.getPackageName(context)
                 + NAME, Context.MODE_PRIVATE);
-        String info =  preferences.getString(INFO, "");
+        String info =  preferences.getString(userId,"");
         if(!TextUtils.isEmpty(info)) {
-            UserInfo userInfo = new Gson().fromJson(info,UserInfo.class);
-            return userInfo;
+            UserModel userInfo = new Gson().fromJson(info,UserModel.class);
+            if(!TextUtils.isEmpty(userInfo.getHeadimg())) {
+                Log.e("tag","userInfo="+userInfo.getHeadimg());
+                UserInfo model = new UserInfo(userInfo.getUserid(), userInfo.getName(), Uri.parse(userInfo.getHeadimg()));
+                return model;
+            }
         }
         return null;
     }

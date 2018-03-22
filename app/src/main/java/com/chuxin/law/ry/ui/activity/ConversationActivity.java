@@ -108,6 +108,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
     private TextView tv_announce;
     private ImageView iv_arrow;
 
+    private String touserid;
     @Override
     @TargetApi(23)
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +129,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
             return;
 
         mTargetId = intent.getData().getQueryParameter("targetId");
+        touserid  = intent.getData().getQueryParameter("touserid");
         //10000 为 Demo Server 加好友的 id，若 targetId 为 10000，则为加好友消息，默认跳转到 NewFriendListActivity
         // Demo 逻辑
         if (mTargetId != null && mTargetId.equals("10000")) {
@@ -299,7 +301,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                     SealAppContext.getInstance().popAllActivity();
                     return;
                 }
-                enterFragment(mConversationType, mTargetId);
+                enterFragment(mConversationType, mTargetId,touserid);
             }
 
         } else {
@@ -314,7 +316,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                     }
                 }, 300);
             } else {
-                enterFragment(mConversationType, mTargetId);
+                enterFragment(mConversationType, mTargetId,touserid);
             }
         }
     }
@@ -362,7 +364,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                 if (mDialog != null)
                     mDialog.dismiss();
 
-                enterFragment(mConversationType, mTargetId);
+                enterFragment(mConversationType, mTargetId,touserid);
 
             }
 
@@ -372,7 +374,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                 if (mDialog != null)
                     mDialog.dismiss();
 
-                enterFragment(mConversationType, mTargetId);
+                enterFragment(mConversationType, mTargetId,touserid);
             }
         });
 
@@ -386,13 +388,15 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
      * @param mConversationType 会话类型
      * @param mTargetId         会话 Id
      */
-    private void enterFragment(Conversation.ConversationType mConversationType, String mTargetId) {
+    private void enterFragment(Conversation.ConversationType mConversationType, String mTargetId,String touserid) {
 
         fragment = new ConversationFragmentEx();
 
         Uri uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
                 .appendPath("conversation").appendPath(mConversationType.getName().toLowerCase())
-                .appendQueryParameter("targetId", mTargetId).build();
+                .appendQueryParameter("targetId", mTargetId)
+                .appendQueryParameter("touserid", touserid).
+                        build();
 
         fragment.setUri(uri);
 
