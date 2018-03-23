@@ -94,7 +94,7 @@ public class PaySucActivity extends BaseTalkLawActivity {
     }
 
     private void goNext(){
-        FriendsSp.saveFriedns(mContext,new UserInfo(data.getLaw().getUserid(),data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
+        FriendsSp.saveFriedns(mContext,data.getLaw());
         startChatRoomChat(mContext,rongId,data.getLaw().getName(),true);
         onBackPressed();
     }

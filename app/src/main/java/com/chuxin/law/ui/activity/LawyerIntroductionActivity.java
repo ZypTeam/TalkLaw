@@ -333,7 +333,7 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
 
     private void goRongIM(String id) {
         if (data != null && data.getLaw() != null)
-            FriendsSp.saveFriedns(mContext, new UserInfo(data.getLaw().getUserid(), data.getLaw().getName(), Uri.parse(data.getLaw().getHeadimg())));
+            FriendsSp.saveFriedns(mContext, data.getLaw());
         startChatRoomChat(mContext, id, data.getLaw().getName(), true);
     }
 }

@@ -48,6 +48,7 @@ public class GuaranteeRequestActivity extends BaseTalkLawActivity {
     protected TextView textName;
 
     private String targetId;
+    private String toUserId="";
 
 
     @Override
@@ -58,6 +59,7 @@ public class GuaranteeRequestActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
         targetId = getIntent().getStringExtra("targetId");
+        toUserId = getIntent().getStringExtra("toUserId");
     }
 
     @Override
@@ -110,7 +112,7 @@ public class GuaranteeRequestActivity extends BaseTalkLawActivity {
     private void getOrderData() {
         showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
-        params.put("touserid", TalkLawApplication.getUserId());
+        params.put("touserid", toUserId);
         params.put("consult", targetId);
         params.put("money", editMoney.getText().toString());
 
@@ -121,7 +123,7 @@ public class GuaranteeRequestActivity extends BaseTalkLawActivity {
                         hideLoadDialog();
                         if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
 
-                            PayMessage payMessage =  PayMessage.obtain(noDataModel.data.order,TalkLawApplication.getUserId(),editMoney.getText().toString());
+                            PayMessage payMessage =  PayMessage.obtain(noDataModel.data.order,toUserId,editMoney.getText().toString());
                             RongIM.getInstance().sendMessage(Message.obtain(targetId, Conversation.ConversationType.CHATROOM, payMessage),
                                     "保证金", "保证金", new IRongCallback.ISendMessageCallback() {
                                         @Override

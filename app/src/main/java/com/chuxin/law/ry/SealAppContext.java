@@ -389,8 +389,8 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
 //        SealUserInfoManager.getInstance().getUserInfo(s);
 
 
-        Log.e("tag","getUserInfogetUserInfo1="+FriendsSp.getFriendsInfo(mContext));
-        return FriendsSp.getFriendsInfo(mContext);
+        Log.e("tag","getUserInfogetUserInfo1="+FriendsSp.getFriendsInfo(mContext,s)+" "+s);
+        return FriendsSp.getFriendsInfo(mContext,s);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -64,24 +65,31 @@ public class MyConsultViewHolder extends BaseViewHolder<MyConsultModel> {
             @Override
             public void onClick(View v) {
                 if (model!=null&&model.getUser()!=null){
-//                    goNext(model.getUser(),model.getSession());
-                    goNext(model.getUser(),"166");
+                    goNext(model.getUser(),model.getSession());
+//                    goNext(model.getUser(),"195");
                 }
             }
         });
     }
 
     private void goNext(UserModel userModel,String rongId){
-        FriendsSp.saveFriedns(mContext,new UserInfo(userModel.getUserid(),userModel.getName(), Uri.parse(userModel.getHeadimg())));
-        startChatRoomChat(mContext,rongId,userModel.getName(),true);
+        FriendsSp.saveFriedns(mContext,userModel);
+        startChatRoomChat(mContext,rongId,userModel.getName(),userModel.getUserid(),true);
+
+
     }
 
-    public void startChatRoomChat(Context context, String chatRoomId, String title, boolean createIfNotExist) {
+    public void startChatRoomChat(Context context, String chatRoomId,String title,String touserid ,boolean createIfNotExist) {
         if(context != null && !TextUtils.isEmpty(chatRoomId)) {
             if(RongContext.getInstance() == null) {
                 throw new ExceptionInInitializerError("RongCloud SDK not init");
             } else {
-                Uri uri = Uri.parse("rong://" + context.getApplicationInfo().packageName).buildUpon().appendPath("conversation").appendPath(Conversation.ConversationType.CHATROOM.getName().toLowerCase(Locale.US)).appendQueryParameter("targetId", chatRoomId).appendQueryParameter("title", title).build();
+                Log.e("tag","touserid1="+touserid);
+                Uri uri = Uri.parse("rong://" + context.getApplicationInfo().packageName).buildUpon().appendPath("conversation")
+                        .appendPath(Conversation.ConversationType.CHATROOM.getName().toLowerCase(Locale.US))
+                        .appendQueryParameter("targetId", chatRoomId)
+                        .appendQueryParameter("title", title)
+                        .appendQueryParameter("touserid", touserid).build();
                 Intent intent = new Intent("android.intent.action.VIEW", uri);
                 intent.putExtra("createIfNotExist", createIfNotExist);
                 context.startActivity(intent);

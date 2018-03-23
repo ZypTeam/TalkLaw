@@ -419,7 +419,7 @@ public interface ApiService {
     Observable<GuaranteeRequestModel> getOrderData(@QueryMap Map<String,String> params);
 
     /**
-     *检查订单
+     *保证金检查订单
      * @param params
      * @return
      */
@@ -454,7 +454,7 @@ public interface ApiService {
     /**
      * 保证金下单
      */
-    @POST("/consult/set")
+    @GET("/cash-deposit/set")
     Observable<OrderResultModel> marginPayOrder(@QueryMap Map<String,String> params);
 
 }

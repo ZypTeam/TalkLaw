@@ -343,7 +343,9 @@ public class LoginActivity extends BaseTalkLawActivity {
             public void onSuccess(String s) {
                 hideLoadDialog();
                 if (userInfoModel.getData() != null) {
-                    FriendsSp.saveFriedns(mContext,new UserInfo(userInfoModel.getData().getUserid(), userInfoModel.getData().getName(), Uri.parse(userInfoModel.getData().getHeadimg())));
+
+                    Log.e("tag","hideLoadDialoghideLoadDialoghideLoadDialog="+userInfoModel.getData().getUserid()+" "+userInfoModel.getData().getName()+" "+userInfoModel.getData().getHeadimg());
+                    FriendsSp.saveFriedns(mContext,userInfoModel.getData());
 //                    RongIM.getInstance().refreshUserInfoCache();
 //                    RongIM.getInstance().setCurrentUserInfo(new UserInfo("userId", userInfoModel.getData().getUserid(), Uri.parse(userInfoModel.getData().getHeadimg())));
                 }
