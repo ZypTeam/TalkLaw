@@ -75,6 +75,13 @@ public class ProductiListActivity extends BaseTalkLawActivity {
 
 
         getData(true,true);
+
+        rxManage.on(CommonConstant.EVNET_LIKE, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                getData(false,true);
+            }
+        });
     }
 
     private void getData(boolean isShow, final boolean isRefresh){

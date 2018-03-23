@@ -118,19 +118,19 @@ public class WiterQRUtil {
         int width=result.getWidth();
         int height=result.getHeight();
         Matrix m=new Matrix();
-        m.setScale(0.2f,0.2f);//设置loge大小为二维码1/5
+        m.setScale(0.15f,0.15f);//设置loge大小为二维码1/5
         logo=Bitmap.createBitmap(logo,0,0,logo.getWidth(),logo.getHeight(),m,false);
         int[] pixels=new int[width*height];
 
         for (int y = 0; y < height; y++) {
             int offset=y*width;
             for (int x = 0; x < width; x++) {
-                if (x>width/2-width/10
-                        &&x<width/2+width/10
-                        &&y>height/2-height/10
-                        &&y<height/2+height/10){
-                    pixels[offset+x]=logo.getPixel(x-width/2+width/10
-                    ,y-height/2+height/10);
+                if (x>width/2-width*3/40
+                        &&x<width/2+width*3/40
+                        &&y>height/2-height*3/40
+                        &&y<height/2+height*3/40){
+                    pixels[offset+x]=logo.getPixel(x-width/2+width*3/40
+                    ,y-height/2+height*3/40);
                 }else {
                         pixels[offset+x]=result.get(x,y)?qrColor:bgColor;
                 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.common.CommonLogic;
 import com.chuxin.law.model.CarouseModel;
 import com.chuxin.law.ui.activity.AudioDetailsActivity;
@@ -100,10 +101,18 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         layoutSearchEdit = (LinearLayout) headerView.findViewById(R.id.layout_search_edit);
         imgAudio = (ImageView) headerView.findViewById(R.id.img_audio);
         backTitleView = (BackTitleView) rootView.findViewById(R.id.back_title_view);
+
     }
 
     @Override
     public void initAction() {
+
+        rxManage.on(CommonConstant.EVNET_LIKE, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                delMsg(false);
+            }
+        });
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setPullRefreshEnabled(false);
@@ -207,11 +216,13 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
 
     @Override
     protected void refreshData() {
-        delMsg();
+        delMsg(true);
     }
 
-    private void delMsg() {
-        showLoadDialog();
+    private void delMsg(boolean isShow) {
+        if (isShow) {
+            showLoadDialog();
+        }
         addNetwork(Api.getInstance().getService(ApiService.class).getHomeKanfa()
                 , new Action1<ProductListModel>() {
                     @Override

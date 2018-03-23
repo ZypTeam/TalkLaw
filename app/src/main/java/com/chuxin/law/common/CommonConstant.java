@@ -56,4 +56,7 @@ public class CommonConstant {
     //购买产品成功
     public static final String EVENT_BUY_LAWYER="event_buy_lawyer";
 
+    //点赞 取消点赞
+    public static final String EVNET_LIKE="event_like";
+
 }

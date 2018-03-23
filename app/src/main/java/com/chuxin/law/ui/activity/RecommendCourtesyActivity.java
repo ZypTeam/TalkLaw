@@ -118,9 +118,9 @@ public class RecommendCourtesyActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View v) {
                 ShareModel shareModel=new ShareModel();
-                shareModel.setShareUrl("www.baidu.com");
-                shareModel.setShareTitle("说法");
-                shareModel.setShareContent("说法");
+                shareModel.setShareUrl(url);
+                shareModel.setShareTitle("快来跟我一块使用看法说法吧");
+                shareModel.setShareContent("");
                 shareModel.setBitmap(qrcodeBitmap);
                 shareDialog.setShareModel(shareModel);
                 shareDialog.show();
@@ -133,7 +133,7 @@ public class RecommendCourtesyActivity extends BaseTalkLawActivity {
                 rulesDialog.show();
             }
         });
-        qrcodeBitmap = WiterQRUtil.witerQRCenterLogo("哈哈哈", BitmapFactory.decodeResource(getResources(), R.mipmap.logo)
+        qrcodeBitmap = WiterQRUtil.witerQRCenterLogo(url, BitmapFactory.decodeResource(getResources(), R.mipmap.logo)
                 , PhoneUtil.dip2px(mContext, 271), Color.BLACK, Color.WHITE);
         qrcode.setImageBitmap(qrcodeBitmap);
     }
