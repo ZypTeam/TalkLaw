@@ -387,6 +387,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                         if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             audioModel.setIs_like(1);
                             thumbsUp.setImageResource(R.mipmap.icon_lawyer_like);
+                            rxManage.post(CommonConstant.EVNET_LIKE,"");
                             showToast("已点赞");
                         }else {
                             showToast("点赞失败");
@@ -440,6 +441,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                             audioModel.setIs_like(0);
                             thumbsUp.setImageResource(R.mipmap.icon_lawyer_like_un);
                             showToast("取消点赞");
+                            rxManage.post(CommonConstant.EVNET_LIKE,"");
                         }else {
                             showToast("取消失败");
                         }

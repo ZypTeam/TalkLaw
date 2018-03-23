@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawFragment;
 import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.CarouseModel;
 import com.chuxin.law.model.StatementListModel;
 import com.chuxin.law.ui.activity.WebViewActivity;
@@ -99,6 +100,13 @@ public class HomeFragment extends BaseTalkLawFragment {
         banner.setFocusableInTouchMode(true);
         banner.requestFocus();
 
+        rxManage.on(CommonConstant.EVNET_LIKE, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                delMsg(false);
+            }
+        });
+
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
@@ -144,10 +152,13 @@ public class HomeFragment extends BaseTalkLawFragment {
 
     @Override
     protected void refreshData() {
-        delMsg();
+        delMsg(true);
     }
 
-    private void delMsg() {
+    private void delMsg(boolean isShow) {
+        if (isShow){
+            showLoadDialog();
+        }
         addNetwork(Api.getInstance().getService(ApiService.class).getHomeShuoFa()
                 , new Action1<StatementListModel>() {
                     @Override
