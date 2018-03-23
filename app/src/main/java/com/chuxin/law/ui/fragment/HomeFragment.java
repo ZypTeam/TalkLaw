@@ -133,6 +133,13 @@ public class HomeFragment extends BaseTalkLawFragment {
         backTitleView.setAlpha(0f);
         backTitleView.setTitle("说法");
         backTitleView.setLeftGone();
+
+        viewNeed.setCallBack(new HomeNeedView.CallBack() {
+            @Override
+            public void callback() {
+                changeNet();
+            }
+        });
     }
 
     @Override
@@ -172,6 +179,32 @@ public class HomeFragment extends BaseTalkLawFragment {
                                 } else {
 //                                    banner.setVisibility(View.GONE);
                                 }
+
+                            }
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        hideLoadDialog();
+                    }
+                });
+    }
+
+    private void changeNet() {
+        showLoadDialog();
+        addNetwork(Api.getInstance().getService(ApiService.class).getChangeNeedNet()
+                , new Action1<StatementListModel.StatementDataModel>() {
+                    @Override
+                    public void call(StatementListModel.StatementDataModel model) {
+                        hideLoadDialog();
+                        if (model != null && model.getCode() == NET_SUC_CODE) {
+                            if (model.data != null) {
+
+                                if (model.data!= null) {
+                                    viewNeed.setData(model.data);
+                                }
+
 
                             }
                         }

@@ -131,7 +131,7 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
         rxManage.on(PayUitl.WECHATPAY, new Action1<Object>() {
             @Override
             public void call(Object o) {
-                payValidate("2");
+                payValidate("1");
             }
         });
 
@@ -146,7 +146,7 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
             @Override
             public void call(Object o) {
 //                Map<String,String> map= (Map<String, String>) o;
-                payValidate("1");
+                payValidate("2");
 
             }
         });
@@ -166,7 +166,7 @@ public class BuyLawyerActivity extends BaseTalkLawActivity {
         HashMap<String, String> params = new HashMap<>();
         params.put("id", data.getArticle().getId());
         params.put("type", "1");
-        params.put("method", zhifubao.isSelected() ? "1" : "2");
+        params.put("method", zhifubao.isSelected() ? "2" : "1");
         Log.e("tag", "params" + params);
         addNetwork(Api.getInstance().getService(ApiService.class).buyProduct(params)
                 , new Action1<OrderResultModel>() {

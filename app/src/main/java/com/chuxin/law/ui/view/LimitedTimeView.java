@@ -3,6 +3,7 @@ package com.chuxin.law.ui.view;
 import android.content.Context;
 import android.os.CountDownTimer;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
@@ -74,6 +75,7 @@ public class LimitedTimeView extends BaseView {
     }
 
     public void setData(long time){
+        Log.e("tag","timetime="+time);
         if(myCountDownTimer!=null){
             myCountDownTimer.cancel();
         }

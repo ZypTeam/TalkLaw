@@ -6,15 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chuxin.law.R;
 import com.chuxin.law.base.BaseView;
 import com.chuxin.law.model.ProductItemModel;
 import com.chuxin.law.ui.adapter.HomeNeedAdapter;
 
 import java.util.List;
-
-import com.chuxin.law.R;
 
 /**
  * @author zhaoyapeng
@@ -27,6 +27,7 @@ public class HomeNeedView extends BaseView {
     protected HomeNeedAdapter adapter;
     protected TextView textTitle;
     private LinearLayoutManager layoutManager;
+    private LinearLayout huanLayout;
 
     public HomeNeedView(Context context) {
         super(context);
@@ -50,6 +51,7 @@ public class HomeNeedView extends BaseView {
         LayoutInflater.from(mContext).inflate(R.layout.view_need_home_list, this, true);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         textTitle = (TextView) findViewById(R.id.text_title);
+        huanLayout = (LinearLayout) findViewById(R.id.layout_huan);
     }
 
     @Override
@@ -59,17 +61,31 @@ public class HomeNeedView extends BaseView {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        textTitle.setOnClickListener(new OnClickListener() {
+        huanLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (callBack != null) {
+                    callBack.callback();
+                }
             }
         });
 
     }
 
-    public void setData( List<ProductItemModel> neeList ) {
+    public void setData(List<ProductItemModel> neeList) {
         textTitle.setText("猜你需要");
         adapter.refreshList(neeList);
     }
+
+
+    public interface CallBack {
+        void callback();
+    }
+
+    public CallBack callBack;
+
+    public void setCallBack(CallBack callBack) {
+        this.callBack = callBack;
+    }
+
 }
