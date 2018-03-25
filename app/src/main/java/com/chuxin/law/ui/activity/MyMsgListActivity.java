@@ -1,10 +1,12 @@
 package com.chuxin.law.ui.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chuxin.law.ui.widget.xRecyclerView.XRecyclerView;
+import com.jusfoun.baselibrary.Util.TouchUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.TitleStatusBarView;
@@ -84,6 +86,13 @@ public class MyMsgListActivity extends BaseTalkLawActivity {
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         getData(true,true);
 
         adapter.setCallback(new AdapterCallback() {
@@ -92,6 +101,8 @@ public class MyMsgListActivity extends BaseTalkLawActivity {
                 delMsg((MyMsgModel) model);
             }
         });
+
+        TouchUtil.createTouchDelegate(back,40);
     }
 
     private void delMsg(MyMsgModel model){

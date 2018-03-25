@@ -467,5 +467,12 @@ public interface ApiService {
     @GET("/cash-deposit/set")
     Observable<OrderResultModel> marginPayOrder(@QueryMap Map<String,String> params);
 
+    /**
+     * 换一换
+     */
+    @GET("/article/need")
+    Observable<StatementListModel.StatementDataModel> getChangeNeedNet();
+
+
 }
 
