@@ -59,4 +59,7 @@ public class CommonConstant {
     //点赞 取消点赞
     public static final String EVNET_LIKE="event_like";
 
+    //购买顾问成功
+    public static final String EVENT_BUY_ARRONDI="event_buy_arrondi";
+
 }

@@ -358,6 +358,16 @@ public interface ApiService {
     Observable<PayValidateModel> payValidate(@QueryMap Map<String,String> params);
 
     /**
+     * 产品详情 购买
+     */
+    @POST("/peck-order/set")
+    Observable<OrderResultModel> buyPeck(@QueryMap Map<String,String> params);
+
+    //支付成功
+    @POST("/peck-order/order")
+    Observable<PayValidateModel> payPeck(@QueryMap Map<String,String> params);
+
+    /**
      * 咨询 购买
      */
     @POST("/consult/set")

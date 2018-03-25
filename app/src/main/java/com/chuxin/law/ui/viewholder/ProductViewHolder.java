@@ -58,7 +58,7 @@ public class ProductViewHolder extends BaseViewHolder<ProductModel> {
             }
         });
 
-        comment.setOnClickListener(new View.OnClickListener() {
+        /*comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (commentCall!=null){
@@ -74,7 +74,7 @@ public class ProductViewHolder extends BaseViewHolder<ProductModel> {
                     thumbsCall.callback(model,getAdapterPosition());
                 }
             }
-        });
+        });*/
     }
 
     private void initView(View rootView) {
