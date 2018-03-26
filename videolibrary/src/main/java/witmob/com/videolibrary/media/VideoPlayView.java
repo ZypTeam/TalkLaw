@@ -80,6 +80,7 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
             public boolean onError(IMediaPlayer iMediaPlayer, int i, int i1) {
                 videoImg.setVisibility(VISIBLE);
                 pauseImg.setVisibility(VISIBLE);
+                mediaController.onStop();
                 return false;
             }
         });

@@ -34,6 +34,7 @@ import com.chuxin.law.ui.activity.MyMsgListActivity;
 import com.chuxin.law.ui.activity.RecommendCourtesyActivity;
 import com.chuxin.law.ui.activity.SettingActivity;
 import com.chuxin.law.ui.activity.ShippingAddressActivity;
+import com.chuxin.law.ui.activity.WebViewActivity;
 import com.chuxin.law.util.UIUtils;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
@@ -69,7 +70,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
     protected ImageView imgAddress;
     protected TextView myAddressContent, auth;
     private ImageView setting;
-    private TextView recommend;
+    private TextView recommend,fabu;
     private ImageView msg;
     private UserModel userModel;
     private Drawable dAuthUn, dAuth;
@@ -119,6 +120,7 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         msg = (ImageView) rootView.findViewById(R.id.msg);
 
         setting = rootView.findViewById(R.id.setting);
+        fabu = rootView.findViewById(R.id.fabu);
     }
 
 
@@ -136,6 +138,16 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         btnJifen.setOnClickListener(this);
         auth.setOnClickListener(this);
         btnTixian.setOnClickListener(this);
+
+        fabu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,WebViewActivity.class);
+                intent.putExtra("url","http://www.baidu.com");
+                intent.putExtra("title","发布产品");
+                startActivity(intent);
+            }
+        });
 
     }
 

@@ -98,19 +98,19 @@
 
     <Button
         android:id="@+id/login"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/login_agree"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
         android:layout_marginBottom="29dp"
         android:layout_marginLeft="28dp"
         android:layout_marginRight="28dp"
-        android:text="登录"
-        android:gravity="center"
-        android:textSize="18dp"
-        android:textColor="#fff"
         android:background="@drawable/bg_login_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        android:gravity="center"
+        android:text="登录"
+        android:textColor="#fff"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/login_agree"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/login_agree"

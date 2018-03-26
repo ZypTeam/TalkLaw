@@ -297,13 +297,17 @@ public class CustomMediaContoller implements IMediaController {
         pauseImage.setVisibility(View.GONE);
         itemView.setVisibility(View.GONE);
         play.setImageResource(R.mipmap.video_play_btn);
-        if (loadingProgress.getVisibility()==View.GONE)
+        if (loadingProgress.getVisibility()==View.GONE) {
             loadingProgress.setVisibility(View.VISIBLE);
+        }
     }
 
     public void onStop(){
         play.setImageResource(R.mipmap.video_stop_btn);
         full.setImageResource(R.mipmap.full_screen_icon);
+        if (loadingProgress.getVisibility()==View.VISIBLE) {
+            loadingProgress.setVisibility(View.GONE);
+        }
     }
 
     public void pause() {
