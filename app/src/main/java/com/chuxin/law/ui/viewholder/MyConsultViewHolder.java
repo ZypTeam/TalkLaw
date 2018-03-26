@@ -20,10 +20,14 @@ import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 
 import com.chuxin.law.R;
 
+import java.util.List;
 import java.util.Locale;
 
 import io.rong.imkit.RongContext;
+import io.rong.imlib.IRongCallback;
+import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.Message;
 import io.rong.imlib.model.UserInfo;
 
 /**
@@ -65,9 +69,21 @@ public class MyConsultViewHolder extends BaseViewHolder<MyConsultModel> {
             @Override
             public void onClick(View v) {
                 if (model!=null&&model.getUser()!=null){
-                    goNext(model.getUser(),model.getSession());
+                    goNext(model.getUser(),model.getId()+"");
 //                    goNext(model.getUser(),"195");
                 }
+            }
+        });
+
+        RongIMClient.getInstance().getChatroomHistoryMessages(model.getId() + "", 0, 1, RongIMClient.TimestampOrder.RC_TIMESTAMP_ASC, new IRongCallback.IChatRoomHistoryMessageCallback() {
+            @Override
+            public void onSuccess(List<Message> list, long l) {
+                Log.e("tag","RongIMClient1");
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+                Log.e("tag","RongIMClient2="+errorCode);
             }
         });
     }

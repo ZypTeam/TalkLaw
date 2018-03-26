@@ -25,7 +25,7 @@ import io.rong.imlib.model.MessageContent;
  */
 @MessageTag(
         value = "APP:MyPay",
-        flag = 3
+        flag = MessageTag.ISCOUNTED | MessageTag.ISPERSISTED
 )
 public class PayMessage extends MessageContent {
     private String order;

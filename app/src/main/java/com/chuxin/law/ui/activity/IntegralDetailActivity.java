@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -32,6 +33,7 @@ public class IntegralDetailActivity extends BaseTalkLawActivity {
     protected RecyclerView recyclerView;
     protected ImageView imgBack;
     protected ImageView imgBofang;
+    protected TextView guizeText;
 
     private IntegralDetailListAdapter adapter;
 
@@ -54,6 +56,9 @@ public class IntegralDetailActivity extends BaseTalkLawActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         imgBack = (ImageView) findViewById(R.id.img_back);
         imgBofang = (ImageView) findViewById(R.id.img_bofang);
+
+        guizeText = (TextView) findViewById(R.id.text_guize);
+
 
     }
 
@@ -86,6 +91,16 @@ public class IntegralDetailActivity extends BaseTalkLawActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        guizeText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext,WebViewActivity.class);
+                intent.putExtra("url","http://api.law.wzgeek.com/html/integral.html");
+                intent.putExtra("title","积分规则");
+                startActivity(intent);
             }
         });
         delMsg();
