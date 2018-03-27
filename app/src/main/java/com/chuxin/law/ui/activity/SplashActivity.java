@@ -1,13 +1,17 @@
 package com.chuxin.law.ui.activity;
 
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.chuxin.law.TalkLawApplication;
+import com.chuxin.law.ry.SealAppContext;
 import com.jusfoun.baselibrary.task.WeakHandler;
 
 import com.chuxin.law.R;
 
 import com.chuxin.law.base.BaseTalkLawActivity;
+
+import io.rong.imkit.RongIM;
 
 /**
  * @author wangcc
@@ -40,7 +44,21 @@ public class SplashActivity extends BaseTalkLawActivity {
 
     @Override
     public void initAction() {
-        handler.postDelayed(task,3000);
+        SharedPreferences sp = getSharedPreferences("config", MODE_PRIVATE);
+        String cachedToken = sp.getString("loginToken", "");
+        if (!TextUtils.isEmpty(cachedToken)) {
+            RongIM.connect(cachedToken, SealAppContext.getInstance().getConnectCallback());
+            handler.postDelayed(task,3000);
+        } else {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    goActivity(null,LoginActivity.class);
+                }
+            }, 3000);
+        }
+
+
     }
 
     @Override
@@ -48,6 +66,8 @@ public class SplashActivity extends BaseTalkLawActivity {
         super.onDestroy();
         handler.removeCallbacks(task);
     }
+
+
 
     private void goNextActivity(){
         if (!TextUtils.isEmpty(TalkLawApplication.getUserId())){

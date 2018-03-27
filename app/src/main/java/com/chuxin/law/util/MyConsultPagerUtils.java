@@ -15,8 +15,8 @@ public class MyConsultPagerUtils {
 
     public static final int COUNT = 2;
     public static final String TYPE = "type";
-    public static final int TYPE_ING = 0;
-    public static final int TYPE_HIS = 1;
+    public static final int TYPE_ING = 1;
+    public static final int TYPE_HIS = 2;
 
     public static Fragment getFragment(int position) {
         Fragment fragment = null;

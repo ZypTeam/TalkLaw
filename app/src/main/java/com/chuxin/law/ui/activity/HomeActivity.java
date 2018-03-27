@@ -71,6 +71,7 @@ public class HomeActivity extends BaseTalkLawActivity {
     public void initAction() {
         viewPager.setNotTouchScoll(true);
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(4);
         opinionLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

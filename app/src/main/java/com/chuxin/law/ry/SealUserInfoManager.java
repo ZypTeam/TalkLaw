@@ -134,7 +134,10 @@ public class SealUserInfoManager implements OnDataListener {
      * 修改数据库的存贮路径为.../appkey/userID/,
      * 必须确保userID存在后才能初始化DBManager
      */
-    public void openDB() {
+    public void
+
+
+    openDB() {
         RLog.d(TAG, "SealUserInfoManager openDB");
         if (mDBManager == null || !mDBManager.isInitialized()) {
             mDBManager = DBManager.init(mContext);
