@@ -229,7 +229,7 @@ public class AudioBroadcastReceiver {
      */
     public void unregisterReceiver(Context context) {
         if (mAudioBroadcastReceiver != null && isRegisterSuccess) {
-
+            isRegisterSuccess=false;
             mContext.unregisterReceiver(mAudioBroadcastReceiver);
 
         }

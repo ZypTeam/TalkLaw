@@ -513,9 +513,11 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
         super.onStop();
         if (mAudioBroadcastReceiver!=null) {
             mAudioBroadcastReceiver.unregisterReceiver(mContext);
+            mAudioBroadcastReceiver=null;
         }
         if (mOnLineAudioReceiver!=null) {
             mOnLineAudioReceiver.unregisterReceiver(mContext);
+            mOnLineAudioReceiver=null;
         }
     }
 

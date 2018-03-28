@@ -96,6 +96,7 @@ public class OnLineAudioReceiver {
     public void unregisterReceiver(Context context) {
         if (mOnlineAudioBroadcastReceiver != null && isRegisterSuccess) {
 
+            isRegisterSuccess=false;
             mContext.unregisterReceiver(mOnlineAudioBroadcastReceiver);
 
         }
