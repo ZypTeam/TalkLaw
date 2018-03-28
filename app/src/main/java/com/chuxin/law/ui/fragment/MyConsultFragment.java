@@ -135,4 +135,13 @@ public class MyConsultFragment extends BaseTalkLawFragment {
         list.loadMoreComplete();
         list.refreshComplete();
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(adapter!=null){
+            adapter.notifyDataSetChanged();
+        }
+    }
 }

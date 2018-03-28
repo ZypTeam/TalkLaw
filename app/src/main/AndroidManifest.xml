@@ -39,7 +39,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/AppTheme_slide"
         tools:replace="android:allowBackup">
         <activity
             android:name="com.chuxin.law.ui.activity.SplashActivity"
@@ -60,7 +60,8 @@
         <!--首页-->
         <activity
             android:name="com.chuxin.law.ui.activity.HomeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_slide_false"/>
         <!--音频详情-->
         <activity
             android:name="com.chuxin.law.ui.activity.AudioDetailsActivity"
@@ -155,7 +156,8 @@
         <!--律师详情-->
         <activity
             android:name="com.chuxin.law.ui.activity.LawyerDefautActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_slide"/>
 
 
         <!--诉讼计算器-->

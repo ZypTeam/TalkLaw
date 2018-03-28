@@ -229,8 +229,8 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                 }
                 ShareModel shareModel = new ShareModel();
                 shareModel.setShareUrl(audioModel.getUrl());
-                shareModel.setShareTitle("说法");
-                shareModel.setShareContent("说法");
+                shareModel.setShareTitle(audioModel.getTitle());
+//                shareModel.setShareContent(audioModel.getContent());
                 shareDialog.setShareModel(shareModel);
                 shareDialog.show();
             }
@@ -323,7 +323,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         userModel = data.getLawyer();
         ImageLoderUtil.loadCircleImage(mContext, iconHead, userModel.getHeadimg(), R.mipmap.icon_head_def_cir);
         if (StringUtil.isEmpty(userModel.getName())) {
-            name.setText("王律师");
+            name.setText("");
         } else {
             name.setText(userModel.getName());
         }
