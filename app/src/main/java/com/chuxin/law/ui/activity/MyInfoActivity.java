@@ -457,7 +457,7 @@ public class MyInfoActivity extends BaseTalkLawActivity {
             return;
         }
         if (requestCode == NAME_REQUEST_CODE || requestCode == NICKNAME_REQUEST_CODE
-                || requestCode == PHONE_REQUEST_CODE || requestCode == EMAIL_REQUEST_CODE) {
+                || requestCode == PHONE_REQUEST_CODE || requestCode == EMAIL_REQUEST_CODE||requestCode==ADDRESS_REQUEST_CODE) {
 //            userModel = TalkLawApplication.getUserInfo();
             updateUserInfo();
         }

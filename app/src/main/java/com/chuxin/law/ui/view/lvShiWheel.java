@@ -314,42 +314,44 @@ public class lvShiWheel extends ScrollView {
     @Override
     public void setBackgroundDrawable(Drawable background) {
 
-        if (viewWidth == 0) {
-            viewWidth = ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
-            Log.d(TAG, "viewWidth: " + viewWidth);
+        if (context != null) {
+            if (viewWidth == 0) {
+                viewWidth = ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
+                Log.d(TAG, "viewWidth: " + viewWidth);
+            }
+
+            if (null == paint) {
+                paint = new Paint();
+                paint.setColor(Color.parseColor("#83cde6"));
+                paint.setStrokeWidth(dip2px(1f));
+            }
+
+            background = new Drawable() {
+                @Override
+                public void draw(Canvas canvas) {
+                    canvas.drawLine(viewWidth * 1 / 6, obtainSelectedAreaBorder()[0], viewWidth * 5 / 6, obtainSelectedAreaBorder()[0], paint);
+                    canvas.drawLine(viewWidth * 1 / 6, obtainSelectedAreaBorder()[1], viewWidth * 5 / 6, obtainSelectedAreaBorder()[1], paint);
+                }
+
+                @Override
+                public void setAlpha(int alpha) {
+
+                }
+
+                @Override
+                public void setColorFilter(ColorFilter cf) {
+
+                }
+
+                @Override
+                public int getOpacity() {
+                    return PixelFormat.TRANSLUCENT;
+                }
+            };
+
+
+            super.setBackgroundDrawable(background);
         }
-
-        if (null == paint) {
-            paint = new Paint();
-            paint.setColor(Color.parseColor("#83cde6"));
-            paint.setStrokeWidth(dip2px(1f));
-        }
-
-        background = new Drawable() {
-            @Override
-            public void draw(Canvas canvas) {
-                canvas.drawLine(viewWidth * 1 / 6, obtainSelectedAreaBorder()[0], viewWidth * 5 / 6, obtainSelectedAreaBorder()[0], paint);
-                canvas.drawLine(viewWidth * 1 / 6, obtainSelectedAreaBorder()[1], viewWidth * 5 / 6, obtainSelectedAreaBorder()[1], paint);
-            }
-
-            @Override
-            public void setAlpha(int alpha) {
-
-            }
-
-            @Override
-            public void setColorFilter(ColorFilter cf) {
-
-            }
-
-            @Override
-            public int getOpacity() {
-                return PixelFormat.TRANSLUCENT;
-            }
-        };
-
-
-        super.setBackgroundDrawable(background);
 
     }
 

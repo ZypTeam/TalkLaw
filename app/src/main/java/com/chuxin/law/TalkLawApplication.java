@@ -178,7 +178,6 @@ public class TalkLawApplication extends BaseApplication {
                 RongIM.registerMessageType(PayMessage.class);
                 RongIM.registerMessageTemplate(new PayMessageProvider());
 
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
