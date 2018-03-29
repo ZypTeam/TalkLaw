@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ecebf3"
@@ -80,16 +81,15 @@
 
             <TextView
                 android:id="@+id/auth"
-                android:textColor="@color/app_red_color"
-                android:textSize="14sp"
-                android:text="专家级"
-                app:layout_constraintLeft_toLeftOf="@+id/name"
-                app:layout_constraintTop_toBottomOf="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
                 android:layout_marginTop="5dp"
                 android:drawablePadding="5dp"
                 android:drawableRight="@mipmap/icon_lawyer_auth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textColor="@color/app_red_color"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="@+id/name"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
 
             <TextView
                 android:id="@+id/recommend"
@@ -342,13 +342,15 @@
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="@+id/my_zixun"
                 android:layout_marginTop="16dp"
-                android:text="法定节假日"
+                android:text="暂无"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
+                android:gravity="center"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"/>
 
             <TextView
                 android:text="您这个案子..."
@@ -365,7 +367,8 @@
                 android:layout_width="0dp"
                 android:drawableLeft="@mipmap/icon_my_info_sound"
                 android:drawablePadding="12dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
             <View
                 android:id="@+id/view_my_address"

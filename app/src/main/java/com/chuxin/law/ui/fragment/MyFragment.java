@@ -39,6 +39,12 @@ import com.chuxin.law.util.UIUtils;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 
+import java.util.List;
+
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.MessageContent;
+import io.rong.message.TextMessage;
 import rx.functions.Action1;
 
 /**
@@ -143,11 +149,13 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext,WebViewActivity.class);
-                intent.putExtra("url","http://www.baidu.com");
+                intent.putExtra("url","http://api.law.wzgeek.com/html/send.html");
                 intent.putExtra("title","发布产品");
                 startActivity(intent);
             }
         });
+
+
 
     }
 
@@ -312,6 +320,29 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
             } else {
                 myAddressContent.setText(model.city);
             }
+            RongIMClient.getInstance().getConversationList(new RongIMClient.ResultCallback<List<Conversation>>() {
+                @Override
+                public void onSuccess(List<Conversation> conversations) {
+                    Log.e("tag","getConversationList="+conversations);
+                    if(conversations!=null&&conversations.size()>0){
+                        MessageContent messageContent = conversations.get(0).getLatestMessage();
+                        if ("RC:TxtMsg".equals(conversations.get(0).getObjectName())) {
+                            zixunContent.setText(((TextMessage) (messageContent)).getContent());
+                        } else if ("RC:ImgMsg".equals(conversations.get(0).getObjectName())) {
+                            zixunContent.setText("[图片]");
+                        } else if ("APP:MyPay".equals(conversations.get(0).getObjectName())) {
+                            zixunContent.setText("[保证金]");
+                        }
+                    }
+                }
+
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+
+                }
+            });
         }
+
+
     }
 }

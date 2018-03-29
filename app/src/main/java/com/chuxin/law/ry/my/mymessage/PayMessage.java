@@ -31,6 +31,7 @@ public class PayMessage extends MessageContent {
     private String order;
     private String userId;
     private String money;
+    private String type="";// 0 发送保证金 1 已支付保证金
 
 
 
@@ -58,6 +59,12 @@ public class PayMessage extends MessageContent {
             if (jsonObj.has("money"))
                 money = jsonObj.optString("money");
 
+            if (jsonObj.has("type"))
+                type = jsonObj.optString("type");
+
+
+
+
         } catch (JSONException e) {
         }
 
@@ -71,6 +78,9 @@ public class PayMessage extends MessageContent {
             jsonObj.put("order", order);
             jsonObj.put("userId", userId);
             jsonObj.put("money", money);
+            jsonObj.put("type", type);
+
+
         } catch (JSONException e) {
             Log.e("JSONException", e.getMessage());
         }
@@ -86,11 +96,12 @@ public class PayMessage extends MessageContent {
 
 
 
-    public static PayMessage obtain(String order,String userId,String money) {
+    public static PayMessage obtain(String order,String userId,String money,String type) {
         PayMessage model = new PayMessage();
         model.setOrder(order);
         model.setUserId(userId);
         model.setMoney(money);
+        model.setType(type);
         return model;
     }
 
@@ -101,6 +112,7 @@ public class PayMessage extends MessageContent {
         this.order = ParcelUtils.readFromParcel(in);
         this.money = ParcelUtils.readFromParcel(in);
         this.userId = ParcelUtils.readFromParcel(in);
+        this.type = ParcelUtils.readFromParcel(in);
     }
 
     /**
@@ -140,6 +152,7 @@ public class PayMessage extends MessageContent {
         ParcelUtils.writeToParcel(dest, order);
         ParcelUtils.writeToParcel(dest, money);
         ParcelUtils.writeToParcel(dest, userId);
+        ParcelUtils.writeToParcel(dest, type);
     }
 
 
@@ -149,6 +162,7 @@ public class PayMessage extends MessageContent {
         words.add(order);
         words.add(money);
         words.add(userId);
+        words.add(type);
         return words;
     }
 
@@ -176,5 +190,14 @@ public class PayMessage extends MessageContent {
 
     public void setMoney(String money) {
         this.money = money;
+    }
+
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

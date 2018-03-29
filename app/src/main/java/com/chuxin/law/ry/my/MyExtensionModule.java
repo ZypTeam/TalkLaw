@@ -18,6 +18,10 @@ import io.rong.imlib.model.Conversation;
  * @Description ${聊天页面 底部功能选项 自定义 真费劲}
  */
 public class MyExtensionModule extends DefaultExtensionModule {
+    int type =0;
+    public MyExtensionModule (int type){
+        this.type = type;
+    }
 
     @Override
     public List<IPluginModule> getPluginModules(Conversation.ConversationType conversationType) {
@@ -26,7 +30,11 @@ public class MyExtensionModule extends DefaultExtensionModule {
 //        IPluginModule locationPlugin = new DefaultLocationPlugin();
         pluginModules.add(image);
 //        pluginModules.add(locationPlugin);
-        pluginModules.add(new PayPlugin());
+
+
+        if(type==2) {
+            pluginModules.add(new PayPlugin());
+        }
         return pluginModules;
     }
 }

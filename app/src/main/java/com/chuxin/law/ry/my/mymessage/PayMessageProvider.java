@@ -49,22 +49,29 @@ public class PayMessageProvider extends IContainerItemProvider.MessageProvider<P
             holder.iconImg.setImageResource(R.drawable.img_baozhengjin_send);
             holder.message.setTextColor(0xffffffff);
             holder.desText.setTextColor(0xffffc5c8);
-            holder.desText.setText("已发送保证金");
+
+            if("0".equals(payMessage.getType())) {
+                holder.desText.setText("已发送保证金");
+            }else{
+                holder.desText.setText("已支付保证金");
+            }
         } else {
             holder.layout_bg.setBackgroundResource(io.rong.imkit.R.drawable.rc_ic_bubble_left);
             holder.iconImg.setImageResource(R.drawable.img_chat_left_baozheng);
             holder.message.setTextColor(0xff000000);
             holder.desText.setTextColor(0xff999999);
 
-            holder.desText.setText("点击支付保证金");
+            if("0".equals(payMessage.getType())) {
+                holder.desText.setText("点击支付保证金");
+            }else{
+                holder.desText.setText("已支付保证金");
+            }
 //            if(PayMessage.TYPE_PAY_NO.equals(payMessage.getState())){
 //                holder.desText.setText("点击支付保证金");
 //            }else{
 //                holder.desText.setText("已支付");
 //            }
-
         }
-
         holder.message.setText("￥" + payMessage.getMoney()); // 设置消息内容
 
 
@@ -81,7 +88,7 @@ public class PayMessageProvider extends IContainerItemProvider.MessageProvider<P
 
         }
 
-        if (uiMessage.getMessageDirection() != Message.MessageDirection.SEND) {
+        if (uiMessage.getMessageDirection() != Message.MessageDirection.SEND&&"0".equals(payMessage.getType())) {
             CheckOrderEvent checkOrderEvent = new CheckOrderEvent();
             checkOrderEvent.order = payMessage.getOrder();
             checkOrderEvent.price = payMessage.getMoney();
@@ -91,12 +98,7 @@ public class PayMessageProvider extends IContainerItemProvider.MessageProvider<P
 //        CheckOrderEvent checkOrderEvent = new CheckOrderEvent();
 //        checkOrderEvent.order = payMessage.getOrder();
 //        EventBus.getDefault().post(checkOrderEvent);
-//
         Log.e("tag","payMessage="+payMessage.getOrder());
-
-
-
-
     }
 
     @Override

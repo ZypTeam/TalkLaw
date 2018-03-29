@@ -19,6 +19,7 @@ import com.chuxin.law.model.GuaranteeRequestModel;
 import com.chuxin.law.model.LawyerIntroModel;
 import com.chuxin.law.model.OrderResultModel;
 import com.chuxin.law.model.PayValidateModel;
+import com.chuxin.law.ry.my.mymessage.PayMessage;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.chuxin.law.util.PayUitl;
 import com.google.gson.Gson;
@@ -26,6 +27,11 @@ import com.jusfoun.baselibrary.net.Api;
 
 import java.util.HashMap;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.IRongCallback;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.Message;
 import rx.functions.Action1;
 
 /**
@@ -42,6 +48,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
     public static final String MARGIN_PRICE = "MARGIN_PRICE";
     public static final String MARGIN_ORDER = "MARGIN_ORDER";
     public static final String MARGIN_LAWYERID = "MARGIN_LAWYERID";
+    public static final String MARGIN_TARGETID = "targetId";
     protected BackTitleView titleView;
     protected TextView price,agree_btn;
     protected TextView produte;
@@ -58,6 +65,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
     private boolean isMargin = false;
     private String marginOrder = "";
     private String marginLawyerId = "";
+    private String targetId = "";
 
     @Override
     public int getLayoutResId() {
@@ -73,6 +81,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
         if(isMargin){
             mPrice = getIntent().getExtras().getString(MARGIN_PRICE);
             marginLawyerId = getIntent().getExtras().getString(MARGIN_LAWYERID);
+            targetId = getIntent().getExtras().getString(MARGIN_TARGETID);
         }else{
             mPrice=data.getLaw().getPrice();
         }
@@ -319,6 +328,7 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
                             Log.e("tag", "checkOrder=" + noDataModel.data.state);
                             if(noDataModel.data!=null&&noDataModel.data.state>0){
                                 showToast("支付成功");
+                                sendPayMessage();
                                 finish();
                             }else{
                                 showToast(noDataModel.getMsg());
@@ -331,6 +341,32 @@ public class BuyIntroductionActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(Throwable throwable) {
                         hideLoadDialog();
+                    }
+                });
+    }
+
+
+    private void sendPayMessage(){
+        PayMessage payMessage =  PayMessage.obtain("","",mPrice,"1");
+        RongIM.getInstance().sendMessage(Message.obtain(targetId, Conversation.ConversationType.GROUP, payMessage),
+                "已支付保证金", "已支付保证金", new IRongCallback.ISendMessageCallback() {
+                    @Override
+                    public void onAttached(Message message) {
+                        Log.e("tag","RongIM-onAttached");
+                    }
+
+                    @Override
+                    public void onSuccess(Message message) {
+                        hideLoadDialog();
+                        finish();
+                        Log.e("tag","RongIM-onSuccess");
+                    }
+
+                    @Override
+                    public void onError(Message message, RongIMClient.ErrorCode errorCode) {
+                        hideLoadDialog();
+                        showToast("申请失败，请重试");
+                        Log.e("tag","RongIM-onError="+new Gson().toJson(message)+" "+errorCode);
                     }
                 });
     }

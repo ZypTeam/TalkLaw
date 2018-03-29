@@ -721,6 +721,9 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                                 bundle.putString(BuyIntroductionActivity.MARGIN_ORDER,prepayid);
                                 bundle.putString(BuyIntroductionActivity.MARGIN_PRICE, price);
                                 bundle.putString(BuyIntroductionActivity.MARGIN_LAWYERID, userId);
+                                bundle.putString(BuyIntroductionActivity.MARGIN_TARGETID, mTargetId);
+
+
                                 Intent intent = new Intent(mContext,BuyIntroductionActivity.class);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
