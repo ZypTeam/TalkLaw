@@ -19,6 +19,7 @@ import com.chuxin.law.audioplayer.manage.AudioPlayerManager;
 import com.chuxin.law.audioplayer.service.AudioPlayerService;
 import com.chuxin.law.audioplayer.util.AudioPlayUtils;
 import com.chuxin.law.base.BaseTalkLawActivity;
+import com.chuxin.law.common.CommonLogic;
 import com.chuxin.law.ui.adapter.HomeAdapter;
 import com.chuxin.law.util.voice.VoiceHelper;
 import com.jusfoun.baselibrary.Util.LogUtil;
@@ -179,6 +180,7 @@ public class HomeActivity extends BaseTalkLawActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        CommonLogic.getInstance().setLawyerProductData(null);
         AudioPlayUtils.getInstance().setPlayStatus(AudioPlayerManager.STOP);
         Intent playerServiceIntent = new Intent(this, AudioPlayerService.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
