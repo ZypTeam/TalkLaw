@@ -70,7 +70,7 @@ public class GratuityPayActivity extends BaseTalkLawActivity {
     public void initAction() {
         titleBar.setTitle("打赏");
 
-        price.setText(gratuityPrice + "");
+        price.setText(gratuityPrice + "杯茶");
 
         zhifubao.setOnClickListener(new View.OnClickListener() {
             @Override

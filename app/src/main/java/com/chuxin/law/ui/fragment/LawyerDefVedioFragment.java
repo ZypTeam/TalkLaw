@@ -10,10 +10,10 @@ import android.widget.TextView;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawFragment;
 import com.chuxin.law.model.LawyerProductModel;
+import com.chuxin.law.ui.widget.HtmlTextView;
 import com.chuxin.law.util.ImageLoderUtil;
 import com.chuxin.law.util.LawyerDefViewPagerUtils;
 import com.chuxin.law.util.UIUtils;
-import com.jusfoun.baselibrary.Util.LogUtil;
 
 import rx.functions.Action1;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
@@ -34,7 +34,7 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
     protected TextView time;
     protected TextView timeAll;
     protected SeekBar seek;
-    protected TextView content;
+    protected HtmlTextView content;
     protected TextView dashang;
     private String mContent;
     private String url;
@@ -81,7 +81,7 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
         time = (TextView) rootView.findViewById(R.id.time);
         timeAll = (TextView) rootView.findViewById(R.id.time_all);
         seek = (SeekBar) rootView.findViewById(R.id.seek);
-        content = (TextView) rootView.findViewById(R.id.content);
+        content = (HtmlTextView) rootView.findViewById(R.id.content);
         dashang = (TextView) rootView.findViewById(R.id.dashang);
 
         videoPlayView=new VideoPlayView(mContext);
@@ -91,7 +91,7 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
 
     @Override
     public void initAction() {
-        content.setText(UIUtils.getHtmlTxt(mContent));
+        content.setHtmlFromString(mContent,false);
         dashang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

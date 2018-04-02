@@ -10,6 +10,8 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseTalkLawFragment;
 import com.chuxin.law.model.LawyerProductModel;
+import com.chuxin.law.ui.widget.HtmlTextView;
+import com.chuxin.law.ui.widget.ImageTextView;
 import com.chuxin.law.util.LawyerDefViewPagerUtils;
 import com.chuxin.law.util.UIUtils;
 import com.jusfoun.baselibrary.Util.StringUtil;
@@ -23,7 +25,7 @@ import com.jusfoun.baselibrary.Util.StringUtil;
 public class LawyerDefImageFragment extends BaseTalkLawFragment {
 
     protected ImageView img;
-    protected TextView content;
+    protected HtmlTextView content;
     protected TextView dashang;
     private String mContent;
     private String url;
@@ -61,7 +63,7 @@ public class LawyerDefImageFragment extends BaseTalkLawFragment {
     @Override
     public void initView(View rootView) {
         img = (ImageView) rootView.findViewById(R.id.img);
-        content = (TextView) rootView.findViewById(R.id.content);
+        content = (HtmlTextView) rootView.findViewById(R.id.content);
         dashang = (TextView) rootView.findViewById(R.id.dashang);
 
     }
@@ -80,7 +82,7 @@ public class LawyerDefImageFragment extends BaseTalkLawFragment {
                 .into(img);
 
 
-        content.setText(UIUtils.getHtmlTxt(mContent));
+        content.setHtmlFromString(mContent,false);
         dashang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

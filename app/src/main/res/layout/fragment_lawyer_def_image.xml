@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="180dp" />
 
-        <TextView
+        <com.chuxin.law.ui.widget.HtmlTextView
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
