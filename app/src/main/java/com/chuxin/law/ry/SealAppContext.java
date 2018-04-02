@@ -17,6 +17,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chuxin.law.common.UserInfoDelegate;
+import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ry.db.Friend;
 import com.chuxin.law.ry.db.GroupMember;
 import com.chuxin.law.ry.db.Groups;
@@ -33,6 +35,7 @@ import com.chuxin.law.ry.ui.activity.MainActivity;
 import com.chuxin.law.ry.ui.activity.NewFriendListActivity;
 import com.chuxin.law.ry.ui.activity.UserDetailActivity;
 import com.chuxin.law.sharedpreferences.FriendsSp;
+import com.chuxin.law.util.UIUtils;
 
 import io.rong.calllib.RongCallClient;
 import io.rong.calllib.RongCallSession;
@@ -158,7 +161,7 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
         RongIM.getInstance().setReadReceiptConversationTypeList(types);
     }
 
-    private void setInputProvider() {
+    public void setInputProvider() {
         RongIM.setOnReceiveMessageListener(this);
 
         List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
@@ -172,9 +175,16 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
             }
             if (defaultModule != null) {
                 RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
-//                RongExtensionManager.getInstance().registerExtensionModule(new SealExtensionModule());
-                RongExtensionManager.getInstance().registerExtensionModule(new MyExtensionModule());
+                UserModel userModel = UserInfoDelegate.getInstance().getUserInfo();
+                int type =0;
+                if (userModel!=null) {
+                    type = userModel.getType();
+                }
+
+                RongExtensionManager.getInstance().registerExtensionModule(new MyExtensionModule(type));
             }
+
+//                RongExtensionManager.getInstance().registerExtensionModule(new SealExtensionModule());
         }
 
     }
@@ -419,15 +429,15 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
         if (conversationType == Conversation.ConversationType.CUSTOMER_SERVICE || conversationType == Conversation.ConversationType.PUBLIC_SERVICE || conversationType == Conversation.ConversationType.APP_PUBLIC_SERVICE) {
             return false;
         }
-        //开发测试时,发送系统消息的userInfo只有id不为空
-        if (userInfo != null && userInfo.getName() != null && userInfo.getPortraitUri() != null) {
-            Intent intent = new Intent(context, UserDetailActivity.class);
-            intent.putExtra("conversationType", conversationType.getValue());
-            Friend friend = CharacterParser.getInstance().generateFriendFromUserInfo(userInfo);
-            intent.putExtra("friend", friend);
-            intent.putExtra("type", CLICK_CONVERSATION_USER_PORTRAIT);
-            context.startActivity(intent);
-        }
+//        //开发测试时,发送系统消息的userInfo只有id不为空
+//        if (userInfo != null && userInfo.getName() != null && userInfo.getPortraitUri() != null) {
+//            Intent intent = new Intent(context, UserDetailActivity.class);
+//            intent.putExtra("conversationType", conversationType.getValue());
+//            Friend friend = CharacterParser.getInstance().generateFriendFromUserInfo(userInfo);
+//            intent.putExtra("friend", friend);
+//            intent.putExtra("type", CLICK_CONVERSATION_USER_PORTRAIT);
+//            context.startActivity(intent);
+//        }
         return true;
     }
 

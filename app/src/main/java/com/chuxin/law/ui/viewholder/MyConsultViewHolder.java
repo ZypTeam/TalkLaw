@@ -86,6 +86,7 @@ public class MyConsultViewHolder extends BaseViewHolder<MyConsultModel> {
 //        });
 
 
+
         RongIMClient.getInstance().getLatestMessages(Conversation.ConversationType.GROUP, model.getId() + "", 10, new RongIMClient.ResultCallback<List<Message>>() {
             @Override
             public void onSuccess(List<Message> messages) {

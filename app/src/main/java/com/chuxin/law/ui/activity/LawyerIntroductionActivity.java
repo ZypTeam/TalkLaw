@@ -278,33 +278,34 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     }
 
     private void checkConsult() {
-        if (data != null && data.getLaw() != null)
+        if (data != null && data.getLaw() != null) {
             showLoadDialog();
-        HashMap<String, String> params = new HashMap<>();
-        params.put("touserid", data.getLaw().getUserid());
-        params.put("type", type);
-        addNetwork(Api.getInstance().getService(ApiService.class).checkConsult(params)
-                , new Action1<CheckConsultModel>() {
-                    @Override
-                    public void call(CheckConsultModel noDataModel) {
-                        hideLoadDialog();
-                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
-                            if (noDataModel.getData() == null || StringUtil.isEmpty(noDataModel.getData().getOrder())) {
-                                dialog.show();
-                            } else {
+            HashMap<String, String> params = new HashMap<>();
+            params.put("touserid", data.getLaw().getUserid());
+            params.put("type", type);
+            addNetwork(Api.getInstance().getService(ApiService.class).checkConsult(params)
+                    , new Action1<CheckConsultModel>() {
+                        @Override
+                        public void call(CheckConsultModel noDataModel) {
+                            hideLoadDialog();
+                            if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
+                                if (noDataModel.getData() == null || StringUtil.isEmpty(noDataModel.getData().getOrder())) {
+                                    dialog.show();
+                                } else {
 
 
-                                goRongIM(noDataModel.getData().getId() + "");
+                                    goRongIM(noDataModel.getData().getId() + "");
 //                                goRongIM("86");
+                                }
                             }
                         }
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        hideLoadDialog();
-                    }
-                });
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            hideLoadDialog();
+                        }
+                    });
+        }
     }
 
     private void setNoTxt(String price) {
@@ -332,8 +333,9 @@ public class LawyerIntroductionActivity extends BaseTalkLawActivity {
     }
 
     private void goRongIM(String id) {
-        if (data != null && data.getLaw() != null)
+        if (data != null && data.getLaw() != null) {
             FriendsSp.saveFriedns(mContext, data.getLaw());
-        startChatRoomChat(mContext, id, data.getLaw().getName(), true);
+            startChatRoomChat(mContext, id, data.getLaw().getName(), true);
+        }
     }
 }

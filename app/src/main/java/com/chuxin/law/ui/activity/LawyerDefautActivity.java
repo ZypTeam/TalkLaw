@@ -141,7 +141,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         jifen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (data.getArticle().getIs_buy()==1){
+                if (data.getArticle().getIs_buy() == 1) {
                     showToast("已经购买");
                     return;
                 }
@@ -153,7 +153,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.putExtra(LawyerIntroductionActivity.ID, userModel != null ? userModel.getId() : "");
-                intent.putExtra(LawyerIntroductionActivity.LAW_USER_MODEL,userModel);
+                intent.putExtra(LawyerIntroductionActivity.LAW_USER_MODEL, userModel);
 
                 Bundle bundle = new Bundle();
                 intent.setClass(mContext, LawyerIntroductionActivity.class);
@@ -164,7 +164,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (data.getArticle().getIs_buy()==1){
+                if (data.getArticle().getIs_buy() == 1) {
                     showToast("已经购买");
                     return;
                 }
@@ -203,7 +203,9 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIUtils.goCommentList(mContext,id,data.getArticle().getTitle());
+                if(data!=null&&data.getArticle()!=null) {
+                    UIUtils.goCommentList(mContext, id, data.getArticle().getTitle());
+                }
             }
         });
 
@@ -217,7 +219,8 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIUtils.goCommentList(mContext,id,data.getArticle().getTitle());
+                if (data != null)
+                    UIUtils.goCommentList(mContext, id, data.getArticle().getTitle());
             }
         });
 
@@ -387,9 +390,9 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                         if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             audioModel.setIs_like(1);
                             thumbsUp.setImageResource(R.mipmap.icon_lawyer_like);
-                            rxManage.post(CommonConstant.EVNET_LIKE,"");
+                            rxManage.post(CommonConstant.EVNET_LIKE, "");
                             showToast("已点赞");
-                        }else {
+                        } else {
                             showToast("点赞失败");
                         }
                     }
@@ -415,7 +418,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                             audioModel.setIs_colle(0);
                             collection.setImageResource(R.mipmap.icon_lawyer_collection_un);
                             showToast("取消收藏");
-                        }else {
+                        } else {
                             showToast("取消失败");
                         }
                     }
@@ -441,8 +444,8 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                             audioModel.setIs_like(0);
                             thumbsUp.setImageResource(R.mipmap.icon_lawyer_like_un);
                             showToast("取消点赞");
-                            rxManage.post(CommonConstant.EVNET_LIKE,"");
-                        }else {
+                            rxManage.post(CommonConstant.EVNET_LIKE, "");
+                        } else {
                             showToast("取消失败");
                         }
                     }
@@ -468,7 +471,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                             audioModel.setIs_colle(1);
                             collection.setImageResource(R.mipmap.icon_lawyer_collection);
                             showToast("收藏成功");
-                        }else {
+                        } else {
                             showToast("收藏失败");
                         }
                     }

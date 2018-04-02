@@ -2,7 +2,6 @@ package com.chuxin.law.ui.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,6 +20,7 @@ import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.HeaderTalkInterceptor;
 import com.chuxin.law.common.UserInfoDelegate;
 import com.chuxin.law.model.UserInfoModel;
+import com.chuxin.law.ry.SealAppContext;
 import com.chuxin.law.ry.SealConst;
 import com.chuxin.law.ry.SealUserInfoManager;
 import com.chuxin.law.sharedpreferences.FriendsSp;
@@ -38,7 +38,6 @@ import java.util.concurrent.TimeUnit;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
-import io.rong.imlib.model.UserInfo;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -344,8 +343,8 @@ public class LoginActivity extends BaseTalkLawActivity {
                 hideLoadDialog();
                 if (userInfoModel.getData() != null) {
 
-                    Log.e("tag","hideLoadDialoghideLoadDialoghideLoadDialog="+userInfoModel.getData().getUserid()+" "+userInfoModel.getData().getName()+" "+userInfoModel.getData().getHeadimg());
-                    FriendsSp.saveFriedns(mContext,userInfoModel.getData());
+                    Log.e("tag", "hideLoadDialoghideLoadDialoghideLoadDialog=" + userInfoModel.getData().getUserid() + " " + userInfoModel.getData().getName() + " " + userInfoModel.getData().getHeadimg());
+                    FriendsSp.saveFriedns(mContext, userInfoModel.getData());
 //                    RongIM.getInstance().refreshUserInfoCache();
 //                    RongIM.getInstance().setCurrentUserInfo(new UserInfo("userId", userInfoModel.getData().getUserid(), Uri.parse(userInfoModel.getData().getHeadimg())));
                 }
@@ -355,7 +354,7 @@ public class LoginActivity extends BaseTalkLawActivity {
                         .addInterceptro(new HeaderTalkInterceptor())
                         .build();
 
-                Log.e("tag","UserInfoDelegate="+new Gson().toJson(userInfoModel.getData()));
+                Log.e("tag", "UserInfoDelegate=" + new Gson().toJson(userInfoModel.getData()));
                 editor.putString(SealConst.SEALTALK_LOGIN_ID, s);
                 editor.commit();
                 SealUserInfoManager.getInstance().openDB();
@@ -367,7 +366,7 @@ public class LoginActivity extends BaseTalkLawActivity {
                 Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
 
 
-
+                SealAppContext.getInstance().setInputProvider();
                 goActivity(null, HomeActivity.class);
                 finish();
 
