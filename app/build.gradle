@@ -64,6 +64,31 @@ android {
         abortOnError false
     }
 
+    productFlavors {
+        '官方' {}
+//        '360手机助手' {}
+//        '小米' {}
+//        '腾讯应用宝' {}
+//        'ali' {}
+//        '华为开发者联盟' {}
+//        baidu {}
+//        meizu {}
+////        google{}
+//        oppo{}
+//        vivo{}
+//        lenovomm{}
+    }
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.processManifest.doLast {
+                def manifestFile = output.processManifest.manifestOutputFile
+                def updatedContent = manifestFile.getText('UTF-8').
+                        replaceAll("UMENG_CHANNEL_VALUE", "${variant.productFlavors[0].name}")
+                manifestFile.write(updatedContent, 'UTF-8')
+            }
+        }
+    }
+
 }
 
 repositories {

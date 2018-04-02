@@ -26,6 +26,7 @@ import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.event.CheckOrderEvent;
 import com.chuxin.law.event.IEvent;
 import com.chuxin.law.model.GuaranteeRequestModel;
+import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.ry.SealAppContext;
 import com.chuxin.law.ry.SealUserInfoManager;
 import com.chuxin.law.ry.db.GroupMember;
@@ -223,6 +224,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
         //CallKit end 2
 
         EventBus.getDefault().register(this);
+        getGroupUserId();
     }
 
     /**
@@ -730,6 +732,27 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                             }
                             Log.e("tag", "checkOrder=" + noDataModel.data.state);
 
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+//                        hideLoadDialog();
+                    }
+                });
+    }
+
+    private void getGroupUserId() {
+//        showLoadDialog();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", mTargetId);
+
+        addNetwork(Api.getInstance().getService(ApiService.class).getGroupUserId(params)
+                , new Action1<UserInfoModel>() {
+                    @Override
+                    public void call(UserInfoModel noDataModel) {
+//                        hideLoadDialog();
+                        if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                         }
                     }
                 }, new Action1<Throwable>() {

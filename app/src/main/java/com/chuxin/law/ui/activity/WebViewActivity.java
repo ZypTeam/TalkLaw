@@ -94,7 +94,7 @@ public class WebViewActivity extends BaseTalkLawActivity {
             }
         });
         webView.setWebChromeClient(chromeClient);
-        webView.loadUrl(url);
+        webView.loadUrl("http://www.51purse.com/pdf/web/viewer.html?name=b.pdf");
     }
 
     WebChromeClient chromeClient = new WebChromeClient() {

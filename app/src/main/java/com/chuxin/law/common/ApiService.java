@@ -474,5 +474,7 @@ public interface ApiService {
     Observable<StatementListModel.StatementDataModel> getChangeNeedNet();
 
 
+    @GET("/consult/orderid")
+    Observable<UserInfoModel> getGroupUserId(@QueryMap Map<String,String> params);
 }
 
