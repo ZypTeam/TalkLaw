@@ -26,6 +26,7 @@ import com.chuxin.law.base.BaseTalkLawFragment;
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.common.CommonLogic;
 import com.chuxin.law.model.LawyerProductModel;
+import com.chuxin.law.ui.widget.HtmlTextView;
 import com.chuxin.law.util.DateUtil;
 import com.chuxin.law.util.ImageLoderUtil;
 import com.chuxin.law.util.LawyerDefViewPagerUtils;
@@ -64,7 +65,8 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
     protected ImageView next;
     protected ImageView forward;
     protected TextView time;
-    protected TextView timeAll, content;
+    protected HtmlTextView content;
+    protected TextView timeAll;
     protected SeekBar seek;
     protected TextView dashang;
     private String mContent;
@@ -247,7 +249,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
         time = (TextView) rootView.findViewById(R.id.time);
         timeAll = (TextView) rootView.findViewById(R.id.time_all);
         seek = (SeekBar) rootView.findViewById(R.id.seek);
-        content = (TextView) rootView.findViewById(R.id.content);
+        content = (HtmlTextView) rootView.findViewById(R.id.content);
         dashang = (TextView) rootView.findViewById(R.id.dashang);
 
         progressBar=rootView.findViewById(R.id.progress_bar);
@@ -257,7 +259,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
     @Override
     public void initAction() {
         play.setImageResource(R.mipmap.icon_lawyer_pause);
-        content.setText(UIUtils.getHtmlTxt(mContent));
+        content.setHtmlFromString(mContent,false);
         dashang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
