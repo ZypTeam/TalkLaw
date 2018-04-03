@@ -137,7 +137,7 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
         RongIM.setUserInfoProvider(this, true);
         RongIM.setGroupInfoProvider(this, true);
         RongIM.setLocationProvider(this);//设置地理位置提供者,不用位置的同学可以注掉此行代码
-        setInputProvider();
+        setInputProvider(false);
         //setUserInfoEngineListener();//移到SealUserInfoManager
         setReadReceiptConversationType();
         RongIM.getInstance().enableNewComingMessageIcon(true);
@@ -161,7 +161,7 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
         RongIM.getInstance().setReadReceiptConversationTypeList(types);
     }
 
-    public void setInputProvider() {
+    public void setInputProvider(boolean isShowPay) {
         RongIM.setOnReceiveMessageListener(this);
 
         List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
@@ -176,12 +176,12 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
             if (defaultModule != null) {
                 RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
                 UserModel userModel = UserInfoDelegate.getInstance().getUserInfo();
-                int type =0;
-                if (userModel!=null) {
-                    type = userModel.getType();
-                }
+//                int type =0;
+//                if (userModel!=null) {
+//                    type = userModel.getType();
+//                }
 
-                RongExtensionManager.getInstance().registerExtensionModule(new MyExtensionModule(type));
+                RongExtensionManager.getInstance().registerExtensionModule(new MyExtensionModule(isShowPay));
             }
 
 //                RongExtensionManager.getInstance().registerExtensionModule(new SealExtensionModule());

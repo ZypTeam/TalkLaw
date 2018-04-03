@@ -29,6 +29,7 @@ public class IntegralModel extends BaseModel implements Serializable {
         public String intro;
         public String img;
         public String url;
+        public String num;
     }
 
     public class CatItemModel extends BaseModel implements Serializable {

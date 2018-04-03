@@ -366,7 +366,7 @@ public class LoginActivity extends BaseTalkLawActivity {
                 Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
 
 
-                SealAppContext.getInstance().setInputProvider();
+//                SealAppContext.getInstance().setInputProvider();
                 goActivity(null, HomeActivity.class);
                 finish();
 

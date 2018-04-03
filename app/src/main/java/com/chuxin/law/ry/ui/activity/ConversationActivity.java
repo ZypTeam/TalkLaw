@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chuxin.law.R;
+import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.event.CheckOrderEvent;
@@ -110,6 +111,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
     private ImageView iv_arrow;
 
     private String touserid;
+
     @Override
     @TargetApi(23)
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +132,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
             return;
 
         mTargetId = intent.getData().getQueryParameter("targetId");
-        touserid  = intent.getData().getQueryParameter("touserid");
+        touserid = intent.getData().getQueryParameter("touserid");
         //10000 为 Demo Server 加好友的 id，若 targetId 为 10000，则为加好友消息，默认跳转到 NewFriendListActivity
         // Demo 逻辑
         if (mTargetId != null && mTargetId.equals("10000")) {
@@ -303,7 +305,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                     SealAppContext.getInstance().popAllActivity();
                     return;
                 }
-                enterFragment(mConversationType, mTargetId,touserid);
+                enterFragment(mConversationType, mTargetId, touserid);
             }
 
         } else {
@@ -318,7 +320,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                     }
                 }, 300);
             } else {
-                enterFragment(mConversationType, mTargetId,touserid);
+                enterFragment(mConversationType, mTargetId, touserid);
             }
         }
     }
@@ -366,7 +368,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                 if (mDialog != null)
                     mDialog.dismiss();
 
-                enterFragment(mConversationType, mTargetId,touserid);
+                enterFragment(mConversationType, mTargetId, touserid);
 
             }
 
@@ -376,7 +378,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                 if (mDialog != null)
                     mDialog.dismiss();
 
-                enterFragment(mConversationType, mTargetId,touserid);
+                enterFragment(mConversationType, mTargetId, touserid);
             }
         });
 
@@ -390,7 +392,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
      * @param mConversationType 会话类型
      * @param mTargetId         会话 Id
      */
-    private void enterFragment(Conversation.ConversationType mConversationType, String mTargetId,String touserid) {
+    private void enterFragment(Conversation.ConversationType mConversationType, String mTargetId, String touserid) {
 
         fragment = new ConversationFragmentEx();
 
@@ -700,11 +702,11 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
         Log.e("tag", "eventevent1");
         if (event instanceof CheckOrderEvent) {
             Log.e("tag", "eventevent2");
-            checkOrder(((CheckOrderEvent) event).order,((CheckOrderEvent) event).price,((CheckOrderEvent) event).userid);
+            checkOrder(((CheckOrderEvent) event).order, ((CheckOrderEvent) event).price, ((CheckOrderEvent) event).userid);
         }
     }
 
-    private void checkOrder(final String prepayid,final String price,final String userId) {
+    private void checkOrder(final String prepayid, final String price, final String userId) {
 //        showLoadDialog();
         HashMap<String, String> params = new HashMap<>();
         params.put("order", prepayid);
@@ -715,18 +717,18 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                     public void call(GuaranteeRequestModel noDataModel) {
 //                        hideLoadDialog();
                         if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
-                            if(noDataModel.data!=null&&noDataModel.data.state>0){
-                                Toast.makeText(ConversationActivity.this,"您已支付",Toast.LENGTH_SHORT).show();
-                            }else{
+                            if (noDataModel.data != null && noDataModel.data.state > 0) {
+                                Toast.makeText(ConversationActivity.this, "您已支付", Toast.LENGTH_SHORT).show();
+                            } else {
                                 Bundle bundle = new Bundle();
                                 bundle.putBoolean(BuyIntroductionActivity.MARGIN, true);
-                                bundle.putString(BuyIntroductionActivity.MARGIN_ORDER,prepayid);
+                                bundle.putString(BuyIntroductionActivity.MARGIN_ORDER, prepayid);
                                 bundle.putString(BuyIntroductionActivity.MARGIN_PRICE, price);
                                 bundle.putString(BuyIntroductionActivity.MARGIN_LAWYERID, userId);
                                 bundle.putString(BuyIntroductionActivity.MARGIN_TARGETID, mTargetId);
 
 
-                                Intent intent = new Intent(mContext,BuyIntroductionActivity.class);
+                                Intent intent = new Intent(mContext, BuyIntroductionActivity.class);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                             }
@@ -753,6 +755,13 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
                     public void call(UserInfoModel noDataModel) {
 //                        hideLoadDialog();
                         if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
+                            if (noDataModel.getData() != null) {
+                                if (noDataModel.getData().getUserid() != null) {
+                                    if (noDataModel.getData().getUserid().equals(TalkLawApplication.getUserId())) {
+                                        SealAppContext.getInstance().setInputProvider(true);
+                                    }
+                                }
+                            }
                         }
                     }
                 }, new Action1<Throwable>() {

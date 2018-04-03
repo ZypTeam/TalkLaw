@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.fragment;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,6 +11,8 @@ import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.model.CarouseModel;
 import com.chuxin.law.model.StatementListModel;
+import com.chuxin.law.ui.activity.IntegralActivity;
+import com.chuxin.law.ui.activity.LawyerIntroductionActivity;
 import com.chuxin.law.ui.activity.WebViewActivity;
 import com.chuxin.law.util.GlideImageLoader;
 import com.chuxin.law.util.UIUtils;
@@ -17,6 +20,7 @@ import com.chuxin.law.ui.view.HomeListProductView;
 import com.chuxin.law.ui.view.HomeNeedView;
 import com.chuxin.law.ui.view.HomeScrollView;
 import com.chuxin.law.ui.widget.BackTitleView;
+import com.google.gson.Gson;
 import com.jusfoun.baselibrary.Util.AppUtil;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
 import com.jusfoun.baselibrary.net.Api;
@@ -72,7 +76,7 @@ public class HomeFragment extends BaseTalkLawFragment {
         backTitleView = (BackTitleView) rootView.findViewById(R.id.back_title_view);
         scrollview = (HomeScrollView) rootView.findViewById(R.id.scrollview);
 
-        ((TextView)    rootView.findViewById(R.id.text_test)).setText("测试用--当前版本号为："+AppUtil.getVersionName(mContext));
+//        ((TextView)    rootView.findViewById(R.id.text_test)).setText("测试用--当前版本号为："+AppUtil.getVersionName(mContext));
 
     }
 
@@ -114,11 +118,20 @@ public class HomeFragment extends BaseTalkLawFragment {
                     CarouseModel model = statementListModel.data.carouse.get(position);
                     if (model != null) {
                         if ("0".equals(model.atype)) {
-                            UIUtils.goLawyerDef(mContext, model.id);
-                        } else {
+                            UIUtils.goLawyerDef(mContext, model.url);
+                        }else if("1".equals(model.atype)) {
                             Intent intent = new Intent(mContext, WebViewActivity.class);
                             intent.putExtra("url",model.url);
                             intent.putExtra("title","详情");
+                            mContext.startActivity(intent);
+                        }else if("2".equals(model.atype)){
+                            Intent intent = new Intent();
+                            intent.putExtra(LawyerIntroductionActivity.ID, model.url);
+                            intent.setClass(mContext, LawyerIntroductionActivity.class);
+                            mContext.startActivity(intent);
+                        }else if("3".equals(model.atype)){
+                            Intent intent = new Intent();
+                            intent.setClass(mContext, IntegralActivity.class);
                             mContext.startActivity(intent);
                         }
                     }
@@ -179,6 +192,8 @@ public class HomeFragment extends BaseTalkLawFragment {
                                 }
 
                                 if (model.data.carouse != null) {
+
+                                    Log.e("tag","model.data.carouse="+new Gson().toJson(model.data.carouse));
                                     banner.setImages(model.data.carouse);
                                     banner.start();
 //                                    if(model.data.carouse.size()>0) {

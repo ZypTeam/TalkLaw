@@ -42,13 +42,24 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true">
 
+
+                <TextView
+                    android:id="@+id/text_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#aaaaaa"
+                    android:textSize="13sp"
+                    android:layout_alignBottom="@+id/text_duihuan"/>
+
                 <TextView
                     android:id="@+id/text_integral"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#fda623"
                     android:textSize="13sp"
-                    android:layout_alignBottom="@+id/text_duihuan"/>
+                    android:layout_marginLeft="19dp"
+                    android:layout_alignBottom="@+id/text_duihuan"
+                    android:layout_toRightOf="@+id/text_count"/>
 
                 <TextView
                     android:id="@+id/text_duihuan"
