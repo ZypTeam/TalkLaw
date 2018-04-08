@@ -34,11 +34,18 @@ public class FriendsSp {
         String info =  preferences.getString(userId,"");
         if(!TextUtils.isEmpty(info)) {
             UserModel userInfo = new Gson().fromJson(info,UserModel.class);
-            if(!TextUtils.isEmpty(userInfo.getHeadimg())) {
+            if(TextUtils.isEmpty(userInfo.getHeadimg())) {
                 Log.e("tag","userInfo="+userInfo.getHeadimg());
-                UserInfo model = new UserInfo(userInfo.getUserid(), userInfo.getName(), Uri.parse(userInfo.getHeadimg()));
-                return model;
+                userInfo.setHeadimg("http://");
+
             }
+
+            if(TextUtils.isEmpty(userInfo.getName())) {
+                userInfo.setName("说法");
+
+            }
+            UserInfo model = new UserInfo(userInfo.getUserid(), userInfo.getName(), Uri.parse(userInfo.getHeadimg()));
+            return model;
         }
         return null;
     }

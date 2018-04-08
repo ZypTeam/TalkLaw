@@ -91,6 +91,9 @@ public class EditUserInfoActivity extends BaseTalkLawActivity{
         }else if (updateInfoType==6){
             titleView.setTitle("修改姓名");
             ed_info.setHint("请输入姓名");
+        }else if (updateInfoType==7){
+            titleView.setTitle("修改简介");
+            ed_info.setHint("请输入简介");
         }
 
         titleView.setRightText("确认", new View.OnClickListener() {
@@ -133,7 +136,10 @@ public class EditUserInfoActivity extends BaseTalkLawActivity{
                 intent.putExtra("price",info);
                 setResult(RESULT_OK,intent);
                 onBackPressed();
-                return;
+            case 7:
+                toastText = "请输入简介";
+                map.put("intro", info);
+                break;
         }
         if(TextUtils.isEmpty(info)){
             map.clear();
@@ -165,6 +171,10 @@ public class EditUserInfoActivity extends BaseTalkLawActivity{
                         case 3:
                             userModel.setEmail(info);
                             showToast("修改邮箱成功");
+                            break;
+                        case 7:
+                            userModel.setEmail(info);
+                            showToast("修改简介成功");
                             break;
                     }
 
