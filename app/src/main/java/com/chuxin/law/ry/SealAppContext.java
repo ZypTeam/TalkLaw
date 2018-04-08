@@ -36,6 +36,7 @@ import com.chuxin.law.ry.ui.activity.NewFriendListActivity;
 import com.chuxin.law.ry.ui.activity.UserDetailActivity;
 import com.chuxin.law.sharedpreferences.FriendsSp;
 import com.chuxin.law.util.UIUtils;
+import com.google.gson.Gson;
 
 import io.rong.calllib.RongCallClient;
 import io.rong.calllib.RongCallSession;
@@ -137,7 +138,7 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
         RongIM.setUserInfoProvider(this, true);
         RongIM.setGroupInfoProvider(this, true);
         RongIM.setLocationProvider(this);//设置地理位置提供者,不用位置的同学可以注掉此行代码
-        setInputProvider();
+        setInputProvider(false);
         //setUserInfoEngineListener();//移到SealUserInfoManager
         setReadReceiptConversationType();
         RongIM.getInstance().enableNewComingMessageIcon(true);
@@ -161,7 +162,7 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
         RongIM.getInstance().setReadReceiptConversationTypeList(types);
     }
 
-    public void setInputProvider() {
+    public void setInputProvider(boolean isShowPay) {
         RongIM.setOnReceiveMessageListener(this);
 
         List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
@@ -176,12 +177,12 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
             if (defaultModule != null) {
                 RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
                 UserModel userModel = UserInfoDelegate.getInstance().getUserInfo();
-                int type =0;
-                if (userModel!=null) {
-                    type = userModel.getType();
-                }
+//                int type =0;
+//                if (userModel!=null) {
+//                    type = userModel.getType();
+//                }
 
-                RongExtensionManager.getInstance().registerExtensionModule(new MyExtensionModule(type));
+                RongExtensionManager.getInstance().registerExtensionModule(new MyExtensionModule(isShowPay));
             }
 
 //                RongExtensionManager.getInstance().registerExtensionModule(new SealExtensionModule());
@@ -236,128 +237,133 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
      */
     @Override
     public boolean onReceived(Message message, int i) {
-        MessageContent messageContent = message.getContent();
-        if (messageContent instanceof ContactNotificationMessage) {
-            ContactNotificationMessage contactNotificationMessage = (ContactNotificationMessage) messageContent;
-            if (contactNotificationMessage.getOperation().equals("Request")) {
-                //对方发来好友邀请
-                BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_RED_DOT);
-            } else if (contactNotificationMessage.getOperation().equals("AcceptResponse")) {
-                //对方同意我的好友请求
-                ContactNotificationMessageData contactNotificationMessageData;
-                try {
-                    contactNotificationMessageData = JsonMananger.jsonToBean(contactNotificationMessage.getExtra(), ContactNotificationMessageData.class);
-                } catch (HttpException e) {
-                    e.printStackTrace();
-                    return false;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return false;
-                }
-                if (contactNotificationMessageData != null) {
-                    if (SealUserInfoManager.getInstance().isFriendsRelationship(contactNotificationMessage.getSourceUserId())) {
-                        return false;
-                    }
-                    SealUserInfoManager.getInstance().addFriend(
-                            new Friend(contactNotificationMessage.getSourceUserId(),
-                                    contactNotificationMessageData.getSourceUserNickname(),
-                                    null, null, null, null,
-                                    null, null,
-                                    CharacterParser.getInstance().getSpelling(contactNotificationMessageData.getSourceUserNickname()),
-                                    null));
-                }
-                BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_FRIEND);
-                BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_RED_DOT);
-            }
-            /*// 发广播通知更新好友列表
-            BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_RED_DOT);
-            }*/
-        } else if (messageContent instanceof GroupNotificationMessage) {
-            GroupNotificationMessage groupNotificationMessage = (GroupNotificationMessage) messageContent;
-            NLog.e("onReceived:" + groupNotificationMessage.getMessage());
-            String groupID = message.getTargetId();
-            GroupNotificationMessageData data = null;
-            try {
-                String currentID = RongIM.getInstance().getCurrentUserId();
-                try {
-                    data = jsonToBean(groupNotificationMessage.getData());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (groupNotificationMessage.getOperation().equals("Create")) {
-                    //创建群组
-                    SealUserInfoManager.getInstance().getGroups(groupID);
-                    SealUserInfoManager.getInstance().getGroupMember(groupID);
-                } else if (groupNotificationMessage.getOperation().equals("Dismiss")) {
-                    //解散群组
-                    hangUpWhenQuitGroup();      //挂断电话
-                    handleGroupDismiss(groupID);
-                } else if (groupNotificationMessage.getOperation().equals("Kicked")) {
-                    //群组踢人
-                    if (data != null) {
-                        List<String> memberIdList = data.getTargetUserIds();
-                        if (memberIdList != null) {
-                            for (String userId : memberIdList) {
-                                if (currentID.equals(userId)) {
-                                    hangUpWhenQuitGroup();
-                                    RongIM.getInstance().removeConversation(Conversation.ConversationType.GROUP, message.getTargetId(), new RongIMClient.ResultCallback<Boolean>() {
-                                        @Override
-                                        public void onSuccess(Boolean aBoolean) {
-                                            Log.e("SealAppContext", "Conversation remove successfully.");
-                                        }
 
-                                        @Override
-                                        public void onError(RongIMClient.ErrorCode e) {
+        Log.e("tag","onReceivedonReceived"+new Gson().toJson(message.getContent()));
 
-                                        }
-                                    });
-                                }
-                            }
-                        }
 
-                        List<String> kickedUserIDs = data.getTargetUserIds();
-                        SealUserInfoManager.getInstance().deleteGroupMembers(groupID, kickedUserIDs);
-                        BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_GROUP_MEMBER, groupID);
-                    }
-                } else if (groupNotificationMessage.getOperation().equals("Add")) {
-                    //群组添加人员
-                    SealUserInfoManager.getInstance().getGroups(groupID);
-                    SealUserInfoManager.getInstance().getGroupMember(groupID);
-                    BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_GROUP_MEMBER, groupID);
-                } else if (groupNotificationMessage.getOperation().equals("Quit")) {
-                    //退出群组
-                    if (data != null) {
-                        List<String> quitUserIDs = data.getTargetUserIds();
-                        if (quitUserIDs.contains(currentID)) {
-                            hangUpWhenQuitGroup();
-                        }
-                        SealUserInfoManager.getInstance().deleteGroupMembers(groupID, quitUserIDs);
-                        BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_GROUP_MEMBER, groupID);
-                    }
-                } else if (groupNotificationMessage.getOperation().equals("Rename")) {
-                    //群组重命名
-                    if (data != null) {
-                        String targetGroupName = data.getTargetGroupName();
-                        SealUserInfoManager.getInstance().updateGroupsName(groupID, targetGroupName);
-                        List<String> groupNameList = new ArrayList<>();
-                        groupNameList.add(groupID);
-                        groupNameList.add(data.getTargetGroupName());
-                        groupNameList.add(data.getOperatorNickname());
-                        BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_GROUP_NAME, groupNameList);
-                        Groups oldGroup = SealUserInfoManager.getInstance().getGroupsByID(groupID);
-                        if (oldGroup != null) {
-                            Group group = new Group(groupID, data.getTargetGroupName(), Uri.parse(oldGroup.getPortraitUri()));
-                            RongIM.getInstance().refreshGroupInfoCache(group);
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return true;
-        } else if (messageContent instanceof ImageMessage) {
-            //ImageMessage imageMessage = (ImageMessage) messageContent;
-        }
+
+//        MessageContent messageContent = message.getContent();
+//        if (messageContent instanceof ContactNotificationMessage) {
+//            ContactNotificationMessage contactNotificationMessage = (ContactNotificationMessage) messageContent;
+//            if (contactNotificationMessage.getOperation().equals("Request")) {
+//                //对方发来好友邀请
+//                BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_RED_DOT);
+//            } else if (contactNotificationMessage.getOperation().equals("AcceptResponse")) {
+//                //对方同意我的好友请求
+//                ContactNotificationMessageData contactNotificationMessageData;
+//                try {
+//                    contactNotificationMessageData = JsonMananger.jsonToBean(contactNotificationMessage.getExtra(), ContactNotificationMessageData.class);
+//                } catch (HttpException e) {
+//                    e.printStackTrace();
+//                    return false;
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    return false;
+//                }
+//                if (contactNotificationMessageData != null) {
+//                    if (SealUserInfoManager.getInstance().isFriendsRelationship(contactNotificationMessage.getSourceUserId())) {
+//                        return false;
+//                    }
+//                    SealUserInfoManager.getInstance().addFriend(
+//                            new Friend(contactNotificationMessage.getSourceUserId(),
+//                                    contactNotificationMessageData.getSourceUserNickname(),
+//                                    null, null, null, null,
+//                                    null, null,
+//                                    CharacterParser.getInstance().getSpelling(contactNotificationMessageData.getSourceUserNickname()),
+//                                    null));
+//                }
+//                BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_FRIEND);
+//                BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_RED_DOT);
+//            }
+//            /*// 发广播通知更新好友列表
+//            BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_RED_DOT);
+//            }*/
+//        } else if (messageContent instanceof GroupNotificationMessage) {
+//            GroupNotificationMessage groupNotificationMessage = (GroupNotificationMessage) messageContent;
+//            NLog.e("onReceived:" + groupNotificationMessage.getMessage());
+//            String groupID = message.getTargetId();
+//            GroupNotificationMessageData data = null;
+//            try {
+//                String currentID = RongIM.getInstance().getCurrentUserId();
+//                try {
+//                    data = jsonToBean(groupNotificationMessage.getData());
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                if (groupNotificationMessage.getOperation().equals("Create")) {
+//                    //创建群组
+//                    SealUserInfoManager.getInstance().getGroups(groupID);
+//                    SealUserInfoManager.getInstance().getGroupMember(groupID);
+//                } else if (groupNotificationMessage.getOperation().equals("Dismiss")) {
+//                    //解散群组
+//                    hangUpWhenQuitGroup();      //挂断电话
+//                    handleGroupDismiss(groupID);
+//                } else if (groupNotificationMessage.getOperation().equals("Kicked")) {
+//                    //群组踢人
+//                    if (data != null) {
+//                        List<String> memberIdList = data.getTargetUserIds();
+//                        if (memberIdList != null) {
+//                            for (String userId : memberIdList) {
+//                                if (currentID.equals(userId)) {
+//                                    hangUpWhenQuitGroup();
+//                                    RongIM.getInstance().removeConversation(Conversation.ConversationType.GROUP, message.getTargetId(), new RongIMClient.ResultCallback<Boolean>() {
+//                                        @Override
+//                                        public void onSuccess(Boolean aBoolean) {
+//                                            Log.e("SealAppContext", "Conversation remove successfully.");
+//                                        }
+//
+//                                        @Override
+//                                        public void onError(RongIMClient.ErrorCode e) {
+//
+//                                        }
+//                                    });
+//                                }
+//                            }
+//                        }
+//
+//                        List<String> kickedUserIDs = data.getTargetUserIds();
+//                        SealUserInfoManager.getInstance().deleteGroupMembers(groupID, kickedUserIDs);
+//                        BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_GROUP_MEMBER, groupID);
+//                    }
+//                } else if (groupNotificationMessage.getOperation().equals("Add")) {
+//                    //群组添加人员
+//                    SealUserInfoManager.getInstance().getGroups(groupID);
+//                    SealUserInfoManager.getInstance().getGroupMember(groupID);
+//                    BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_GROUP_MEMBER, groupID);
+//                } else if (groupNotificationMessage.getOperation().equals("Quit")) {
+//                    //退出群组
+//                    if (data != null) {
+//                        List<String> quitUserIDs = data.getTargetUserIds();
+//                        if (quitUserIDs.contains(currentID)) {
+//                            hangUpWhenQuitGroup();
+//                        }
+//                        SealUserInfoManager.getInstance().deleteGroupMembers(groupID, quitUserIDs);
+//                        BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_GROUP_MEMBER, groupID);
+//                    }
+//                } else if (groupNotificationMessage.getOperation().equals("Rename")) {
+//                    //群组重命名
+//                    if (data != null) {
+//                        String targetGroupName = data.getTargetGroupName();
+//                        SealUserInfoManager.getInstance().updateGroupsName(groupID, targetGroupName);
+//                        List<String> groupNameList = new ArrayList<>();
+//                        groupNameList.add(groupID);
+//                        groupNameList.add(data.getTargetGroupName());
+//                        groupNameList.add(data.getOperatorNickname());
+//                        BroadcastManager.getInstance(mContext).sendBroadcast(UPDATE_GROUP_NAME, groupNameList);
+//                        Groups oldGroup = SealUserInfoManager.getInstance().getGroupsByID(groupID);
+//                        if (oldGroup != null) {
+//                            Group group = new Group(groupID, data.getTargetGroupName(), Uri.parse(oldGroup.getPortraitUri()));
+//                            RongIM.getInstance().refreshGroupInfoCache(group);
+//                        }
+//                    }
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            return true;
+//        } else if (messageContent instanceof ImageMessage) {
+//            //ImageMessage imageMessage = (ImageMessage) messageContent;
+//        }
         return false;
     }
 
@@ -397,9 +403,9 @@ public class SealAppContext implements RongIM.ConversationListBehaviorListener,
     public UserInfo getUserInfo(String s) {
         //UserInfoEngine.getInstance(mContext).startEngine(s);
 //        SealUserInfoManager.getInstance().getUserInfo(s);
+        UserInfo userInfo = FriendsSp.getFriendsInfo(mContext,s);
 
-
-        Log.e("tag","getUserInfogetUserInfo1="+FriendsSp.getFriendsInfo(mContext,s)+" "+s);
+        Log.e("tag","getUserInfogetUserInfo1="+userInfo.getName()+" "+userInfo.getUserId()+" "+s);
         return FriendsSp.getFriendsInfo(mContext,s);
     }
 

@@ -485,5 +485,7 @@ public interface ApiService {
     @GET("/index/version")
     Observable<VersionModel> getVersion(@QueryMap Map<String,String> params);
 
+    @GET("/consult/orderid")
+    Observable<UserInfoModel> getGroupUserId(@QueryMap Map<String,String> params);
 }
 

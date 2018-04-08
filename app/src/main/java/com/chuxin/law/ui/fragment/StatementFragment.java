@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.common.CommonLogic;
 import com.chuxin.law.model.CarouseModel;
 import com.chuxin.law.ui.activity.AudioDetailsActivity;
+import com.chuxin.law.ui.activity.IntegralActivity;
+import com.chuxin.law.ui.activity.LawyerIntroductionActivity;
 import com.chuxin.law.ui.activity.WebViewActivity;
 import com.chuxin.law.util.GlideImageLoader;
 import com.chuxin.law.util.UIUtils;
@@ -183,11 +186,20 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
                     CarouseModel model = carouseList.get(position);
                     if (model != null) {
                         if ("0".equals(model.atype)) {
-                            UIUtils.goLawyerDef(mContext, model.id);
-                        } else {
+                            UIUtils.goLawyerDef(mContext, model.url);
+                        }else if("1".equals(model.atype)) {
                             Intent intent = new Intent(mContext, WebViewActivity.class);
                             intent.putExtra("url",model.url);
                             intent.putExtra("title","详情");
+                            mContext.startActivity(intent);
+                        }else if("2".equals(model.atype)){
+                            Intent intent = new Intent();
+                            intent.putExtra(LawyerIntroductionActivity.ID, model.url);
+                            intent.setClass(mContext, LawyerIntroductionActivity.class);
+                            mContext.startActivity(intent);
+                        }else if("3".equals(model.atype)){
+                            Intent intent = new Intent();
+                            intent.setClass(mContext, IntegralActivity.class);
                             mContext.startActivity(intent);
                         }
                     }

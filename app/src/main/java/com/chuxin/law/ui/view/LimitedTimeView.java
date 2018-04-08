@@ -102,7 +102,7 @@ public class LimitedTimeView extends BaseView {
 //            desText.setVisibility(GONE);
 //            return;
 //        }
-        this.time= time;
+        this.time= time*1000;
         Log.e("tag","timetime="+time);
         if(myCountDownTimer!=null){
             myCountDownTimer.cancel();

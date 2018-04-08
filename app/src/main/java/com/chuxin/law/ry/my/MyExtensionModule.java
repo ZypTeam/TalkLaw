@@ -18,9 +18,9 @@ import io.rong.imlib.model.Conversation;
  * @Description ${聊天页面 底部功能选项 自定义 真费劲}
  */
 public class MyExtensionModule extends DefaultExtensionModule {
-    int type =0;
-    public MyExtensionModule (int type){
-        this.type = type;
+    private boolean isShowPay;
+    public MyExtensionModule (boolean isShowPay){
+        this.isShowPay = isShowPay;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class MyExtensionModule extends DefaultExtensionModule {
 //        pluginModules.add(locationPlugin);
 
 
-        if(type==2) {
+        if(isShowPay) {
             pluginModules.add(new PayPlugin());
         }
         return pluginModules;

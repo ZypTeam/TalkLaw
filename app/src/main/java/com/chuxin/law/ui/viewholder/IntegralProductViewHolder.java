@@ -26,6 +26,7 @@ public class IntegralProductViewHolder extends BaseViewHolder<IntegralModel.Good
     protected TextView textTitle;
     protected TextView textCount;
     protected Button btnExchange;
+    protected TextView numText;
 
     public IntegralProductViewHolder(View itemView, Context mContext) {
         super(itemView, mContext);
@@ -55,6 +56,7 @@ public class IntegralProductViewHolder extends BaseViewHolder<IntegralModel.Good
                 mContext.startActivity(intent);
             }
         });
+        numText.setText("剩余数量："+model.num);
     }
 
     private void initView(View rootView) {
@@ -62,6 +64,7 @@ public class IntegralProductViewHolder extends BaseViewHolder<IntegralModel.Good
         textTitle = (TextView) rootView.findViewById(R.id.text_title);
         textCount = (TextView) rootView.findViewById(R.id.text_count);
         btnExchange = (Button) rootView.findViewById(R.id.btn_exchange);
+        numText = (TextView)rootView.findViewById(R.id.text_num);
 
 
 

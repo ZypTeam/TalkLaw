@@ -45,18 +45,20 @@ public class UrlImageGetter implements Html.ImageGetter {
                     @Override
                     public void onLoadingComplete(String imageUri, View view,
                                                   Bitmap loadedImage) {
-                        float scaleWidth = ((float) width) / loadedImage.getWidth();
+                        if(loadedImage!=null) {
+                            float scaleWidth = ((float) width) / loadedImage.getWidth();
 
-                        Matrix matrix = new Matrix();
-                        matrix.postScale(scaleWidth, scaleWidth);
-                        loadedImage = Bitmap.createBitmap(loadedImage, 0, 0,
-                                loadedImage.getWidth(), loadedImage.getHeight(),
-                                matrix, true);
-                        urlDrawable.bitmap = loadedImage;
-                        urlDrawable.setBounds(0, 0, loadedImage.getWidth(),
-                                loadedImage.getHeight());
-                        container.invalidate();
-                        container.setText(container.getText()); // ??????
+                            Matrix matrix = new Matrix();
+                            matrix.postScale(scaleWidth, scaleWidth);
+                            loadedImage = Bitmap.createBitmap(loadedImage, 0, 0,
+                                    loadedImage.getWidth(), loadedImage.getHeight(),
+                                    matrix, true);
+                            urlDrawable.bitmap = loadedImage;
+                            urlDrawable.setBounds(0, 0, loadedImage.getWidth(),
+                                    loadedImage.getHeight());
+                            container.invalidate();
+                            container.setText(container.getText()); // ??????
+                        }
                     }
                 });
 

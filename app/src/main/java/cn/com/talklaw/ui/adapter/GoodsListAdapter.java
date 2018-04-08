@@ -42,6 +42,7 @@ public class GoodsListAdapter extends BaseAdapter<IntegralModel.GoodsItemModel> 
         protected TextView textTitle;
         protected TextView textIntegral;
         protected TextView textDuihuan;
+        protected TextView coutText;
 
         public GoodsViewHolser(View itemView, Context mContext) {
             super(itemView, mContext);
@@ -71,6 +72,8 @@ public class GoodsListAdapter extends BaseAdapter<IntegralModel.GoodsItemModel> 
                     mContext.startActivity(intent);
                 }
             });
+
+            coutText.setText("剩余："+model.num);
         }
 
         private void initView(View rootView) {
@@ -78,6 +81,7 @@ public class GoodsListAdapter extends BaseAdapter<IntegralModel.GoodsItemModel> 
             textTitle = (TextView) rootView.findViewById(R.id.text_title);
             textIntegral = (TextView) rootView.findViewById(R.id.text_integral);
             textDuihuan = (TextView) rootView.findViewById(R.id.text_duihuan);
+            coutText = (TextView)rootView.findViewById(R.id.text_count);
         }
     }
 }

@@ -475,10 +475,6 @@
             android:value="e09af6a2b26c02086e9216bd07c960ae" />
 
 
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="RongCloudApp" />
-
 
         <receiver
             android:name="io.rong.push.platform.MiMessageReceiver"
@@ -555,6 +551,9 @@
                 android:resource="@xml/rc_file_path" />
         </provider>
 
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="UMENG_CHANNEL_VALUE" />
     </application>
 
 </manifest>
