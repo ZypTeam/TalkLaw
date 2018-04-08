@@ -122,7 +122,7 @@ public class ApkDownloadService extends IntentService {
             }
 
         };
-        File file= new File(filePath,"ShenYouKe.apk");
+        File file= new File(filePath,"talklaw.apk");
         if (file.exists() && file.isFile()){
             file.delete();
         }

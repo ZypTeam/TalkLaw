@@ -35,7 +35,7 @@ public class IOUtil {
     public static final String FS = File.separator;
 
     // SD卡缓存
-    private static final String SDCardName = "ShenYouKe";
+    private static final String SDCardName = "talkLaw";
     private static final String IMAGE = "image";
     private static final String DOWNLOAD = "download";
 
@@ -51,7 +51,7 @@ public class IOUtil {
 
     private static final String VIDEO = "video";
 
-    private static final String DOWNLOADIMAGEPATH = "jusfouns";
+    private static final String DOWNLOADIMAGEPATH = "talkLaw";
 
     public static String convertStreamToJson(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is), 8 * 1024);
