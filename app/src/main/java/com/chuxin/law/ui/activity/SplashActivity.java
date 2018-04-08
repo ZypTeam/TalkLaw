@@ -36,33 +36,34 @@ import rx.functions.Action1;
  */
 
 public class SplashActivity extends BaseTalkLawActivity {
-    private int net = 1,daley = 2;
+    private int net = 1, daley = 2;
     private boolean netSuccess = false, handerSuc = false;
     private GratuityDialog dialog;
     private String url;
-    private Runnable task=new Runnable() {
+    private Runnable task = new Runnable() {
         @Override
         public void run() {
             goNextActivity();
         }
     };
-    private WeakHandler handler=new WeakHandler(new Handler.Callback() {
+    private WeakHandler handler = new WeakHandler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            if (msg.what == net){
+            if (msg.what == net) {
                 netSuccess = true;
-                if(handerSuc){
+                if (handerSuc) {
                     goNextActivity();
                 }
-            } else if(msg.what == daley){
+            } else if (msg.what == daley) {
                 handerSuc = true;
-                if(netSuccess){
+                if (netSuccess) {
                     goNextActivity();
                 }
             }
             return false;
         }
     });
+
     @Override
     public int getLayoutResId() {
         return R.layout.activity_splash;
@@ -70,7 +71,7 @@ public class SplashActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-        dialog=new GratuityDialog(mContext);
+        dialog = new GratuityDialog(mContext);
         dialog.setContent("有新版本更新了");
         dialog.setOkListener(new View.OnClickListener() {
             @Override
@@ -107,13 +108,13 @@ public class SplashActivity extends BaseTalkLawActivity {
         String cachedToken = sp.getString("loginToken", "");
         if (!TextUtils.isEmpty(cachedToken)) {
             RongIM.connect(cachedToken, SealAppContext.getInstance().getConnectCallback());
-            handler.postDelayed(task,3000);
+            handler.postDelayed(task, 3000);
             handler.sendEmptyMessage(net);
         } else {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    goActivity(null,LoginActivity.class);
+                    goActivity(null, LoginActivity.class);
                 }
             }, 3000);
             handler.sendEmptyMessage(net);
@@ -122,24 +123,23 @@ public class SplashActivity extends BaseTalkLawActivity {
         getVersion();
     }
 
-    private void getVersion(){
-        HashMap<String,String> params = new HashMap<>();
-        params.put("versioncode", AppUtil.getVersionCode(mContext)+"");
+    private void getVersion() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("versioncode", AppUtil.getVersionCode(mContext) + "");
         addNetwork(Api.getInstance().getService(ApiService.class).getVersion(params), new Action1<VersionModel>() {
             @Override
             public void call(VersionModel model) {
-                if(model.getCode() == CommonConstant.NET_SUC_CODE){
-                    sentMsg(model.getVersiondata());
-                    /*if(model.getVersiondata() != null){
+                if (model.getCode() == CommonConstant.NET_SUC_CODE) {
+                    if (model.getVersiondata() != null) {
                         sentMsg(model.getVersiondata());
-                    }else {
-                        if(TextUtils.isEmpty(model.getMsg())){
+                    } else {
+                        if (!TextUtils.isEmpty(model.getMsg())) {
                             showToast(model.getMsg());
-                            handler.sendEmptyMessage(net);
                         }
-                    }*/
-                }else {
-                    if(TextUtils.isEmpty(model.getMsg())){
+                        handler.sendEmptyMessage(net);
+                    }
+                } else {
+                    if (TextUtils.isEmpty(model.getMsg())) {
                         showToast(model.getMsg());
                         handler.sendEmptyMessage(net);
                     }
@@ -153,10 +153,9 @@ public class SplashActivity extends BaseTalkLawActivity {
         });
     }
 
-    private void sentMsg(final VersionDataModel versionDataModel){
+    private void sentMsg(final VersionDataModel versionDataModel) {
 
-//        url=versionDataModel.getUrl();
-        url="https://vscode.cdn.azure.cn/stable/79b44aa704ce542d8ca4a3cc44cfca566e7720f1/VSCode-darwin-stable.zip";
+        url = versionDataModel.getUrl();
         dialog.show();
     }
 
@@ -166,11 +165,11 @@ public class SplashActivity extends BaseTalkLawActivity {
         handler.removeCallbacks(task);
     }
 
-    private void goNextActivity(){
-        if (!TextUtils.isEmpty(TalkLawApplication.getUserId())){
-            goActivity(null,HomeActivity.class);
-        }else {
-            goActivity(null,LoginActivity.class);
+    private void goNextActivity() {
+        if (!TextUtils.isEmpty(TalkLawApplication.getUserId())) {
+            goActivity(null, HomeActivity.class);
+        } else {
+            goActivity(null, LoginActivity.class);
         }
         onBackPressed();
     }
