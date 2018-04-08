@@ -24,12 +24,14 @@ import com.chuxin.law.model.ProductsModel;
 import com.chuxin.law.model.StatementListModel;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
+import com.chuxin.law.model.VersionModel;
 import com.chuxin.law.ui.viewholder.AccountDetailModel;
 import com.jusfoun.baselibrary.base.NoDataModel;
 
 import java.util.Map;
 
 import cn.com.talklaw.model.GoodsDataModel;
+import okhttp3.ResponseBody;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -37,6 +39,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 import rx.Observable;
 
@@ -473,6 +476,14 @@ public interface ApiService {
     @GET("/article/need")
     Observable<StatementListModel.StatementDataModel> getChangeNeedNet();
 
+    //下载文件
+    @Streaming
+    @GET
+    Observable<ResponseBody> download(@Url String url);
+
+    //版本更新
+    @GET("/index/version")
+    Observable<VersionModel> getVersion(@QueryMap Map<String,String> params);
 
 }
 

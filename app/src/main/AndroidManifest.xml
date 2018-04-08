@@ -522,6 +522,8 @@
         </service>-->
         <!-- GCM 配置结束 < -->
 
+        <service android:name=".update.ApkDownloadService"/>
+
         <!-- [START firebase_service] -->
         <service
             android:name="io.rong.push.platform.RongFirebaseMessagingService"

@@ -110,6 +110,10 @@ public class WeakHandler {
         return mExec.postAtTime(wrapRunnable(r), uptimeMillis);
     }
 
+    public final Message obtainMessage(int what,Object obj){
+        return mExec.obtainMessage(what,obj);
+    }
+
     /**
      * Causes the Runnable r to be added to the message queue, to be run
      * at a specific time given by <var>uptimeMillis</var>.

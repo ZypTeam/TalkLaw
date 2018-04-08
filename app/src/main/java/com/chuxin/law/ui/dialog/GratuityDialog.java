@@ -75,6 +75,10 @@ public class GratuityDialog extends Dialog {
         sure.setOnClickListener(listener);
     }
 
+    public void setOnCancelListener(View.OnClickListener listener){
+        cancel.setOnClickListener(listener);
+    }
+
     public void setOneBtn(boolean isOne){
         if (isOne){
             line.setVisibility(View.VISIBLE);

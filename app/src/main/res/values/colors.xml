@@ -25,5 +25,7 @@
     <color name="wheel_bg">#f2f2f2</color>
 
 
+    <!--下载-->
+    <color name="download_pro_color">#666666</color>
 
 </resources>
