@@ -36,10 +36,9 @@ import rx.functions.Action1;
  */
 
 public class SplashActivity extends BaseTalkLawActivity {
-    private int net = 1, daley = 2;
-    private boolean netSuccess = false, handerSuc = false;
-    private GratuityDialog dialog;
-    private String url;
+//    private int net = 1, daley = 2;
+//    private boolean netSuccess = false, handerSuc = false;
+
     private Runnable task = new Runnable() {
         @Override
         public void run() {
@@ -49,7 +48,7 @@ public class SplashActivity extends BaseTalkLawActivity {
     private WeakHandler handler = new WeakHandler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            if (msg.what == net) {
+            /*if (msg.what == net) {
                 netSuccess = true;
                 if (handerSuc) {
                     goNextActivity();
@@ -59,7 +58,7 @@ public class SplashActivity extends BaseTalkLawActivity {
                 if (netSuccess) {
                     goNextActivity();
                 }
-            }
+            }*/
             return false;
         }
     });
@@ -71,29 +70,7 @@ public class SplashActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-        dialog = new GratuityDialog(mContext);
-        dialog.setContent("有新版本更新了");
-        dialog.setOkListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!ApkDownloadService.getState(mContext)) {
-                    Intent intent = new Intent(mContext, ApkDownloadService.class);
-                    intent.putExtra(ApkDownloadService.DOWNLOAD_URL, url);
-                    intent.putExtra(ApkDownloadService.NOTIFICATION_ID, 20);
-                    startService(intent);
-                }
-                handler.sendEmptyMessage(net);
-                dialog.dismiss();
-            }
-        });
 
-        dialog.setOnCancelListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handler.sendEmptyMessage(net);
-                dialog.dismiss();
-            }
-        });
     }
 
     @Override
@@ -108,55 +85,18 @@ public class SplashActivity extends BaseTalkLawActivity {
         String cachedToken = sp.getString("loginToken", "");
         if (!TextUtils.isEmpty(cachedToken)) {
             RongIM.connect(cachedToken, SealAppContext.getInstance().getConnectCallback());
-            handler.postDelayed(task, 3000);
-            handler.sendEmptyMessage(net);
+            handler.postDelayed(task, 1000);
+//            handler.sendEmptyMessage(net);
         } else {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     goActivity(null, LoginActivity.class);
                 }
-            }, 3000);
-            handler.sendEmptyMessage(net);
+            }, 1000);
+//            handler.sendEmptyMessage(net);
         }
 
-        getVersion();
-    }
-
-    private void getVersion() {
-        HashMap<String, String> params = new HashMap<>();
-        params.put("versioncode", AppUtil.getVersionCode(mContext) + "");
-        addNetwork(Api.getInstance().getService(ApiService.class).getVersion(params), new Action1<VersionModel>() {
-            @Override
-            public void call(VersionModel model) {
-                if (model.getCode() == CommonConstant.NET_SUC_CODE) {
-                    if (model.getVersiondata() != null) {
-                        sentMsg(model.getVersiondata());
-                    } else {
-                        if (!TextUtils.isEmpty(model.getMsg())) {
-                            showToast(model.getMsg());
-                        }
-                        handler.sendEmptyMessage(net);
-                    }
-                } else {
-                    if (TextUtils.isEmpty(model.getMsg())) {
-                        showToast(model.getMsg());
-                        handler.sendEmptyMessage(net);
-                    }
-                }
-            }
-        }, new Action1<Throwable>() {
-            @Override
-            public void call(Throwable throwable) {
-                handler.sendEmptyMessage(net);
-            }
-        });
-    }
-
-    private void sentMsg(final VersionDataModel versionDataModel) {
-
-        url = versionDataModel.getUrl();
-        dialog.show();
     }
 
     @Override

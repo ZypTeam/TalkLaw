@@ -10,13 +10,13 @@ import com.jusfoun.baselibrary.base.BaseModel;
 
 public class VersionModel extends BaseModel {
 
-    private VersionDataModel versiondata;
+    private VersionDataModel data;
 
     public VersionDataModel getVersiondata() {
-        return versiondata;
+        return data;
     }
 
-    public void setVersiondata(VersionDataModel versiondata) {
-        this.versiondata = versiondata;
+    public void setVersiondata(VersionDataModel data) {
+        this.data = data;
     }
 }

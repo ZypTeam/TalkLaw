@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,14 +20,28 @@ import com.chuxin.law.audioplayer.manage.AudioPlayerManager;
 import com.chuxin.law.audioplayer.service.AudioPlayerService;
 import com.chuxin.law.audioplayer.util.AudioPlayUtils;
 import com.chuxin.law.base.BaseTalkLawActivity;
+import com.chuxin.law.common.ApiService;
+import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.common.CommonLogic;
+import com.chuxin.law.model.VersionDataModel;
+import com.chuxin.law.model.VersionModel;
 import com.chuxin.law.ui.adapter.HomeAdapter;
+import com.chuxin.law.ui.dialog.GratuityDialog;
+import com.chuxin.law.update.ApkDownloadService;
 import com.chuxin.law.util.voice.VoiceHelper;
+import com.jusfoun.baselibrary.Util.AppUtil;
+import com.jusfoun.baselibrary.Util.IOUtil;
 import com.jusfoun.baselibrary.Util.LogUtil;
+import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.permissiongen.PermissionFail;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
 import com.jusfoun.baselibrary.permissiongen.PermissionSuccess;
 import com.jusfoun.baselibrary.view.HomeViewPager;
+
+import java.io.File;
+import java.util.HashMap;
+
+import rx.functions.Action1;
 
 /**
  * @author zhaoyapeng
@@ -50,6 +65,27 @@ public class HomeActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
         adapter = new HomeAdapter(getSupportFragmentManager());
+        dialog = new GratuityDialog(mContext);
+        dialog.setContent("有新版本更新了");
+        dialog.setOkListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!ApkDownloadService.getState(mContext)) {
+                    Intent intent = new Intent(mContext, ApkDownloadService.class);
+                    intent.putExtra(ApkDownloadService.DOWNLOAD_URL, url);
+                    intent.putExtra(ApkDownloadService.NOTIFICATION_ID, 20);
+                    startService(intent);
+                }
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setOnCancelListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 
     @Override
@@ -102,9 +138,14 @@ public class HomeActivity extends BaseTalkLawActivity {
 
         initService();
 
-        PermissionGen.with(this).addRequestCode(100)
-                .permissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE})
-                .request();
+        if (!PermissionGen.checkPermissions(mContext,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE})){
+            PermissionGen.with(this).addRequestCode(100)
+                    .permissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE})
+                    .request();
+        }else {
+            getVersion();
+        }
     }
 
     @PermissionFail(requestCode = 100)
@@ -114,7 +155,7 @@ public class HomeActivity extends BaseTalkLawActivity {
 
     @PermissionSuccess(requestCode = 100)
     private void perSuc() {
-
+        getVersion();
     }
 
     private void initService(){
@@ -188,5 +229,36 @@ public class HomeActivity extends BaseTalkLawActivity {
         } else {
             stopService(playerServiceIntent);
         }
+    }
+
+    private GratuityDialog dialog;
+    private String url;
+
+    private void getVersion() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("versioncode", AppUtil.getVersionCode(mContext) + "");
+        addNetwork(Api.getInstance().getService(ApiService.class).getVersion(params), new Action1<VersionModel>() {
+            @Override
+            public void call(VersionModel model) {
+                if (model.getCode() == CommonConstant.NET_SUC_CODE) {
+                    if (model.getVersiondata() != null) {
+                        sentMsg(model.getVersiondata());
+                    }
+                }
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+
+            }
+        });
+    }
+
+    private void sentMsg(final VersionDataModel versionDataModel) {
+
+        url = versionDataModel.getUrl();
+        dialog.setContent(versionDataModel.getDescribe());
+        dialog.setTitle(versionDataModel.getTitle());
+        dialog.show();
     }
 }

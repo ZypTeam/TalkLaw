@@ -10,9 +10,26 @@ import java.io.Serializable;
 
 public class VersionDataModel implements Serializable {
 
-    private String describe,url,versionname,titletext;
+    private int type;
+    private String title;
+    private String describe;
+    private String url;
 
-    private int update,filter,versioncode;
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getDescribe() {
         return describe;
@@ -30,56 +47,13 @@ public class VersionDataModel implements Serializable {
         this.url = url;
     }
 
-    public String getVersionname() {
-        return versionname;
-    }
-
-    public void setVersionname(String versionname) {
-        this.versionname = versionname;
-    }
-
-    public String getTitletext() {
-        return titletext;
-    }
-
-    public void setTitletext(String titletext) {
-        this.titletext = titletext;
-    }
-
-    public int getUpdate() {
-        return update;
-    }
-
-    public void setUpdate(int update) {
-        this.update = update;
-    }
-
-    public int getFilter() {
-        return filter;
-    }
-
-    public void setFilter(int filter) {
-        this.filter = filter;
-    }
-
-    public int getVersioncode() {
-        return versioncode;
-    }
-
-    public void setVersioncode(int versioncode) {
-        this.versioncode = versioncode;
-    }
-
     @Override
     public String toString() {
         return "VersionDataModel{" +
                 "describe='" + describe + '\'' +
                 ", url='" + url + '\'' +
-                ", versionname='" + versionname + '\'' +
-                ", titletext='" + titletext + '\'' +
-                ", update=" + update +
-                ", filter=" + filter +
-                ", versioncode=" + versioncode +
+                ", type='" + type + '\'' +
+                ", title='" + title  +
                 '}';
     }
 }

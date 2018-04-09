@@ -53,6 +53,8 @@ public class IOUtil {
 
     private static final String DOWNLOADIMAGEPATH = "talkLaw";
 
+    private static final String DOWNLOAD_APK_NAME="talkLaw.apk";
+
     public static String convertStreamToJson(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is), 8 * 1024);
         StringBuilder sb = new StringBuilder();
@@ -280,6 +282,10 @@ public class IOUtil {
     // String path = basePath + FS + COMMUNITY + FS + pkgName + FS + CACHE + FS;
     // return createFileDir(path);
     // }
+
+    public static String getDownloadApkPath(Context context){
+        return getDownloadPath(context)+File.separator+DOWNLOAD_APK_NAME;
+    }
 
     // 下载路径
     public static String getDownloadPath(Context context) {

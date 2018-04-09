@@ -93,7 +93,7 @@ public class ApkDownloadService extends IntentService {
         nofiId = intent.getIntExtra(NOTIFICATION_ID, -100000000);
         Log.e("TAG","downloadUrl:"+downloadUrl);
         //设置参数
-        filePath = IOUtil.getDownloadPath(getApplicationContext());
+        filePath = IOUtil.getDownloadApkPath(getApplicationContext());
         //开始下载
         download();
 
@@ -112,7 +112,7 @@ public class ApkDownloadService extends IntentService {
                 }
                 int downloadSpeed= (int) (model.getBytesLength()/usedTime/1024);
                 String progressTxt = String.format(getString(R.string.download_progress),progress,downloadSpeed);
-                contentViews.setImageViewResource(R.id.download_icon, R.drawable.ic_launcher);
+                contentViews.setImageViewResource(R.id.download_icon, R.mipmap.logo);
                 contentViews.setTextViewText(R.id.download_progress_text, progressTxt);
                 contentViews.setProgressBar(R.id.download_progressbar, 100, progress, false);
                 contentViews.setTextViewText(R.id.download_title,  getResources().getString(R.string.download_title));
@@ -122,7 +122,7 @@ public class ApkDownloadService extends IntentService {
             }
 
         };
-        File file= new File(filePath,"talklaw.apk");
+        File file= new File(filePath);
         if (file.exists() && file.isFile()){
             file.delete();
         }

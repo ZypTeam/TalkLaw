@@ -26,6 +26,7 @@ public class GratuityDialog extends Dialog {
     protected TextView content;
     protected TextView cancel;
     protected TextView sure;
+    protected TextView title;
     private View line;
 
     public GratuityDialog(@NonNull Context context) {
@@ -51,6 +52,7 @@ public class GratuityDialog extends Dialog {
         content = (TextView) findViewById(R.id.content);
         cancel = (TextView) findViewById(R.id.cancel);
         sure = (TextView) findViewById(R.id.sure);
+        title = (TextView) findViewById(R.id.title);
         line =  findViewById(R.id.line);
 
     }
@@ -91,5 +93,9 @@ public class GratuityDialog extends Dialog {
 
     public void setContent(String txt){
         content.setText(txt);
+    }
+
+    public void setTitle(String txt) {
+        title.setText(txt);
     }
 }
