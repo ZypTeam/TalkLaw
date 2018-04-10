@@ -310,6 +310,13 @@
             android:name=".ui.activity.RecommendedProductActivity"
             android:screenOrientation="portrait" />
 
+        <!--广告activity-->
+        <activity
+            android:name=".ui.activity.AdActivity"
+            android:screenOrientation="portrait" />
+
+
+
 
         <!--新浪分享-->
         <activity

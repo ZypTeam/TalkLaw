@@ -1,5 +1,6 @@
 package com.chuxin.law.common;
 
+import com.chuxin.law.model.AdModel;
 import com.chuxin.law.model.ArrondiModel;
 import com.chuxin.law.model.BackCardModel;
 import com.chuxin.law.model.CheckConsultModel;
@@ -487,5 +488,9 @@ public interface ApiService {
 
     @GET("/consult/orderid")
     Observable<UserInfoModel> getGroupUserId(@QueryMap Map<String,String> params);
+
+
+    @GET("/carousel/page")
+    Observable<AdModel> getAdNet();
 }
 
