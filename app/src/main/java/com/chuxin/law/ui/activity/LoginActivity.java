@@ -2,6 +2,7 @@ package com.chuxin.law.ui.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -38,6 +39,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -193,7 +195,7 @@ public class LoginActivity extends BaseTalkLawActivity {
                 , new Action1<UserInfoModel>() {
                     @Override
                     public void call(UserInfoModel userInfoModel) {
-                        if (userInfoModel != null && userInfoModel.getData() != null && userInfoModel.getCode() == 10000) {
+                        if (userInfoModel.getData() != null && userInfoModel.getCode() == 10000) {
                             //TODO :登录成功直接登录 hide loading 新用户 融云登录注册调试后去掉
                             hideLoadDialog();
 //                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
@@ -214,7 +216,7 @@ public class LoginActivity extends BaseTalkLawActivity {
                             loginHx(userInfoModel);
                         } else {
                             hideLoadDialog();
-                            Toast.makeText(mContext, "登录失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, userInfoModel.getMsg(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -346,7 +348,10 @@ public class LoginActivity extends BaseTalkLawActivity {
                     Log.e("tag", "hideLoadDialoghideLoadDialoghideLoadDialog=" + userInfoModel.getData().getUserid() + " " + userInfoModel.getData().getName() + " " + userInfoModel.getData().getHeadimg());
                     FriendsSp.saveFriedns(mContext, userInfoModel.getData());
 //                    RongIM.getInstance().refreshUserInfoCache();
-//                    RongIM.getInstance().setCurrentUserInfo(new UserInfo("userId", userInfoModel.getData().getUserid(), Uri.parse(userInfoModel.getData().getHeadimg())));
+                    if(TextUtils.isEmpty(userInfoModel.getData().getHeadimg())){
+                        userInfoModel.getData().setHeadimg("http://");
+                    }
+                    RongIM.getInstance().setCurrentUserInfo(new UserInfo( userInfoModel.getData().getUserid(), userInfoModel.getData().getName(), Uri.parse(userInfoModel.getData().getHeadimg())));
                 }
 
                 UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
