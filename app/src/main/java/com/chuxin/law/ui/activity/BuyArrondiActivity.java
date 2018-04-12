@@ -19,17 +19,20 @@ import com.chuxin.law.ui.widget.BackTitleView;
 
 public class BuyArrondiActivity extends BaseTalkLawActivity {
 
-    public static final String PRICE="price";
-    public static final String TYPE="type";
+    public static final String PRICE = "price";
+    public static final String OLD_PRICE = "old_price";
+    public static final String TYPE = "type";
     protected BackTitleView titleView;
     protected ImageView iconBuy;
     protected TextView content;
     protected View viewBg;
     protected TextView price;
     protected TextView buy;
+    protected TextView quanyi;
 
     private String priceNum;
     private int type;
+    private String oldPrice;
 
 
     @Override
@@ -39,8 +42,9 @@ public class BuyArrondiActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
-        priceNum=getIntent().getStringExtra(PRICE);
-        type=getIntent().getIntExtra(TYPE,0);
+        priceNum = getIntent().getStringExtra(PRICE);
+        oldPrice = getIntent().getStringExtra(OLD_PRICE);
+        type = getIntent().getIntExtra(TYPE, 0);
     }
 
     @Override
@@ -51,6 +55,7 @@ public class BuyArrondiActivity extends BaseTalkLawActivity {
         viewBg = (View) findViewById(R.id.view_bg);
         price = (TextView) findViewById(R.id.price);
         buy = (TextView) findViewById(R.id.buy);
+        quanyi = (TextView) findViewById(R.id.quanyi);
 
     }
 
@@ -58,21 +63,23 @@ public class BuyArrondiActivity extends BaseTalkLawActivity {
     public void initAction() {
         titleView.setTitle("购买");
 
-        if (type==1){
+        quanyi.setText(String.format(getString(R.string.buy_arrondi),oldPrice,priceNum));
+
+        if (type == 1) {
             content.setText("私人顾问");
-        }else {
+        } else {
             content.setText("公司顾问");
         }
 
-        price.setText("¥"+priceNum);
+        price.setText("¥" + priceNum);
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle=new Bundle();
-                bundle.putInt(PayArrondiActivity.TYPE,1);
-                bundle.putString(PayArrondiActivity.PRICE,priceNum);
-                goActivityForResult(bundle,PayArrondiActivity.class, CommonConstant.REQUEST_PAY_SUCCUSE);
+                Bundle bundle = new Bundle();
+                bundle.putInt(PayArrondiActivity.TYPE, 1);
+                bundle.putString(PayArrondiActivity.PRICE, priceNum);
+                goActivityForResult(bundle, PayArrondiActivity.class, CommonConstant.REQUEST_PAY_SUCCUSE);
             }
         });
     }
@@ -80,10 +87,10 @@ public class BuyArrondiActivity extends BaseTalkLawActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode!=RESULT_OK){
+        if (resultCode != RESULT_OK) {
             return;
         }
-        if (requestCode==CommonConstant.REQUEST_PAY_SUCCUSE){
+        if (requestCode == CommonConstant.REQUEST_PAY_SUCCUSE) {
             onBackPressed();
         }
     }

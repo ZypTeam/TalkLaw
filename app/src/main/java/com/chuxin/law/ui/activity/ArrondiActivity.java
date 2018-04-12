@@ -61,7 +61,7 @@ public class ArrondiActivity extends BaseTalkLawActivity {
     private int type;
     private int PAGE_COUNT = 8;
 
-    private String price;
+    private String price,oldPrice;
 
     @Override
     public int getLayoutResId() {
@@ -86,13 +86,14 @@ public class ArrondiActivity extends BaseTalkLawActivity {
         arrondi = (ViewPager) headerView.findViewById(R.id.arrondi);
         buy = (Button) findViewById(R.id.buy);
         list = (XRecyclerView) findViewById(R.id.list);
+        top.setFocusable(false);
         list.addHeaderView(headerView);
     }
 
     @Override
     public void initAction() {
 
-        list.setPullRefreshEnabled(true);
+        list.setPullRefreshEnabled(false);
         list.setLoadingMoreEnabled(false);
         list.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -174,6 +175,7 @@ public class ArrondiActivity extends BaseTalkLawActivity {
                 Intent intent=new Intent(mContext,BuyArrondiActivity.class);
                 intent.putExtra(BuyArrondiActivity.TYPE,type);
                 intent.putExtra(BuyArrondiActivity.PRICE,price);
+                intent.putExtra(BuyArrondiActivity.OLD_PRICE,oldPrice);
                 mContext.startActivity(intent);
 
             }
@@ -281,6 +283,9 @@ public class ArrondiActivity extends BaseTalkLawActivity {
                     if (dataBean != null) {
                         if (!TextUtils.isEmpty(dataBean.getPrice())) {
                             price = dataBean.getPrice();
+                        }
+                        if (!TextUtils.isEmpty(dataBean.getOldPrice())){
+                            oldPrice=dataBean.getOldPrice();
                         }
                         listAdapter.refreshList(dataBean.getArticle());
                         topAdapter.refresh(dataBean.getCarouse());

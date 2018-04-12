@@ -36,6 +36,7 @@ import com.chuxin.law.ui.activity.SettingActivity;
 import com.chuxin.law.ui.activity.ShippingAddressActivity;
 import com.chuxin.law.ui.activity.WebViewActivity;
 import com.chuxin.law.util.UIUtils;
+import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 
@@ -283,8 +284,16 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
         buyCount.setText(userModel.getDonenum());
         followCount.setText(userModel.getFollow());
 //        myAddressContent.setText(userModel.getAddress());
-        zhuanghuCount.setText("¥" + userModel.getMoney());
-        jifenCount.setText(userModel.getPoints());
+        if (StringUtil.isEmpty(userModel.getMoney())){
+            zhuanghuCount.setText("¥0");
+        }else {
+            zhuanghuCount.setText("¥" + userModel.getMoney());
+        }
+        if (StringUtil.isEmpty(userModel.getPoints())){
+            jifenCount.setText("0");
+        }else {
+            jifenCount.setText(userModel.getPoints());
+        }
         if (userModel.getType() != 2) {
             auth.setText("未认证");
             auth.setTextColor(Color.parseColor("#bababa"));
