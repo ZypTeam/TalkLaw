@@ -241,7 +241,7 @@ public class HomeActivity extends BaseTalkLawActivity {
             @Override
             public void call(VersionModel model) {
                 if (model.getCode() == CommonConstant.NET_SUC_CODE) {
-                    if (model.getVersiondata() != null) {
+                    if (model.getVersiondata() != null&&model.getVersiondata().getType()!=0) {
                         sentMsg(model.getVersiondata());
                     }
                 }
@@ -255,7 +255,7 @@ public class HomeActivity extends BaseTalkLawActivity {
     }
 
     private void sentMsg(final VersionDataModel versionDataModel) {
-
+//        url = "http://ojprcxbjz.bkt.clouddn.com/app-%E5%AE%98%E6%96%B9-debug.apk";
         url = versionDataModel.getUrl();
         dialog.setContent(versionDataModel.getDescribe());
         dialog.setTitle(versionDataModel.getTitle());

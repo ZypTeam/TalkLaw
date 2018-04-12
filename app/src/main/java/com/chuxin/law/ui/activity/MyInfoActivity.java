@@ -78,7 +78,7 @@ public class MyInfoActivity extends BaseTalkLawActivity {
     protected View lineAddress;
     protected TextView number;
     protected View lineNumber;
-    protected TextView mail;
+    protected TextView mail,introText,userIntroText;
 
     private HashMap<String, String> editUserMap = new HashMap<>();
     private UserModel userModel;
@@ -164,6 +164,11 @@ public class MyInfoActivity extends BaseTalkLawActivity {
         number = (TextView) findViewById(R.id.number);
         lineNumber = (View) findViewById(R.id.line_number);
         mail = (TextView) findViewById(R.id.mail);
+        introText = (TextView) findViewById(R.id.intro);
+        userIntroText = (TextView) findViewById(R.id.user_intro);
+
+
+
 
     }
 
@@ -210,6 +215,15 @@ public class MyInfoActivity extends BaseTalkLawActivity {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putInt(EditUserInfoActivity.UPDATE_TYPE, 3);
+                bundle.putString(EditUserInfoActivity.UPDATE_VALUE, userModel.getEmail());
+                goActivityForResult(bundle, EditUserInfoActivity.class, EMAIL_REQUEST_CODE);
+            }
+        });
+        introText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(EditUserInfoActivity.UPDATE_TYPE, 7);
                 bundle.putString(EditUserInfoActivity.UPDATE_VALUE, userModel.getEmail());
                 goActivityForResult(bundle, EditUserInfoActivity.class, EMAIL_REQUEST_CODE);
             }
@@ -337,6 +351,7 @@ public class MyInfoActivity extends BaseTalkLawActivity {
         userBirthday.setText(userModel.getBirthday());
         userMail.setText(userModel.getEmail());
         userNumber.setText(userModel.getPhone());
+        userIntroText.setText(userModel.getIntro());
     }
 
     private void editUserInfo(boolean isEditHeadImg) {

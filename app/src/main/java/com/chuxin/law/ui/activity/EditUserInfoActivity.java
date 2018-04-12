@@ -173,7 +173,7 @@ public class EditUserInfoActivity extends BaseTalkLawActivity{
                             showToast("修改邮箱成功");
                             break;
                         case 7:
-                            userModel.setEmail(info);
+                            userModel.setIntro(info);
                             showToast("修改简介成功");
                             break;
                     }
