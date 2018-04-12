@@ -34,6 +34,8 @@ public class  ArrondiProductAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View view=inflater.inflate(R.layout.item_arrondi_product,null);
         RecyclerView list=view.findViewById(R.id.list);
+        list.setFocusable(false);
+        list.setNestedScrollingEnabled(false);
         list.setLayoutManager(new GridLayoutManager(context,4));
         ArrondiProductListAdapter adapter=new ArrondiProductListAdapter(context);
         list.setAdapter(adapter);

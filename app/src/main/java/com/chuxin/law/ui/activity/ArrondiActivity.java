@@ -86,13 +86,14 @@ public class ArrondiActivity extends BaseTalkLawActivity {
         arrondi = (ViewPager) headerView.findViewById(R.id.arrondi);
         buy = (Button) findViewById(R.id.buy);
         list = (XRecyclerView) findViewById(R.id.list);
+        top.setFocusable(false);
         list.addHeaderView(headerView);
     }
 
     @Override
     public void initAction() {
 
-        list.setPullRefreshEnabled(true);
+        list.setPullRefreshEnabled(false);
         list.setLoadingMoreEnabled(false);
         list.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
