@@ -89,7 +89,7 @@ public class ProductiListActivity extends BaseTalkLawActivity {
             showLoadDialog();
         }
         HashMap<String,String> params=new HashMap<>();
-        params.put("catid","1");
+        params.put("catid",model.getId());
         params.put("size", CommonConstant.LIST_PAGE_SIZE);
         params.put("page",(isRefresh?1:page+1)+"");
         addNetwork(Api.getInstance().getService(ApiService.class).getProductList(params)

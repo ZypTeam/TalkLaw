@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -278,8 +279,9 @@ public class ArrondiActivity extends BaseTalkLawActivity {
                 if (arrondiModel.getCode() == CommonConstant.NET_SUC_CODE) {
                     ArrondiModel.DataBean dataBean = arrondiModel.getData();
                     if (dataBean != null) {
-                        price=dataBean.getPrice();
-                        Log.e("price",price);
+                        if (!TextUtils.isEmpty(dataBean.getPrice())) {
+                            price = dataBean.getPrice();
+                        }
                         listAdapter.refreshList(dataBean.getArticle());
                         topAdapter.refresh(dataBean.getCarouse());
                         top.start();
