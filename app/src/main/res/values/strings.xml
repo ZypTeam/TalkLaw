@@ -25,4 +25,5 @@
     <string name="download_progress">已下载%1$d%%,下载速度为%2$dk/s</string>
 
     <string name="buy_arrondi">1、一次性全部购买一年内私人顾问板块全部产品，原价%1$s元，限时抢购只需%2$s元。\n2、全部产品可以通过积分兑换，一经兑换，概不退还。 </string>
+    <string name="buy_arrondi_company">1、一次性全部购买一年内公司顾问板块全部产品，原价%1$s元，限时抢购只需%2$s元。\n2、全部产品可以通过积分兑换，一经兑换，概不退还。 </string>
 </resources>
