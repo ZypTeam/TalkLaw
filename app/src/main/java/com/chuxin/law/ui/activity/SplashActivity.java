@@ -87,6 +87,7 @@ public class SplashActivity extends BaseTalkLawActivity {
                 @Override
                 public void run() {
                     goActivity(null, LoginActivity.class);
+                    finish();
                 }
             }, 1000);
 //            handler.sendEmptyMessage(net);
