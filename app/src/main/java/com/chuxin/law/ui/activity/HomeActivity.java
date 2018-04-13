@@ -3,8 +3,6 @@ package com.chuxin.law.ui.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,10 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chuxin.law.TalkLawApplication;
-
 import com.chuxin.law.R;
-
+import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.audioplayer.manage.AudioPlayerManager;
 import com.chuxin.law.audioplayer.service.AudioPlayerService;
 import com.chuxin.law.audioplayer.util.AudioPlayUtils;
@@ -28,17 +24,13 @@ import com.chuxin.law.model.VersionModel;
 import com.chuxin.law.ui.adapter.HomeAdapter;
 import com.chuxin.law.ui.dialog.GratuityDialog;
 import com.chuxin.law.update.ApkDownloadService;
-import com.chuxin.law.util.voice.VoiceHelper;
 import com.jusfoun.baselibrary.Util.AppUtil;
-import com.jusfoun.baselibrary.Util.IOUtil;
-import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.permissiongen.PermissionFail;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
 import com.jusfoun.baselibrary.permissiongen.PermissionSuccess;
 import com.jusfoun.baselibrary.view.HomeViewPager;
 
-import java.io.File;
 import java.util.HashMap;
 
 import rx.functions.Action1;
@@ -139,11 +131,11 @@ public class HomeActivity extends BaseTalkLawActivity {
         initService();
 
         if (!PermissionGen.checkPermissions(mContext,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE})){
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})) {
             PermissionGen.with(this).addRequestCode(100)
-                    .permissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE})
+                    .permissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
                     .request();
-        }else {
+        } else {
             getVersion();
         }
     }
@@ -158,7 +150,7 @@ public class HomeActivity extends BaseTalkLawActivity {
         getVersion();
     }
 
-    private void initService(){
+    private void initService() {
         Intent playerServiceIntent = new Intent(this, AudioPlayerService.class);
         TalkLawApplication.getBaseApplication().startService(playerServiceIntent);
         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -196,6 +188,7 @@ public class HomeActivity extends BaseTalkLawActivity {
     }
 
     private long mLastTime;
+
     /**
      * 退出程序
      */
@@ -241,8 +234,9 @@ public class HomeActivity extends BaseTalkLawActivity {
             @Override
             public void call(VersionModel model) {
                 if (model.getCode() == CommonConstant.NET_SUC_CODE) {
-                    if (model.getVersiondata() != null&&model.getVersiondata().getType()!=0) {
-                        sentMsg(model.getVersiondata());
+                    if (model.getVersiondata() != null) {
+                        if (AppUtil.getVersionCode(mContext) < model.getVersiondata().versioncode)
+                            sentMsg(model.getVersiondata());
                     }
                 }
             }

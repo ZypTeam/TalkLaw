@@ -14,6 +14,7 @@ public class VersionDataModel implements Serializable {
     private String title;
     private String describe;
     private String url;
+    public int versioncode;
 
     public int getType() {
         return type;
