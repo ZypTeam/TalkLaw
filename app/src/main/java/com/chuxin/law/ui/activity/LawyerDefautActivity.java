@@ -404,6 +404,14 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         } else {
             thumbsUp.setImageResource(R.mipmap.icon_lawyer_like_un);
         }
+
+        if(audioModel.is_point==0){
+            jifen.setVisibility(View.INVISIBLE);
+        }else{
+            jifen.setVisibility(View.VISIBLE);
+        }
+
+
         buyCount.setText("已购：" + audioModel.getBuynum());
         title.setText(audioModel.getTitle());
         jifenCount.setText("积分：" + audioModel.getPoint());

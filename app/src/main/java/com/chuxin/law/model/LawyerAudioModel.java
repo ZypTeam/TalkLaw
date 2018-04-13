@@ -45,6 +45,7 @@ public class LawyerAudioModel implements Serializable {
     private int is_colle;
     private int is_buy;
     private String url;
+    public int is_point;
 
     public String getId() {
         return id;

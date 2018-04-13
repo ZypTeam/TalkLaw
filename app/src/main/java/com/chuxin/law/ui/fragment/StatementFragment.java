@@ -137,9 +137,9 @@ public class StatementFragment extends BaseTalkLawFragment implements View.OnCli
         banner.setIndicatorGravity(BannerConfig.CENTER);
 
 
-//        banner.setFocusable(true);
-//        banner.setFocusableInTouchMode(true);
-//        banner.requestFocus();
+        backTitleView.setFocusable(true);
+        backTitleView.setFocusableInTouchMode(true);
+        backTitleView.requestFocus();
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));

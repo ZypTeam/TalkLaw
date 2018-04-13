@@ -63,11 +63,13 @@ public class BuyArrondiActivity extends BaseTalkLawActivity {
     public void initAction() {
         titleView.setTitle("购买");
 
-        quanyi.setText(String.format(getString(R.string.buy_arrondi),oldPrice,priceNum));
+
 
         if (type == 1) {
             content.setText("私人顾问");
+            quanyi.setText(String.format(getString(R.string.buy_arrondi),oldPrice,priceNum));
         } else {
+            quanyi.setText(String.format(getString(R.string.buy_arrondi_company),oldPrice,priceNum));
             content.setText("公司顾问");
         }
 

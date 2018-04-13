@@ -116,7 +116,8 @@
                         android:textColor="#ff8400"
                         android:textSize="12sp"
                         app:layout_constraintLeft_toRightOf="@+id/buy"
-                        app:layout_constraintTop_toTopOf="@+id/buy" />
+                        app:layout_constraintTop_toTopOf="@+id/buy"
+                        android:visibility="invisible"/>
 
                     <TextView
                         android:id="@+id/price"
