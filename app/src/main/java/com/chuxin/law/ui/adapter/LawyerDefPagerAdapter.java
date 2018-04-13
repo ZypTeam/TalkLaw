@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.util.LawyerDefViewPagerUtils;
+import com.jusfoun.baselibrary.Util.StringUtil;
 
 /**
  * @author wangcc
@@ -27,7 +28,7 @@ public class LawyerDefPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return LawyerDefViewPagerUtils.COUNT;
+        return LawyerDefViewPagerUtils.getCount(data);
     }
 
 }

@@ -20,6 +20,7 @@ import com.chuxin.law.model.UserModel;
 import com.chuxin.law.ui.adapter.LawyerDefPagerAdapter;
 import com.chuxin.law.ui.dialog.ShareDialog;
 import com.chuxin.law.util.ImageLoderUtil;
+import com.chuxin.law.util.LawyerDefViewPagerUtils;
 import com.chuxin.law.util.UIUtils;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
@@ -75,6 +76,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     private LawyerDefPagerAdapter adapter;
     private UserModel userModel;
     private LawyerProductModel.LawyerProductData data;
+    private LawyerAudioModel model;
 
     @Override
     public int getLayoutResId() {
@@ -129,7 +131,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
 
             @Override
             public void onPageSelected(int position) {
-                selectPosition(position);
+                selectPosition(position,model);
             }
 
             @Override
@@ -219,8 +221,9 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (data != null)
+                if (data != null) {
                     UIUtils.goCommentList(mContext, id, data.getArticle().getTitle());
+                }
             }
         });
 
@@ -252,29 +255,81 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         getData();
     }
 
-    private void selectPosition(int position) {
-        audio.setTextColor(Color.parseColor("#999999"));
-        audio.setBackgroundResource(R.color.transparent);
-        image.setTextColor(Color.parseColor("#999999"));
-        image.setBackgroundResource(R.color.transparent);
-        video.setTextColor(Color.parseColor("#999999"));
-        video.setBackgroundResource(R.color.transparent);
+    private void selectPosition(int position,LawyerAudioModel model) {
+        if (model==null){
+            return;
+        }
         viewpager.setCurrentItem(position);
-        switch (position) {
-            case 0:
-                audio.setTextColor(Color.parseColor("#cb1f28"));
-                audio.setBackgroundResource(R.drawable.bg_red_line);
-                break;
-            case 1:
-                image.setTextColor(Color.parseColor("#cb1f28"));
-                image.setBackgroundResource(R.drawable.bg_red_line);
-                break;
-            case 2:
-                video.setTextColor(Color.parseColor("#cb1f28"));
-                video.setBackgroundResource(R.drawable.bg_red_line);
-                break;
-            default:
-                break;
+        if (!StringUtil.isEmpty(model.getMp4())&&!StringUtil.isEmpty(model.getMp3())) {
+            audio.setTextColor(Color.parseColor("#999999"));
+            audio.setBackgroundResource(R.color.transparent);
+            image.setTextColor(Color.parseColor("#999999"));
+            image.setBackgroundResource(R.color.transparent);
+            video.setTextColor(Color.parseColor("#999999"));
+            video.setBackgroundResource(R.color.transparent);
+            switch (position) {
+                case 0:
+                    audio.setTextColor(Color.parseColor("#cb1f28"));
+                    audio.setBackgroundResource(R.drawable.bg_red_line);
+                    break;
+                case 1:
+                    image.setTextColor(Color.parseColor("#cb1f28"));
+                    image.setBackgroundResource(R.drawable.bg_red_line);
+                    break;
+                case 2:
+                    video.setTextColor(Color.parseColor("#cb1f28"));
+                    video.setBackgroundResource(R.drawable.bg_red_line);
+                    break;
+                default:
+                    break;
+            }
+            return;
+        }
+
+        if (StringUtil.isEmpty(model.getMp4())&&StringUtil.isEmpty(model.getMp3())){
+            image.setTextColor(Color.parseColor("#cb1f28"));
+            image.setBackgroundResource(R.drawable.bg_red_line);
+            return;
+        }
+
+        if (StringUtil.isEmpty(model.getMp4())){
+            audio.setTextColor(Color.parseColor("#999999"));
+            audio.setBackgroundResource(R.color.transparent);
+            image.setTextColor(Color.parseColor("#999999"));
+            image.setBackgroundResource(R.color.transparent);
+            switch (position) {
+                case 0:
+                    audio.setTextColor(Color.parseColor("#cb1f28"));
+                    audio.setBackgroundResource(R.drawable.bg_red_line);
+                    break;
+                case 1:
+                    image.setTextColor(Color.parseColor("#cb1f28"));
+                    image.setBackgroundResource(R.drawable.bg_red_line);
+                    break;
+                default:
+                    break;
+            }
+            return;
+        }
+
+        if (StringUtil.isEmpty(model.getMp3())){
+            image.setTextColor(Color.parseColor("#999999"));
+            image.setBackgroundResource(R.color.transparent);
+            video.setTextColor(Color.parseColor("#999999"));
+            video.setBackgroundResource(R.color.transparent);
+            switch (position) {
+                case 0:
+                    image.setTextColor(Color.parseColor("#cb1f28"));
+                    image.setBackgroundResource(R.drawable.bg_red_line);
+                    break;
+                case 1:
+                    video.setTextColor(Color.parseColor("#cb1f28"));
+                    video.setBackgroundResource(R.drawable.bg_red_line);
+                    break;
+                default:
+                    break;
+            }
+            return;
         }
     }
 
@@ -318,11 +373,12 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                 });
     }
 
-    private void updateView(LawyerProductModel.LawyerProductData data) {
+    private void updateView(final LawyerProductModel.LawyerProductData data) {
         if (data == null) {
             return;
         }
         this.data = data;
+        this.model=data.getArticle();
         userModel = data.getLawyer();
         ImageLoderUtil.loadCircleImage(mContext, iconHead, userModel.getHeadimg(), R.mipmap.icon_head_def_cir);
         if (StringUtil.isEmpty(userModel.getName())) {
@@ -363,27 +419,37 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
         adapter = new LawyerDefPagerAdapter(getSupportFragmentManager(), data);
         viewpager.setAdapter(adapter);
 
+        final LawyerAudioModel model=data.getArticle();
+
+        if (StringUtil.isEmpty(model.getMp3())){
+            audio.setVisibility(View.GONE);
+        }
+
+        if (StringUtil.isEmpty(model.getMp4())){
+            video.setVisibility(View.GONE);
+        }
+
         audio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectPosition(0);
+                selectPosition(0,model);
             }
         });
 
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectPosition(1);
+                selectPosition(LawyerDefViewPagerUtils.getImagePosition(data),model);
             }
         });
 
         video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectPosition(2);
+                selectPosition(LawyerDefViewPagerUtils.getVideoPosition(data),model);
             }
         });
-        selectPosition(0);
+        selectPosition(0,model);
     }
 
     private void like() {

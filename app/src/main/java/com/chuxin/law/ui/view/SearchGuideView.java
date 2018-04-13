@@ -100,9 +100,10 @@ public class SearchGuideView extends LinearLayout {
         imgDelete.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!TextUtils.isEmpty(mCurrentType)) {
-//                    DBUtil.deleteAll(mContext, mCurrentType);
-                    mHistoryLayout.setVisibility(GONE);
+                mHistoryLayout.setVisibility(GONE);
+                mHistory.removeAllViews();
+                if (onDelListener!=null){
+                    onDelListener.onClick(view);
                 }
             }
         });
@@ -116,6 +117,12 @@ public class SearchGuideView extends LinearLayout {
 
     }
 
+    private OnClickListener onDelListener;
+
+    public void setOnDelListener(OnClickListener onDelListener) {
+        this.onDelListener = onDelListener;
+    }
+
     /**
      * 设置 历史搜索显示
      *
@@ -123,6 +130,8 @@ public class SearchGuideView extends LinearLayout {
      */
     public void setHistoryData(HashSet<String> set) {
         if (set==null||set.size()==0){
+            mHistoryLayout.setVisibility(GONE);
+            mHistory.removeAllViews();
             return;
         }
         mHistoryLayout.setVisibility(VISIBLE);

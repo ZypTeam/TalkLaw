@@ -119,6 +119,14 @@ public class SearchActivity extends BaseTalkLawActivity {
             }
         });
 
+        viewSearchGuide.setOnDelListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                historySearch.clear();
+                SharePrefenceUtils.getInstance().setSet(HISTORY,historySearch);
+            }
+        });
+
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
