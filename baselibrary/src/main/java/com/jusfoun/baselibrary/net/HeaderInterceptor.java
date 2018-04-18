@@ -37,6 +37,7 @@ public class HeaderInterceptor implements Interceptor {
     private String APIVersion = "APIVersion";
     private String ContentType="";
     private String SEAVER_TOKEN="Seaver-Token";
+    private String SEAVER_Type="Seaver-Type";
     public HeaderInterceptor(Context mContext) {
         this.mContext=mContext.getApplicationContext();
     }
@@ -51,6 +52,7 @@ public class HeaderInterceptor implements Interceptor {
 ////                .addHeader(Channel, AppUtil.getChannelName(mContext))
 //                .addHeader(Deviceid, PhoneUtil.getIMEI(mContext))
                 .addHeader(APIVersion, "1.0")
+                .addHeader(SEAVER_Type, "Android")
 //                .addHeader(SEAVER_TOKEN, "d6115638dbf7d1b4a63513fc50d573d3")
                 .build();
 
