@@ -102,6 +102,7 @@
 
         <!--个人信息-->
         <activity
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:name="com.chuxin.law.ui.activity.MyInfoActivity"
             android:screenOrientation="portrait" />
 
@@ -263,6 +264,7 @@
 
         <!--律师认证-->
         <activity
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:name=".ui.activity.LawyerAuthActivity"
             android:screenOrientation="portrait" />
 
@@ -413,12 +415,6 @@
 
         </activity>
 
-
-        <!--Image Selector Entry-->
-        <activity
-            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
-            android:configChanges="orientation|screenSize" />
-
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5a3a0da5b27b0a4ed200002f" />
@@ -548,15 +544,15 @@
 
         <service android:name=".audioplayer.service.AudioPlayerService" />
 
-        <provider
+        <!--<provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.chuxin.law.FileProvider"
+            android:authorities="com.chuxin.law.qr.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/rc_file_path" />
-        </provider>
+        </provider>-->
 
         <meta-data
             android:name="UMENG_CHANNEL"

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:background="@drawable/shape_bg_dialog_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="116dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/top_txt"
+            android:gravity="center"
+            android:textColor="@color/color_017af8"
+            android:textSize="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_dialog_first_btn_bg"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line_color" />
+
+        <TextView
+            android:id="@+id/bottom_txt"
+            android:gravity="center"
+            android:textColor="@color/color_017af8"
+            android:textSize="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_dialog_second_bg"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:background="@drawable/selector_bottom_dialog"
+        android:id="@+id/cencel"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/color_017af8"
+        android:textSize="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+</LinearLayout>

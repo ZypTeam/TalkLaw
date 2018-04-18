@@ -14,18 +14,22 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.chuxin.law.R;
 import com.chuxin.law.TalkLawApplication;
+import com.chuxin.law.base.BaseTakeActivity;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.common.UserInfoDelegate;
 import com.chuxin.law.model.UserInfoModel;
 import com.chuxin.law.model.UserModel;
+import com.chuxin.law.ui.dialog.BottomDialog;
+import com.chuxin.law.util.TakeHelper;
 import com.chuxin.law.util.base64.Base64Util;
 import com.chuxin.law.util.base64.EncodeCallBack;
 import com.chuxin.law.ui.view.wheel.dialog.SelectorDateDialog;
 import com.chuxin.law.ui.widget.BackTitleView;
 import com.chuxin.law.ui.widget.NumberPickerPopupwinow;
 import com.chuxin.law.ui.widget.SexNumberPickerPopup;
+import com.jph.takephoto.model.TResult;
 import com.jusfoun.baselibrary.Util.PhoneUtil;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
@@ -33,10 +37,7 @@ import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.GlideCircleTransform;
 
 import java.util.HashMap;
-import java.util.List;
 
-import me.nereo.multi_image_selector.MultiImageSelector;
-import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 import rx.functions.Action1;
 
 /**
@@ -45,7 +46,7 @@ import rx.functions.Action1;
  * @describe
  */
 
-public class MyInfoActivity extends BaseTalkLawActivity {
+public class MyInfoActivity extends BaseTakeActivity {
     //    implements View.OnKeyListener
     private final int NAME_REQUEST_CODE = 101;
     private final int NICKNAME_REQUEST_CODE = 102;
@@ -78,10 +79,12 @@ public class MyInfoActivity extends BaseTalkLawActivity {
     protected View lineAddress;
     protected TextView number;
     protected View lineNumber;
-    protected TextView mail,introText,userIntroText;
+    protected TextView mail, introText, userIntroText;
 
     private HashMap<String, String> editUserMap = new HashMap<>();
     private UserModel userModel;
+
+    private BottomDialog bottomDialog;
 
     private SelectorDateDialog dialog;
 
@@ -97,6 +100,24 @@ public class MyInfoActivity extends BaseTalkLawActivity {
 
     @Override
     public void initDatas() {
+        bottomDialog = new BottomDialog(mContext, R.style.my_dialog);
+        bottomDialog.setTxt("拍照", "从相册选取");
+        bottomDialog.setTopListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TakeHelper.pickByTake(getTakePhoto());
+                bottomDialog.dismiss();
+            }
+        });
+
+        bottomDialog.setBottomListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TakeHelper.pickBySelect(takePhoto);
+                bottomDialog.dismiss();
+            }
+        });
+
         dialog = new SelectorDateDialog(mContext, R.style.my_dialog);
         sexNumPicPop = new SexNumberPickerPopup(MyInfoActivity.this,
                 new View.OnClickListener() {
@@ -166,8 +187,6 @@ public class MyInfoActivity extends BaseTalkLawActivity {
         mail = (TextView) findViewById(R.id.mail);
         introText = (TextView) findViewById(R.id.intro);
         userIntroText = (TextView) findViewById(R.id.user_intro);
-
-
 
 
     }
@@ -279,13 +298,14 @@ public class MyInfoActivity extends BaseTalkLawActivity {
         iconHead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                bottomDialog.show();
                 // Multi image selector form an Activity
-                MultiImageSelector.create(MyInfoActivity.this)
+               /* MultiImageSelector.create(MyInfoActivity.this)
                         .showCamera(true) // 是否显示相机. 默认为显示
                         .count(1) // 最大选择图片数量, 默认为9. 只有在选择模式为多选时有效
                         .single() // 单选模式
                         .multi() // 多选模式, 默认模式;
-                        .start(MyInfoActivity.this, REQUEST_IMAGE);
+                        .start(MyInfoActivity.this, REQUEST_IMAGE);*/
             }
         });
 
@@ -356,7 +376,7 @@ public class MyInfoActivity extends BaseTalkLawActivity {
 
     private void editUserInfo(boolean isEditHeadImg) {
         showLoadDialog();
-        Log.e("tag","editUserMap="+editUserMap);
+        Log.e("tag", "editUserMap=" + editUserMap);
         addNetwork(Api.getInstance().getService(ApiService.class).editUserInfo(editUserMap)
                 , new Action1<UserInfoModel>() {
                     @Override
@@ -371,7 +391,7 @@ public class MyInfoActivity extends BaseTalkLawActivity {
                     @Override
                     public void call(Throwable throwable) {
                         hideLoadDialog();
-                        Log.e("tag","throwable="+throwable);
+                        Log.e("tag", "throwable=" + throwable);
                         showToast("修改失败");
                     }
                 });
@@ -472,37 +492,19 @@ public class MyInfoActivity extends BaseTalkLawActivity {
             return;
         }
         if (requestCode == NAME_REQUEST_CODE || requestCode == NICKNAME_REQUEST_CODE
-                || requestCode == PHONE_REQUEST_CODE || requestCode == EMAIL_REQUEST_CODE||requestCode==ADDRESS_REQUEST_CODE) {
+                || requestCode == PHONE_REQUEST_CODE || requestCode == EMAIL_REQUEST_CODE || requestCode == ADDRESS_REQUEST_CODE) {
 //            userModel = TalkLawApplication.getUserInfo();
             updateUserInfo();
         }
 
-        if (requestCode == REQUEST_IMAGE&&data!=null) {
-            final List<String> pathList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+        if (requestCode == REQUEST_IMAGE && data != null) {
+            /*final List<String> pathList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
             if (pathList != null && pathList.size() > 0) {
-                userModel.setHeadimg(pathList.get(0));
-                Base64Util.encodeBase64File(this, pathList.get(0), new EncodeCallBack() {
-                    @Override
-                    public void callBack(final String str) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                editUserMap.clear();
-                                editUserMap.put("headimg", "data:image/jpeg;base64," + str);
-                                editUserInfo(true);
-                                Glide.with(mContext)
-                                        .load(pathList.get(0))
-                                        .placeholder(R.mipmap.icon_head_def_cir)
-                                        .error(R.mipmap.icon_head_def_cir)
-                                        .transform(new CenterCrop(mContext), new GlideCircleTransform(mContext))
-                                        .crossFade()
-                                        .into(iconHead);
-                            }
-                        });
+
                     }
                 });
 
-            }
+            }*/
         }
     }
 
@@ -510,5 +512,39 @@ public class MyInfoActivity extends BaseTalkLawActivity {
     public void onBackPressed() {
         super.onBackPressed();
         setResult(RESULT_OK);
+    }
+
+    @Override
+    public void takeSuccess(TResult result) {
+        super.takeSuccess(result);
+        if (result == null) {
+            return;
+        }
+        if (result.getImages() == null || result.getImages().size() == 0
+                || result.getImages().get(0) == null) {
+            return;
+        }
+        final String url = result.getImages().get(0).getOriginalPath();
+        userModel.setHeadimg(url);
+        Base64Util.encodeBase64File(this, url, new EncodeCallBack() {
+            @Override
+            public void callBack(final String str) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        editUserMap.clear();
+                        editUserMap.put("headimg", "data:image/jpeg;base64," + str);
+                        editUserInfo(true);
+                        Glide.with(mContext)
+                                .load(url)
+                                .placeholder(R.mipmap.icon_head_def_cir)
+                                .error(R.mipmap.icon_head_def_cir)
+                                .transform(new CenterCrop(mContext), new GlideCircleTransform(mContext))
+                                .crossFade()
+                                .into(iconHead);
+                    }
+                });
+            }
+        });
     }
 }
