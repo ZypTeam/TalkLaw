@@ -251,7 +251,6 @@
                 android:textSize="24sp"
                 android:textColor="#fda623"
                 app:layout_constraintLeft_toLeftOf="@+id/view_zhanghu_info"
-                android:text="$9999"
                 android:gravity="center"
                 app:layout_constraintRight_toRightOf="@+id/zhuanghu"
                 android:layout_width="0dp"
@@ -266,7 +265,6 @@
                 android:gravity="center"
                 app:layout_constraintLeft_toLeftOf="@+id/jifen"
                 app:layout_constraintRight_toRightOf="@+id/jifen"
-                android:text="999"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
 
