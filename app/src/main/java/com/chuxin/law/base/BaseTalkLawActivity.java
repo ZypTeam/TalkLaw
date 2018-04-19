@@ -1,11 +1,15 @@
 package com.chuxin.law.base;
 
+import android.app.KeyguardManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.chuxin.law.R;
+import com.chuxin.law.audioplayer.receiver.AudioBroadcastReceiver;
 import com.chuxin.law.ui.dialog.LoadingDialog;
 import com.jusfoun.baselibrary.base.BaseActivity;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
@@ -20,10 +24,12 @@ import com.umeng.analytics.MobclickAgent;
 public abstract class BaseTalkLawActivity extends BaseActivity {
 
     private LoadingDialog loadingDialog;
+    private KeyguardManager mKeyguardManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mKeyguardManager= (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
         initDialog();
         initDatas();
         initView();
@@ -73,5 +79,15 @@ public abstract class BaseTalkLawActivity extends BaseActivity {
         MobclickAgent.onPageEnd(this.getClass().getSimpleName());
         MobclickAgent.onPause(mContext);
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mKeyguardManager.inKeyguardRestrictedInputMode()){
+            Intent resumeIntent = new Intent(AudioBroadcastReceiver.ACTION_PAUSEMUSIC);
+            resumeIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+            mContext.sendBroadcast(resumeIntent);
+        }
     }
 }

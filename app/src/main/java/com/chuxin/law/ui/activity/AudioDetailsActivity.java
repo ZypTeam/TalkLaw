@@ -92,8 +92,6 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
 
     private MyProgressBar myProgressBar;
 
-    private KeyguardManager mKeyguardManager;
-
     private boolean hasPer=false;
 
     /**
@@ -676,13 +674,5 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
         seek.setProgress(0);
         time.setText("00:00");
         play.setImageResource(R.mipmap.icon_audio_player);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mKeyguardManager.inKeyguardRestrictedInputMode()){
-            EventBus.getDefault().post(new AudioStopEvent());
-        }
     }
 }

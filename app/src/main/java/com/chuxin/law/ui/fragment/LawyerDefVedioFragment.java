@@ -1,5 +1,6 @@
 package com.chuxin.law.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.chuxin.law.R;
 import com.chuxin.law.audioplayer.AudioStopEvent;
+import com.chuxin.law.audioplayer.receiver.AudioBroadcastReceiver;
 import com.chuxin.law.base.BaseTalkLawFragment;
 import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.ui.widget.HtmlTextView;
@@ -115,7 +117,9 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
                     showToast("请先购买");
                     return;
                 }
-                EventBus.getDefault().post(new AudioStopEvent());
+                Intent resumeIntent = new Intent(AudioBroadcastReceiver.ACTION_PAUSEMUSIC);
+                resumeIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+                mContext.sendBroadcast(resumeIntent);
                 videoPlayView.start(url);
             }
         });

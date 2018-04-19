@@ -31,4 +31,8 @@ public class CommonLogic {
     public void setLawyerProductData(LawyerProductModel.LawyerProductData lawyerProductData) {
         this.lawyerProductData = lawyerProductData;
     }
+
+    public void  clear(){
+        lawyerProductData=null;
+    }
 }

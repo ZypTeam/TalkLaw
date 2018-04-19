@@ -84,7 +84,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     private UserModel userModel;
     private LawyerProductModel.LawyerProductData data;
     private LawyerAudioModel model;
-    private KeyguardManager mKeyguardManager;
+
 
     @Override
     public int getLayoutResId() {
@@ -94,7 +94,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
 
-        mKeyguardManager= (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+
         id = getIntent().getStringExtra(ID);
         shareDialog = new ShareDialog(this);
     }
@@ -131,6 +131,8 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
 
     @Override
     public void initAction() {
+
+        viewpager.setOffscreenPageLimit(2);
 
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -599,8 +601,5 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (mKeyguardManager.inKeyguardRestrictedInputMode()){
-            EventBus.getDefault().post(new AudioStopEvent());
-        }
     }
 }

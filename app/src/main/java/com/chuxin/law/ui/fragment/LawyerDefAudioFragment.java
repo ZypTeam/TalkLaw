@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.fragment;
 
 import android.Manifest;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ import com.jusfoun.baselibrary.task.WeakHandler;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import rx.functions.Action1;
 
@@ -78,6 +80,8 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
     private AudioInfo audioInfo;
     private VoiceHelper voiceHelper;
     private MyProgressBar progressBar;
+
+    private KeyguardManager mKeyguardManager;
 
     /**
      * 音频广播
@@ -218,6 +222,9 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
 
     @Override
     public void initDatas() {
+
+        mKeyguardManager= (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
+
         data = (LawyerProductModel.LawyerProductData) getArguments().getSerializable(LawyerDefViewPagerUtils.DATA);
         if (data == null || data.getArticle() == null || data.getLawyer() == null) {
             return;
@@ -521,6 +528,10 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
             mOnLineAudioReceiver.unregisterReceiver(mContext);
             mOnLineAudioReceiver=null;
         }
+
+        if (mKeyguardManager.inKeyguardRestrictedInputMode()){
+            play.setImageResource(R.mipmap.icon_lawyer_pause);
+        }
     }
 
     @Override
@@ -552,7 +563,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
 
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(AudioStopEvent event){
         seek.setProgress(0);
         time.setText("00:00");
