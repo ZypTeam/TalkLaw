@@ -53,10 +53,10 @@ public class RecommendCourtesyActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
 
-        PermissionGen.needPermission(RecommendCourtesyActivity.this,100,new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-        });
+        if (!checkPer()){
+            applyPer();
+        }
+
         shareDialog = new ShareDialog(this);
         rulesDialog = new RecommendationRulesDialog(mContext);
         if (getIntent().getExtras()!=null){
@@ -89,22 +89,25 @@ public class RecommendCourtesyActivity extends BaseTalkLawActivity {
     @PermissionFail(requestCode = 100)
     private void onPerFail(){
         showToast("无存储权限");
-        finish();
     }
 
     @PermissionSuccess(requestCode = 100)
     private void onPerSuc(){
-//        saveQrcode();
+        saveQrcode();
     }
 
     private void saveQrcode() {
 
-        while (qrcodeBitmap != null && !qrcodeBitmap.isRecycled()) {
-            qrcodeBitmap = WiterQRUtil.witerQRCenterLogo(url, BitmapFactory.decodeResource(getResources(), R.mipmap.logo)
-                    , PhoneUtil.dip2px(mContext, 271), Color.BLACK, Color.WHITE);
-            break;
+        if (checkPer()) {
+            while (qrcodeBitmap != null && !qrcodeBitmap.isRecycled()) {
+                qrcodeBitmap = WiterQRUtil.witerQRCenterLogo(url, BitmapFactory.decodeResource(getResources(), R.mipmap.logo)
+                        , PhoneUtil.dip2px(mContext, 271), Color.BLACK, Color.WHITE);
+                break;
+            }
+            IOUtil.saveImageToGallery(mContext, qrcodeBitmap, "qrcode");
+        }else {
+            applyPer();
         }
-        IOUtil.saveImageToGallery(mContext, qrcodeBitmap,"qrcode");
     }
 
     @Override
@@ -152,5 +155,17 @@ public class RecommendCourtesyActivity extends BaseTalkLawActivity {
         if (shareDialog!=null){
             shareDialog.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private boolean checkPer(){
+        return PermissionGen.checkPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE});
+    }
+
+    private void applyPer(){
+        PermissionGen.with(this).addRequestCode(100)
+                .permissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE})
+                .request();
     }
 }

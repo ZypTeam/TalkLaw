@@ -121,7 +121,6 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:11.4.0'
     compile 'com.parse:parse-android:1.13.1'
     compile 'com.android.support:multidex:1.0.1'
-    compile 'com.github.lovetuzitong:MultiImageSelector:1.2'
     compile project(':videolibrary')
 //    compile files('libs/alipaySdk-20170922.jar')
 
@@ -138,5 +137,7 @@ dependencies {
     compile 'com.belerweb:pinyin4j:2.5.0'
 
     compile 'com.umeng.analytics:analytics:latest.integration'
+
+    compile 'com.jph.takephoto:takephoto_library:4.0.3'
 }
 

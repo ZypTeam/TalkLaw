@@ -24,8 +24,16 @@
     <color name="select_text">#333333</color>
     <color name="wheel_bg">#f2f2f2</color>
 
+    <color name="division_line">#efefef</color>
+
+    <color name="color_017af8">#017af8</color>
+
+    <color name="line_color">#c8c8c9</color>
+
 
     <!--下载-->
     <color name="download_pro_color">#666666</color>
+
+    <color name="multiple_image_select_primaryDark">#333333</color>
 
 </resources>
