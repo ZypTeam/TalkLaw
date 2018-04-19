@@ -1,6 +1,7 @@
 package com.chuxin.law.ui.activity;
 
 import android.Manifest;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -90,6 +91,8 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
     private VoiceHelper voiceHelper;
 
     private MyProgressBar myProgressBar;
+
+    private KeyguardManager mKeyguardManager;
 
     private boolean hasPer=false;
 
@@ -536,12 +539,12 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
         //注册接收音频播放广播
         mAudioBroadcastReceiver = new AudioBroadcastReceiver(getApplicationContext());
         mAudioBroadcastReceiver.setAudioReceiverListener(mAudioReceiverListener);
-        mAudioBroadcastReceiver.registerReceiver(getApplicationContext());
+        mAudioBroadcastReceiver.registerReceiver(mContext);
 
         //在线音乐广播
         mOnLineAudioReceiver = new OnLineAudioReceiver(getApplicationContext());
         mOnLineAudioReceiver.setOnlineAudioReceiverListener(mOnlineAudioReceiverListener);
-        mOnLineAudioReceiver.registerReceiver(getApplicationContext());
+        mOnLineAudioReceiver.registerReceiver(mContext);
     }
 
     private String setTimeAll(long time) {
@@ -673,5 +676,13 @@ public class AudioDetailsActivity extends BaseTalkLawActivity {
         seek.setProgress(0);
         time.setText("00:00");
         play.setImageResource(R.mipmap.icon_audio_player);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mKeyguardManager.inKeyguardRestrictedInputMode()){
+            EventBus.getDefault().post(new AudioStopEvent());
+        }
     }
 }

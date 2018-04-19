@@ -1,14 +1,18 @@
 package com.chuxin.law.ui.activity;
 
+import android.app.KeyguardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chuxin.law.R;
+import com.chuxin.law.audioplayer.AudioStopEvent;
 import com.chuxin.law.base.BaseTalkLawActivity;
 import com.chuxin.law.common.ApiService;
 import com.chuxin.law.common.CommonConstant;
@@ -22,11 +26,14 @@ import com.chuxin.law.ui.dialog.ShareDialog;
 import com.chuxin.law.util.ImageLoderUtil;
 import com.chuxin.law.util.LawyerDefViewPagerUtils;
 import com.chuxin.law.util.UIUtils;
+import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.Util.StringUtil;
 import com.jusfoun.baselibrary.base.NoDataModel;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.widget.TitleStatusBarView;
 import com.umeng.socialize.UMShareAPI;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -77,6 +84,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     private UserModel userModel;
     private LawyerProductModel.LawyerProductData data;
     private LawyerAudioModel model;
+    private KeyguardManager mKeyguardManager;
 
     @Override
     public int getLayoutResId() {
@@ -86,6 +94,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
     @Override
     public void initDatas() {
 
+        mKeyguardManager= (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
         id = getIntent().getStringExtra(ID);
         shareDialog = new ShareDialog(this);
     }
@@ -587,5 +596,11 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                 });
     }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mKeyguardManager.inKeyguardRestrictedInputMode()){
+            EventBus.getDefault().post(new AudioStopEvent());
+        }
+    }
 }

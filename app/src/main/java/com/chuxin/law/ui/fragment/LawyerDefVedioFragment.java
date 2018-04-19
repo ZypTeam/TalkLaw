@@ -8,12 +8,15 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.chuxin.law.R;
+import com.chuxin.law.audioplayer.AudioStopEvent;
 import com.chuxin.law.base.BaseTalkLawFragment;
 import com.chuxin.law.model.LawyerProductModel;
 import com.chuxin.law.ui.widget.HtmlTextView;
 import com.chuxin.law.util.ImageLoderUtil;
 import com.chuxin.law.util.LawyerDefViewPagerUtils;
 import com.chuxin.law.util.UIUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import rx.functions.Action1;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
@@ -112,6 +115,7 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
                     showToast("请先购买");
                     return;
                 }
+                EventBus.getDefault().post(new AudioStopEvent());
                 videoPlayView.start(url);
             }
         });

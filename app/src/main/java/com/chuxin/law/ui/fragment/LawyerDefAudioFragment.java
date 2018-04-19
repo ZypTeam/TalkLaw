@@ -501,8 +501,8 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         if (CommonLogic.getInstance().getLawyerProductData() == null
                 || CommonLogic.getInstance().getLawyerProductData().getArticle() == null
                 || StringUtil.equals(CommonLogic.getInstance().getLawyerProductData().getArticle().getId(), data.getArticle().getId())) {
