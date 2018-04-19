@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/txt"
-        android:text="未来就是法制化，你做好准备了吗"
+        android:text="未来就是法治化，你做好准备了吗"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/number"
