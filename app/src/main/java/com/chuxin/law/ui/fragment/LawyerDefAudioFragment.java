@@ -1,10 +1,12 @@
 package com.chuxin.law.ui.fragment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -108,6 +110,8 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
             doNetMusicReceive(context, intent);
         }
     };
+
+    private PowerManager pm;
 
     /**
      * 处理网络歌曲广播
@@ -243,6 +247,8 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
         audioInfo.setType(AudioInfo.NET);
         voiceHelper=new VoiceHelper();
         voiceHelper.initVoice(VoiceHelper.MUSIC_INDEX,url);
+
+        pm = (PowerManager)mContext.getSystemService(Context.POWER_SERVICE);
     }
 
     @Override
@@ -531,6 +537,13 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
 
         if (mKeyguardManager.inKeyguardRestrictedInputMode()){
             play.setImageResource(R.mipmap.icon_lawyer_pause);
+        }
+
+        if (pm != null) {
+            boolean isScreenOn = pm.isScreenOn();//如果为true，则表示屏幕“亮”了，否则屏幕“暗”了。
+            if (!isScreenOn) {
+                play.setImageResource(R.mipmap.icon_lawyer_pause);
+            }
         }
     }
 

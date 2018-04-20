@@ -213,6 +213,10 @@ public class LoginActivity extends BaseTalkLawActivity {
                             Api.getInstance().register(LoginActivity.this, getString(R.string.url))
                                     .addInterceptro(new HeaderTalkInterceptor())
                                     .build();
+                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
+                            Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
+                            goActivity(null, HomeActivity.class);
+
                             loginHx(userInfoModel);
                         } else {
                             hideLoadDialog();
@@ -249,6 +253,10 @@ public class LoginActivity extends BaseTalkLawActivity {
 
 //                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
 //                            goActivity(null, HomeActivity.class);
+
+                            UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
+                            Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
+                            goActivity(null, HomeActivity.class);
 
                             loginHx(userInfoModel);
                         } else {
@@ -330,14 +338,13 @@ public class LoginActivity extends BaseTalkLawActivity {
 
     private void loginHx(final UserInfoModel userInfoModel) {
 
-
         RongIM.connect(userInfoModel.getData().rToken, new RongIMClient.ConnectCallback() {
             @Override
             public void onTokenIncorrect() {
                 Log.e("connect", "onTokenIncorrect");
 //                reGetToken();
                 hideLoadDialog();
-                Toast.makeText(mContext, "登录失败", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "登录失败", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -353,8 +360,6 @@ public class LoginActivity extends BaseTalkLawActivity {
                     }
                     RongIM.getInstance().setCurrentUserInfo(new UserInfo( userInfoModel.getData().getUserid(), userInfoModel.getData().getName(), Uri.parse(userInfoModel.getData().getHeadimg())));
                 }
-
-                UserInfoDelegate.getInstance().saveUserInfo(userInfoModel.getData());
                 Api.getInstance().register(LoginActivity.this, getString(R.string.url))
                         .addInterceptro(new HeaderTalkInterceptor())
                         .build();
@@ -368,12 +373,10 @@ public class LoginActivity extends BaseTalkLawActivity {
                 editor.putString("loginToken", userInfoModel.getData().rToken);
                 editor.commit();
 
-                Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
 
 
 //                SealAppContext.getInstance().setInputProvider();
-                goActivity(null, HomeActivity.class);
-                finish();
+
 
 //                connectResultId = s;
 //                NLog.e("connect", "onSuccess userid:" + s);
@@ -386,7 +389,7 @@ public class LoginActivity extends BaseTalkLawActivity {
             @Override
             public void onError(RongIMClient.ErrorCode errorCode) {
                 hideLoadDialog();
-                Toast.makeText(mContext, "登录失败", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "登录失败", Toast.LENGTH_SHORT).show();
                 Log.e("connect", "onError errorcode:" + errorCode.getValue());
             }
         });
