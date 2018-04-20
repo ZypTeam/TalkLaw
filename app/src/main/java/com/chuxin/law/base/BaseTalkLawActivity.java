@@ -75,7 +75,6 @@ public abstract class BaseTalkLawActivity extends BaseActivity {
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
         MobclickAgent.onResume(mContext);
 
-        Log.e("tag", "onStoponStop3=" + mKeyguardManager.inKeyguardRestrictedInputMode());
     }
 
     @Override
@@ -96,6 +95,12 @@ public abstract class BaseTalkLawActivity extends BaseActivity {
                 resumeIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
                 mContext.sendBroadcast(resumeIntent);
             }
+        }
+
+        if(mKeyguardManager.inKeyguardRestrictedInputMode()){
+            Intent resumeIntent = new Intent(AudioBroadcastReceiver.ACTION_PAUSEMUSIC);
+            resumeIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+            mContext.sendBroadcast(resumeIntent);
         }
     }
 }
