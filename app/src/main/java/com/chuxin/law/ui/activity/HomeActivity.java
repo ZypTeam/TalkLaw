@@ -2,6 +2,7 @@ package com.chuxin.law.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,10 +22,12 @@ import com.chuxin.law.common.CommonConstant;
 import com.chuxin.law.common.CommonLogic;
 import com.chuxin.law.model.VersionDataModel;
 import com.chuxin.law.model.VersionModel;
+import com.chuxin.law.receiver.ScreenBroadcastReceiver;
 import com.chuxin.law.ui.adapter.HomeAdapter;
 import com.chuxin.law.ui.dialog.GratuityDialog;
 import com.chuxin.law.update.ApkDownloadService;
 import com.jusfoun.baselibrary.Util.AppUtil;
+import com.jusfoun.baselibrary.Util.LogUtil;
 import com.jusfoun.baselibrary.net.Api;
 import com.jusfoun.baselibrary.permissiongen.PermissionFail;
 import com.jusfoun.baselibrary.permissiongen.PermissionGen;
@@ -48,6 +51,8 @@ public class HomeActivity extends BaseTalkLawActivity {
     private LinearLayout opinionLayout, statementLayout, myLayout;
     private ImageView opinionImg, statementImg, myImg;
     private TextView opinionText, statementText, myText;
+
+    private ScreenBroadcastReceiver screenReceiver;
 
     @Override
     public int getLayoutResId() {
@@ -130,6 +135,7 @@ public class HomeActivity extends BaseTalkLawActivity {
 
         initService();
 
+//        registerBroadcastReceiver();
         if (!PermissionGen.checkPermissions(mContext,
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})) {
             PermissionGen.with(this).addRequestCode(100)
@@ -214,6 +220,7 @@ public class HomeActivity extends BaseTalkLawActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+//        unRegisterBroadcastReceiver();
         CommonLogic.getInstance().setLawyerProductData(null);
         AudioPlayUtils.getInstance().setPlayStatus(AudioPlayerManager.STOP);
         Intent playerServiceIntent = new Intent(this, AudioPlayerService.class);
@@ -246,6 +253,40 @@ public class HomeActivity extends BaseTalkLawActivity {
 
             }
         });
+    }
+
+    /**
+     * 启动screen状态广播接收器
+     */
+    private void registerBroadcastReceiver() {
+        screenReceiver=new ScreenBroadcastReceiver();
+        screenReceiver.setScreenStateListener(new ScreenBroadcastReceiver.ScreenStateListener() {
+            @Override
+            public void onScreenOn() {
+                LogUtil.e(TAG,"onScreenOn");
+            }
+
+            @Override
+            public void onScreenOff() {
+                LogUtil.e(TAG,"onScreenOff");
+            }
+
+            @Override
+            public void onUserPresent() {
+                LogUtil.e(TAG,"onUserPresent");
+            }
+        });
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_USER_PRESENT);
+        registerReceiver(screenReceiver, filter);
+    }
+
+    private void unRegisterBroadcastReceiver(){
+        if (screenReceiver!=null) {
+            unregisterReceiver(screenReceiver);
+        }
     }
 
     private void sentMsg(final VersionDataModel versionDataModel) {
