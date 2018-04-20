@@ -4,6 +4,7 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -25,11 +26,12 @@ public abstract class BaseTalkLawActivity extends BaseActivity {
 
     private LoadingDialog loadingDialog;
     private KeyguardManager mKeyguardManager;
+    private PowerManager pm;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mKeyguardManager= (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+        mKeyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
         initDialog();
         initDatas();
         initView();
@@ -48,6 +50,7 @@ public abstract class BaseTalkLawActivity extends BaseActivity {
             loadingDialog.setCancelable(true);
             loadingDialog.setCanceledOnTouchOutside(false);
         }
+        pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
     }
 
     protected void showLoadDialog() {
@@ -71,6 +74,7 @@ public abstract class BaseTalkLawActivity extends BaseActivity {
         super.onResume();
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
         MobclickAgent.onResume(mContext);
+
     }
 
     @Override
@@ -84,7 +88,16 @@ public abstract class BaseTalkLawActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (mKeyguardManager.inKeyguardRestrictedInputMode()){
+        if (pm != null) {
+            boolean isScreenOn = pm.isScreenOn();//如果为true，则表示屏幕“亮”了，否则屏幕“暗”了。
+            if (!isScreenOn) {
+                Intent resumeIntent = new Intent(AudioBroadcastReceiver.ACTION_PAUSEMUSIC);
+                resumeIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+                mContext.sendBroadcast(resumeIntent);
+            }
+        }
+
+        if(mKeyguardManager.inKeyguardRestrictedInputMode()){
             Intent resumeIntent = new Intent(AudioBroadcastReceiver.ACTION_PAUSEMUSIC);
             resumeIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
             mContext.sendBroadcast(resumeIntent);
