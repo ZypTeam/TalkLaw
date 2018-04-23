@@ -62,4 +62,9 @@ public class CommonConstant {
     //购买顾问成功
     public static final String EVENT_BUY_ARRONDI="event_buy_arrondi";
 
+    /**
+     * 视频播放
+     */
+    public static final String AUDIO_PLAYER="audio_player";
+
 }

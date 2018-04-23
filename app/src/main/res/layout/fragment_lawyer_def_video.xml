@@ -9,33 +9,51 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/video"
-        android:layout_width="match_parent"
-        android:layout_height="212dp" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="212dp">
 
-    <com.chuxin.law.ui.widget.HtmlTextView
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="20dp"
-        android:textColor="#666"
-        android:textSize="17sp" />
+            <FrameLayout
+                android:id="@+id/video"
+                android:layout_width="match_parent"
+                android:layout_height="212dp" />
 
-    <TextView
-        android:id="@+id/dashang"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="13dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@mipmap/icon_dashang"
-        android:gravity="center_horizontal"
-        android:paddingTop="45dp"
-        android:text="打赏"
-        android:textColor="#8d8e93"
-        android:textSize="13sp" />
+            <ImageView
+                android:id="@+id/img_video"
+                android:layout_width="match_parent"
+                android:layout_height="212dp" />
+
+            <ImageView
+                android:id="@+id/play"
+                android:src="@mipmap/video_stop_btn"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+
+        <com.chuxin.law.ui.widget.HtmlTextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#666"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/dashang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="13dp"
+            android:background="@mipmap/icon_dashang"
+            android:gravity="center_horizontal"
+            android:paddingTop="45dp"
+            android:text="打赏"
+            android:textColor="#8d8e93"
+            android:textSize="13sp" />
 
     </LinearLayout>
 

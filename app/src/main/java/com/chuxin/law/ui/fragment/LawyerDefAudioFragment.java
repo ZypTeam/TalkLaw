@@ -302,6 +302,7 @@ public class LawyerDefAudioFragment extends BaseTalkLawFragment {
                         && CommonLogic.getInstance().getLawyerProductData().getArticle() != null
                         && !StringUtil.equals(CommonLogic.getInstance().getLawyerProductData().getArticle().getId(), data.getArticle().getId())) {
                     initService();
+                    rxManage.post(CommonConstant.AUDIO_PLAYER,"");
                     CommonLogic.getInstance().setLawyerProductData(data);
                     Intent playIntent = new Intent(AudioBroadcastReceiver.ACTION_PLAYMUSIC);
                     AudioMessage audioMessage = new AudioMessage();

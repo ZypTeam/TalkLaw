@@ -24,6 +24,7 @@ import rx.functions.Action1;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import witmob.com.videolibrary.media.VideoPlayView;
 
+import static com.chuxin.law.common.CommonConstant.AUDIO_PLAYER;
 import static com.chuxin.law.common.CommonConstant.EVENT_BUY_LAWYER;
 
 /**
@@ -47,7 +48,7 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
     private VideoPlayView videoPlayView;
     private String id;
     private LawyerProductModel.LawyerProductData data;
-    private ImageView videoImg;
+    private ImageView videoImg,play;
 
     public static LawyerDefVedioFragment getInstance(Bundle args) {
         LawyerDefVedioFragment fragment = new LawyerDefVedioFragment();
@@ -88,10 +89,11 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
         seek = (SeekBar) rootView.findViewById(R.id.seek);
         content = (HtmlTextView) rootView.findViewById(R.id.content);
         dashang = (TextView) rootView.findViewById(R.id.dashang);
+        videoImg=rootView.findViewById(R.id.img_video);
+        play=rootView.findViewById(R.id.play);
+
 
         videoPlayView=new VideoPlayView(mContext);
-        video.addView(videoPlayView);
-        videoImg=videoPlayView.getVideoImage();
     }
 
     @Override
@@ -107,10 +109,13 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
         videoPlayView.setCompletionListener(new VideoPlayView.CompletionListener() {
             @Override
             public void completion(IMediaPlayer mp) {
+                videoImg.setVisibility(View.VISIBLE);
+                play.setVisibility(View.VISIBLE);
+                video.removeAllViews();
                 videoPlayView.release();
             }
         });
-        videoImg.setOnClickListener(new View.OnClickListener() {
+        play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (data==null||data.getArticle()==null||data.getArticle().getIs_buy()==0){
@@ -120,6 +125,10 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
                 Intent resumeIntent = new Intent(AudioBroadcastReceiver.ACTION_PAUSEMUSIC);
                 resumeIntent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
                 mContext.sendBroadcast(resumeIntent);
+                videoImg.setVisibility(View.GONE);
+                play.setVisibility(View.GONE);
+                video.removeAllViews();
+                video.addView(videoPlayView);
                 videoPlayView.start(url);
             }
         });
@@ -132,6 +141,18 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
                 }
             }
         });
+
+        rxManage.on(AUDIO_PLAYER, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                if (videoPlayView.isPlay()){
+                    videoPlayView.stop();
+                    video.removeAllViews();
+                    videoImg.setVisibility(View.VISIBLE);
+                    play.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     @Override
@@ -141,6 +162,9 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
             if (videoPlayView!=null){
                 if (videoPlayView.isPlay()){
                     videoPlayView.stop();
+                    video.removeAllViews();
+                    videoImg.setVisibility(View.VISIBLE);
+                    play.setVisibility(View.VISIBLE);
                 }
             }
         }
@@ -152,6 +176,9 @@ public class LawyerDefVedioFragment extends BaseTalkLawFragment {
         if (videoPlayView!=null){
             if (videoPlayView.isPlay()){
                 videoPlayView.stop();
+                video.removeAllViews();
+                videoImg.setVisibility(View.VISIBLE);
+                play.setVisibility(View.VISIBLE);
             }
         }
     }

@@ -36,7 +36,6 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
     private View rView;
     private Context mContext;
     private boolean portrait;
-    private ImageView videoImg,pauseImg;
 
     public VideoPlayView(Context context) {
         this(context,null);
@@ -70,16 +69,12 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
         rView = LayoutInflater.from(mContext).inflate(R.layout.view_video_item, this, true);
         view = findViewById(R.id.media_contoller);
         mVideoView = (IjkVideoView) findViewById(R.id.main_video);
-        videoImg=findViewById(R.id.video_img);
-        pauseImg=findViewById(R.id.pause_image);
         mediaController = new CustomMediaContoller(mContext, rView);
         mVideoView.setMediaController(mediaController);
 
         mVideoView.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(IMediaPlayer iMediaPlayer, int i, int i1) {
-                videoImg.setVisibility(VISIBLE);
-                pauseImg.setVisibility(VISIBLE);
                 mediaController.onStop();
                 return false;
             }
@@ -89,8 +84,6 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
             @Override
             public void onCompletion(IMediaPlayer mp) {
                 view.setVisibility(View.GONE);
-                videoImg.setVisibility(VISIBLE);
-                pauseImg.setVisibility(VISIBLE);
                 if (mediaController.getScreenOrientation((Activity) mContext)
                         == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
                     //横屏播放完毕，重置
@@ -142,8 +135,6 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
     }
 
     public void start(String path) {
-        videoImg.setVisibility(GONE);
-        pauseImg.setVisibility(GONE);
         Uri uri = Uri.parse(path);
         if (mediaController != null)
             mediaController.start();
@@ -211,8 +202,6 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
     }
 
     public void stop() {
-        videoImg.setVisibility(VISIBLE);
-        pauseImg.setVisibility(VISIBLE);
         if (mVideoView.isPlaying()) {
             mVideoView.stopPlayback();
         }
@@ -279,10 +268,6 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
 
     public void setCompletionListener(CompletionListener completionListener) {
         this.completionListener = completionListener;
-    }
-
-    public ImageView getVideoImage(){
-        return videoImg;
     }
 
     public interface CompletionListener {
