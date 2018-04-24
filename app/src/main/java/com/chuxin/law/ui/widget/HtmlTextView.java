@@ -3,6 +3,7 @@ package com.chuxin.law.ui.widget;
 import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Html;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -56,8 +57,17 @@ public class HtmlTextView extends AppCompatTextView {
             imgGetter = new UrlImageGetter(this, getContext());
         }
 
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html,Html.FROM_HTML_MODE_LEGACY,imgGetter,new HtmlTagHandler());
+        } else {
+            result = Html.fromHtml(html,imgGetter,new HtmlTagHandler());
+        }
+
+        setText(result);
+
         // this uses Android's Html class for basic parsing, and HtmlTagHandler
-        setText(Html.fromHtml(html, imgGetter, new HtmlTagHandler()));
+//        setText(Html.fromHtml(html, imgGetter, new HtmlTagHandler()));
 
         // make links work
         setMovementMethod(LinkMovementMethod.getInstance());
