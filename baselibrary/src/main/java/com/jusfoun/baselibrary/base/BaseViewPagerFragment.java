@@ -45,7 +45,13 @@ public abstract class BaseViewPagerFragment extends BaseFragment {
             isInit = false;// 加载数据完成
             // 加载各种刷新数据
             refreshData();
+        }else {
+            refresh();
         }
+    }
+
+    public void refresh(){
+
     }
 
     protected abstract void refreshData();

@@ -585,6 +585,7 @@ public class LawyerDefautActivity extends BaseTalkLawActivity {
                         if (noDataModel.getCode() == CommonConstant.NET_SUC_CODE) {
                             data.getArticle().setIs_buy(1);
                             showToast("兑换成功");
+                            rxManage.post(CommonConstant.BUY_SUC_BY_JIFEN,"");
                             return;
                         }
                         showToast(noDataModel.getMsg());

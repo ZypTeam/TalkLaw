@@ -185,6 +185,7 @@ public class ArrondiActivity extends BaseTalkLawActivity {
             @Override
             public void call(Object o) {
                 getData(false,true);
+                rxManage.post(CommonConstant.EVENT_BUY_LAWYER,"");
             }
         });
 

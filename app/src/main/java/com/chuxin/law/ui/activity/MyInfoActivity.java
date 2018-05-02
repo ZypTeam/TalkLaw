@@ -40,6 +40,8 @@ import java.util.HashMap;
 
 import rx.functions.Action1;
 
+import static com.chuxin.law.common.CommonConstant.EDIT_HEADER;
+
 /**
  * @author wangcc
  * @date 2018/1/3
@@ -383,7 +385,15 @@ public class MyInfoActivity extends BaseTakeActivity {
                     public void call(UserInfoModel model) {
                         hideLoadDialog();
                         if (model.getCode() == CommonConstant.NET_SUC_CODE) {
+                            Glide.with(mContext)
+                                    .load(model.getData().getHeadimg())
+                                    .placeholder(R.mipmap.icon_head_def_cir)
+                                    .error(R.mipmap.icon_head_def_cir)
+                                    .transform(new CenterCrop(mContext), new GlideCircleTransform(mContext))
+                                    .crossFade()
+                                    .into(iconHead);
                             UserInfoDelegate.getInstance().saveUserInfo(model.getData());
+                            rxManage.post(EDIT_HEADER,"");
                         }
                         showToast(model.getMsg());
                     }
@@ -535,13 +545,6 @@ public class MyInfoActivity extends BaseTakeActivity {
                         editUserMap.clear();
                         editUserMap.put("headimg", "data:image/jpeg;base64," + str);
                         editUserInfo(true);
-                        Glide.with(mContext)
-                                .load(url)
-                                .placeholder(R.mipmap.icon_head_def_cir)
-                                .error(R.mipmap.icon_head_def_cir)
-                                .transform(new CenterCrop(mContext), new GlideCircleTransform(mContext))
-                                .crossFade()
-                                .into(iconHead);
                     }
                 });
             }

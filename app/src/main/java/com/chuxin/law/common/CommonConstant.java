@@ -67,4 +67,14 @@ public class CommonConstant {
      */
     public static final String AUDIO_PLAYER="audio_player";
 
+    /**
+     * 修改头像成功
+     */
+    public static final String EDIT_HEADER="edit_header";
+
+    /**
+     * 积分购买成功
+     */
+    public static final String BUY_SUC_BY_JIFEN="buy_suc_by_jifen";
+
 }

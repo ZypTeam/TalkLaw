@@ -48,6 +48,10 @@ import io.rong.imlib.model.MessageContent;
 import io.rong.message.TextMessage;
 import rx.functions.Action1;
 
+import static com.chuxin.law.common.CommonConstant.BUY_SUC_BY_JIFEN;
+import static com.chuxin.law.common.CommonConstant.EDIT_HEADER;
+import static com.chuxin.law.common.CommonConstant.EVENT_BUY_LAWYER;
+
 /**
  * @author zhaoyapeng
  * @version create time:17/12/2115:49
@@ -155,9 +159,6 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
                 startActivity(intent);
             }
         });
-
-
-
     }
 
     @Override
@@ -239,12 +240,19 @@ public class MyFragment extends BaseTalkLawFragment implements View.OnClickListe
 
     @Override
     protected void refreshData() {
-        getUserInfo();
+        getUserInfo(true);
 //        updateUserInfo();
     }
 
-    private void getUserInfo() {
-        showLoadDialog();
+    @Override
+    public void refresh(){
+        getUserInfo(false);
+    }
+
+    private void getUserInfo(boolean show) {
+        if (show) {
+            showLoadDialog();
+        }
         addNetwork(Api.getInstance().getService(ApiService.class).getUserInfo()
                 , new Action1<UserInfoModel>() {
                     @Override
