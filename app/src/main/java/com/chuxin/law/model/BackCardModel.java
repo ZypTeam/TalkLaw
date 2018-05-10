@@ -22,6 +22,7 @@ public class BackCardModel extends BaseModel implements Serializable {
         public String userid;
         public String name;
         public String phone;
+        public String logo;
 
         public boolean isSelect;
     }

@@ -6,11 +6,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chuxin.law.R;
 import com.chuxin.law.base.BaseAdapter;
 import com.chuxin.law.base.BaseViewHolder;
 import com.chuxin.law.common.AdapterCallback;
 import com.chuxin.law.model.BackCardModel;
+import com.chuxin.law.util.ImageLoderUtil;
 
 /**
  * @author wangcc
@@ -44,7 +46,7 @@ public class SelectBankCardAdapter extends BaseAdapter<BackCardModel.BackCardIte
     public class SelectBankCardViewHolder extends BaseViewHolder<BackCardModel.BackCardItemModel> {
         protected View rootView;
         protected ImageView imgTitle;
-        protected TextView textNum;
+        protected TextView textNum,nameText;
         protected LinearLayout layoutCard;
         private Context context;
         private ImageView img_select;
@@ -58,9 +60,10 @@ public class SelectBankCardAdapter extends BaseAdapter<BackCardModel.BackCardIte
 
         @Override
         public void update(final BackCardModel.BackCardItemModel model) {
-//            ImageLoderUtil.loadRoundSmailImage(mContext, imgItemGoods, model.img);
-
-
+            Glide.with(mContext)
+                    .load(model.logo)
+                    .crossFade()
+                    .into(imgTitle);
             if (model.card.length() > 4) {
                 textNum.setText(model.card.substring(model.card.length() - 4, model.card.length() ));
             }else{
@@ -83,6 +86,7 @@ public class SelectBankCardAdapter extends BaseAdapter<BackCardModel.BackCardIte
                 img_select.setImageResource(R.drawable.img_back_select_no);
             }
 
+            nameText.setText(model.name);
 
         }
 
@@ -91,6 +95,9 @@ public class SelectBankCardAdapter extends BaseAdapter<BackCardModel.BackCardIte
             textNum = (TextView) rootView.findViewById(R.id.text_num);
             layoutCard = (LinearLayout) rootView.findViewById(R.id.layout_card);
             img_select = (ImageView) rootView.findViewById(R.id.img_select);
+            nameText = (TextView) rootView.findViewById(R.id.text_name);
+
+
 
         }
     }

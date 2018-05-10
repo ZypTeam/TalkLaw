@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chuxin.law.R;
 import com.chuxin.law.TalkLawApplication;
 import com.chuxin.law.base.BaseTalkLawActivity;
@@ -115,6 +116,12 @@ public class ApplyForWithdrawalsActivity extends BaseTalkLawActivity {
                     textNum.setText(model.card);
                 }
 
+                Glide.with(mContext)
+                        .load(model.logo)
+                        .crossFade()
+                        .into(imgTitle);
+                textName.setText(model.name);
+
             }
         });
 
@@ -179,6 +186,11 @@ public class ApplyForWithdrawalsActivity extends BaseTalkLawActivity {
                                     textNum.setText(backCardItemModel.card);
                                 }
 
+                                Glide.with(mContext)
+                                        .load(backCardItemModel.logo)
+                                        .crossFade()
+                                        .into(imgTitle);
+                                textName.setText(backCardItemModel.name);
                                 layoutCard.setVisibility(View.VISIBLE);
                             }
 
@@ -219,7 +231,6 @@ public class ApplyForWithdrawalsActivity extends BaseTalkLawActivity {
                     public void call(BackCardModel model) {
                         hideLoadDialog();
                         if (model != null && model.getCode() == NET_SUC_CODE) {
-
                             showToast("提现成功");
                             finish();
                         } else {
